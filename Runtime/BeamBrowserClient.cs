@@ -160,7 +160,6 @@ namespace Beam
                 }
 
                 onOpIdCreated.Invoke(model);
-                print($"Got opId: {model.Id}");
             }
             else
             {
@@ -185,7 +184,6 @@ namespace Beam
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     var model = JsonConvert.DeserializeObject<BeamOperation>(request.downloadHandler.text);
-                    print($"Got response: {model.Status.ToString()} {model.Error}");
                     if (model.Status != BeamOperationStatus.Pending)
                     {
                         callback.Invoke(new BeamOperationResult
