@@ -1,15 +1,15 @@
 # Beam SDK Client for Unity
 
+### Dependencies
+This package only depends upon 
 
 ### Installation
-To install Beam SDK Client for Unity you have to add following dependencies to your manifest.json:
+To install Beam Client SDK for Unity you have to add following dependencies to your manifest.json:
 Option 1 - manifest.json
 
 Open Packages/manifest.json and add these lines:
 
-"com.unity.nuget.newtonsoft-json": "3.0.1",
-"com.openfort.sdk": "https://github.com/openfort-xyz/openfort-csharp-unity.git",
-"com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.3.3"
+"beam.sdk.client": "https://github.com/Merit-Circle/beam-client-unity.git",
 
 Option 2 - Package Manager Editor UI
 
@@ -17,10 +17,6 @@ Follow these instructions:
 
 https://docs.unity3d.com/Manual/upm-ui-giturl.html
 
-And add these urls:
+And add this url:
 
-https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.3.3
-
-https://github.com/needle-mirror/com.unity.nuget.newtonsoft-json.git
-
-https://github.com/openfort-xyz/openfort-csharp-unity.git
+https://github.com/Merit-Circle/beam-client-unity.git
