@@ -1,0 +1,22 @@
+{
+  "name": "beam.sdk.client",
+  "version": "0.0.1",
+  "displayName": "Beam SDK",
+  "description": "Official Unity SDK for Beam.",
+  "unity": "2020.3",
+  "author": {
+    "name": "Merit Circle",
+    "email": "development@meritcircle.io"
+  },
+  "keywords": [
+    "web3",
+    "ethereum",
+    "polygon",
+    "beam",
+    "onbeam",
+    "smart contracts"
+  ],
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.0.1"
+  }
+}
