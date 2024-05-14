@@ -46,8 +46,8 @@ namespace Beam
                     break;
                 default:
                 case BeamEnvironment.Testnet:
-                    m_BeamAuthUrl = "https://identity.preview.onbeam.com/"; // todo: replace with testnet
-                    m_ApiBaseUrl = "https://api.preview.onbeam.com";    // todo: replace with testnet
+                    m_BeamAuthUrl = "https://identity.testnet.onbeam.com/";
+                    m_ApiBaseUrl = "https://api.testnet.onbeam.com";
                     break;
             }
 
@@ -64,7 +64,6 @@ namespace Beam
         public IEnumerator SignSession(string entityId, Action<BeamOperationResult> callback, int secondsTimeout = 120)
         {
             EnsureApiKeyIsSet();
-            // url: http://localhost:3000/games/clvxqrso4000fbsialajt0m8c/session/create?entityId=Maciek
 
             // retrieve operation Id to pass further and track result
             string opId = null;
