@@ -1,0 +1,9 @@
+namespace Beam
+{
+    public interface IStorage
+    {
+        string Get(string key);
+        void Set(string key, string value);
+        void Delete(string key);
+    }
+}

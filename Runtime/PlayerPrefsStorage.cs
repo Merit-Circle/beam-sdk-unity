@@ -1,0 +1,24 @@
+using System;
+using UnityEngine;
+
+namespace Beam
+{
+    public class PlayerPrefsStorage: IStorage
+    {
+        public string Get(string key)
+        {
+            var value = PlayerPrefs.GetString(key);
+            return string.IsNullOrEmpty(value) ? null : value;
+        }
+
+        public void Set(string key, string value)
+        {
+            PlayerPrefs.SetString(key, value);
+        }
+
+        public void Delete(string key)
+        {
+            PlayerPrefs.DeleteKey(key);
+        }
+    }
+}

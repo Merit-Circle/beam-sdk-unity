@@ -1,16 +1,22 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
 
 namespace Beam
 {
-    public class BeamOperation
+    internal class BeamOperation
     {
-        [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))] 
+        [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
         public BeamOperationStatus Status;
+
         public string Id;
-        public string GameId;
         public string Error;
+        public string UserId;
+        public string GameId;
         public DateTimeOffset CreatedAt;
         public DateTimeOffset? UpdatedAt;
+        public int? ChainId;
+        public IEnumerable<BeamOperationTransactionModel> Transactions { get; set; }
+        public BeamGameModel Game { get; set; }
     }
 }
