@@ -7,7 +7,8 @@ This package only depends upon:
 `"com.unity.nuget.newtonsoft-json": "3.2.1"`
 
 ## Installation
-To install Beam Client SDK for Unity you have to add following dependencies to your manifest.json:
+To install Beam Client SDK for Unity you have to add following dependencies to your manifest.json:  
+
 Option 1 - manifest.json
 
 Open Packages/manifest.json and add these lines:
@@ -31,24 +32,31 @@ And add these urls:
 ## Usage
 To use the package, initalize `BeamBrowserClient`:
 ```csharp
-var beamBrowserClient = gameObject.AddComponent<BeamBrowserClient>()
-                .SetPublishableBeamApiKey("RwNv...bb5Vt")   // set your Publishable(!) Game API Key
-                .SetEnvironment(BeamEnvironment.Testnet);   // pick Environment, defaults to Testnet
+var beamClient = gameObject.AddComponent<BeamClient>()
+                .SetBeamApiGame("your-game-id", "your-publishable-api-key")
+                .SetEnvironment(BeamEnvironment.Testnet);
 ```
-BeamBrowserClient exposes methods that should be wrapped in Coroutines to not block UI thread.
+BeamClient exposes methods that should be wrapped in Coroutines to not block UI thread.
 
-### Signing a session:
+### Creating a session:
 ```csharp
-StartCoroutine(beamBrowserClient.SignSession("entityIdOfTheUser", result =>
-            {
-                print($"Got Beam SignSession result: {result.Status} {result.Error}");
-            }));
+StartCoroutine(beamClient.CreateSession("entityIdOfYourUser", result =>
+                {
+                    // handle the result here
+                },
+                chainId: 13337, // defaults to 13337
+                secondsTimeout: 240 // timeout in seconds for getting a result of Session signing from the browser
+            ));
 ```
 
 ### Signing a transaction:
 ```csharp
-StartCoroutine(beamBrowserClient.SignTransaction("entityIdOfTheUser", "tin_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx", result =>
-            {
-                print($"Got Beam SignTransaction result: {result.Status} {result.Error}");
-            }));
+StartCoroutine(beamClient.SignOperation("entityIdOfYourUser", "operationIdFromBeamAPI", result =>
+                {
+                    // handle the result here
+                },
+                chainId: 13337, // defaults to 13337
+                secondsTimeout: 240, // timeout in seconds for getting a response in case browser flow was chosen
+                fallBackToBrowser: true // if true, opens a browser for the user to sign the operation if Session was not started
+            ));
 ```
