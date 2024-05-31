@@ -1,6 +1,6 @@
-namespace Beam
+namespace Beam.Models
 {
-    public class BeamGameModel
+    public class BeamGame
     {
         public string PegiRating { get; set; }
         public string[] PegiContent { get; set; }

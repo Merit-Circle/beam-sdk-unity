@@ -1,6 +1,11 @@
-using Beam.Marketplace;
+using System.Collections.Generic;
+using System.Text;
 using Nethereum.ABI.EIP712;
-using Nethereum.RPC.AccountSigning;
+using Nethereum.ABI.FunctionEncoding.Attributes;
+using Nethereum.Signer;
+using Nethereum.Util;
+using Nethereum.Web3.Accounts;
+using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Sec;
 using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Crypto;
@@ -8,20 +13,19 @@ using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Security;
-using Nethereum.Signer;
-using Nethereum.Signer.EIP712;
-using Nethereum.Web3.Accounts;
 
-namespace Beam
+namespace Beam.Util
 {
-    public class KeyPair
+    internal class KeyPair
     {
         private static readonly X9ECParameters Curve = ECNamedCurveTable.GetByName("secp256k1");
-        private static readonly ECDomainParameters DomainParams = new ECDomainParameters(Curve.Curve, Curve.G, Curve.N, Curve.H, Curve.GetSeed());
+
+        private static readonly ECDomainParameters DomainParams =
+            new ECDomainParameters(Curve.Curve, Curve.G, Curve.N, Curve.H, Curve.GetSeed());
 
         private readonly ECPublicKeyParameters _public;
         private readonly ECPrivateKeyParameters _private;
-        
+
         public Account Account => new Account(PrivateHex);
 
         public string PublicHex => _public.Q.GetEncoded(true).ToHex();
@@ -48,6 +52,7 @@ namespace Beam
             {
                 return null;
             }
+
             var privateKey = new ECPrivateKeyParameters(privateKeyValue, DomainParams);
 
             var q = privateKey.Parameters.G.Multiply(privateKey.D);
@@ -57,31 +62,46 @@ namespace Beam
             return new KeyPair(keyPair);
         }
 
-        public string Sign(byte[] msgBytes)
+        public string SignMessage(string message)
         {
             var signer = new EthereumMessageSigner();
             var ethEcKey = new EthECKey(_private.D.ToByteArray(), true);
-            return signer.Sign(msgBytes, ethEcKey);
+            var msgBytes = Encoding.UTF8.GetBytes(message);
+            var signature = signer.Sign(msgBytes, ethEcKey);
+
+            return signature;
         }
 
-        public string Sign(string message)
+        public string SignMarketplaceTransaction(string data, string accountAddress, int chainId)
         {
-            var signer = new EthereumMessageSigner();
-            var ethEcKey = new EthECKey(_private.D.ToByteArray(), true);
-            return signer.EncodeUTF8AndSign(message, ethEcKey);
-        }
-        
-        public string SignTypedData(dynamic data)
-        {
-            var signer = new Eip712TypedDataSigner();
-            var ethEcKey = new EthECKey(_private.D.ToByteArray(), true);
-            return signer.SignTypedDataV4<SeaportTypedData>(data as TypedData<SeaportTypedData>, ethEcKey);
+            var hashOnlyData = new
+            {
+                hash = string.Empty
+            };
+            hashOnlyData = JsonConvert.DeserializeAnonymousType(data, hashOnlyData);
+
+            return SignMessage(hashOnlyData.hash);
         }
 
         private KeyPair(AsymmetricCipherKeyPair keyPair)
         {
             _public = keyPair.Public as ECPublicKeyParameters;
             _private = keyPair.Private as ECPrivateKeyParameters;
+        }
+        
+        public class BeamDomain : IDomain
+        {
+            [Parameter("string", "name", 1)]
+            public virtual string Name { get; set; }
+
+            [Parameter("string", "version", 2)]
+            public virtual string Version { get; set; }
+
+            [Parameter("uint256", "chainId", 3)]
+            public virtual int ChainId { get; set; }
+
+            [Parameter("address", "verifyingContract", 4)]
+            public virtual string VerifyingContract { get; set; }
         }
     }
 }

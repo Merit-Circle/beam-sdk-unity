@@ -1,4 +1,4 @@
-namespace Beam
+namespace Beam.Models
 {
     internal class BeamSessionResult
     {

@@ -1,4 +1,4 @@
-namespace Beam
+namespace Beam.Models
 {
     public class BeamResult<T>
     {

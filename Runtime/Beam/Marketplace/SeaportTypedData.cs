@@ -1,3 +1,5 @@
+using Nethereum.ABI.EIP712;
+
 namespace Beam.Marketplace
 {
     public class SeaportTypedData
@@ -10,42 +12,15 @@ namespace Beam.Marketplace
 
     public class Types
     {
-        public EIP712Domain[] EIP712Domain { get; set; }
-        public OrderComponents[] OrderComponents { get; set; }
-        public OfferItem[] OfferItem { get; set; }
+        public MemberDescription[] OrderComponents { get; set; }
+        public MemberDescription[] OfferItem { get; set; }
         public ConsiderationItem[] ConsiderationItem { get; set; }
-    }
-
-    public class EIP712Domain
-    {
-        public string Name { get; set; }
-        public string Type { get; set; }
-    }
-
-    public class OrderComponents
-    {
-        public string Name { get; set; }
-        public string Type { get; set; }
-    }
-
-    public class OfferItem
-    {
-        public string Name { get; set; }
-        public string Type { get; set; }
     }
 
     public class ConsiderationItem
     {
         public string Name { get; set; }
         public string Type { get; set; }
-    }
-
-    public class Domain
-    {
-        public string Name { get; set; }
-        public string Version { get; set; }
-        public string ChainId { get; set; }
-        public string VerifyingContract { get; set; }
     }
 
     public class Message

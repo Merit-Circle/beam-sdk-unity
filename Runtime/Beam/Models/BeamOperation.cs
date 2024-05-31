@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Beam.Models;
 using Newtonsoft.Json.Converters;
 
 namespace Beam
@@ -16,7 +17,8 @@ namespace Beam
         public DateTimeOffset CreatedAt;
         public DateTimeOffset? UpdatedAt;
         public int? ChainId;
-        public IEnumerable<BeamOperationTransactionModel> Transactions { get; set; }
-        public BeamGameModel Game { get; set; }
+        public IEnumerable<BeamOperationTransaction> Transactions { get; set; }
+        public BeamGame Game { get; set; }
+        public string Url { get; set; }
     }
 }
