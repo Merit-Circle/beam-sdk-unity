@@ -388,7 +388,7 @@ namespace Beam
                         case BeamOperationTransactionType.OpenfortReservoirOrder:
                             signature = activeSessionKeyPair
                                 .SignMarketplaceTransaction(
-                                    transaction.Data,
+                                    transaction.Openfort.Message.HashedMessage,
                                     activeSession.AccountAddress,
                                     chainId);
                             break;
@@ -477,7 +477,7 @@ namespace Beam
 
                 // check for status as well as updatedAt
                 // in case of retries, status can be set to Error, but we're interested in the newest actual result
-                if (beamOperation.Status != BeamOperationStatus.Pending && beamOperation.UpdatedAt > now)
+                if (beamOperation.Status != BeamOperationStatus.Pending && (beamOperation.UpdatedAt != null && beamOperation.UpdatedAt > now))
                 {
                     operationResult.Invoke(beamOperation);
 

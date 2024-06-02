@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using System.Text;
 using Nethereum.ABI.EIP712;
 using Nethereum.ABI.FunctionEncoding.Attributes;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Signer;
-using Nethereum.Util;
 using Nethereum.Web3.Accounts;
-using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Sec;
 using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Crypto;
@@ -66,21 +64,21 @@ namespace Beam.Util
         {
             var signer = new EthereumMessageSigner();
             var ethEcKey = new EthECKey(_private.D.ToByteArray(), true);
-            var msgBytes = Encoding.UTF8.GetBytes(message);
+            var msgBytes = message.HexToByteArray();
             var signature = signer.Sign(msgBytes, ethEcKey);
 
             return signature;
         }
 
-        public string SignMarketplaceTransaction(string data, string accountAddress, int chainId)
+        public string SignMarketplaceTransaction(string hash, string accountAddress, int chainId)
         {
-            var hashOnlyData = new
-            {
-                hash = string.Empty
-            };
-            hashOnlyData = JsonConvert.DeserializeAnonymousType(data, hashOnlyData);
+            var signer = new EthereumMessageSigner();
+            var ethEcKey = new EthECKey(_private.D.ToByteArray(), true);
+            var msgBytes = Encoding.UTF8.GetBytes(hash); // todo: figure out why either doesn't work yet
+            // var msgBytes = hash.HexToByteArray();
+            var signature = signer.Sign(msgBytes, ethEcKey);
 
-            return SignMessage(hashOnlyData.hash);
+            return signature;
         }
 
         private KeyPair(AsymmetricCipherKeyPair keyPair)
