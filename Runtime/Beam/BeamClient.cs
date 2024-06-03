@@ -52,10 +52,14 @@ namespace Beam
                     m_BeamAuthUrl = "https://identity.onbeam.com";
                     apiUrl = "https://api.onbeam.com";
                     break;
+                case BeamEnvironment.Preview:
+                    m_BeamAuthUrl = "https://identity.preview.onbeam.com/"; // todo: remove after SDK becomes stable
+                    apiUrl = "https://api.preview.onbeam.com";
+                    break;
                 default:
                 case BeamEnvironment.Testnet:
-                    m_BeamAuthUrl = "https://identity.preview.onbeam.com/"; // todo: change back to testnet
-                    apiUrl = "https://api.preview.onbeam.com";
+                    m_BeamAuthUrl = "https://identity.testnet.onbeam.com/";
+                    apiUrl = "https://api.testnet.onbeam.com";
                     break;
             }
 
