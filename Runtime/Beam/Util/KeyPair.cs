@@ -1,9 +1,6 @@
-using System.Text;
-using Nethereum.ABI.EIP712;
-using Nethereum.ABI.FunctionEncoding.Attributes;
 using Nethereum.Hex.HexConvertors.Extensions;
+using Nethereum.Model;
 using Nethereum.Signer;
-using Nethereum.Web3.Accounts;
 using Org.BouncyCastle.Asn1.Sec;
 using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Crypto;
@@ -11,6 +8,7 @@ using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Security;
+using Account = Nethereum.Web3.Accounts.Account;
 
 namespace Beam.Util
 {
@@ -19,12 +17,12 @@ namespace Beam.Util
         private static readonly X9ECParameters Curve = ECNamedCurveTable.GetByName("secp256k1");
 
         private static readonly ECDomainParameters DomainParams =
-            new ECDomainParameters(Curve.Curve, Curve.G, Curve.N, Curve.H, Curve.GetSeed());
+            new(Curve.Curve, Curve.G, Curve.N, Curve.H, Curve.GetSeed());
 
         private readonly ECPublicKeyParameters _public;
         private readonly ECPrivateKeyParameters _private;
 
-        public Account Account => new Account(PrivateHex);
+        public Account Account => new(PrivateHex);
 
         public string PublicHex => _public.Q.GetEncoded(true).ToHex();
         public string PrivateHex => _private.D.ToHex();
@@ -60,6 +58,11 @@ namespace Beam.Util
             return new KeyPair(keyPair);
         }
 
+        /// <summary>
+        /// Signs message as a regular Ethereum message
+        /// </summary>
+        /// <param name="message">Message/hash to sign</param>
+        /// <returns></returns>
         public string SignMessage(string message)
         {
             var signer = new EthereumMessageSigner();
@@ -70,13 +73,16 @@ namespace Beam.Util
             return signature;
         }
 
-        public string SignMarketplaceTransaction(string hash, string accountAddress, int chainId)
+        /// <summary>
+        /// Signs an Ethereum of a Marketplace Listing related Typed Data. Skips adding Ethereum message prefix.
+        /// </summary>
+        /// <param name="hash">Ethereum valid hash of TypedData</param>
+        /// <returns></returns>
+        public string SignMarketplaceTransactionHash(string hash)
         {
-            var signer = new EthereumMessageSigner();
             var ethEcKey = new EthECKey(_private.D.ToByteArray(), true);
-            var msgBytes = Encoding.UTF8.GetBytes(hash); // todo: figure out why either doesn't work yet
-            // var msgBytes = hash.HexToByteArray();
-            var signature = signer.Sign(msgBytes, ethEcKey);
+            var msgBytes = hash.HexToByteArray();
+            var signature = ethEcKey.SignAndCalculateV(msgBytes).CreateStringSignature();
 
             return signature;
         }
@@ -85,21 +91,6 @@ namespace Beam.Util
         {
             _public = keyPair.Public as ECPublicKeyParameters;
             _private = keyPair.Private as ECPrivateKeyParameters;
-        }
-        
-        public class BeamDomain : IDomain
-        {
-            [Parameter("string", "name", 1)]
-            public virtual string Name { get; set; }
-
-            [Parameter("string", "version", 2)]
-            public virtual string Version { get; set; }
-
-            [Parameter("uint256", "chainId", 3)]
-            public virtual int ChainId { get; set; }
-
-            [Parameter("address", "verifyingContract", 4)]
-            public virtual string VerifyingContract { get; set; }
         }
     }
 }

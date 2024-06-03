@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Linq;
-using System.Security.Cryptography;
 using Beam.Api;
 using Beam.Models;
 using Beam.Util;
@@ -79,7 +78,7 @@ namespace Beam
             return this;
         }
 
-        public BeamClient DebugLogging(bool enable)
+        public BeamClient SetDebugLogging(bool enable)
         {
             m_DebugLog = enable;
             return this;
@@ -247,10 +246,8 @@ namespace Beam
                 yield return SignOperationUsingSession(
                     entityId,
                     operationId,
-                    chainId,
                     callback,
-                    activeSessionKeyPair,
-                    activeSession);
+                    activeSessionKeyPair);
             }
             else if (fallBackToBrowser)
             {
@@ -322,10 +319,8 @@ namespace Beam
         private IEnumerator SignOperationUsingSession(
             string entityId,
             string operationId,
-            int chainId,
             Action<BeamResult<BeamOperationStatus>> callback,
-            KeyPair activeSessionKeyPair,
-            BeamSession activeSession)
+            KeyPair activeSessionKeyPair)
         {
             BeamOperation operation = null;
             Log($"Retrieving operation({operationId})");
@@ -390,11 +385,7 @@ namespace Beam
                             signature = activeSessionKeyPair.SignMessage(transaction.Data);
                             break;
                         case BeamOperationTransactionType.OpenfortReservoirOrder:
-                            signature = activeSessionKeyPair
-                                .SignMarketplaceTransaction(
-                                    transaction.Openfort.Message.HashedMessage,
-                                    activeSession.AccountAddress,
-                                    chainId);
+                            signature = activeSessionKeyPair.SignMarketplaceTransactionHash(transaction.Hash);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -438,7 +429,7 @@ namespace Beam
                     {
                         Result = BeamOperationStatus.Error,
                         Status = BeamResultType.Error,
-                        Error = res.Error
+                        Error = res.Error ?? $"Encountered unknown error when confirming operation {operationId}"
                     });
                 }
             }));

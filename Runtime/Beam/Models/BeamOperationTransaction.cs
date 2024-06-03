@@ -22,17 +22,7 @@ namespace Beam.Models
         [JsonConverter(typeof(BeamTransactionDataJsonConverter))]
         public string Data { get; set; }
         
-        public OpenfortDataToSign Openfort { get; set; }
-    }
-
-    public class OpenfortDataToSign
-    {
-        public OpenfortMessageToSign Message { get; set; }
-    }
-
-    public class OpenfortMessageToSign
-    {
-        public string HashedMessage { get; set; }
+        public string Hash { get; set; }
     }
 
     public enum BeamOperationTransactionType
