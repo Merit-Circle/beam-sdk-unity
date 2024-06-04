@@ -51,7 +51,7 @@ StartCoroutine(beamClient.GetActiveSession(
                         // you need to create a session using CreateSession(), or User will sign operations using browser
                     }
                 },
-                chainId: 1337 // optional chainId, defaults to 13337
+                chainId: 13337 // optional chainId, defaults to 13337
             ));
 ```
 
@@ -67,7 +67,7 @@ StartCoroutine(beamClient.CreateSession(
                         // you now have an active session that can sign operations
                     }
                 },
-                chainId: 1337, // optional chainId, defaults to 13337
+                chainId: 13337, // optional chainId, defaults to 13337
                 secondsTimeout: 240 // timeout in seconds for getting a result of Session signing from the browser
             ));
 ```
