@@ -12,9 +12,10 @@ namespace Beam
     public class BeamClient : MonoBehaviour
     {
         private const int DEFAULT_TIMEOUT_IN_SECONDS = 240;
-        private bool m_DebugLog = false;
+
         private readonly BeamApi m_BeamApi = new();
 
+        private bool m_DebugLog = false;
         private IStorage m_Storage = new PlayerPrefsStorage();
 
         public BeamClient()
