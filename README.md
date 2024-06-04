@@ -88,7 +88,7 @@ StartCoroutine(m_BeamClient.SignOperation(
                         // (...)
                     }
                 },
-                chainId: 1337, // optional chainId, defaults to 13337
+                chainId: 13337, // optional chainId, defaults to 13337
                 fallbackToBrowser: true, // if true, will automatically open browser for the user to sign the operation, if there is no valid session
                 secondsTimeout: 240 // timeout in seconds for getting a result of message signing from the browser, used if there was no valid session
             ));
