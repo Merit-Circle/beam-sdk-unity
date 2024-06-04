@@ -9,17 +9,11 @@ namespace Beam.Api
     internal class BeamApi
     {
         private string m_ApiBaseUrl = string.Empty;
-        private string m_BeamGameId = string.Empty;
         private string m_BeamPublishableGameKey = string.Empty;
 
         public void SetBaseUrl(string baseUrl)
         {
             m_ApiBaseUrl = baseUrl;
-        }
-
-        public void SetBeamGameId(string gameId)
-        {
-            m_BeamGameId = gameId;
         }
 
         public void SetApiKey(string apiKey)
@@ -106,11 +100,6 @@ namespace Beam.Api
             if (string.IsNullOrEmpty(m_BeamPublishableGameKey))
             {
                 throw new ArgumentNullException("beamApiKey", "Set Beam Api Key first!");
-            }
-
-            if (string.IsNullOrEmpty(m_BeamGameId))
-            {
-                throw new ArgumentNullException("beamGameId", "Set Beam Game Id first!");
             }
             
             if (string.IsNullOrEmpty(m_ApiBaseUrl))

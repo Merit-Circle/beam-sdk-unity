@@ -12,8 +12,6 @@ namespace Beam
     public class BeamClient : MonoBehaviour
     {
         private const int DEFAULT_TIMEOUT_IN_SECONDS = 240;
-        private string m_BeamAuthUrl = string.Empty;
-        private string m_BeamGameId = string.Empty;
         private bool m_DebugLog = false;
         private readonly BeamApi m_BeamApi = new();
 
@@ -27,14 +25,11 @@ namespace Beam
         /// <summary>
         /// Sets Publishable Beam API key on the client. WARNING: Do not use keys other than Publishable, they're meant to be private, server-side only!
         /// </summary>
-        /// <param name="gameId">Id of your Beam Game registration</param>
         /// <param name="publishableApiKey">Publishable Beam API key</param>
         /// <returns>BeamClient</returns>
-        public BeamClient SetBeamApiGame(string gameId, string publishableApiKey)
+        public BeamClient SetBeamApiKey(string publishableApiKey)
         {
-            m_BeamApi.SetBeamGameId(gameId);
             m_BeamApi.SetApiKey(publishableApiKey);
-            m_BeamGameId = gameId;
             return this;
         }
 
@@ -49,13 +44,11 @@ namespace Beam
             switch (environment)
             {
                 case BeamEnvironment.Mainnet:
-                    m_BeamAuthUrl = "https://identity.onbeam.com";
                     apiUrl = "https://api.onbeam.com";
                     break;
                 default:
                 case BeamEnvironment.Testnet:
                 default:
-                    m_BeamAuthUrl = "https://identity.testnet.onbeam.com/";
                     apiUrl = "https://api.testnet.onbeam.com";
                     break;
             }
@@ -115,7 +108,7 @@ namespace Beam
                 keyPair = kp;
             }));
 
-            if (activeSession != null)
+            if (activeSession == null)
             {
                 Log("No active session found");
                 actionResult.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "No active session found")
@@ -289,6 +282,36 @@ namespace Beam
                 activeSession = sessionInfo;
                 activeSessionKeyPair = keyPair;
             }));
+            
+            BeamOperation operation = null;
+            Log($"Retrieving operation({operationId})");
+            yield return StartCoroutine(m_BeamApi.GetOperationById(operationId, (res) =>
+            {
+                if (res.Success)
+                {
+                    operation = res.Result;
+                }
+                else if (res.StatusCode != 404) // 404 will be handled as operation == null below
+                {
+                    actionResult.Invoke(new BeamResult<BeamOperationStatus>
+                    {
+                        Status = BeamResultType.Error,
+                        Error = res.ErrorMessage
+                    });
+                }
+            }));
+
+            if (operation == null)
+            {
+                Log($"No operation({operationId}) was found, ending");
+                actionResult.Invoke(new BeamResult<BeamOperationStatus>
+                {
+                    Status = BeamResultType.Error,
+                    Error = "Operation was not found"
+                });
+
+                yield break;
+            }
 
             var hasActiveSession = activeSessionKeyPair != null && activeSession != null;
             if (hasActiveSession)
@@ -296,14 +319,14 @@ namespace Beam
                 Log($"Has an active session until: {activeSession.EndTime:o}, using it to sign the operation");
                 yield return SignOperationUsingSession(
                     entityId,
-                    operationId,
+                    operation,
                     actionResult,
                     activeSessionKeyPair);
             }
             else if (fallbackToBrowser)
             {
                 Log("No active session found, using browser to sign the operation");
-                yield return SignOperationUsingBrowser(operationId, actionResult, secondsTimeout);
+                yield return SignOperationUsingBrowser(operation, actionResult, secondsTimeout);
             }
             else
             {
@@ -317,21 +340,22 @@ namespace Beam
             }
         }
 
-        private object SignOperationUsingBrowser(
-            string operationId,
+        private IEnumerator SignOperationUsingBrowser(
+            BeamOperation operation,
             Action<BeamResult<BeamOperationStatus>> callback,
             int secondsTimeout)
         {
-            var url = $"{m_BeamAuthUrl}/games/{m_BeamGameId}/operation/{operationId}/confirm";
+
+            var url = operation.Url;
             Log($"Opening {url}");
 
             // open identity.onbeam.com, give it operation id
             Application.OpenURL(url);
 
             // start polling for results of the operation
-            return StartCoroutine(PollForOperationResult(operationId, operationResult =>
+            yield return StartCoroutine(PollForOperationResult(operation.Id, operationResult =>
                 {
-                    Log($"Got operation({operationId}) result: {operationResult.Status.ToString()}");
+                    Log($"Got operation({operation.Id}) result: {operationResult.Status.ToString()}");
                     var beamResult = new BeamResult<BeamOperationStatus>
                     {
                         Result = operationResult.Status
@@ -356,59 +380,28 @@ namespace Beam
                 },
                 () =>
                 {
-                    Log($"Timed out polling for Operation({operationId}) result");
+                    Log($"Timed out polling for Operation({operation.Id}) result");
                     callback.Invoke(
                         new BeamResult<BeamOperationStatus>(BeamResultType.Timeout,
                             "Timed out polling for Operation result"));
                 }, () =>
                 {
-                    Log($"Operation with id: {operationId} could not be found, something went wrong");
+                    Log($"Operation with id: {operation.Id} could not be found, something went wrong");
                     callback.Invoke(
                         new BeamResult<BeamOperationStatus>(BeamResultType.Error,
-                            $"Operation with id: {operationId} could not be found"));
+                            $"Operation with id: {operation.Id} could not be found"));
                 }, secondsTimeout));
         }
 
         private IEnumerator SignOperationUsingSession(
             string entityId,
-            string operationId,
+            BeamOperation operation,
             Action<BeamResult<BeamOperationStatus>> callback,
             KeyPair activeSessionKeyPair)
         {
-            BeamOperation operation = null;
-            Log($"Retrieving operation({operationId})");
-            yield return StartCoroutine(m_BeamApi.GetOperationById(operationId, (res) =>
-            {
-                if (res.Success)
-                {
-                    operation = res.Result;
-                }
-                else if (res.StatusCode != 404) // 404 will be handled as operation == null below
-                {
-                    callback.Invoke(new BeamResult<BeamOperationStatus>
-                    {
-                        Status = BeamResultType.Error,
-                        Error = res.ErrorMessage
-                    });
-                }
-            }));
-
-            if (operation == null)
-            {
-                Log($"No operation({operationId}) was found, ending");
-                callback.Invoke(new BeamResult<BeamOperationStatus>
-                {
-                    Result = BeamOperationStatus.Error,
-                    Status = BeamResultType.Error,
-                    Error = "Operation was not found"
-                });
-
-                yield break;
-            }
-
             if (operation?.Transactions?.Any() != true)
             {
-                Log($"Operation({operationId}) has no transactions to sign, ending");
+                Log($"Operation({operation.Id}) has no transactions to sign, ending");
                 callback.Invoke(new BeamResult<BeamOperationStatus>
                 {
                     Result = BeamOperationStatus.Error,
@@ -421,14 +414,14 @@ namespace Beam
 
             var confirmationModel = new BeamOperationConfirmation
             {
-                GameId = m_BeamGameId,
+                GameId = operation.GameId,
                 EntityId = entityId,
                 Status = BeamOperationStatus.Pending
             };
 
             foreach (var transaction in operation.Transactions)
             {
-                Log($"Signing operation({operationId}) transaction({transaction.ExternalId})");
+                Log($"Signing operation({operation.Id}) transaction({transaction.ExternalId})");
                 string signature;
                 try
                 {
@@ -459,8 +452,8 @@ namespace Beam
                 }
             }
 
-            Log($"Confirming operation({operationId})");
-            yield return StartCoroutine(m_BeamApi.ConfirmOperation(operationId, confirmationModel, res =>
+            Log($"Confirming operation({operation.Id})");
+            yield return StartCoroutine(m_BeamApi.ConfirmOperation(operation.Id, confirmationModel, res =>
             {
                 if (res.Success)
                 {
@@ -468,7 +461,7 @@ namespace Beam
                                   res.Result.Status != BeamOperationStatus.Pending;
 
                     Log(
-                        $"Confirming operation({operationId}) status: {res.Result.Status.ToString()} error: {res.Result.Error}");
+                        $"Confirming operation({operation.Id}) status: {res.Result.Status.ToString()} error: {res.Result.Error}");
                     callback.Invoke(new BeamResult<BeamOperationStatus>
                     {
                         Status = didFail ? BeamResultType.Error : BeamResultType.Success,
@@ -478,12 +471,12 @@ namespace Beam
                 }
                 else
                 {
-                    Log($"Confirming operation({operationId}) encountered an error: {res.ErrorMessage}");
+                    Log($"Confirming operation({operation.Id}) encountered an error: {res.ErrorMessage}");
                     callback.Invoke(new BeamResult<BeamOperationStatus>
                     {
                         Result = BeamOperationStatus.Error,
                         Status = BeamResultType.Error,
-                        Error = res.ErrorMessage ?? $"Encountered unknown error when confirming operation {operationId}"
+                        Error = res.ErrorMessage ?? $"Encountered unknown error when confirming operation {operation.Id}"
                     });
                 }
             }));

@@ -27,7 +27,7 @@ https://github.com/Merit-Circle/beam-client-unity.git
 To use the package, initialize `BeamClient`:
 ```csharp
 var beamClient = gameObject.AddComponent<BeamClient>()
-                .SetBeamApiGame("your-game-id", "your-publishable-api-key")
+                .SetBeamApiKey("your-publishable-api-key") // set your Publishable(!) API key
                 .SetEnvironment(BeamEnvironment.Testnet) // defaults to Testnet
                 .SetDebugLogging(true) // optional, defaults to false
                 .SetStorage(yourCustomStorageImplementation); // optional, defaults to PlayerPrefs storage;
