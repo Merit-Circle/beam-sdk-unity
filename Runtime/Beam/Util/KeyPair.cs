@@ -1,3 +1,4 @@
+using System.Text;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Model;
 using Nethereum.Signer;
@@ -8,6 +9,7 @@ using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Utilities.Encoders;
 using Account = Nethereum.Web3.Accounts.Account;
 
 namespace Beam.Util

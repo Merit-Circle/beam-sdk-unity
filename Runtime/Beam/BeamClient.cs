@@ -11,6 +11,7 @@ namespace Beam
 {
     public class BeamClient : MonoBehaviour
     {
+        private const int DEFAULT_TIMEOUT_IN_SECONDS = 240;
         private string m_BeamAuthUrl = string.Empty;
         private string m_BeamGameId = string.Empty;
         private bool m_DebugLog = false;
@@ -28,7 +29,7 @@ namespace Beam
         /// </summary>
         /// <param name="gameId">Id of your Beam Game registration</param>
         /// <param name="publishableApiKey">Publishable Beam API key</param>
-        /// <returns>BeamBrowserClient</returns>
+        /// <returns>BeamClient</returns>
         public BeamClient SetBeamApiGame(string gameId, string publishableApiKey)
         {
             m_BeamApi.SetBeamGameId(gameId);
@@ -41,7 +42,7 @@ namespace Beam
         /// Sets Environment on the client.
         /// </summary>
         /// <param name="environment">BeamEnvironment.Mainnet or BeamEnvironment.Testnet (defaults to Testnet)</param>
-        /// <returns>BeamBrowserClient</returns>
+        /// <returns>BeamClient</returns>
         public BeamClient SetEnvironment(BeamEnvironment environment)
         {
             string apiUrl;
@@ -71,13 +72,18 @@ namespace Beam
         /// Sets custom storage for Session related information. Defaults to <see cref="PlayerPrefsStorage"/>.
         /// </summary>
         /// <param name="storage">Storage that implements IStorage</param>
-        /// <returns>BeamBrowserClient</returns>
+        /// <returns>BeamClient</returns>
         public BeamClient SetCustomStorage(IStorage storage)
         {
             m_Storage = storage;
             return this;
         }
 
+        /// <summary>
+        /// Set to true, to enable Debug.Log() statements. Defaults to false.
+        /// </summary>
+        /// <param name="enable">True to enable</param>
+        /// <returns>BeamClient</returns>
         public BeamClient SetDebugLogging(bool enable)
         {
             m_DebugLog = enable;
@@ -85,18 +91,59 @@ namespace Beam
         }
 
         /// <summary>
+        /// Retrieves active, valid session.
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="result">Callback to return a result with <see cref="BeamSession"/></param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <returns>IEnumerator</returns>
+        public IEnumerator GetActiveSession(
+            string entityId,
+            Action<BeamResult<BeamSession>> result,
+            int chainId = Constants.DefaultChainId)
+        {
+            Log("Retrieving active session");
+
+            BeamSession activeSession = null;
+            KeyPair keyPair = null;
+            yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (res, kp) =>
+            {
+                if (res != null)
+                {
+                    Log(
+                        $"Retrieved a session: {res.SessionAddress}, valid from: {res.StartTime:o}, to: {res.EndTime:o}");
+                    activeSession = res;
+                }
+
+                keyPair = kp;
+            }));
+
+            if (activeSession != null)
+            {
+                Log("No active session found");
+                result.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "No active session found")
+                {
+                    Result = activeSession
+                });
+                yield break;
+            }
+
+            result.Invoke(new BeamResult<BeamSession>(activeSession));
+        }
+
+        /// <summary>
         /// A Coroutine that opens an external browser to sign a Session, returns the result via callback arg.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
-        /// <param name="result">Callback to return a result of signin g</param>
+        /// <param name="result">Callback to return a result of Session creation</param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
-        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 30</param>
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <returns>IEnumerator</returns>
         public IEnumerator CreateSession(
             string entityId,
             Action<BeamResult<BeamSession>> result,
             int chainId = Constants.DefaultChainId,
-            int secondsTimeout = 120)
+            int secondsTimeout = DEFAULT_TIMEOUT_IN_SECONDS)
         {
             BeamSession activeSession = null;
             KeyPair keyPair = null;
@@ -124,7 +171,8 @@ namespace Beam
             }
 
             Log("No active session found, refreshing local KeyPair");
-            // refresh keypair to make sure we got no conflicts with existing sessions
+
+            // refresh keypair to make sure we have no conflicts with existing sessions
             keyPair = GetOrCreateSigningKeyPair(refresh: true);
 
             // retrieve operation Id to pass further and track result
@@ -155,23 +203,25 @@ namespace Beam
             // open identity.onbeam.com
             Application.OpenURL(beamSessionRequest.Url);
 
-            var beamResult = new BeamResult<BeamSession>();
+            var beamResultModel = new BeamResult<BeamSession>();
 
             Log("Started polling for Session creation result");
             // start polling for results of the operation
+            var error = false;
             yield return StartCoroutine(PollForSessionRequestResult(beamSessionRequest.Id, operationResult =>
                 {
                     switch (operationResult.Status)
                     {
                         case BeamSessionRequestStatus.Pending:
-                            beamResult.Status = BeamResultType.Pending;
+                            beamResultModel.Status = BeamResultType.Pending;
                             break;
                         case BeamSessionRequestStatus.Accepted:
-                            beamResult.Status = BeamResultType.Success;
+                            beamResultModel.Status = BeamResultType.Success;
                             break;
                         case BeamSessionRequestStatus.Error:
-                            beamResult.Status = BeamResultType.Error;
-                            beamResult.Error = "Encountered an error when requesting a session";
+                            beamResultModel.Status = BeamResultType.Error;
+                            beamResultModel.Error = "Encountered an error when requesting a session";
+                            error = true;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -180,36 +230,40 @@ namespace Beam
                 () =>
                 {
                     Log("Timed out when polling for Session");
+                    error = true;
                     result.Invoke(new BeamResult<BeamSession>(BeamResultType.Timeout,
                         "Timed out polling for Session Request result"));
                 }, () =>
                 {
                     Log("Session request was not found, something went wrong");
+                    error = true;
                     result.Invoke(
                         new BeamResult<BeamSession>(BeamResultType.Error,
                             $"Session Request with id: {beamSessionRequest.Id} could not be found"));
                 }, secondsTimeout));
 
             Log("Retrieving newly created Session");
-            // retrieve freshly created session
-            yield return StartCoroutine(m_BeamApi.GetActiveSessionInfo(entityId, res =>
+            // retrieve newly created session
+            if (!error)
             {
-                if (res.Success)
+                yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (bs, kp) =>
                 {
-                    // store session info in 'cache' for future reference
-                    m_Storage.Set(Constants.Storage.BeamSession, JsonConvert.SerializeObject(res));
-                    beamResult.Result = res.Result;
-                    Log(
-                        $"Retrieved a session: {res.Result.SessionAddress}, valid from: {res.Result.StartTime:o}, to: {res.Result.EndTime:o}");
-                }
-                else
-                {
-                    beamResult.Error = res.Error;
-                    beamResult.Status = BeamResultType.Error;
-                }
+                    if (bs != null)
+                    {
+                        beamResultModel.Result = bs;
+                        Log(
+                            $"Retrieved a session: {bs.SessionAddress}, valid from: {bs.StartTime:o}, to: {bs.EndTime:o}");
+                    }
+                    else
+                    {
+                        beamResultModel.Error = "Could not retrieve session after it was created";
+                        beamResultModel.Status = BeamResultType.Error;
+                    }
 
-                result.Invoke(beamResult);
-            }, chainId));
+                    keyPair = kp;
+                    result.Invoke(beamResultModel);
+                }));
+            }
         }
 
         /// <summary>
@@ -217,18 +271,18 @@ namespace Beam
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
         /// <param name="operationId">Id of the Operation to sign. Returned by Beam API.</param>
-        /// <param name="callback">Callback to return a result of signin g</param>
+        /// <param name="result">Callback to return a result of signin g</param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
-        /// <param name="fallBackToBrowser">If true, opens the browser for the User to perform signing. Defaults to true.</param>
-        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 30</param>
+        /// <param name="fallbackToBrowser">If true, opens the browser for the User to create new Session. Defaults to true. Returns an Error if false and there is no active session</param>
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <returns>IEnumerator</returns>
         public IEnumerator SignOperation(
             string entityId,
             string operationId,
-            Action<BeamResult<BeamOperationStatus>> callback,
+            Action<BeamResult<BeamOperationStatus>> result,
             int chainId = Constants.DefaultChainId,
-            bool fallBackToBrowser = true,
-            int secondsTimeout = 120)
+            bool fallbackToBrowser = true,
+            int secondsTimeout = DEFAULT_TIMEOUT_IN_SECONDS)
         {
             BeamSession activeSession = null;
             KeyPair activeSessionKeyPair = null;
@@ -246,27 +300,29 @@ namespace Beam
                 yield return SignOperationUsingSession(
                     entityId,
                     operationId,
-                    callback,
+                    result,
                     activeSessionKeyPair);
             }
-            else if (fallBackToBrowser)
+            else if (fallbackToBrowser)
             {
                 Log("No active session found, using browser to sign the operation");
-                yield return SignOperationUsingBrowser(operationId, callback, secondsTimeout);
+                yield return SignOperationUsingBrowser(operationId, result, secondsTimeout);
             }
             else
             {
-                Log($"No active session found, fallBackToBrowser set to false, ending");
-                callback.Invoke(new BeamResult<BeamOperationStatus>
+                Log($"No active session found, {nameof(fallbackToBrowser)} set to false");
+                result.Invoke(new BeamResult<BeamOperationStatus>
                 {
                     Result = BeamOperationStatus.Error,
                     Status = BeamResultType.Error,
-                    Error = $"No active session and {nameof(fallBackToBrowser)} set to false"
+                    Error = $"No active session and {nameof(fallbackToBrowser)} set to false"
                 });
             }
         }
 
-        private object SignOperationUsingBrowser(string operationId, Action<BeamResult<BeamOperationStatus>> callback,
+        private object SignOperationUsingBrowser(
+            string operationId,
+            Action<BeamResult<BeamOperationStatus>> callback,
             int secondsTimeout)
         {
             var url = $"{m_BeamAuthUrl}/games/{m_BeamGameId}/operation/{operationId}/confirm";
@@ -414,7 +470,8 @@ namespace Beam
                     var didFail = res.Result.Status != BeamOperationStatus.Executed &&
                                   res.Result.Status != BeamOperationStatus.Pending;
 
-                    Log($"Confirming operation({operationId}) status: {res.Result.Status.ToString()} error: {res.Result.Error}");
+                    Log(
+                        $"Confirming operation({operationId}) status: {res.Result.Status.ToString()} error: {res.Result.Error}");
                     callback.Invoke(new BeamResult<BeamOperationStatus>
                     {
                         Status = didFail ? BeamResultType.Error : BeamResultType.Success,
@@ -440,7 +497,7 @@ namespace Beam
             Action<BeamOperation> operationResult,
             Action timeout,
             Action operationNotFound,
-            int secondsTimeout = 240,
+            int secondsTimeout = DEFAULT_TIMEOUT_IN_SECONDS,
             int secondsBetweenPolls = 1)
         {
             var now = DateTimeOffset.Now;
@@ -472,7 +529,8 @@ namespace Beam
 
                 // check for status as well as updatedAt
                 // in case of retries, status can be set to Error, but we're interested in the newest actual result
-                if (beamOperation.Status != BeamOperationStatus.Pending && (beamOperation.UpdatedAt != null && beamOperation.UpdatedAt > now))
+                if (beamOperation.Status != BeamOperationStatus.Pending &&
+                    (beamOperation.UpdatedAt != null && beamOperation.UpdatedAt > now))
                 {
                     operationResult.Invoke(beamOperation);
 
@@ -490,7 +548,7 @@ namespace Beam
             Action<BeamSessionRequest> sessionRequestResult,
             Action timeout,
             Action operationNotFound,
-            int secondsTimeout = 240,
+            int secondsTimeout = DEFAULT_TIMEOUT_IN_SECONDS,
             int secondsBetweenPolls = 1)
         {
             yield return new WaitForSecondsRealtime(2);
@@ -546,13 +604,12 @@ namespace Beam
                 beamSession = JsonConvert.DeserializeObject<BeamSession>(sessionInfo);
             }
 
-            var now = DateTimeOffset.Now;
+            var keyPair = GetOrCreateSigningKeyPair();
 
-            if (beamSession == null || beamSession.StartTime > now || beamSession.EndTime < now)
+            // if session is no longer valid, check if we have one saved in the API
+            if (!beamSession.IsValidNow())
             {
-                m_Storage.Delete(Constants.Storage.BeamSession);
-
-                yield return m_BeamApi.GetActiveSessionInfo(entityId, (res) =>
+                yield return m_BeamApi.GetActiveSessionInfo(entityId, keyPair.Account.Address, (res) =>
                 {
                     if (res.Success && res.Result != null)
                     {
@@ -561,21 +618,17 @@ namespace Beam
                 }, chainId);
             }
 
-            var keyPair = GetOrCreateSigningKeyPair();
-
-            if (beamSession != null
-                && beamSession?.StartTime <= now
-                && beamSession?.EndTime > now
-                && string.Equals(beamSession.SessionAddress, keyPair.Account.Address,
-                    StringComparison.InvariantCultureIgnoreCase))
+            // make sure session we just retrieved is valid and owned by current KeyPair
+            if (beamSession.IsValidNow() && beamSession.IsOwnedBy(keyPair))
             {
                 m_Storage.Set(Constants.Storage.BeamSession, JsonConvert.SerializeObject(beamSession));
                 activeSession.Invoke(beamSession, keyPair);
                 yield break;
             }
-            
-            activeSession.Invoke(null, keyPair);
+
+            // if session is not valid or owned by different KeyPair, remove it from cache
             m_Storage.Delete(Constants.Storage.BeamSession);
+            activeSession.Invoke(null, keyPair);
         }
 
         private KeyPair GetOrCreateSigningKeyPair(bool refresh = false)

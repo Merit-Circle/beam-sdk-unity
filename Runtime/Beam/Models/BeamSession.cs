@@ -9,6 +9,5 @@ namespace Beam.Models
         [JsonProperty("sessionAddress")] public string SessionAddress { get; set; }
         [JsonProperty("startTime")] public DateTimeOffset StartTime { get; set; }
         [JsonProperty("endTime")] public DateTimeOffset EndTime { get; set; }
-        [JsonProperty("accountAddress")] public string AccountAddress { get; set; }
     }
 }

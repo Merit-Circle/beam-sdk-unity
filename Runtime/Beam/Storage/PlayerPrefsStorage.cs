@@ -14,11 +14,13 @@ namespace Beam
         public void Set(string key, string value)
         {
             PlayerPrefs.SetString(key, value);
+            PlayerPrefs.Save();
         }
 
         public void Delete(string key)
         {
             PlayerPrefs.DeleteKey(key);
+            PlayerPrefs.Save();
         }
     }
 }

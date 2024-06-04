@@ -29,11 +29,12 @@ namespace Beam.Api
 
         public IEnumerator GetActiveSessionInfo(
             string entityId,
+            string accountAddress,
             Action<BeamHttpResult<BeamSession>> callback,
             int chainId = Constants.DefaultChainId)
         {
             EnsureApiIsConfigured();
-            var path = $"{m_ApiBaseUrl}/v1/self-custody/sessions/users/{entityId}/active?chainId={chainId}";
+            var path = $"{m_ApiBaseUrl}/v1/self-custody/sessions/users/{entityId}/{accountAddress}/active?chainId={chainId}";
             var request = UnityWebRequest.Get(path);
             request.SetRequestHeader(Constants.BeamAPIKeyHeader, m_BeamPublishableGameKey);
             yield return request.SendWebRequest();
@@ -41,7 +42,7 @@ namespace Beam.Api
             var result = new BeamHttpResult<BeamSession>(request);
             callback.Invoke(result);
         }
-        
+
         public IEnumerator CreateSessionRequest(string entityId, int chainId, string address, Action<BeamHttpResult<BeamSessionRequest>> result)
         {
             EnsureApiIsConfigured();
