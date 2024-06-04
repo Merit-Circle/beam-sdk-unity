@@ -1,11 +1,5 @@
 # Beam SDK Client for Unity
 
-##
-# Dependencies
-This package only depends upon:
-
-`"com.unity.nuget.newtonsoft-json": "3.2.1"`
-
 ## Installation
 To install Beam Client SDK for Unity you have to add following dependencies to your manifest.json:  
 
