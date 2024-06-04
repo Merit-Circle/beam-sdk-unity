@@ -54,6 +54,7 @@ namespace Beam
                     break;
                 default:
                 case BeamEnvironment.Testnet:
+                default:
                     m_BeamAuthUrl = "https://identity.testnet.onbeam.com/";
                     apiUrl = "https://api.testnet.onbeam.com";
                     break;
@@ -69,7 +70,7 @@ namespace Beam
         /// </summary>
         /// <param name="storage">Storage that implements IStorage</param>
         /// <returns>BeamClient</returns>
-        public BeamClient SetCustomStorage(IStorage storage)
+        public BeamClient SetStorage(IStorage storage)
         {
             m_Storage = storage;
             return this;
@@ -90,12 +91,12 @@ namespace Beam
         /// Retrieves active, valid session.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
-        /// <param name="result">Callback to return a result with <see cref="BeamSession"/></param>
+        /// <param name="actionResult">Callback to return a result with <see cref="BeamSession"/></param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
         /// <returns>IEnumerator</returns>
         public IEnumerator GetActiveSession(
             string entityId,
-            Action<BeamResult<BeamSession>> result,
+            Action<BeamResult<BeamSession>> actionResult,
             int chainId = Constants.DefaultChainId)
         {
             Log("Retrieving active session");
@@ -117,27 +118,27 @@ namespace Beam
             if (activeSession != null)
             {
                 Log("No active session found");
-                result.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "No active session found")
+                actionResult.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "No active session found")
                 {
                     Result = activeSession
                 });
                 yield break;
             }
 
-            result.Invoke(new BeamResult<BeamSession>(activeSession));
+            actionResult.Invoke(new BeamResult<BeamSession>(activeSession));
         }
 
         /// <summary>
         /// A Coroutine that opens an external browser to sign a Session, returns the result via callback arg.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
-        /// <param name="result">Callback to return a result of Session creation</param>
+        /// <param name="actionResult">Callback to return a result of Session creation</param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <returns>IEnumerator</returns>
         public IEnumerator CreateSession(
             string entityId,
-            Action<BeamResult<BeamSession>> result,
+            Action<BeamResult<BeamSession>> actionResult,
             int chainId = Constants.DefaultChainId,
             int secondsTimeout = DEFAULT_TIMEOUT_IN_SECONDS)
         {
@@ -159,7 +160,7 @@ namespace Beam
             if (activeSession != null)
             {
                 Log("Already has an active session, ending early");
-                result.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "Already has an active session")
+                actionResult.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "Already has an active session")
                 {
                     Result = activeSession
                 });
@@ -183,10 +184,10 @@ namespace Beam
                     }
                     else
                     {
-                        Log($"Failed creating session request: {res.Error}");
-                        result.Invoke(new BeamResult<BeamSession>(
+                        Log($"Failed creating session request: {res.ErrorMessage}");
+                        actionResult.Invoke(new BeamResult<BeamSession>(
                             status: BeamResultType.Error,
-                            error: res.Error));
+                            error: res.ErrorMessage));
                     }
                 }));
 
@@ -227,13 +228,13 @@ namespace Beam
                 {
                     Log("Timed out when polling for Session");
                     error = true;
-                    result.Invoke(new BeamResult<BeamSession>(BeamResultType.Timeout,
+                    actionResult.Invoke(new BeamResult<BeamSession>(BeamResultType.Timeout,
                         "Timed out polling for Session Request result"));
                 }, () =>
                 {
                     Log("Session request was not found, something went wrong");
                     error = true;
-                    result.Invoke(
+                    actionResult.Invoke(
                         new BeamResult<BeamSession>(BeamResultType.Error,
                             $"Session Request with id: {beamSessionRequest.Id} could not be found"));
                 }, secondsTimeout));
@@ -257,7 +258,7 @@ namespace Beam
                     }
 
                     keyPair = kp;
-                    result.Invoke(beamResultModel);
+                    actionResult.Invoke(beamResultModel);
                 }));
             }
         }
@@ -267,7 +268,7 @@ namespace Beam
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
         /// <param name="operationId">Id of the Operation to sign. Returned by Beam API.</param>
-        /// <param name="result">Callback to return a result of signin g</param>
+        /// <param name="actionResult">Callback to return a result of signin g</param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
         /// <param name="fallbackToBrowser">If true, opens the browser for the User to create new Session. Defaults to true. Returns an Error if false and there is no active session</param>
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
@@ -275,7 +276,7 @@ namespace Beam
         public IEnumerator SignOperation(
             string entityId,
             string operationId,
-            Action<BeamResult<BeamOperationStatus>> result,
+            Action<BeamResult<BeamOperationStatus>> actionResult,
             int chainId = Constants.DefaultChainId,
             bool fallbackToBrowser = true,
             int secondsTimeout = DEFAULT_TIMEOUT_IN_SECONDS)
@@ -296,18 +297,18 @@ namespace Beam
                 yield return SignOperationUsingSession(
                     entityId,
                     operationId,
-                    result,
+                    actionResult,
                     activeSessionKeyPair);
             }
             else if (fallbackToBrowser)
             {
                 Log("No active session found, using browser to sign the operation");
-                yield return SignOperationUsingBrowser(operationId, result, secondsTimeout);
+                yield return SignOperationUsingBrowser(operationId, actionResult, secondsTimeout);
             }
             else
             {
                 Log($"No active session found, {nameof(fallbackToBrowser)} set to false");
-                result.Invoke(new BeamResult<BeamOperationStatus>
+                actionResult.Invoke(new BeamResult<BeamOperationStatus>
                 {
                     Result = BeamOperationStatus.Error,
                     Status = BeamResultType.Error,
@@ -387,7 +388,7 @@ namespace Beam
                     callback.Invoke(new BeamResult<BeamOperationStatus>
                     {
                         Status = BeamResultType.Error,
-                        Error = res.Error
+                        Error = res.ErrorMessage
                     });
                 }
             }));
@@ -472,17 +473,17 @@ namespace Beam
                     {
                         Status = didFail ? BeamResultType.Error : BeamResultType.Success,
                         Result = res.Result.Status,
-                        Error = didFail ? res.Error : null
+                        Error = didFail ? res.ErrorMessage : null
                     });
                 }
                 else
                 {
-                    Log($"Confirming operation({operationId}) encountered an error: {res.Error}");
+                    Log($"Confirming operation({operationId}) encountered an error: {res.ErrorMessage}");
                     callback.Invoke(new BeamResult<BeamOperationStatus>
                     {
                         Result = BeamOperationStatus.Error,
                         Status = BeamResultType.Error,
-                        Error = res.Error ?? $"Encountered unknown error when confirming operation {operationId}"
+                        Error = res.ErrorMessage ?? $"Encountered unknown error when confirming operation {operationId}"
                     });
                 }
             }));
