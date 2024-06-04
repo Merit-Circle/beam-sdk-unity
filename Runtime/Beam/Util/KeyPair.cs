@@ -1,4 +1,4 @@
-using System.Text;
+using Beam.Extensions;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Model;
 using Nethereum.Signer;
@@ -9,7 +9,6 @@ using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities.Encoders;
 using Account = Nethereum.Web3.Accounts.Account;
 
 namespace Beam.Util
@@ -26,10 +25,10 @@ namespace Beam.Util
 
         public Account Account => new(PrivateHex);
 
-        public string PublicHex => _public.Q.GetEncoded(true).ToHex();
+        public string PublicHex => ByteExtensions.ToHex(_public.Q.GetEncoded(true));
         public string PrivateHex => _private.D.ToHex();
 
-        public static KeyPair Generate()
+        internal static KeyPair Generate()
         {
             var secureRandom = new SecureRandom();
             var keyParams = new ECKeyGenerationParameters(DomainParams, secureRandom);
@@ -39,7 +38,7 @@ namespace Beam.Util
             return new KeyPair(generator.GenerateKeyPair());
         }
 
-        public static KeyPair Load(string savedPrivateKey)
+        internal static KeyPair Load(string savedPrivateKey)
         {
             BigInteger privateKeyValue;
             try
@@ -65,7 +64,7 @@ namespace Beam.Util
         /// </summary>
         /// <param name="message">Message/hash to sign</param>
         /// <returns></returns>
-        public string SignMessage(string message)
+        internal string SignMessage(string message)
         {
             var signer = new EthereumMessageSigner();
             var ethEcKey = new EthECKey(_private.D.ToByteArray(), true);
@@ -80,7 +79,7 @@ namespace Beam.Util
         /// </summary>
         /// <param name="hash">Ethereum valid hash of TypedData</param>
         /// <returns></returns>
-        public string SignMarketplaceTransactionHash(string hash)
+        internal string SignMarketplaceTransactionHash(string hash)
         {
             var ethEcKey = new EthECKey(_private.D.ToByteArray(), true);
             var msgBytes = hash.HexToByteArray();

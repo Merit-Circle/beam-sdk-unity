@@ -7,7 +7,7 @@ namespace Beam.Models
     public class BeamOperationConfirmation
     {
         [JsonProperty("status")]
-        [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(StringEnumConverter))]
         public BeamOperationStatus Status { get; set; }
 
         [JsonProperty("transactions")]

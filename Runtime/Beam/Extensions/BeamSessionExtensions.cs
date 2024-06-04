@@ -2,7 +2,7 @@ using System;
 using Beam.Models;
 using Beam.Util;
 
-namespace Beam
+namespace Beam.Extensions
 {
     internal static class BeamSessionExtensions
     {

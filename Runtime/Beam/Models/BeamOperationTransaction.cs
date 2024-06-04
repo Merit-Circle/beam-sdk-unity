@@ -7,22 +7,25 @@ namespace Beam.Models
 {
     public class BeamOperationTransaction
     {
-        public string Id { get; set; }
+        [JsonProperty("id")] public string Id { get; set; }
 
+        [JsonProperty("type")]
         [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
         public BeamOperationTransactionType Type { get; set; }
 
+        [JsonProperty("status")]
         [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
         public BeamOperationTransactionStatus Status { get; set; }
 
-        public string ExternalId { get; set; }
-        public string Signature { get; set; }
-        public string OperationId { get; set; }
+        [JsonProperty("externalId")] public string ExternalId { get; set; }
+        [JsonProperty("signature")] public string Signature { get; set; }
+        [JsonProperty("operationId")] public string OperationId { get; set; }
 
+        [JsonProperty("data")]
         [JsonConverter(typeof(BeamTransactionDataJsonConverter))]
         public string Data { get; set; }
-        
-        public string Hash { get; set; }
+
+        [JsonProperty("hash")] public string Hash { get; set; }
     }
 
     public enum BeamOperationTransactionType

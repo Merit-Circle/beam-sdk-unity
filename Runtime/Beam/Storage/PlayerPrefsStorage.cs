@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
-namespace Beam
+namespace Beam.Storage
 {
-    public class PlayerPrefsStorage: IStorage
+    internal class PlayerPrefsStorage: IStorage
     {
         public string Get(string key)
         {

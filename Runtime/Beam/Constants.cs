@@ -1,8 +1,8 @@
 namespace Beam
 {
-    public static class Constants
+    internal static class Constants
     {
-        public const int DefaultChainId = 13337;
+        internal const int DefaultChainId = 13337;
 
         internal const string BeamAPIKeyHeader = "x-api-key";
 

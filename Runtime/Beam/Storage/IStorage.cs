@@ -1,4 +1,4 @@
-namespace Beam
+namespace Beam.Storage
 {
     public interface IStorage
     {

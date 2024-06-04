@@ -6,7 +6,7 @@ namespace Beam.Models
 {
     public class BeamSessionRequest
     {
-        [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("status")] public BeamSessionRequestStatus Status { get; set; }
         [JsonProperty("id")] public string Id { get; set; }
         [JsonProperty("createdAt")] public DateTimeOffset CreatedAt { get; set; }

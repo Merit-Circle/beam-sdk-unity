@@ -1,24 +1,25 @@
 using System;
 using System.Collections.Generic;
-using Beam.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Beam
+namespace Beam.Models
 {
     internal class BeamOperation
     {
-        [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
-        public BeamOperationStatus Status;
+        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty("status")]
+        public BeamOperationStatus Status { get; set; }
 
-        public string Id;
-        public string Error;
-        public string UserId;
-        public string GameId;
-        public DateTimeOffset CreatedAt;
-        public DateTimeOffset? UpdatedAt;
-        public int? ChainId;
-        public IEnumerable<BeamOperationTransaction> Transactions { get; set; }
-        public BeamGame Game { get; set; }
-        public string Url { get; set; }
+        [JsonProperty("id")] public string Id { get; set; }
+        [JsonProperty("error")] public string Error { get; set; }
+        [JsonProperty("userId")] public string UserId { get; set; }
+        [JsonProperty("gameId")] public string GameId { get; set; }
+        [JsonProperty("createdAt")] public DateTimeOffset CreatedAt { get; set; }
+        [JsonProperty("updatedAt")] public DateTimeOffset? UpdatedAt { get; set; }
+        [JsonProperty("chainId")] public int? ChainId { get; set; }
+        [JsonProperty("transactions")] public IEnumerable<BeamOperationTransaction> Transactions { get; set; }
+        [JsonProperty("game")] public BeamGame Game { get; set; }
+        [JsonProperty("url")] public string Url { get; set; }
     }
 }
