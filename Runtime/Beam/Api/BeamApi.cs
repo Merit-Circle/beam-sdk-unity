@@ -28,7 +28,7 @@ namespace Beam.Api
             int chainId = Constants.DefaultChainId)
         {
             EnsureApiIsConfigured();
-            var path = $"{m_ApiBaseUrl}/v1/self-custody/sessions/users/{entityId}/{accountAddress}/active?chainId={chainId}";
+            var path = $"{m_ApiBaseUrl}/v1/player/sessions/users/{entityId}/{accountAddress}/active?chainId={chainId}";
             var request = UnityWebRequest.Get(path);
             request.SetRequestHeader(Constants.BeamAPIKeyHeader, m_BeamPublishableGameKey);
             yield return request.SendWebRequest();
@@ -46,7 +46,7 @@ namespace Beam.Api
                 chainId
             });
 
-            var path = $"{m_ApiBaseUrl}/v1/self-custody/sessions/users/{entityId}/request";
+            var path = $"{m_ApiBaseUrl}/v1/player/sessions/users/{entityId}/request";
             var request = UnityWebRequest.Post(path, bodyJson, "application/json");
             request.SetRequestHeader(Constants.BeamAPIKeyHeader, m_BeamPublishableGameKey);
             yield return request.SendWebRequest();
@@ -58,7 +58,7 @@ namespace Beam.Api
         public IEnumerator GetOperationById(string opId, Action<BeamHttpResult<BeamOperation>> result)
         {
             EnsureApiIsConfigured();
-            var path = $"{m_ApiBaseUrl}/v1/self-custody/operation/{opId}";
+            var path = $"{m_ApiBaseUrl}/v1/player/operation/{opId}";
             var request = UnityWebRequest.Get(path);
             request.SetRequestHeader(Constants.BeamAPIKeyHeader, m_BeamPublishableGameKey);
             yield return request.SendWebRequest();
@@ -73,7 +73,7 @@ namespace Beam.Api
         {
             EnsureApiIsConfigured();
             var bodyJson = JsonConvert.SerializeObject(beamOperationConfirmation);
-            var request = UnityWebRequest.Post($"{m_ApiBaseUrl}/v1/self-custody/operation/{operationId}", bodyJson,
+            var request = UnityWebRequest.Post($"{m_ApiBaseUrl}/v1/player/operation/{operationId}", bodyJson,
                 "application/json");
             request.method = "PATCH";
             request.SetRequestHeader(Constants.BeamAPIKeyHeader, m_BeamPublishableGameKey);
@@ -88,7 +88,7 @@ namespace Beam.Api
         {
             EnsureApiIsConfigured();
             var request =
-                UnityWebRequest.Get($"{m_ApiBaseUrl}/v1/self-custody/sessions/request/{requestId}");
+                UnityWebRequest.Get($"{m_ApiBaseUrl}/v1/player/sessions/request/{requestId}");
             request.SetRequestHeader(Constants.BeamAPIKeyHeader, m_BeamPublishableGameKey);
             yield return request.SendWebRequest();
             

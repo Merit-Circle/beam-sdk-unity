@@ -1,14 +1,14 @@
-# Beam SDK Client for Unity
+# Beam SDK for Unity
 
 ## Installation
-To install Beam Client SDK for Unity you have to add following dependencies to your manifest.json:  
+To install Beam SDK for Unity you have to add following dependencies to your manifest.json:  
 
 #### Option 1 - manifest.json
 
 Open Packages/manifest.json and add this line:
 
 ```
-"beam.sdk.client": "https://github.com/Merit-Circle/beam-client-unity.git"
+"beam.sdk.client": "https://github.com/Merit-Circle/beam-sdk-unity.git"
 ```
 
 #### Option 2 - Package Manager Editor UI
@@ -19,7 +19,7 @@ https://docs.unity3d.com/Manual/upm-ui-giturl.html
 
 And add this url:  
 ```
-https://github.com/Merit-Circle/beam-client-unity.git
+https://github.com/Merit-Circle/beam-sdk-unity.git
 ```
 
 
