@@ -75,7 +75,7 @@ StartCoroutine(beamClient.CreateSession(
 ### Signing an operation:
 Once you get an operationId from Beam API, that requires signing by the user, you can call BeamClient.SignOperation() to sign and execute given operation:
 ```csharp
-StartCoroutine(m_BeamClient.SignOperation(
+StartCoroutine(beamClient.SignOperation(
                 "entityIdOfYourUser",
                 operationId,    // operationId from Beam API
                 actionResult =>
