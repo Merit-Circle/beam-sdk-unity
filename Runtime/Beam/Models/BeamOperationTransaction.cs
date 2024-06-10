@@ -38,6 +38,7 @@ namespace Beam.Models
     {
         Pending,
         Executed,
+        Signed,
         Error
     }
 
