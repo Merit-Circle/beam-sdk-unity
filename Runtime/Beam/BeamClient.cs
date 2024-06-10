@@ -369,6 +369,7 @@ namespace Beam
                         case BeamOperationStatus.Pending:
                         case BeamOperationStatus.Executed:
                         case BeamOperationStatus.Rejected:
+                        case BeamOperationStatus.Signed:
                             beamResult.Status = BeamResultType.Success;
                             break;
                         case BeamOperationStatus.Error:
@@ -461,6 +462,7 @@ namespace Beam
                 if (res.Success)
                 {
                     var didFail = res.Result.Status != BeamOperationStatus.Executed &&
+                                  res.Result.Status != BeamOperationStatus.Signed &&
                                   res.Result.Status != BeamOperationStatus.Pending;
 
                     Log(
