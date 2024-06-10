@@ -50,8 +50,6 @@ namespace Beam
                     apiUrl = "https://api.onbeam.com";
                     break;
                 default:
-                case BeamEnvironment.Testnet:
-                default:
                     apiUrl = "https://api.testnet.onbeam.com";
                     break;
             }
