@@ -93,3 +93,6 @@ StartCoroutine(beamClient.SignOperation(
                 secondsTimeout: 240 // timeout in seconds for getting a result of message signing from the browser, used if there was no valid session
             ));
 ```
+
+### Examples
+You can find an example implementation using this demo in [beam-sdk-unity-example](https://github.com/Merit-Circle/beam-sdk-unity-example/tree/main)
