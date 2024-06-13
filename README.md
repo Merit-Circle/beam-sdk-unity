@@ -83,7 +83,8 @@ StartCoroutine(beamClient.SignOperation(
                     if (actionResult.Status == BeamResultType.Success)
                     {
                         // you can now check for actual Status of the signing f.e.:
-                        var isApproved = actionResult.Result == BeamOperationStatus.Executed;
+                        var isSigned = actionResult.Result == BeamOperationStatus.Signed;
+                        var isExecuted = actionResult.Result == BeamOperationStatus.Executed;
                         var isRejected = actionResult.Result == BeamOperationStatus.Rejected;
                         // (...)
                     }
