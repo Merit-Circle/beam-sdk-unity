@@ -31,6 +31,7 @@ namespace Beam.Models
     public enum BeamOperationTransactionType
     {
         OpenfortTransaction,
+        OpenfortRevokeSession,
         OpenfortReservoirOrder
     }
 
