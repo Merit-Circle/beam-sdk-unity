@@ -1,0 +1,3887 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: The Player API is a service to integrate your game with Beam
+  title: Player API
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: "Retrieve assets (ERC-20, ERC-721 and ERC1155) for profiles in your\
+    \ game"
+  name: Assets
+- description: Retrieve and create transactions on behalf of the profiles in your
+    game
+  name: Transactions
+- description: Manage listings and buy assets through the Beam marketplace
+  name: Marketplace
+- description: "Used by Game SDKs to propagate transaction results like signing, sessions\
+    \ etc."
+  name: Operation
+- description: Convert tokens using an exchange for users in your game
+  name: Exchange
+- description: Retrieve and manage users in Beam
+  name: Users
+paths:
+  /v1/health/services:
+    get:
+      operationId: check
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/check_200_response'
+          description: The Health Check is successful
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/check_503_response'
+          description: The Health Check is not successful
+      tags:
+      - Health
+  /v1/player/assets/users/{entityId}:
+    post:
+      operationId: getUserAssetsForGamePost
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAssetsForUserBodyInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssetsForUserResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: "Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)"
+      tags:
+      - Assets
+  /v1/player/assets/users/{entityId}/currencies:
+    get:
+      operationId: getUserCurrencies
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserCurrenciesResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Get all the currencies owned by an account (ERC20)
+      tags:
+      - Assets
+  /v1/player/assets/users/{entityId}/native:
+    get:
+      operationId: getUserNativeCurrency
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserNativeCurrencyResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Get the native token balance
+      tags:
+      - Assets
+  /v1/player/assets/users/{entityId}/transfer-asset:
+    post:
+      operationId: TransferAsset
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferAssetRequestInput'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: "Transfer an asset (NFT assets, ERC721 / ERC1155)"
+      tags:
+      - Assets
+  /v1/player/assets/users/{entityId}/transfer-token:
+    post:
+      operationId: TransferToken
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferTokenRequestInput'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: "Transfer a token (token assets, ERC20)"
+      tags:
+      - Assets
+  /v1/player/assets/users/{entityId}/transfer-native:
+    post:
+      operationId: TransferNativeToken
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferNativeTokenRequestInput'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Transfer the native token (BEAM)
+      tags:
+      - Assets
+  /v1/player/assets/{assetAddress}:
+    post:
+      operationId: getContractAssetsPost
+      parameters:
+      - explode: false
+        in: path
+        name: assetAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAssetsForContractBodyInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssetsForContractResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: "Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)"
+      tags:
+      - Assets
+  /v1/player/assets/{assetAddress}/{assetId}:
+    get:
+      operationId: getAsset
+      parameters:
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: false
+        in: path
+        name: assetAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: assetId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: entityId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "If true, will return owners of the token"
+        explode: true
+        in: query
+        name: owners
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssetResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Get a single NFT (e.g. ERC721 / ERC1155)
+      tags:
+      - Assets
+  /v1/player/marketplace:
+    post:
+      operationId: getListedAssets
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetListedAssetsBodyInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssetListingsResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: "Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)"
+      tags:
+      - Marketplace
+  /v1/player/marketplace/users/{entityId}:
+    post:
+      operationId: getListedAssetsForUser
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetListedAssetsBodyInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssetListingsResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: "Get all the assets listed by a profile (NFT assets, e.g. ERC721 /\
+        \ ERC1155)"
+      tags:
+      - Marketplace
+  /v1/player/marketplace/users/{entityId}/listing:
+    post:
+      operationId: listAsset
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SellAssetRequestInput'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: List an asset for sale
+      tags:
+      - Marketplace
+  /v1/player/marketplace/users/{entityId}/listing/{orderId}:
+    delete:
+      operationId: cancelListing
+      parameters:
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: orderId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelAssetListingRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Cancel asset listing
+      tags:
+      - Marketplace
+    post:
+      operationId: buyListedAsset
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: orderId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuyAssetRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Buy listed asset
+      tags:
+      - Marketplace
+  /v1/player/marketplace/users/{entityId}/offers:
+    get:
+      operationId: getUserOffers
+      parameters:
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: continuation
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssetListingsResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Get all offers that a user created
+      tags:
+      - Marketplace
+    post:
+      operationId: createAssetOffer
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAssetOfferRequestInput'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Make an offer for an asset
+      tags:
+      - Marketplace
+  /v1/player/marketplace/users/{entityId}/offers/asset/{assetAddress}/{assetId}:
+    get:
+      operationId: getUserAssetOffers
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: assetAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: assetId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: continuation
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssetListingsResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Get all asset offers that a user created for a specific asset
+      tags:
+      - Marketplace
+  /v1/player/marketplace/users/{entityId}/offers/{offerId}/accept:
+    post:
+      operationId: acceptAssetOffer
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: offerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptAssetOfferRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Accept an offer for an asset
+      tags:
+      - Marketplace
+  /v1/player/marketplace/users/{entityId}/offers/{offerId}:
+    delete:
+      operationId: cancelAssetOffer
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: offerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelAssetOfferRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Cancel an offer for an asset
+      tags:
+      - Marketplace
+  /v1/player/marketplace/offers/asset/{assetAddress}/{assetId}:
+    get:
+      operationId: getAssetOffers
+      parameters:
+      - explode: false
+        in: path
+        name: assetAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: assetId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: continuation
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssetListingsResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Get all offers for an asset
+      tags:
+      - Marketplace
+  /v1/player/marketplace/chain-currencies/{chainId}:
+    get:
+      operationId: getChainCurrencies
+      parameters:
+      - explode: false
+        in: path
+        name: chainId
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChainCurrenciesResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Get available currencies for given chain
+      tags:
+      - Marketplace
+  /v1/player/transactions:
+    get:
+      operationId: getTransactions
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionsResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Get a paginated list of transactions from your game
+      tags:
+      - Transactions
+  /v1/player/transactions/{transactionId}:
+    get:
+      operationId: getTransaction
+      parameters:
+      - explode: false
+        in: path
+        name: transactionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Getting a transaction
+      tags:
+      - Transactions
+  /v1/player/transactions/users/{entityId}:
+    get:
+      operationId: getUserTransactions
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionsResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Get a paginated list of transactions created on behalf of a user
+      tags:
+      - Transactions
+    post:
+      operationId: createUserTransaction
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransactionRequestInput'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Creating a new transaction on behalf of a user
+      tags:
+      - Transactions
+  /v1/player/users:
+    get:
+      operationId: getAllUsers
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllUsersResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Returns a list of users
+      tags:
+      - Users
+  /v1/player/users/{entityId}:
+    get:
+      operationId: getUser
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Returns a particular user
+      tags:
+      - Users
+  /v1/player/operation/{opId}:
+    delete:
+      operationId: deleteOperation
+      parameters:
+      - explode: false
+        in: path
+        name: opId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Delete an operation
+      tags:
+      - Operation
+    get:
+      operationId: getOperation
+      parameters:
+      - explode: false
+        in: path
+        name: opId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Returns operation data for given id. Used by Game SDKs to get transaction
+        results.
+      tags:
+      - Operation
+    patch:
+      operationId: processOperation
+      parameters:
+      - explode: false
+        in: path
+        name: opId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmOperationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Updates operation result for given id
+      tags:
+      - Operation
+  /v1/player/operation:
+    post:
+      operationId: createOperation
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOperationRequestInput'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Initializes an operation. Used by Game SDKs to get transaction results.
+      tags:
+      - Operation
+  /v1/player/exchange/quote/input:
+    get:
+      operationId: getQuoteForInput
+      parameters:
+      - explode: true
+        in: query
+        name: tokenIn
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: tokenOut
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: amountOut
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuoteResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: "Returns the maximum necessary input amount for a token trade, given\
+        \ a desired output amount"
+      tags:
+      - Exchange
+  /v1/player/exchange/quote/output:
+    get:
+      operationId: getQuoteForOutput
+      parameters:
+      - explode: true
+        in: query
+        name: tokenIn
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: tokenOut
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: amountIn
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuoteResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: "Returns the minimum expected output amount for a token trade, given\
+        \ an input amount"
+      tags:
+      - Exchange
+  /v1/player/exchange/users/{entityId}/convert/input:
+    post:
+      operationId: convertInput
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConvertTokenRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`
+      tags:
+      - Exchange
+  /v1/player/exchange/users/{entityId}/convert/output:
+    post:
+      operationId: convertToOutput
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConvertTokenRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`
+      tags:
+      - Exchange
+  /v1/player/sessions/users/{entityId}/request:
+    post:
+      operationId: createSessionRequest
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateSessionUrlRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateSessionRequestResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: ""
+      tags:
+      - Sessions
+  /v1/player/sessions/request/{requestId}:
+    get:
+      operationId: getSessionRequest
+      parameters:
+      - explode: false
+        in: path
+        name: requestId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionRequestResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: ""
+      tags:
+      - Sessions
+  /v1/player/sessions/users/{entityId}/{accountAddress}/active:
+    get:
+      operationId: getActiveSession
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActiveSessionResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: ""
+      tags:
+      - Sessions
+  /v1/player/connector:
+    post:
+      operationId: createConnectionRequest
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateLoginRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateLoginRequestResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: ""
+      tags:
+      - Connector
+components:
+  schemas:
+    GetAssetsForUserBodyInput:
+      example:
+        sortDirection: asc
+        chainId: 0.8008281904610115
+        contract: contract
+        limit: 60.67181621239699
+        sortBy: acquiredAt
+        includeAttributes: false
+        continuation: continuation
+      properties:
+        sortDirection:
+          default: asc
+          enum:
+          - asc
+          - desc
+          type: string
+        sortBy:
+          default: acquiredAt
+          enum:
+          - acquiredAt
+          - lastAppraisalValue
+          type: string
+        contract:
+          nullable: true
+          type: string
+        includeAttributes:
+          default: false
+          nullable: true
+          type: boolean
+        continuation:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        limit:
+          default: 20
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 100
+          minimum: 1
+          type: number
+      type: object
+    GetAssetsForUserResponse:
+      example:
+        data:
+        - ownedQuantity: 2.3021358869347655
+          chainId: 5.637376656633329
+          assetAddress: assetAddress
+          assetId: assetId
+          imageUrl: imageUrl
+          name: name
+          rarityScore: 6.027456183070403
+          attributes:
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          supply: 0.8008281904610115
+          assetType: assetType
+          rarity: Common
+        - ownedQuantity: 2.3021358869347655
+          chainId: 5.637376656633329
+          assetAddress: assetAddress
+          assetId: assetId
+          imageUrl: imageUrl
+          name: name
+          rarityScore: 6.027456183070403
+          attributes:
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          supply: 0.8008281904610115
+          assetType: assetType
+          rarity: Common
+        continuation: continuation
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetAssetsForUserResponse_data_inner'
+          type: array
+        continuation:
+          nullable: true
+          type: string
+      required:
+      - data
+      type: object
+    GetUserCurrenciesResponse:
+      example:
+        data:
+        - symbol: symbol
+          address: address
+          balance: balance
+          chainId: 6.027456183070403
+          decimals: 0.8008281904610115
+          name: name
+          logoUri: logoUri
+        - symbol: symbol
+          address: address
+          balance: balance
+          chainId: 6.027456183070403
+          decimals: 0.8008281904610115
+          name: name
+          logoUri: logoUri
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetUserCurrenciesResponse_data_inner'
+          type: array
+      required:
+      - data
+      type: object
+    GetUserNativeCurrencyResponse:
+      example:
+        nativeTokenBalance:
+          symbol: symbol
+          balance: balance
+          chainId: 6.027456183070403
+          decimals: 0.8008281904610115
+          name: name
+          logoUri: logoUri
+      properties:
+        nativeTokenBalance:
+          $ref: '#/components/schemas/GetUserNativeCurrencyResponse_nativeTokenBalance'
+      required:
+      - nativeTokenBalance
+      type: object
+    TransferAssetRequestInput:
+      example:
+        optimistic: false
+        sponsor: true
+        assets:
+        - receiverWalletAddress: receiverWalletAddress
+          amountToTransfer: 0.08008281904610115
+          assetAddress: assetAddress
+          assetId: assetId
+          receiverEntityId: receiverEntityId
+        - receiverWalletAddress: receiverWalletAddress
+          amountToTransfer: 0.08008281904610115
+          assetAddress: assetAddress
+          assetId: assetId
+          receiverEntityId: receiverEntityId
+        policyId: policyId
+        chainId: 6.027456183070403
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        assets:
+          items:
+            $ref: '#/components/schemas/TransferAssetRequestInput_assets_inner'
+          minItems: 1
+          type: array
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - assets
+      type: object
+    CommonOperationResponse:
+      example:
+        gameId: gameId
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        chainId: 0
+        processing: SignOnly
+        id: id
+        transactions:
+        - data: null
+          signature: signature
+          externalId: externalId
+          operationId: operationId
+          id: id
+          type: OpenfortTransaction
+          hash: hash
+          status: Pending
+        - data: null
+          signature: signature
+          externalId: externalId
+          operationId: operationId
+          id: id
+          type: OpenfortTransaction
+          hash: hash
+          status: Pending
+        userId: userId
+        url: https://openapi-generator.tech
+        status: Signed
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        status:
+          enum:
+          - Signed
+          - Pending
+          - Rejected
+          - Executed
+          - Error
+          type: string
+        processing:
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        id:
+          format: cuid
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          nullable: true
+          type: string
+        gameId:
+          type: string
+        userId:
+          type: string
+        chainId:
+          type: integer
+        url:
+          format: uri
+          type: string
+        transactions:
+          items:
+            $ref: '#/components/schemas/CommonOperationResponse_transactions_inner'
+          type: array
+      required:
+      - chainId
+      - createdAt
+      - gameId
+      - id
+      - processing
+      - status
+      - transactions
+      - updatedAt
+      - url
+      - userId
+      type: object
+    TransferTokenRequestInput:
+      example:
+        receiverWalletAddress: receiverWalletAddress
+        optimistic: false
+        sponsor: true
+        amountToTransfer: amountToTransfer
+        policyId: policyId
+        chainId: 0.8008281904610115
+        assetAddress: assetAddress
+        receiverEntityId: receiverEntityId
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        receiverEntityId:
+          type: string
+        receiverWalletAddress:
+          type: string
+        assetAddress:
+          type: string
+        amountToTransfer:
+          type: string
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - amountToTransfer
+      - assetAddress
+      type: object
+    TransferNativeTokenRequestInput:
+      example:
+        receiverWalletAddress: receiverWalletAddress
+        optimistic: false
+        sponsor: true
+        amountToTransfer: amountToTransfer
+        policyId: policyId
+        chainId: 0.8008281904610115
+        receiverEntityId: receiverEntityId
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        receiverEntityId:
+          type: string
+        receiverWalletAddress:
+          type: string
+        amountToTransfer:
+          type: string
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - amountToTransfer
+      type: object
+    GetAssetsForContractBodyInput:
+      example:
+        sortDirection: asc
+        chainId: 0.8008281904610115
+        limit: 23.791145280654177
+        minFloorAskPrice: 5.962133916683182
+        maxFloorAskPrice: 5.637376656633329
+        includeAttributes: false
+        attributes:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        sortBy: floorAskPrice
+        maxRarityRank: 1
+        continuation: continuation
+        minRarityRank: 6
+      properties:
+        continuation:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        minRarityRank:
+          nullable: true
+          type: integer
+        maxRarityRank:
+          nullable: true
+          type: integer
+        minFloorAskPrice:
+          nullable: true
+          type: number
+        maxFloorAskPrice:
+          nullable: true
+          type: number
+        includeAttributes:
+          default: false
+          nullable: true
+          type: boolean
+        attributes:
+          items:
+            $ref: '#/components/schemas/GetAssetsForContractBodyInput_attributes_inner'
+          nullable: true
+          type: array
+        sortDirection:
+          default: asc
+          enum:
+          - asc
+          - desc
+          type: string
+        sortBy:
+          default: floorAskPrice
+          enum:
+          - floorAskPrice
+          - tokenId
+          - rarity
+          - updatedAt
+          type: string
+        limit:
+          default: 20
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 100
+          minimum: 1
+          type: number
+      type: object
+    GetAssetsForContractResponse:
+      example:
+        data:
+        - chainId: 1.4658129805029452
+          assetAddress: assetAddress
+          assetId: assetId
+          imageUrl: imageUrl
+          name: name
+          rarityScore: 6.027456183070403
+          attributes:
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          supply: 0.8008281904610115
+          assetType: assetType
+          rarity: Common
+        - chainId: 1.4658129805029452
+          assetAddress: assetAddress
+          assetId: assetId
+          imageUrl: imageUrl
+          name: name
+          rarityScore: 6.027456183070403
+          attributes:
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          supply: 0.8008281904610115
+          assetType: assetType
+          rarity: Common
+        continuation: continuation
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetAssetsForContractResponse_data_inner'
+          type: array
+        continuation:
+          nullable: true
+          type: string
+      required:
+      - data
+      type: object
+    GetAssetResponse:
+      example:
+        chainId: 5.962133916683182
+        assetAddress: assetAddress
+        assetId: assetId
+        imageUrl: imageUrl
+        name: name
+        owners:
+        - address: address
+          quantity: 6.027456183070403
+          entityId: entityId
+        - address: address
+          quantity: 6.027456183070403
+          entityId: entityId
+        rarityScore: 1.4658129805029452
+        attributes:
+        - displayType: displayType
+          maxValue: 1.4658129805029452
+          type: type
+          value: value
+          rarity: 5.962133916683182
+        - displayType: displayType
+          maxValue: 1.4658129805029452
+          type: type
+          value: value
+          rarity: 5.962133916683182
+        supply: 0.8008281904610115
+        assetType: assetType
+        rarity: Common
+      properties:
+        name:
+          type: string
+        imageUrl:
+          type: string
+        assetType:
+          type: string
+        assetAddress:
+          type: string
+        assetId:
+          type: string
+        supply:
+          type: number
+        owners:
+          items:
+            $ref: '#/components/schemas/GetAssetResponse_owners_inner'
+          nullable: true
+          type: array
+        rarity:
+          enum:
+          - Common
+          - Uncommon
+          - Rare
+          - VeryRare
+          - ExtremelyRare
+          nullable: true
+          type: string
+          x-enumNames:
+          - Common
+          - Uncommon
+          - Rare
+          - VeryRare
+          - ExtremelyRare
+        rarityScore:
+          nullable: true
+          type: number
+        attributes:
+          items:
+            $ref: '#/components/schemas/GetAssetsForUserResponse_data_inner_attributes_inner'
+          nullable: true
+          type: array
+        chainId:
+          default: 13337
+          type: number
+      required:
+      - assetAddress
+      - assetId
+      - assetType
+      - imageUrl
+      - name
+      - owners
+      - supply
+      type: object
+    GetListedAssetsBodyInput:
+      example:
+        sortDirection: desc
+        assetAddresses:
+        - assetAddresses
+        - assetAddresses
+        chainId: 6.027456183070403
+        limit: 81
+        sortBy: createdAt
+        continuation: continuation
+      properties:
+        assetAddresses:
+          items:
+            type: string
+          nullable: true
+          type: array
+        sortBy:
+          default: createdAt
+          enum:
+          - createdAt
+          - updatedAt
+          - price
+          type: string
+        sortDirection:
+          default: desc
+          description: "If using `createdAt` for sorting, only `desc` is allowed."
+          enum:
+          - asc
+          - desc
+          type: string
+        limit:
+          default: 50
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 1000
+          minimum: 1
+          type: integer
+        chainId:
+          default: 13337
+          type: number
+        continuation:
+          nullable: true
+          type: string
+      type: object
+    GetAssetListingsResponse:
+      example:
+        data:
+        - side: side
+          contractKind: contractKind
+          assetAddress: assetAddress
+          maker: maker
+          validFrom: ""
+          expiresAt: ""
+          quantityFilled: 5.637376656633329
+          createdAt: ""
+          assetId: assetId
+          price:
+            amount:
+              native: 5.962133916683182
+              usd: 1.4658129805029452
+              raw: raw
+              decimal: 6.027456183070403
+            netAmount:
+              native: 5.962133916683182
+              usd: 1.4658129805029452
+              raw: raw
+              decimal: 6.027456183070403
+            currency:
+              symbol: BEAM
+              address: address
+              decimals: 0
+          quantityRemaining: 2.3021358869347655
+          validUntil: ""
+          id: id
+          status: active
+          updatedAt: ""
+        - side: side
+          contractKind: contractKind
+          assetAddress: assetAddress
+          maker: maker
+          validFrom: ""
+          expiresAt: ""
+          quantityFilled: 5.637376656633329
+          createdAt: ""
+          assetId: assetId
+          price:
+            amount:
+              native: 5.962133916683182
+              usd: 1.4658129805029452
+              raw: raw
+              decimal: 6.027456183070403
+            netAmount:
+              native: 5.962133916683182
+              usd: 1.4658129805029452
+              raw: raw
+              decimal: 6.027456183070403
+            currency:
+              symbol: BEAM
+              address: address
+              decimals: 0
+          quantityRemaining: 2.3021358869347655
+          validUntil: ""
+          id: id
+          status: active
+          updatedAt: ""
+        continuation: continuation
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetAssetListingsResponse_data_inner'
+          type: array
+        continuation:
+          nullable: true
+          type: string
+      required:
+      - data
+      type: object
+    SellAssetRequestInput:
+      example:
+        sponsor: true
+        quantity: 0.8008281904610115
+        assetAddress: assetAddress
+        sellType: FixedPrice
+        operationProcessing: Execute
+        policyId: policyId
+        chainId: 6.027456183070403
+        assetId: assetId
+        price: price
+        operationId: operationId
+        startTime: 2000-01-23T04:56:07.000+00:00
+        currency: BEAM
+        endTime: 2000-01-23T04:56:07.000+00:00
+      properties:
+        assetAddress:
+          type: string
+        assetId:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: string
+        startTime:
+          description: Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix
+            timestamp in milliseconds
+          format: date-time
+          nullable: true
+          type: string
+        endTime:
+          description: Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix
+            timestamp in milliseconds
+          format: date-time
+          nullable: true
+          type: string
+        sellType:
+          enum:
+          - FixedPrice
+          - DescendingAuction
+          - AscendingAuction
+          - NotForSale
+          type: string
+          x-enumNames:
+          - FixedPrice
+          - DescendingAuction
+          - AscendingAuction
+          - NotForSale
+        currency:
+          default: BEAM
+          enum:
+          - BEAM
+          - WBEAM
+          - USDC
+          - USDT
+          - IMX
+          - WIMX
+          type: string
+          x-enumNames:
+          - BEAM
+          - WBEAM
+          - USDC
+          - USDT
+          - IMX
+          - WIMX
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - assetAddress
+      - assetId
+      - price
+      - quantity
+      - sellType
+      type: object
+    BuyAssetRequestInput:
+      example:
+        optimistic: false
+        sponsor: true
+        quantity: 0.8008281904610115
+        policyId: policyId
+        chainId: 6.027456183070403
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        quantity:
+          type: number
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - quantity
+      type: object
+    CancelAssetListingRequestInput:
+      example:
+        optimistic: false
+        sponsor: true
+        policyId: policyId
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      type: object
+    CreateAssetOfferRequestInput:
+      example:
+        quantity: 1.0800828190461012
+        chainId: 6.027456183070403
+        assetAddress: assetAddress
+        assetId: assetId
+        price: price
+        operationId: operationId
+        startTime: 2000-01-23T04:56:07.000+00:00
+        currency: WBEAM
+        endTime: 2000-01-23T04:56:07.000+00:00
+        operationProcessing: Execute
+      properties:
+        assetAddress:
+          type: string
+        assetId:
+          type: string
+        quantity:
+          exclusiveMinimum: false
+          minimum: 1
+          type: number
+        price:
+          type: string
+        startTime:
+          format: date-time
+          type: string
+        endTime:
+          format: date-time
+          type: string
+        currency:
+          default: WBEAM
+          enum:
+          - WBEAM
+          - USDC
+          - USDT
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - assetAddress
+      - assetId
+      - price
+      - quantity
+      type: object
+    AcceptAssetOfferRequestInput:
+      example:
+        optimistic: false
+        sponsor: true
+        quantity: 1.0800828190461012
+        policyId: policyId
+        chainId: 6.027456183070403
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        quantity:
+          exclusiveMinimum: false
+          minimum: 1
+          type: number
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - quantity
+      type: object
+    CancelAssetOfferRequestInput:
+      example:
+        optimistic: false
+        sponsor: true
+        policyId: policyId
+        chainId: 0.8008281904610115
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      type: object
+    GetChainCurrenciesResponse:
+      example:
+        data:
+        - symbol: BEAM
+          address: address
+          decimals: 0.8008281904610115
+        - symbol: BEAM
+          address: address
+          decimals: 0.8008281904610115
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetChainCurrenciesResponse_data_inner'
+          type: array
+      required:
+      - data
+      type: object
+    GetTransactionsResponse:
+      example:
+        pagination:
+          offset: 3.616076749251911
+          count: 7.061401241503109
+          limit: 9.301444243932576
+        data:
+        - createdAt: ""
+          chainId: 0.8008281904610115
+          id: id
+          intent:
+            message: message
+            interactions:
+            - functionArgs:
+              - ""
+              - ""
+              functionName: functionName
+              contract: contract
+              to: to
+              value: value
+            - functionArgs:
+              - ""
+              - ""
+              functionName: functionName
+              contract: contract
+              to: to
+              value: value
+          transaction:
+            createdAt: ""
+            gasUsed: gasUsed
+            gasFee: gasFee
+            blockNumber: 6.027456183070403
+            logs:
+            - blockHash: blockHash
+              address: address
+              logIndex: 2.3021358869347655
+              removed: true
+              data: data
+              topics:
+              - topics
+              - topics
+              blockNumber: 5.962133916683182
+              orphaned: true
+              transactionIndex: 5.637376656633329
+              transactionHash: transactionHash
+            - blockHash: blockHash
+              address: address
+              logIndex: 2.3021358869347655
+              removed: true
+              data: data
+              topics:
+              - topics
+              - topics
+              blockNumber: 5.962133916683182
+              orphaned: true
+              transactionIndex: 5.637376656633329
+              transactionHash: transactionHash
+            hash: hash
+            status: 1.4658129805029452
+          updatedAt: ""
+        - createdAt: ""
+          chainId: 0.8008281904610115
+          id: id
+          intent:
+            message: message
+            interactions:
+            - functionArgs:
+              - ""
+              - ""
+              functionName: functionName
+              contract: contract
+              to: to
+              value: value
+            - functionArgs:
+              - ""
+              - ""
+              functionName: functionName
+              contract: contract
+              to: to
+              value: value
+          transaction:
+            createdAt: ""
+            gasUsed: gasUsed
+            gasFee: gasFee
+            blockNumber: 6.027456183070403
+            logs:
+            - blockHash: blockHash
+              address: address
+              logIndex: 2.3021358869347655
+              removed: true
+              data: data
+              topics:
+              - topics
+              - topics
+              blockNumber: 5.962133916683182
+              orphaned: true
+              transactionIndex: 5.637376656633329
+              transactionHash: transactionHash
+            - blockHash: blockHash
+              address: address
+              logIndex: 2.3021358869347655
+              removed: true
+              data: data
+              topics:
+              - topics
+              - topics
+              blockNumber: 5.962133916683182
+              orphaned: true
+              transactionIndex: 5.637376656633329
+              transactionHash: transactionHash
+            hash: hash
+            status: 1.4658129805029452
+          updatedAt: ""
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetTransactionsResponse_data_inner'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/GetTransactionsResponse_pagination'
+      required:
+      - data
+      - pagination
+      type: object
+    GetTransactionResponse:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        chainId: 0.8008281904610115
+        id: id
+        intent:
+          message: message
+          interactions:
+          - functionArgs:
+            - ""
+            - ""
+            functionName: functionName
+            contract: contract
+            to: to
+            value: value
+          - functionArgs:
+            - ""
+            - ""
+            functionName: functionName
+            contract: contract
+            to: to
+            value: value
+        user:
+          wallet:
+            address: address
+          entities:
+          - entityId: entityId
+          - entityId: entityId
+        transaction:
+          createdAt: ""
+          gasUsed: gasUsed
+          gasFee: gasFee
+          blockNumber: 6.027456183070403
+          logs:
+          - blockHash: blockHash
+            address: address
+            logIndex: 2.3021358869347655
+            removed: true
+            data: data
+            topics:
+            - topics
+            - topics
+            blockNumber: 5.962133916683182
+            orphaned: true
+            transactionIndex: 5.637376656633329
+            transactionHash: transactionHash
+          - blockHash: blockHash
+            address: address
+            logIndex: 2.3021358869347655
+            removed: true
+            data: data
+            topics:
+            - topics
+            - topics
+            blockNumber: 5.962133916683182
+            orphaned: true
+            transactionIndex: 5.637376656633329
+            transactionHash: transactionHash
+          hash: hash
+          status: 1.4658129805029452
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        policy:
+          id: id
+      properties:
+        id:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        chainId:
+          type: number
+        intent:
+          $ref: '#/components/schemas/GetTransactionsResponse_data_inner_intent'
+        transaction:
+          $ref: '#/components/schemas/GetTransactionsResponse_data_inner_transaction'
+        policy:
+          $ref: '#/components/schemas/GetTransactionResponse_policy'
+        user:
+          $ref: '#/components/schemas/GetTransactionResponse_user'
+      required:
+      - chainId
+      - createdAt
+      - id
+      - intent
+      - policy
+      - updatedAt
+      - user
+      type: object
+    CreateTransactionRequestInput:
+      example:
+        optimistic: false
+        sponsor: true
+        policyId: policyId
+        chainId: 0.8008281904610115
+        operationId: operationId
+        operationProcessing: Execute
+        interactions:
+        - functionArgs:
+          - ""
+          - ""
+          functionName: functionName
+          contractAddress: contractAddress
+          value: value
+        - functionArgs:
+          - ""
+          - ""
+          functionName: functionName
+          contractAddress: contractAddress
+          value: value
+        - functionArgs:
+          - ""
+          - ""
+          functionName: functionName
+          contractAddress: contractAddress
+          value: value
+        - functionArgs:
+          - ""
+          - ""
+          functionName: functionName
+          contractAddress: contractAddress
+          value: value
+        - functionArgs:
+          - ""
+          - ""
+          functionName: functionName
+          contractAddress: contractAddress
+          value: value
+      properties:
+        interactions:
+          items:
+            $ref: '#/components/schemas/CreateTransactionRequestInput_interactions_inner'
+          maxItems: 9
+          minItems: 1
+          type: array
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - interactions
+      type: object
+    GetAllUsersResponse:
+      example:
+        pagination:
+          offset: 3.616076749251911
+          count: 7.061401241503109
+          limit: 9.301444243932576
+        data:
+        - entities:
+          - entityId: entityId
+          - entityId: entityId
+          wallets:
+          - createdAt: ""
+            address: address
+            chainId: 0
+            profileId: profileId
+            externalId: externalId
+            id: id
+            userId: userId
+            updatedAt: ""
+          - createdAt: ""
+            address: address
+            chainId: 0
+            profileId: profileId
+            externalId: externalId
+            id: id
+            userId: userId
+            updatedAt: ""
+          id: id
+        - entities:
+          - entityId: entityId
+          - entityId: entityId
+          wallets:
+          - createdAt: ""
+            address: address
+            chainId: 0
+            profileId: profileId
+            externalId: externalId
+            id: id
+            userId: userId
+            updatedAt: ""
+          - createdAt: ""
+            address: address
+            chainId: 0
+            profileId: profileId
+            externalId: externalId
+            id: id
+            userId: userId
+            updatedAt: ""
+          id: id
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetAllUsersResponse_data_inner'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/GetTransactionsResponse_pagination'
+      required:
+      - data
+      - pagination
+      type: object
+    GetUserResponse:
+      example:
+        externalEntityId: externalEntityId
+        gameId: gameId
+        wallets:
+        - createdAt: ""
+          address: address
+          chainId: 0
+          profileId: profileId
+          externalId: externalId
+          id: id
+          userId: userId
+          updatedAt: ""
+        - createdAt: ""
+          address: address
+          chainId: 0
+          profileId: profileId
+          externalId: externalId
+          id: id
+          userId: userId
+          updatedAt: ""
+        userId: userId
+      properties:
+        externalEntityId:
+          type: string
+        userId:
+          type: string
+        gameId:
+          type: string
+        wallets:
+          items:
+            $ref: '#/components/schemas/GetAllUsersResponse_data_inner_wallets_inner'
+          type: array
+      required:
+      - externalEntityId
+      - gameId
+      - userId
+      - wallets
+      type: object
+    CreateOperationRequestInput:
+      example:
+        chainId: 0.8008281904610115
+        operationId: operationId
+        entityId: entityId
+        operationProcessing: Execute
+      properties:
+        entityId:
+          type: string
+        chainId:
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - chainId
+      - entityId
+      type: object
+    ConfirmOperationRequest:
+      example:
+        gameId: gameId
+        entityId: entityId
+        transactions:
+        - signature: signature
+          id: id
+        - signature: signature
+          id: id
+        status: Signed
+      properties:
+        status:
+          enum:
+          - Signed
+          - Pending
+          - Rejected
+          - Executed
+          - Error
+          type: string
+        transactions:
+          items:
+            $ref: '#/components/schemas/ConfirmOperationRequest_transactions_inner'
+          nullable: true
+          type: array
+        entityId:
+          type: string
+        gameId:
+          type: string
+      required:
+      - entityId
+      - gameId
+      - status
+      type: object
+    GetQuoteResponse:
+      example:
+        tokenOut: tokenOut
+        amountIn: amountIn
+        amountOut: amountOut
+        tokenIn: tokenIn
+      properties:
+        tokenIn:
+          type: string
+        tokenOut:
+          type: string
+        amountIn:
+          type: string
+        amountOut:
+          type: string
+      required:
+      - amountIn
+      - amountOut
+      - tokenIn
+      - tokenOut
+      type: object
+    ConvertTokenRequestInput:
+      example:
+        tokenOut: tokenOut
+        optimistic: false
+        sponsor: true
+        policyId: policyId
+        chainId: 0.8008281904610115
+        receiverEntityId: receiverEntityId
+        operationId: operationId
+        amountIn: amountIn
+        amountOut: amountOut
+        tokenIn: tokenIn
+        operationProcessing: Execute
+      properties:
+        tokenIn:
+          type: string
+        tokenOut:
+          type: string
+        amountIn:
+          type: string
+        amountOut:
+          type: string
+        receiverEntityId:
+          type: string
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - amountIn
+      - amountOut
+      - tokenIn
+      - tokenOut
+      type: object
+    GenerateSessionUrlRequestInput:
+      example:
+        address: address
+        chainId: 0.8008281904610115
+      properties:
+        address:
+          type: string
+        chainId:
+          default: 13337
+          type: number
+      required:
+      - address
+      type: object
+    GenerateSessionRequestResponse:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        chainId: 0
+        id: id
+        openfortId: openfortId
+        url: https://openapi-generator.tech
+        status: Pending
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        status:
+          enum:
+          - Pending
+          - Accepted
+          - Error
+          type: string
+        id:
+          format: cuid
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          nullable: true
+          type: string
+        chainId:
+          type: integer
+        openfortId:
+          nullable: true
+          type: string
+        url:
+          format: uri
+          type: string
+      required:
+      - chainId
+      - createdAt
+      - id
+      - openfortId
+      - status
+      - updatedAt
+      - url
+      type: object
+    GetSessionRequestResponse:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        chainId: 0
+        id: id
+        openfortId: openfortId
+        status: Pending
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        status:
+          enum:
+          - Pending
+          - Accepted
+          - Error
+          type: string
+        id:
+          format: cuid
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          nullable: true
+          type: string
+        chainId:
+          type: integer
+        openfortId:
+          nullable: true
+          type: string
+      required:
+      - chainId
+      - createdAt
+      - id
+      - openfortId
+      - status
+      - updatedAt
+      type: object
+    GetActiveSessionResponse:
+      example:
+        sessionAddress: sessionAddress
+        startTime: 2000-01-23T04:56:07.000+00:00
+        id: id
+        endTime: 2000-01-23T04:56:07.000+00:00
+        isActive: true
+      properties:
+        id:
+          type: string
+        isActive:
+          type: boolean
+        startTime:
+          format: date-time
+          type: string
+        endTime:
+          format: date-time
+          type: string
+        sessionAddress:
+          type: string
+      required:
+      - endTime
+      - id
+      - isActive
+      - sessionAddress
+      - startTime
+      type: object
+    GenerateLoginRequestInput:
+      example:
+        chainId: 0.8008281904610115
+        message: message
+      properties:
+        message:
+          type: string
+        chainId:
+          default: 13337
+          type: number
+      required:
+      - message
+      type: object
+    GenerateLoginRequestResponse:
+      example:
+        url: https://openapi-generator.tech
+      properties:
+        url:
+          format: uri
+          type: string
+      required:
+      - url
+      type: object
+    check_200_response_info_value:
+      additionalProperties: true
+      properties:
+        status:
+          type: string
+      required:
+      - status
+      type: object
+    check_200_response:
+      example:
+        details:
+          database:
+            status: up
+        error: {}
+        status: ok
+        info:
+          database:
+            status: up
+      properties:
+        status:
+          example: ok
+          type: string
+        info:
+          additionalProperties:
+            $ref: '#/components/schemas/check_200_response_info_value'
+          example:
+            database:
+              status: up
+          nullable: true
+          type: object
+        error:
+          additionalProperties:
+            $ref: '#/components/schemas/check_200_response_info_value'
+          example: {}
+          nullable: true
+          type: object
+        details:
+          additionalProperties:
+            $ref: '#/components/schemas/check_200_response_info_value'
+          example:
+            database:
+              status: up
+          type: object
+      type: object
+    check_503_response:
+      properties:
+        status:
+          example: error
+          type: string
+        info:
+          additionalProperties:
+            $ref: '#/components/schemas/check_200_response_info_value'
+          example:
+            database:
+              status: up
+          nullable: true
+          type: object
+        error:
+          additionalProperties:
+            $ref: '#/components/schemas/check_200_response_info_value'
+          example:
+            redis:
+              status: down
+              message: Could not connect
+          nullable: true
+          type: object
+        details:
+          additionalProperties:
+            $ref: '#/components/schemas/check_200_response_info_value'
+          example:
+            database:
+              status: up
+            redis:
+              status: down
+              message: Could not connect
+          type: object
+      type: object
+    GetAssetsForUserResponse_data_inner_attributes_inner:
+      example:
+        displayType: displayType
+        maxValue: 1.4658129805029452
+        type: type
+        value: value
+        rarity: 5.962133916683182
+      properties:
+        displayType:
+          nullable: true
+          type: string
+        maxValue:
+          nullable: true
+          type: number
+        rarity:
+          nullable: true
+          type: number
+        type:
+          nullable: true
+          type: string
+        value:
+          nullable: true
+          type: string
+      type: object
+    GetAssetsForUserResponse_data_inner:
+      example:
+        ownedQuantity: 2.3021358869347655
+        chainId: 5.637376656633329
+        assetAddress: assetAddress
+        assetId: assetId
+        imageUrl: imageUrl
+        name: name
+        rarityScore: 6.027456183070403
+        attributes:
+        - displayType: displayType
+          maxValue: 1.4658129805029452
+          type: type
+          value: value
+          rarity: 5.962133916683182
+        - displayType: displayType
+          maxValue: 1.4658129805029452
+          type: type
+          value: value
+          rarity: 5.962133916683182
+        supply: 0.8008281904610115
+        assetType: assetType
+        rarity: Common
+      properties:
+        name:
+          type: string
+        imageUrl:
+          type: string
+        assetType:
+          type: string
+        assetAddress:
+          type: string
+        assetId:
+          type: string
+        supply:
+          type: number
+        rarity:
+          enum:
+          - Common
+          - Uncommon
+          - Rare
+          - VeryRare
+          - ExtremelyRare
+          nullable: true
+          type: string
+          x-enumNames:
+          - Common
+          - Uncommon
+          - Rare
+          - VeryRare
+          - ExtremelyRare
+        rarityScore:
+          nullable: true
+          type: number
+        attributes:
+          items:
+            $ref: '#/components/schemas/GetAssetsForUserResponse_data_inner_attributes_inner'
+          nullable: true
+          type: array
+        chainId:
+          default: 13337
+          type: number
+        ownedQuantity:
+          type: number
+      required:
+      - assetAddress
+      - assetId
+      - assetType
+      - imageUrl
+      - name
+      - ownedQuantity
+      - supply
+      type: object
+    GetUserCurrenciesResponse_data_inner:
+      example:
+        symbol: symbol
+        address: address
+        balance: balance
+        chainId: 6.027456183070403
+        decimals: 0.8008281904610115
+        name: name
+        logoUri: logoUri
+      properties:
+        address:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+        decimals:
+          type: number
+        logoUri:
+          type: string
+        chainId:
+          type: number
+        balance:
+          type: string
+      required:
+      - address
+      - balance
+      - chainId
+      - decimals
+      - name
+      - symbol
+      type: object
+    GetUserNativeCurrencyResponse_nativeTokenBalance:
+      example:
+        symbol: symbol
+        balance: balance
+        chainId: 6.027456183070403
+        decimals: 0.8008281904610115
+        name: name
+        logoUri: logoUri
+      properties:
+        name:
+          type: string
+        symbol:
+          type: string
+        decimals:
+          type: number
+        logoUri:
+          type: string
+        chainId:
+          type: number
+        balance:
+          type: string
+      required:
+      - balance
+      - chainId
+      - decimals
+      - name
+      - symbol
+      type: object
+    TransferAssetRequestInput_assets_inner:
+      example:
+        receiverWalletAddress: receiverWalletAddress
+        amountToTransfer: 0.08008281904610115
+        assetAddress: assetAddress
+        assetId: assetId
+        receiverEntityId: receiverEntityId
+      properties:
+        receiverEntityId:
+          type: string
+        receiverWalletAddress:
+          type: string
+        assetAddress:
+          type: string
+        assetId:
+          type: string
+        amountToTransfer:
+          default: 1
+          exclusiveMinimum: true
+          minimum: 0
+          multipleOf: 1
+          type: number
+      required:
+      - assetAddress
+      - assetId
+      type: object
+    CommonOperationResponse_transactions_inner_data:
+      nullable: true
+      oneOf:
+      - type: string
+      - type: number
+      - type: boolean
+      - additionalProperties: {}
+        type: object
+      - items: {}
+        type: array
+    CommonOperationResponse_transactions_inner:
+      example:
+        data: null
+        signature: signature
+        externalId: externalId
+        operationId: operationId
+        id: id
+        type: OpenfortTransaction
+        hash: hash
+        status: Pending
+      properties:
+        type:
+          enum:
+          - OpenfortTransaction
+          - OpenfortReservoirOrder
+          type: string
+        status:
+          enum:
+          - Pending
+          - Signed
+          - Rejected
+          - Executed
+          - Error
+          type: string
+        id:
+          format: cuid
+          type: string
+        externalId:
+          nullable: true
+          type: string
+        signature:
+          nullable: true
+          type: string
+        operationId:
+          nullable: true
+          type: string
+        data:
+          $ref: '#/components/schemas/CommonOperationResponse_transactions_inner_data'
+        hash:
+          type: string
+      required:
+      - externalId
+      - hash
+      - id
+      - operationId
+      - signature
+      - status
+      - type
+      type: object
+    GetAssetsForContractBodyInput_attributes_inner:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    GetAssetsForContractResponse_data_inner:
+      example:
+        chainId: 1.4658129805029452
+        assetAddress: assetAddress
+        assetId: assetId
+        imageUrl: imageUrl
+        name: name
+        rarityScore: 6.027456183070403
+        attributes:
+        - displayType: displayType
+          maxValue: 1.4658129805029452
+          type: type
+          value: value
+          rarity: 5.962133916683182
+        - displayType: displayType
+          maxValue: 1.4658129805029452
+          type: type
+          value: value
+          rarity: 5.962133916683182
+        supply: 0.8008281904610115
+        assetType: assetType
+        rarity: Common
+      properties:
+        name:
+          type: string
+        imageUrl:
+          type: string
+        assetType:
+          type: string
+        assetAddress:
+          type: string
+        assetId:
+          type: string
+        supply:
+          type: number
+        rarity:
+          enum:
+          - Common
+          - Uncommon
+          - Rare
+          - VeryRare
+          - ExtremelyRare
+          nullable: true
+          type: string
+          x-enumNames:
+          - Common
+          - Uncommon
+          - Rare
+          - VeryRare
+          - ExtremelyRare
+        rarityScore:
+          nullable: true
+          type: number
+        attributes:
+          items:
+            $ref: '#/components/schemas/GetAssetsForUserResponse_data_inner_attributes_inner'
+          nullable: true
+          type: array
+        chainId:
+          default: 13337
+          type: number
+      required:
+      - assetAddress
+      - assetId
+      - assetType
+      - imageUrl
+      - name
+      - supply
+      type: object
+    GetAssetResponse_owners_inner:
+      example:
+        address: address
+        quantity: 6.027456183070403
+        entityId: entityId
+      properties:
+        address:
+          type: string
+        quantity:
+          type: number
+        entityId:
+          type: string
+      required:
+      - address
+      - quantity
+      type: object
+    GetAssetListingsResponse_data_inner_price_currency:
+      example:
+        symbol: BEAM
+        address: address
+        decimals: 0
+      nullable: true
+      properties:
+        address:
+          type: string
+        symbol:
+          enum:
+          - BEAM
+          - WBEAM
+          - USDC
+          - USDT
+          - IMX
+          - WIMX
+          nullable: true
+          type: string
+          x-enumNames:
+          - BEAM
+          - WBEAM
+          - USDC
+          - USDT
+          - IMX
+          - WIMX
+        decimals:
+          type: integer
+      required:
+      - address
+      - decimals
+      type: object
+    GetAssetListingsResponse_data_inner_price_amount:
+      example:
+        native: 5.962133916683182
+        usd: 1.4658129805029452
+        raw: raw
+        decimal: 6.027456183070403
+      nullable: true
+      properties:
+        raw:
+          type: string
+        decimal:
+          type: number
+        usd:
+          type: number
+        native:
+          type: number
+      required:
+      - decimal
+      - native
+      - raw
+      - usd
+      type: object
+    GetAssetListingsResponse_data_inner_price:
+      example:
+        amount:
+          native: 5.962133916683182
+          usd: 1.4658129805029452
+          raw: raw
+          decimal: 6.027456183070403
+        netAmount:
+          native: 5.962133916683182
+          usd: 1.4658129805029452
+          raw: raw
+          decimal: 6.027456183070403
+        currency:
+          symbol: BEAM
+          address: address
+          decimals: 0
+      nullable: true
+      properties:
+        currency:
+          $ref: '#/components/schemas/GetAssetListingsResponse_data_inner_price_currency'
+        amount:
+          $ref: '#/components/schemas/GetAssetListingsResponse_data_inner_price_amount'
+        netAmount:
+          $ref: '#/components/schemas/GetAssetListingsResponse_data_inner_price_amount'
+      type: object
+    GetAssetListingsResponse_data_inner:
+      example:
+        side: side
+        contractKind: contractKind
+        assetAddress: assetAddress
+        maker: maker
+        validFrom: ""
+        expiresAt: ""
+        quantityFilled: 5.637376656633329
+        createdAt: ""
+        assetId: assetId
+        price:
+          amount:
+            native: 5.962133916683182
+            usd: 1.4658129805029452
+            raw: raw
+            decimal: 6.027456183070403
+          netAmount:
+            native: 5.962133916683182
+            usd: 1.4658129805029452
+            raw: raw
+            decimal: 6.027456183070403
+          currency:
+            symbol: BEAM
+            address: address
+            decimals: 0
+        quantityRemaining: 2.3021358869347655
+        validUntil: ""
+        id: id
+        status: active
+        updatedAt: ""
+      properties:
+        id:
+          type: string
+        side:
+          type: string
+        status:
+          enum:
+          - active
+          - inactive
+          - expired
+          - canceled
+          - filled
+          nullable: true
+          type: string
+          x-enumNames:
+          - Active
+          - Inactive
+          - Expired
+          - Canceled
+          - Filled
+        assetAddress:
+          type: string
+        assetId:
+          type: string
+        contractKind:
+          type: string
+        maker:
+          type: string
+        price:
+          $ref: '#/components/schemas/GetAssetListingsResponse_data_inner_price'
+        validFrom:
+          nullable: true
+        validUntil:
+          nullable: true
+        quantityFilled:
+          type: number
+        quantityRemaining:
+          type: number
+        expiresAt:
+          nullable: true
+        createdAt:
+          nullable: true
+        updatedAt:
+          nullable: true
+      required:
+      - assetAddress
+      - assetId
+      - contractKind
+      - id
+      - maker
+      - side
+      type: object
+    GetChainCurrenciesResponse_data_inner:
+      example:
+        symbol: BEAM
+        address: address
+        decimals: 0.8008281904610115
+      properties:
+        decimals:
+          type: number
+        symbol:
+          enum:
+          - BEAM
+          - WBEAM
+          - USDC
+          - USDT
+          - IMX
+          - WIMX
+          type: string
+          x-enumNames:
+          - BEAM
+          - WBEAM
+          - USDC
+          - USDT
+          - IMX
+          - WIMX
+        address:
+          type: string
+      required:
+      - address
+      - decimals
+      - symbol
+      type: object
+    GetTransactionsResponse_data_inner_intent_interactions_inner:
+      example:
+        functionArgs:
+        - ""
+        - ""
+        functionName: functionName
+        contract: contract
+        to: to
+        value: value
+      properties:
+        to:
+          type: string
+        value:
+          type: string
+        contract:
+          type: string
+        functionName:
+          type: string
+        functionArgs:
+          items: {}
+          type: array
+      type: object
+    GetTransactionsResponse_data_inner_intent:
+      example:
+        message: message
+        interactions:
+        - functionArgs:
+          - ""
+          - ""
+          functionName: functionName
+          contract: contract
+          to: to
+          value: value
+        - functionArgs:
+          - ""
+          - ""
+          functionName: functionName
+          contract: contract
+          to: to
+          value: value
+      properties:
+        interactions:
+          items:
+            $ref: '#/components/schemas/GetTransactionsResponse_data_inner_intent_interactions_inner'
+          nullable: true
+          type: array
+        message:
+          nullable: true
+          type: string
+      type: object
+    GetTransactionsResponse_data_inner_transaction_logs_inner:
+      example:
+        blockHash: blockHash
+        address: address
+        logIndex: 2.3021358869347655
+        removed: true
+        data: data
+        topics:
+        - topics
+        - topics
+        blockNumber: 5.962133916683182
+        orphaned: true
+        transactionIndex: 5.637376656633329
+        transactionHash: transactionHash
+      properties:
+        blockNumber:
+          type: number
+        blockHash:
+          type: string
+        transactionIndex:
+          type: number
+        removed:
+          type: boolean
+        address:
+          type: string
+        data:
+          type: string
+        topics:
+          items:
+            type: string
+          type: array
+        transactionHash:
+          type: string
+        logIndex:
+          type: number
+        orphaned:
+          nullable: true
+          type: boolean
+      required:
+      - address
+      - blockHash
+      - blockNumber
+      - data
+      - logIndex
+      - removed
+      - topics
+      - transactionHash
+      - transactionIndex
+      type: object
+    GetTransactionsResponse_data_inner_transaction:
+      description: The transaction object exists if you created the transaction deterministically
+        and contains information about the on-chain transaction
+      example:
+        createdAt: ""
+        gasUsed: gasUsed
+        gasFee: gasFee
+        blockNumber: 6.027456183070403
+        logs:
+        - blockHash: blockHash
+          address: address
+          logIndex: 2.3021358869347655
+          removed: true
+          data: data
+          topics:
+          - topics
+          - topics
+          blockNumber: 5.962133916683182
+          orphaned: true
+          transactionIndex: 5.637376656633329
+          transactionHash: transactionHash
+        - blockHash: blockHash
+          address: address
+          logIndex: 2.3021358869347655
+          removed: true
+          data: data
+          topics:
+          - topics
+          - topics
+          blockNumber: 5.962133916683182
+          orphaned: true
+          transactionIndex: 5.637376656633329
+          transactionHash: transactionHash
+        hash: hash
+        status: 1.4658129805029452
+      nullable: true
+      properties:
+        createdAt: {}
+        blockNumber:
+          type: number
+        hash:
+          type: string
+        gasUsed:
+          type: string
+        gasFee:
+          type: string
+        status:
+          type: number
+        logs:
+          items:
+            $ref: '#/components/schemas/GetTransactionsResponse_data_inner_transaction_logs_inner'
+          type: array
+      required:
+      - createdAt
+      type: object
+    GetTransactionsResponse_data_inner:
+      example:
+        createdAt: ""
+        chainId: 0.8008281904610115
+        id: id
+        intent:
+          message: message
+          interactions:
+          - functionArgs:
+            - ""
+            - ""
+            functionName: functionName
+            contract: contract
+            to: to
+            value: value
+          - functionArgs:
+            - ""
+            - ""
+            functionName: functionName
+            contract: contract
+            to: to
+            value: value
+        transaction:
+          createdAt: ""
+          gasUsed: gasUsed
+          gasFee: gasFee
+          blockNumber: 6.027456183070403
+          logs:
+          - blockHash: blockHash
+            address: address
+            logIndex: 2.3021358869347655
+            removed: true
+            data: data
+            topics:
+            - topics
+            - topics
+            blockNumber: 5.962133916683182
+            orphaned: true
+            transactionIndex: 5.637376656633329
+            transactionHash: transactionHash
+          - blockHash: blockHash
+            address: address
+            logIndex: 2.3021358869347655
+            removed: true
+            data: data
+            topics:
+            - topics
+            - topics
+            blockNumber: 5.962133916683182
+            orphaned: true
+            transactionIndex: 5.637376656633329
+            transactionHash: transactionHash
+          hash: hash
+          status: 1.4658129805029452
+        updatedAt: ""
+      properties:
+        id:
+          type: string
+        createdAt: {}
+        updatedAt: {}
+        chainId:
+          type: number
+        intent:
+          $ref: '#/components/schemas/GetTransactionsResponse_data_inner_intent'
+        transaction:
+          $ref: '#/components/schemas/GetTransactionsResponse_data_inner_transaction'
+      required:
+      - chainId
+      - createdAt
+      - id
+      - intent
+      - updatedAt
+      type: object
+    GetTransactionsResponse_pagination:
+      example:
+        offset: 3.616076749251911
+        count: 7.061401241503109
+        limit: 9.301444243932576
+      properties:
+        count:
+          type: number
+        limit:
+          default: 10
+          type: number
+        offset:
+          default: 0
+          type: number
+      required:
+      - count
+      type: object
+    GetTransactionResponse_policy:
+      description: Policy information related to the transaction
+      example:
+        id: id
+      properties:
+        id:
+          nullable: true
+          type: string
+      type: object
+    GetTransactionResponse_user_entities_inner:
+      example:
+        entityId: entityId
+      properties:
+        entityId:
+          type: string
+      required:
+      - entityId
+      type: object
+    GetTransactionResponse_user_wallet:
+      example:
+        address: address
+      properties:
+        address:
+          type: string
+      required:
+      - address
+      type: object
+    GetTransactionResponse_user:
+      description: User and wallet information related to the transaction
+      example:
+        wallet:
+          address: address
+        entities:
+        - entityId: entityId
+        - entityId: entityId
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/GetTransactionResponse_user_entities_inner'
+          type: array
+        wallet:
+          $ref: '#/components/schemas/GetTransactionResponse_user_wallet'
+      required:
+      - entities
+      - wallet
+      type: object
+    CreateTransactionRequestInput_interactions_inner:
+      example:
+        functionArgs:
+        - ""
+        - ""
+        functionName: functionName
+        contractAddress: contractAddress
+        value: value
+      properties:
+        contractAddress:
+          type: string
+        functionName:
+          type: string
+        functionArgs:
+          default: []
+          items: {}
+          type: array
+        value:
+          type: string
+      required:
+      - contractAddress
+      - functionName
+      type: object
+    GetAllUsersResponse_data_inner_wallets_inner:
+      example:
+        createdAt: ""
+        address: address
+        chainId: 0
+        profileId: profileId
+        externalId: externalId
+        id: id
+        userId: userId
+        updatedAt: ""
+      properties:
+        id:
+          format: cuid
+          type: string
+        createdAt: {}
+        updatedAt: {}
+        externalId:
+          type: string
+        address:
+          type: string
+        chainId:
+          type: integer
+        profileId:
+          nullable: true
+          type: string
+        userId:
+          nullable: true
+          type: string
+      required:
+      - address
+      - chainId
+      - createdAt
+      - externalId
+      - id
+      - profileId
+      - updatedAt
+      - userId
+      type: object
+    GetAllUsersResponse_data_inner:
+      example:
+        entities:
+        - entityId: entityId
+        - entityId: entityId
+        wallets:
+        - createdAt: ""
+          address: address
+          chainId: 0
+          profileId: profileId
+          externalId: externalId
+          id: id
+          userId: userId
+          updatedAt: ""
+        - createdAt: ""
+          address: address
+          chainId: 0
+          profileId: profileId
+          externalId: externalId
+          id: id
+          userId: userId
+          updatedAt: ""
+        id: id
+      properties:
+        id:
+          type: string
+        wallets:
+          items:
+            $ref: '#/components/schemas/GetAllUsersResponse_data_inner_wallets_inner'
+          type: array
+        entities:
+          items:
+            $ref: '#/components/schemas/GetTransactionResponse_user_entities_inner'
+          type: array
+      required:
+      - entities
+      - id
+      - wallets
+      type: object
+    ConfirmOperationRequest_transactions_inner:
+      example:
+        signature: signature
+        id: id
+      properties:
+        id:
+          type: string
+        signature:
+          type: string
+      required:
+      - id
+      - signature
+      type: object
+  securitySchemes:
+    Beam API game key:
+      in: header
+      name: x-api-key
+      type: apiKey
+
