@@ -879,8 +879,8 @@ namespace Beam
                     beamSession = new BeamSession
                     {
                         Id = res.Data.Id,
-                        StartTime = DateTimeOffset.Parse(res.Data.EndTime),
-                        EndTime = DateTimeOffset.Parse(res.Data.EndTime),
+                        StartTime = res.Data.EndTime,
+                        EndTime = res.Data.EndTime,
                         SessionAddress = res.Data.SessionAddress
                     };
                 }
