@@ -1,0 +1,7 @@
+{
+    "name": "BeamPlayerClient",
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ]
+}
