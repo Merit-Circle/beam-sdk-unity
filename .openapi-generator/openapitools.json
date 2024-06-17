@@ -8,7 +8,7 @@
         "generatorName": "csharp",
         "output": "../Runtime/Beam/Api/BeamPlayerClient",
         "library": "unityWebRequest",
-        "inputSpec": "https://api.preview.onbeam.com/api/player-json",
+        "inputSpec": "https://api.testnet.onbeam.com/api/player-json",
         "skipValidateSpec": true,
         "globalProperty": {
           "modelTests": false,
