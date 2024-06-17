@@ -68,7 +68,7 @@ namespace Beam
                     apiUrl = "https://api.onbeam.com";
                     break;
                 default:
-                    apiUrl = "https://api.preview.onbeam.com"; // todo: bring back to testnet
+                    apiUrl = "https://api.testnet.onbeam.com";
                     break;
             }
 
@@ -137,7 +137,7 @@ namespace Beam
 
             actionResult.Invoke(new BeamResult<BeamSession>(activeSession));
         }
-        
+
         public async Task<BeamResult<BeamSession>> GetActiveSessionAsync(
             string entityId,
             int chainId = Constants.DefaultChainId,
@@ -315,24 +315,21 @@ namespace Beam
             var newKeyPair = GetOrCreateSigningKeyPair(refresh: true);
 
             // retrieve operation Id to pass further and track result
-            GenerateSessionRequestResponse beamSessionRequest = null;
-            var res = await SessionsApi.CreateSessionRequestWithHttpInfoAsync(entityId, new GenerateSessionUrlRequestInput
+            GenerateSessionRequestResponse beamSessionRequest;
+            try
             {
-                Address = newKeyPair.Account.Address,
-                ChainId = chainId
-            }, cancellationToken);
-            
-            if (res.StatusCode == HttpStatusCode.OK)
-            {
-                Log($"Created session request: {res.Data.Id} to check for session result");
-                beamSessionRequest = res.Data;
+                var res = await SessionsApi.CreateSessionRequestAsync(entityId,
+                    new GenerateSessionUrlRequestInput(newKeyPair.Account.Address, chainId), cancellationToken);
+
+                Log($"Created session request: {res.Id} to check for session result");
+                beamSessionRequest = res;
             }
-            else
+            catch (ApiException e)
             {
-                Log($"Failed creating session request: {res.RawContent}");
+                Log($"Failed creating session request: {e.Message}");
                 return new BeamResult<BeamSession>(
                     status: BeamResultType.Error,
-                    error: res.RawContent);
+                    error: e.Message);
             }
 
             Log($"Opening {beamSessionRequest.Url}");
@@ -389,7 +386,7 @@ namespace Beam
 
             return beamResultModel;
         }
-        
+
         /// <summary>
         /// A Coroutine that opens an external browser to sign a transaction, returns the result via callback arg.
         /// </summary>
@@ -483,31 +480,33 @@ namespace Beam
             CancellationToken cancellationToken = default)
         {
             Log("Retrieving active session");
-            var (activeSession, activeSessionKeyPair) = await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
-            
+            var (activeSession, activeSessionKeyPair) =
+                await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
+
             CommonOperationResponse operation = null;
             Log($"Retrieving operation({operationId})");
-            var res = await OperationApi.GetOperationWithHttpInfoAsync(operationId, cancellationToken);
-            if (res.StatusCode == HttpStatusCode.OK)
+            try
             {
-                operation = res.Data;
+                var res = await OperationApi.GetOperationAsync(operationId, cancellationToken);
+                operation = res;
             }
-            else if (res.StatusCode == HttpStatusCode.NotFound)
+            catch (ApiException e)
             {
-                Log($"No operation({operationId}) was found, ending");
+                if (e.ErrorCode == 404)
+                {
+                    Log($"No operation({operationId}) was found, ending");
+                    return new BeamResult<CommonOperationResponse.StatusEnum>
+                    {
+                        Status = BeamResultType.Error,
+                        Error = "Operation was not found"
+                    };
+                }
+
+                Log($"Encountered an error retrieving operation({operationId}): {e.Message}");
                 return new BeamResult<CommonOperationResponse.StatusEnum>
                 {
                     Status = BeamResultType.Error,
-                    Error = "Operation was not found"
-                };
-            }
-            else
-            {
-                Log($"Encountered an error retrieving operation({operationId}): {res.RawContent}");
-                return new BeamResult<CommonOperationResponse.StatusEnum>
-                {
-                    Status = BeamResultType.Error,
-                    Error = res.RawContent
+                    Error = e.Message
                 };
             }
 
@@ -515,7 +514,8 @@ namespace Beam
             if (hasActiveSession)
             {
                 Log($"Has an active session until: {activeSession.EndTime:o}, using it to sign the operation");
-                return await SignOperationUsingSessionAsync(entityId, operation, activeSessionKeyPair, cancellationToken);
+                return await SignOperationUsingSessionAsync(entityId, operation, activeSessionKeyPair,
+                    cancellationToken);
             }
 
             if (fallbackToBrowser)
@@ -585,7 +585,7 @@ namespace Beam
                             $"Operation with id: {operation.Id} could not be found"));
                 }, secondsTimeout));
         }
-        
+
         private async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
             CommonOperationResponse operation,
             int secondsTimeout,
@@ -781,32 +781,33 @@ namespace Beam
             }
 
             Log($"Confirming operation({operation.Id})");
-            var res = await OperationApi.ProcessOperationWithHttpInfoAsync(operation.Id, confirmationModel,
-                cancellationToken);
-            if (res.StatusCode == HttpStatusCode.OK)
+            try
             {
-                var didFail = res.Data.Status != CommonOperationResponse.StatusEnum.Executed &&
-                              res.Data.Status != CommonOperationResponse.StatusEnum.Signed &&
-                              res.Data.Status != CommonOperationResponse.StatusEnum.Pending;
+                var res = await OperationApi.ProcessOperationAsync(operation.Id, confirmationModel,
+                    cancellationToken);
+                var didFail = res.Status != CommonOperationResponse.StatusEnum.Executed &&
+                              res.Status != CommonOperationResponse.StatusEnum.Signed &&
+                              res.Status != CommonOperationResponse.StatusEnum.Pending;
 
                 Log(
-                    $"Confirming operation({operation.Id}) status: {res.Data.Status.ToString()} error: {res.RawContent}");
+                    $"Confirming operation({operation.Id}) status: {res.Status.ToString()}");
                 return new BeamResult<CommonOperationResponse.StatusEnum>
                 {
                     Status = didFail ? BeamResultType.Error : BeamResultType.Success,
-                    Result = res.Data?.Status ?? CommonOperationResponse.StatusEnum.Error,
-                    Error = didFail ? res.RawContent : null
+                    Result = res.Status
                 };
             }
-
-            Log($"Confirming operation({operation.Id}) encountered an error: {res.RawContent}");
-            return new BeamResult<CommonOperationResponse.StatusEnum>
+            catch (ApiException e)
             {
-                Result = CommonOperationResponse.StatusEnum.Error,
-                Status = BeamResultType.Error,
-                Error = res.RawContent ??
-                        $"Encountered unknown error when confirming operation {operation.Id}"
-            };
+                Log(
+                    $"Confirming operation({operation.Id}) encountered an error: {e.Message}");
+                return new BeamResult<CommonOperationResponse.StatusEnum>
+                {
+                    Status = BeamResultType.Error,
+                    Error = e.Message ??
+                            $"Encountered unknown error when confirming operation {operation.Id}"
+                };
+            }
         }
 
         private IEnumerator PollForOperationResult(
@@ -874,14 +875,19 @@ namespace Beam
             while ((endTime - DateTime.Now).TotalSeconds > 0)
             {
                 CommonOperationResponse beamOperation = null;
-                var res = await OperationApi.GetOperationWithHttpInfoAsync(opId, cancellationToken);
-                if (res.StatusCode == HttpStatusCode.OK)
+                try
                 {
-                    beamOperation = res.Data;
+                    var res = await OperationApi.GetOperationAsync(opId, cancellationToken);
+                    beamOperation = res;
                 }
-                else if (res.StatusCode == HttpStatusCode.NotFound)
+                catch (ApiException e)
                 {
-                    return null;
+                    if (e.ErrorCode == 404)
+                    {
+                        return null;
+                    }
+
+                    throw;
                 }
 
                 // check for status as well as updatedAt
@@ -961,15 +967,19 @@ namespace Beam
             while ((endTime - DateTime.Now).TotalSeconds > 0)
             {
                 GetSessionRequestResponse beamSessionRequest = null;
-                var res = await SessionsApi.GetSessionRequestWithHttpInfoAsync(sessionRequestId, cancellationToken);
-
-                if (res.StatusCode == HttpStatusCode.OK)
+                try
                 {
-                    beamSessionRequest = res.Data;
+                    var res = await SessionsApi.GetSessionRequestAsync(sessionRequestId, cancellationToken);
+                    beamSessionRequest = res;
                 }
-                else if (res.StatusCode == HttpStatusCode.NotFound)
+                catch (ApiException e)
                 {
-                    return null;
+                    if (e.ErrorCode == 404)
+                    {
+                        return null;
+                    }
+
+                    throw;
                 }
 
                 if (beamSessionRequest?.Status != GetSessionRequestResponse.StatusEnum.Pending)
@@ -1043,21 +1053,21 @@ namespace Beam
             // if session is no longer valid, check if we have one saved in the API
             if (!beamSession.IsValidNow())
             {
-                var res = await SessionsApi.GetActiveSessionWithHttpInfoAsync(entityId, keyPair.Account.Address,
-                    chainId, cancellationToken);
-                if (res.StatusCode == HttpStatusCode.OK)
+                try
                 {
+                    var res = await SessionsApi.GetActiveSessionAsync(entityId, keyPair.Account.Address,
+                        chainId, cancellationToken);
                     beamSession = new BeamSession
                     {
-                        Id = res.Data.Id,
-                        StartTime = res.Data.EndTime,
-                        EndTime = res.Data.EndTime,
-                        SessionAddress = res.Data.SessionAddress
+                        Id = res.Id,
+                        StartTime = res.StartTime,
+                        EndTime = res.EndTime,
+                        SessionAddress = res.SessionAddress
                     };
                 }
-                else
+                catch (ApiException e)
                 {
-                    Log($"GetActiveSessionInfo returned: {res.RawContent}");
+                    Log($"GetActiveSessionInfo returned: {e.Message}");
                 }
             }
 
@@ -1094,7 +1104,7 @@ namespace Beam
         {
             var config = new Configuration
             {
-                BasePath = m_BeamApiUrl
+                BasePath = m_BeamApiUrl,
             };
             config.ApiKey.Add("x-api-key", m_BeamApiKey);
             config.DefaultHeaders.Add("x-beam-sdk", "unity");
