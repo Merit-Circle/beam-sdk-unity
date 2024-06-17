@@ -1,3 +1,5 @@
+using BeamPlayerClient.Model;
+
 namespace Beam.Models
 {
     public class BeamResult<T>

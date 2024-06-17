@@ -131,14 +131,28 @@ namespace Beam
             if (activeSession == null)
             {
                 Log("No active session found");
-                actionResult.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "No active session found")
-                {
-                    Result = activeSession
-                });
+                actionResult.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "No active session found"));
                 yield break;
             }
 
             actionResult.Invoke(new BeamResult<BeamSession>(activeSession));
+        }
+        
+        public async Task<BeamResult<BeamSession>> GetActiveSessionAsync(
+            string entityId,
+            int chainId = Constants.DefaultChainId,
+            CancellationToken cancellationToken = default)
+        {
+            Log("Retrieving active session");
+            var (activeSession, _) = await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
+
+            if (activeSession == null)
+            {
+                Log("No active session found");
+                return new BeamResult<BeamSession>(BeamResultType.Error, "No active session found");
+            }
+
+            return new BeamResult<BeamSession>(activeSession);
         }
 
         /// <summary>
@@ -277,6 +291,105 @@ namespace Beam
             }
         }
 
+        public async Task<BeamResult<BeamSession>> CreateSessionAsync(
+            string entityId,
+            int chainId = Constants.DefaultChainId,
+            int secondsTimeout = DefaultTimeoutInSeconds,
+            CancellationToken cancellationToken = default)
+        {
+            Log("Retrieving active session");
+            var (activeSession, _) = await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
+
+            if (activeSession != null)
+            {
+                Log("Already has an active session, ending early");
+                return new BeamResult<BeamSession>(BeamResultType.Error, "Already has an active session")
+                {
+                    Result = activeSession
+                };
+            }
+
+            Log("No active session found, refreshing local KeyPair");
+
+            // refresh keypair to make sure we have no conflicts with existing sessions
+            var newKeyPair = GetOrCreateSigningKeyPair(refresh: true);
+
+            // retrieve operation Id to pass further and track result
+            GenerateSessionRequestResponse beamSessionRequest = null;
+            var res = await SessionsApi.CreateSessionRequestWithHttpInfoAsync(entityId, new GenerateSessionUrlRequestInput
+            {
+                Address = newKeyPair.Account.Address,
+                ChainId = chainId
+            }, cancellationToken);
+            
+            if (res.StatusCode == HttpStatusCode.OK)
+            {
+                Log($"Created session request: {res.Data.Id} to check for session result");
+                beamSessionRequest = res.Data;
+            }
+            else
+            {
+                Log($"Failed creating session request: {res.RawContent}");
+                return new BeamResult<BeamSession>(
+                    status: BeamResultType.Error,
+                    error: res.RawContent);
+            }
+
+            Log($"Opening {beamSessionRequest.Url}");
+            // open identity.onbeam.com
+            Application.OpenURL(beamSessionRequest.Url);
+
+            var beamResultModel = new BeamResult<BeamSession>();
+
+            Log("Started polling for Session creation result");
+            // start polling for results of the operation
+            var error = false;
+            var pollingRes = await PollForSessionRequestResultAsync(beamSessionRequest.Id, secondsTimeout,
+                cancellationToken: cancellationToken);
+            if (pollingRes == null)
+            {
+                return new BeamResult<BeamSession>(BeamResultType.Error,
+                    "Polling for created session encountered an error or timed out");
+            }
+
+            switch (pollingRes.Status)
+            {
+                case GetSessionRequestResponse.StatusEnum.Pending:
+                    beamResultModel.Status = BeamResultType.Pending;
+                    break;
+                case GetSessionRequestResponse.StatusEnum.Accepted:
+                    beamResultModel.Status = BeamResultType.Success;
+                    break;
+                case GetSessionRequestResponse.StatusEnum.Error:
+                    beamResultModel.Status = BeamResultType.Error;
+                    beamResultModel.Error = "Encountered an error when requesting a session";
+                    error = true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            Log("Retrieving newly created Session");
+            // retrieve newly created session
+            if (!error)
+            {
+                var (beamSession, _) = await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
+                if (beamSession != null)
+                {
+                    beamResultModel.Result = beamSession;
+                    Log(
+                        $"Retrieved a session: {beamSession.SessionAddress}, valid from: {beamSession.StartTime:o}, to: {beamSession.EndTime:o}");
+                }
+                else
+                {
+                    beamResultModel.Error = "Could not retrieve session after it was created";
+                    beamResultModel.Status = BeamResultType.Error;
+                }
+            }
+
+            return beamResultModel;
+        }
+        
         /// <summary>
         /// A Coroutine that opens an external browser to sign a transaction, returns the result via callback arg.
         /// </summary>
@@ -361,6 +474,65 @@ namespace Beam
             }
         }
 
+        public async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationAsync(
+            string entityId,
+            string operationId,
+            int chainId = Constants.DefaultChainId,
+            bool fallbackToBrowser = true,
+            int secondsTimeout = DefaultTimeoutInSeconds,
+            CancellationToken cancellationToken = default)
+        {
+            Log("Retrieving active session");
+            var (activeSession, activeSessionKeyPair) = await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
+            
+            CommonOperationResponse operation = null;
+            Log($"Retrieving operation({operationId})");
+            var res = await OperationApi.GetOperationWithHttpInfoAsync(operationId, cancellationToken);
+            if (res.StatusCode == HttpStatusCode.OK)
+            {
+                operation = res.Data;
+            }
+            else if (res.StatusCode == HttpStatusCode.NotFound)
+            {
+                Log($"No operation({operationId}) was found, ending");
+                return new BeamResult<CommonOperationResponse.StatusEnum>
+                {
+                    Status = BeamResultType.Error,
+                    Error = "Operation was not found"
+                };
+            }
+            else
+            {
+                Log($"Encountered an error retrieving operation({operationId}): {res.RawContent}");
+                return new BeamResult<CommonOperationResponse.StatusEnum>
+                {
+                    Status = BeamResultType.Error,
+                    Error = res.RawContent
+                };
+            }
+
+            var hasActiveSession = activeSessionKeyPair != null && activeSession != null;
+            if (hasActiveSession)
+            {
+                Log($"Has an active session until: {activeSession.EndTime:o}, using it to sign the operation");
+                return await SignOperationUsingSessionAsync(entityId, operation, activeSessionKeyPair, cancellationToken);
+            }
+
+            if (fallbackToBrowser)
+            {
+                Log("No active session found, using browser to sign the operation");
+                return await SignOperationUsingBrowserAsync(operation, secondsTimeout, cancellationToken);
+            }
+
+            Log($"No active session found, {nameof(fallbackToBrowser)} set to false");
+            return new BeamResult<CommonOperationResponse.StatusEnum>
+            {
+                Result = CommonOperationResponse.StatusEnum.Error,
+                Status = BeamResultType.Error,
+                Error = $"No active session and {nameof(fallbackToBrowser)} set to false"
+            };
+        }
+
         private IEnumerator SignOperationUsingBrowser(
             BeamOperation operation,
             Action<BeamResult<BeamOperationStatus>> callback,
@@ -415,7 +587,7 @@ namespace Beam
         }
         
         private async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
-            BeamOperation operation,
+            CommonOperationResponse operation,
             int secondsTimeout,
             CancellationToken cancellationToken = default)
         {
@@ -550,7 +722,7 @@ namespace Beam
 
         private async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingSessionAsync(
             string entityId,
-            BeamOperation operation,
+            CommonOperationResponse operation,
             KeyPair activeSessionKeyPair,
             CancellationToken cancellationToken = default)
         {
@@ -580,11 +752,10 @@ namespace Beam
                 {
                     switch (transaction.Type)
                     {
-                        case BeamOperationTransactionType.OpenfortTransaction:
-                        case BeamOperationTransactionType.OpenfortRevokeSession:
-                            signature = activeSessionKeyPair.SignMessage(transaction.Data);
+                        case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortTransaction:
+                            signature = activeSessionKeyPair.SignMessage(transaction.Data.GetString());
                             break;
-                        case BeamOperationTransactionType.OpenfortReservoirOrder:
+                        case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortReservoirOrder:
                             signature = activeSessionKeyPair.SignMarketplaceTransactionHash(transaction.Hash);
                             break;
                         default:
@@ -855,7 +1026,7 @@ namespace Beam
             activeSession.Invoke(null, keyPair);
         }
 
-        private async Task<BeamSession> GetActiveSessionAndKeysAsync(
+        private async Task<(BeamSession, KeyPair)> GetActiveSessionAndKeysAsync(
             string entityId,
             int chainId,
             CancellationToken cancellationToken = default)
@@ -894,12 +1065,12 @@ namespace Beam
             if (beamSession.IsValidNow() && beamSession.IsOwnedBy(keyPair))
             {
                 m_Storage.Set(Constants.Storage.BeamSession, JsonConvert.SerializeObject(beamSession));
-                return beamSession;
+                return (beamSession, keyPair);
             }
 
             // if session is not valid or owned by different KeyPair, remove it from cache
             m_Storage.Delete(Constants.Storage.BeamSession);
-            return null;
+            return (null, keyPair);
         }
 
         private KeyPair GetOrCreateSigningKeyPair(bool refresh = false)
