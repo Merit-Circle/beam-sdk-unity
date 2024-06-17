@@ -1,3 +1,4 @@
 {
-  "name": "Beam"
+  "name": "Beam",
+  "references":[ "GUID:99c58da39a6f43be955fd29a412f780d", "BeamPlayerClient" ]
 }

@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 namespace Beam.Api
 {
-    internal class BeamApi
+    internal class BeamCoroutineApi
     {
         private string m_ApiBaseUrl = string.Empty;
         private string m_BeamPublishableGameKey = string.Empty;

@@ -1,4 +1,5 @@
 using System;
+using BeamPlayerClient.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -19,5 +20,23 @@ namespace Beam.Models
     public enum BeamSessionRequestStatus
     {
         Pending, Accepted, Error
+    }
+
+    public static class BeamSessionRequestStatusExtensions
+    {
+        public static BeamSessionRequestStatus ToBeamSessionRequestStatus(this GetSessionRequestResponse.StatusEnum statusEnum)
+        {
+            switch (statusEnum)
+            {
+                case GetSessionRequestResponse.StatusEnum.Pending:
+                    return BeamSessionRequestStatus.Pending;
+                case GetSessionRequestResponse.StatusEnum.Accepted:
+                    return BeamSessionRequestStatus.Accepted;
+                case GetSessionRequestResponse.StatusEnum.Error:
+                    return BeamSessionRequestStatus.Error;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(statusEnum), statusEnum, null);
+            }
+        }
     }
 }
