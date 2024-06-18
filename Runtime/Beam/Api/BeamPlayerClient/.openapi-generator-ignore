@@ -23,3 +23,6 @@
 #!docs/README.md
 
 .gitignore
+
+/src/BeamPlayerClient/BeamPlayerClient.asmdef
+/src/BeamPlayerClient/BeamPlayerClient.asmdef.meta

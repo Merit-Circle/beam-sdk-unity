@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
-using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
 using Beam.Api;
 using Beam.Extensions;
 using Beam.Models;
@@ -12,6 +10,7 @@ using Beam.Util;
 using BeamPlayerClient.Api;
 using BeamPlayerClient.Client;
 using BeamPlayerClient.Model;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -32,9 +31,9 @@ namespace Beam
 
         private readonly BeamCoroutineApi m_BeamCoroutineApi = new();
 
-        private string m_BeamApiKey = null;
-        private string m_BeamApiUrl = null;
-        private bool m_DebugLog = false;
+        private string m_BeamApiKey;
+        private string m_BeamApiUrl;
+        private bool m_DebugLog;
         private IStorage m_Storage = new PlayerPrefsStorage();
 
         public BeamClient()
@@ -115,8 +114,7 @@ namespace Beam
             Log("Retrieving active session");
 
             BeamSession activeSession = null;
-            KeyPair keyPair = null;
-            yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (res, kp) =>
+            yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (res, _) =>
             {
                 if (res != null)
                 {
@@ -124,8 +122,6 @@ namespace Beam
                         $"Retrieved a session: {res.SessionAddress}, valid from: {res.StartTime:o}, to: {res.EndTime:o}");
                     activeSession = res;
                 }
-
-                keyPair = kp;
             }));
 
             if (activeSession == null)
@@ -138,7 +134,7 @@ namespace Beam
             actionResult.Invoke(new BeamResult<BeamSession>(activeSession));
         }
 
-        public async Task<BeamResult<BeamSession>> GetActiveSessionAsync(
+        public async UniTask<BeamResult<BeamSession>> GetActiveSessionAsync(
             string entityId,
             int chainId = Constants.DefaultChainId,
             CancellationToken cancellationToken = default)
@@ -291,7 +287,7 @@ namespace Beam
             }
         }
 
-        public async Task<BeamResult<BeamSession>> CreateSessionAsync(
+        public async UniTask<BeamResult<BeamSession>> CreateSessionAsync(
             string entityId,
             int chainId = Constants.DefaultChainId,
             int secondsTimeout = DefaultTimeoutInSeconds,
@@ -471,7 +467,7 @@ namespace Beam
             }
         }
 
-        public async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationAsync(
+        public async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationAsync(
             string entityId,
             string operationId,
             int chainId = Constants.DefaultChainId,
@@ -483,7 +479,7 @@ namespace Beam
             var (activeSession, activeSessionKeyPair) =
                 await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
 
-            CommonOperationResponse operation = null;
+            CommonOperationResponse operation;
             Log($"Retrieving operation({operationId})");
             try
             {
@@ -586,7 +582,7 @@ namespace Beam
                 }, secondsTimeout));
         }
 
-        private async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
+        private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
             CommonOperationResponse operation,
             int secondsTimeout,
             CancellationToken cancellationToken = default)
@@ -636,7 +632,7 @@ namespace Beam
         {
             if (operation?.Transactions?.Any() != true)
             {
-                Log($"Operation({operation.Id}) has no transactions to sign, ending");
+                Log($"Operation({operation?.Id}) has no transactions to sign, ending");
                 callback.Invoke(new BeamResult<BeamOperationStatus>
                 {
                     Result = BeamOperationStatus.Error,
@@ -657,9 +653,9 @@ namespace Beam
             foreach (var transaction in operation.Transactions)
             {
                 Log($"Signing operation({operation.Id}) transaction({transaction.ExternalId})");
-                string signature;
                 try
                 {
+                    string signature;
                     switch (transaction.Type)
                     {
                         case BeamOperationTransactionType.OpenfortTransaction:
@@ -720,7 +716,7 @@ namespace Beam
             }));
         }
 
-        private async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingSessionAsync(
+        private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingSessionAsync(
             string entityId,
             CommonOperationResponse operation,
             KeyPair activeSessionKeyPair,
@@ -728,7 +724,7 @@ namespace Beam
         {
             if (operation?.Transactions?.Any() != true)
             {
-                Log($"Operation({operation.Id}) has no transactions to sign, ending");
+                Log($"Operation({operation?.Id}) has no transactions to sign, ending");
                 return new BeamResult<CommonOperationResponse.StatusEnum>
                 {
                     Result = CommonOperationResponse.StatusEnum.Error,
@@ -747,9 +743,9 @@ namespace Beam
             foreach (var transaction in operation.Transactions)
             {
                 Log($"Signing operation({operation.Id}) transaction({transaction.ExternalId})");
-                string signature;
                 try
                 {
+                    string signature;
                     switch (transaction.Type)
                     {
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortTransaction:
@@ -861,20 +857,20 @@ namespace Beam
             timeout.Invoke();
         }
 
-        private async Task<CommonOperationResponse> PollForOperationResultAsync(
+        private async UniTask<CommonOperationResponse> PollForOperationResultAsync(
             string opId,
             int secondsTimeout = DefaultTimeoutInSeconds,
             int secondsBetweenPolls = 1,
             CancellationToken cancellationToken = default)
         {
             var now = DateTimeOffset.Now;
-            await Task.Delay(2000, cancellationToken);
+            await UniTask.Delay(2000, cancellationToken: cancellationToken);
 
             var endTime = DateTime.Now.AddSeconds(secondsTimeout);
 
             while ((endTime - DateTime.Now).TotalSeconds > 0)
             {
-                CommonOperationResponse beamOperation = null;
+                CommonOperationResponse beamOperation;
                 try
                 {
                     var res = await OperationApi.GetOperationAsync(opId, cancellationToken);
@@ -899,7 +895,7 @@ namespace Beam
                     return beamOperation;
                 }
 
-                await Task.Delay(secondsBetweenPolls * 1000, cancellationToken);
+                await UniTask.Delay(secondsBetweenPolls * 1000, cancellationToken: cancellationToken);
             }
 
             return null;
@@ -954,19 +950,19 @@ namespace Beam
             timeout.Invoke();
         }
 
-        private async Task<GetSessionRequestResponse> PollForSessionRequestResultAsync(
+        private async UniTask<GetSessionRequestResponse> PollForSessionRequestResultAsync(
             string sessionRequestId,
             int secondsTimeout = DefaultTimeoutInSeconds,
             int secondsBetweenPolls = 1,
             CancellationToken cancellationToken = default)
         {
-            await Task.Delay(2000, cancellationToken);
+            await UniTask.Delay(2000, cancellationToken: cancellationToken);
 
             var endTime = DateTime.Now.AddSeconds(secondsTimeout);
 
             while ((endTime - DateTime.Now).TotalSeconds > 0)
             {
-                GetSessionRequestResponse beamSessionRequest = null;
+                GetSessionRequestResponse beamSessionRequest;
                 try
                 {
                     var res = await SessionsApi.GetSessionRequestAsync(sessionRequestId, cancellationToken);
@@ -987,7 +983,7 @@ namespace Beam
                     return beamSessionRequest;
                 }
 
-                await Task.Delay(secondsBetweenPolls * 1000, cancellationToken);
+                await UniTask.Delay(secondsBetweenPolls * 1000, cancellationToken: cancellationToken);
             }
 
             return null;
@@ -1036,7 +1032,7 @@ namespace Beam
             activeSession.Invoke(null, keyPair);
         }
 
-        private async Task<(BeamSession, KeyPair)> GetActiveSessionAndKeysAsync(
+        private async UniTask<(BeamSession, KeyPair)> GetActiveSessionAndKeysAsync(
             string entityId,
             int chainId,
             CancellationToken cancellationToken = default)

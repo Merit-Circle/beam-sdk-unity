@@ -119,7 +119,7 @@ namespace BeamPlayerClient.Api
         /// <param name="createOperationRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> CreateOperationAsync(CreateOperationRequestInput createOperationRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> CreateOperationAsync(CreateOperationRequestInput createOperationRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Initializes an operation. Used by Game SDKs to get transaction results.
@@ -131,7 +131,7 @@ namespace BeamPlayerClient.Api
         /// <param name="createOperationRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> CreateOperationWithHttpInfoAsync(CreateOperationRequestInput createOperationRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> CreateOperationWithHttpInfoAsync(CreateOperationRequestInput createOperationRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Delete an operation
         /// </summary>
@@ -142,7 +142,7 @@ namespace BeamPlayerClient.Api
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> DeleteOperationAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> DeleteOperationAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete an operation
@@ -154,7 +154,7 @@ namespace BeamPlayerClient.Api
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> DeleteOperationWithHttpInfoAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> DeleteOperationWithHttpInfoAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Returns operation data for given id. Used by Game SDKs to get transaction results.
         /// </summary>
@@ -165,7 +165,7 @@ namespace BeamPlayerClient.Api
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> GetOperationAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> GetOperationAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Returns operation data for given id. Used by Game SDKs to get transaction results.
@@ -177,7 +177,7 @@ namespace BeamPlayerClient.Api
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> GetOperationWithHttpInfoAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> GetOperationWithHttpInfoAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Updates operation result for given id
         /// </summary>
@@ -189,7 +189,7 @@ namespace BeamPlayerClient.Api
         /// <param name="confirmOperationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> ProcessOperationAsync(string opId, ConfirmOperationRequest confirmOperationRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> ProcessOperationAsync(string opId, ConfirmOperationRequest confirmOperationRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Updates operation result for given id
@@ -202,7 +202,7 @@ namespace BeamPlayerClient.Api
         /// <param name="confirmOperationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> ProcessOperationWithHttpInfoAsync(string opId, ConfirmOperationRequest confirmOperationRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> ProcessOperationWithHttpInfoAsync(string opId, ConfirmOperationRequest confirmOperationRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -415,14 +415,10 @@ namespace BeamPlayerClient.Api
         /// <param name="createOperationRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> CreateOperationAsync(CreateOperationRequestInput createOperationRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> CreateOperationAsync(CreateOperationRequestInput createOperationRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = CreateOperationWithHttpInfoAsync(createOperationRequestInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -433,7 +429,7 @@ namespace BeamPlayerClient.Api
         /// <param name="createOperationRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> CreateOperationWithHttpInfoAsync(CreateOperationRequestInput createOperationRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> CreateOperationWithHttpInfoAsync(CreateOperationRequestInput createOperationRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'createOperationRequestInput' is set
             if (createOperationRequestInput == null)
@@ -470,11 +466,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.PostAsync<CommonOperationResponse>("/v1/player/operation", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -552,14 +544,10 @@ namespace BeamPlayerClient.Api
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> DeleteOperationAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> DeleteOperationAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = DeleteOperationWithHttpInfoAsync(opId, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -570,7 +558,7 @@ namespace BeamPlayerClient.Api
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> DeleteOperationWithHttpInfoAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> DeleteOperationWithHttpInfoAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'opId' is set
             if (opId == null)
@@ -606,11 +594,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.DeleteAsync<CommonOperationResponse>("/v1/player/operation/{opId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -688,14 +672,10 @@ namespace BeamPlayerClient.Api
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> GetOperationAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> GetOperationAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetOperationWithHttpInfoAsync(opId, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -706,7 +686,7 @@ namespace BeamPlayerClient.Api
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> GetOperationWithHttpInfoAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> GetOperationWithHttpInfoAsync(string opId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'opId' is set
             if (opId == null)
@@ -742,11 +722,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.GetAsync<CommonOperationResponse>("/v1/player/operation/{opId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -833,14 +809,10 @@ namespace BeamPlayerClient.Api
         /// <param name="confirmOperationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> ProcessOperationAsync(string opId, ConfirmOperationRequest confirmOperationRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> ProcessOperationAsync(string opId, ConfirmOperationRequest confirmOperationRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = ProcessOperationWithHttpInfoAsync(opId, confirmOperationRequest, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -852,7 +824,7 @@ namespace BeamPlayerClient.Api
         /// <param name="confirmOperationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> ProcessOperationWithHttpInfoAsync(string opId, ConfirmOperationRequest confirmOperationRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> ProcessOperationWithHttpInfoAsync(string opId, ConfirmOperationRequest confirmOperationRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'opId' is set
             if (opId == null)
@@ -894,11 +866,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.PatchAsync<CommonOperationResponse>("/v1/player/operation/{opId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {

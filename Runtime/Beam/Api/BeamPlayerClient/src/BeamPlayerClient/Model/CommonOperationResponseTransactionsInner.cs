@@ -46,7 +46,13 @@ namespace BeamPlayerClient.Model
             /// Enum OpenfortReservoirOrder for value: OpenfortReservoirOrder
             /// </summary>
             [EnumMember(Value = "OpenfortReservoirOrder")]
-            OpenfortReservoirOrder = 2
+            OpenfortReservoirOrder = 2,
+
+            /// <summary>
+            /// Enum OpenfortRevokeSession for value: OpenfortRevokeSession
+            /// </summary>
+            [EnumMember(Value = "OpenfortRevokeSession")]
+            OpenfortRevokeSession = 3
         }
 
 

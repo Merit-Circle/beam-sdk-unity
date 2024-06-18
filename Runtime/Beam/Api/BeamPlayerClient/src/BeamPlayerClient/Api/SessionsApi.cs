@@ -106,7 +106,7 @@ namespace BeamPlayerClient.Api
         /// <param name="generateSessionUrlRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerateSessionRequestResponse</returns>
-        System.Threading.Tasks.Task<GenerateSessionRequestResponse> CreateSessionRequestAsync(string entityId, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GenerateSessionRequestResponse> CreateSessionRequestAsync(string entityId, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -119,7 +119,7 @@ namespace BeamPlayerClient.Api
         /// <param name="generateSessionUrlRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerateSessionRequestResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenerateSessionRequestResponse>> CreateSessionRequestWithHttpInfoAsync(string entityId, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GenerateSessionRequestResponse>> CreateSessionRequestWithHttpInfoAsync(string entityId, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -132,7 +132,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetActiveSessionResponse</returns>
-        System.Threading.Tasks.Task<GetActiveSessionResponse> GetActiveSessionAsync(string entityId, string accountAddress, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetActiveSessionResponse> GetActiveSessionAsync(string entityId, string accountAddress, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -146,7 +146,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetActiveSessionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetActiveSessionResponse>> GetActiveSessionWithHttpInfoAsync(string entityId, string accountAddress, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetActiveSessionResponse>> GetActiveSessionWithHttpInfoAsync(string entityId, string accountAddress, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -157,7 +157,7 @@ namespace BeamPlayerClient.Api
         /// <param name="requestId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetSessionRequestResponse</returns>
-        System.Threading.Tasks.Task<GetSessionRequestResponse> GetSessionRequestAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetSessionRequestResponse> GetSessionRequestAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -169,7 +169,7 @@ namespace BeamPlayerClient.Api
         /// <param name="requestId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetSessionRequestResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetSessionRequestResponse>> GetSessionRequestWithHttpInfoAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetSessionRequestResponse>> GetSessionRequestWithHttpInfoAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -390,14 +390,10 @@ namespace BeamPlayerClient.Api
         /// <param name="generateSessionUrlRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerateSessionRequestResponse</returns>
-        public async System.Threading.Tasks.Task<GenerateSessionRequestResponse> CreateSessionRequestAsync(string entityId, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GenerateSessionRequestResponse> CreateSessionRequestAsync(string entityId, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = CreateSessionRequestWithHttpInfoAsync(entityId, generateSessionUrlRequestInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GenerateSessionRequestResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<GenerateSessionRequestResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -409,7 +405,7 @@ namespace BeamPlayerClient.Api
         /// <param name="generateSessionUrlRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerateSessionRequestResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GenerateSessionRequestResponse>> CreateSessionRequestWithHttpInfoAsync(string entityId, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GenerateSessionRequestResponse>> CreateSessionRequestWithHttpInfoAsync(string entityId, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -451,11 +447,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.PostAsync<GenerateSessionRequestResponse>("/v1/player/sessions/users/{entityId}/request", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -548,14 +540,10 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetActiveSessionResponse</returns>
-        public async System.Threading.Tasks.Task<GetActiveSessionResponse> GetActiveSessionAsync(string entityId, string accountAddress, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetActiveSessionResponse> GetActiveSessionAsync(string entityId, string accountAddress, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetActiveSessionWithHttpInfoAsync(entityId, accountAddress, chainId, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GetActiveSessionResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<GetActiveSessionResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -568,7 +556,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetActiveSessionResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GetActiveSessionResponse>> GetActiveSessionWithHttpInfoAsync(string entityId, string accountAddress, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetActiveSessionResponse>> GetActiveSessionWithHttpInfoAsync(string entityId, string accountAddress, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -613,11 +601,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.GetAsync<GetActiveSessionResponse>("/v1/player/sessions/users/{entityId}/{accountAddress}/active", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -695,14 +679,10 @@ namespace BeamPlayerClient.Api
         /// <param name="requestId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetSessionRequestResponse</returns>
-        public async System.Threading.Tasks.Task<GetSessionRequestResponse> GetSessionRequestAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetSessionRequestResponse> GetSessionRequestAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetSessionRequestWithHttpInfoAsync(requestId, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GetSessionRequestResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<GetSessionRequestResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -713,7 +693,7 @@ namespace BeamPlayerClient.Api
         /// <param name="requestId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetSessionRequestResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GetSessionRequestResponse>> GetSessionRequestWithHttpInfoAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetSessionRequestResponse>> GetSessionRequestWithHttpInfoAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'requestId' is set
             if (requestId == null)
@@ -749,11 +729,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.GetAsync<GetSessionRequestResponse>("/v1/player/sessions/request/{requestId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
