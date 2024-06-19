@@ -106,6 +106,7 @@ namespace Beam
         /// <param name="actionResult">Callback to return a result with <see cref="BeamSession"/></param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
         /// <returns>IEnumerator</returns>
+        [Obsolete("Prefer async version, this will be removed in future versions")]
         public IEnumerator GetActiveSession(
             string entityId,
             Action<BeamResult<BeamSession>> actionResult,
@@ -134,6 +135,13 @@ namespace Beam
             actionResult.Invoke(new BeamResult<BeamSession>(activeSession));
         }
 
+        /// <summary>
+        /// Retrieves active, valid session.
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async UniTask<BeamResult<BeamSession>> GetActiveSessionAsync(
             string entityId,
             int chainId = Constants.DefaultChainId,
@@ -152,13 +160,14 @@ namespace Beam
         }
 
         /// <summary>
-        /// A Coroutine that opens an external browser to sign a Session, returns the result via callback arg.
+        /// Opens an external browser to sign a Session, returns the result via callback arg.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
         /// <param name="actionResult">Callback to return a result of Session creation</param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <returns>IEnumerator</returns>
+        [Obsolete("Prefer async version, this will be removed in future versions")]
         public IEnumerator CreateSession(
             string entityId,
             Action<BeamResult<BeamSession>> actionResult,
@@ -287,6 +296,14 @@ namespace Beam
             }
         }
 
+        /// <summary>
+        /// Opens an external browser to sign a Session, returns the result via callback arg.
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async UniTask<BeamResult<BeamSession>> CreateSessionAsync(
             string entityId,
             int chainId = Constants.DefaultChainId,
@@ -384,7 +401,7 @@ namespace Beam
         }
 
         /// <summary>
-        /// A Coroutine that opens an external browser to sign a transaction, returns the result via callback arg.
+        /// Opens an external browser to sign a transaction, returns the result via callback arg.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
         /// <param name="operationId">Id of the Operation to sign. Returned by Beam API.</param>
@@ -393,6 +410,7 @@ namespace Beam
         /// <param name="fallbackToBrowser">If true, opens the browser for the User to create new Session. Defaults to true. Returns an Error if false and there is no active session</param>
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <returns>IEnumerator</returns>
+        [Obsolete("Prefer async version, this will be removed in future versions")]
         public IEnumerator SignOperation(
             string entityId,
             string operationId,
@@ -467,6 +485,16 @@ namespace Beam
             }
         }
 
+        /// <summary>
+        /// Opens an external browser to sign a transaction, returns the result via callback arg.
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="operationId">Id of the Operation to sign. Returned by Beam API.</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="fallbackToBrowser">If true, opens the browser for the User to create new Session. Defaults to true. Returns an Error if false and there is no active session</param>
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationAsync(
             string entityId,
             string operationId,
@@ -748,6 +776,7 @@ namespace Beam
                     string signature;
                     switch (transaction.Type)
                     {
+                        case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortRevokeSession:
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortTransaction:
                             signature = activeSessionKeyPair.SignMessage(transaction.Data.GetString());
                             break;
