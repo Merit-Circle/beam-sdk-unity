@@ -25,37 +25,37 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// GenerateLoginRequestInput
+    /// GenerateConnectionRequestInput
     /// </summary>
-    [DataContract(Name = "GenerateLoginRequestInput")]
-    public partial class GenerateLoginRequestInput
+    [DataContract(Name = "GenerateConnectionRequestInput")]
+    public partial class GenerateConnectionRequestInput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateLoginRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="GenerateConnectionRequestInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GenerateLoginRequestInput() { }
+        protected GenerateConnectionRequestInput() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateLoginRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="GenerateConnectionRequestInput" /> class.
         /// </summary>
-        /// <param name="message">message (required).</param>
+        /// <param name="entityId">entityId (required).</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
-        public GenerateLoginRequestInput(string message = default(string), decimal chainId = 13337M)
+        public GenerateConnectionRequestInput(string entityId = default(string), decimal chainId = 13337M)
         {
-            // to ensure "message" is required (not null)
-            if (message == null)
+            // to ensure "entityId" is required (not null)
+            if (entityId == null)
             {
-                throw new ArgumentNullException("message is a required property for GenerateLoginRequestInput and cannot be null");
+                throw new ArgumentNullException("entityId is a required property for GenerateConnectionRequestInput and cannot be null");
             }
-            this.Message = message;
+            this.EntityId = entityId;
             this.ChainId = chainId;
         }
 
         /// <summary>
-        /// Gets or Sets Message
+        /// Gets or Sets EntityId
         /// </summary>
-        [DataMember(Name = "message", IsRequired = true, EmitDefaultValue = true)]
-        public string Message { get; set; }
+        [DataMember(Name = "entityId", IsRequired = true, EmitDefaultValue = true)]
+        public string EntityId { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
@@ -70,8 +70,8 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GenerateLoginRequestInput {\n");
-            sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("class GenerateConnectionRequestInput {\n");
+            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

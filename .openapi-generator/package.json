@@ -2,7 +2,7 @@
   "name": "@onbeam/api-client-unity",
   "scripts": {
     "generate": "pnpm generate:player:unity",
-    "generate:player:unity": "rm -rf ../Runtime/Beam/Api/BeamPlayerClient && openapi-generator-cli generate"
+    "generate:player:unity": "rm -rf ../Runtime/Beam/Api/BeamPlayerClient/src && openapi-generator-cli generate"
   },
   "keywords": [],
   "author": "",

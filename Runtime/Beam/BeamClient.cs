@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
-using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
 using Beam.Api;
 using Beam.Extensions;
 using Beam.Models;
@@ -12,6 +10,7 @@ using Beam.Util;
 using BeamPlayerClient.Api;
 using BeamPlayerClient.Client;
 using BeamPlayerClient.Model;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -32,9 +31,9 @@ namespace Beam
 
         private readonly BeamCoroutineApi m_BeamCoroutineApi = new();
 
-        private string m_BeamApiKey = null;
-        private string m_BeamApiUrl = null;
-        private bool m_DebugLog = false;
+        private string m_BeamApiKey;
+        private string m_BeamApiUrl;
+        private bool m_DebugLog;
         private IStorage m_Storage = new PlayerPrefsStorage();
 
         public BeamClient()
@@ -107,6 +106,7 @@ namespace Beam
         /// <param name="actionResult">Callback to return a result with <see cref="BeamSession"/></param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
         /// <returns>IEnumerator</returns>
+        [Obsolete("Prefer async version, this will be removed in future versions")]
         public IEnumerator GetActiveSession(
             string entityId,
             Action<BeamResult<BeamSession>> actionResult,
@@ -115,8 +115,7 @@ namespace Beam
             Log("Retrieving active session");
 
             BeamSession activeSession = null;
-            KeyPair keyPair = null;
-            yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (res, kp) =>
+            yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (res, _) =>
             {
                 if (res != null)
                 {
@@ -124,8 +123,6 @@ namespace Beam
                         $"Retrieved a session: {res.SessionAddress}, valid from: {res.StartTime:o}, to: {res.EndTime:o}");
                     activeSession = res;
                 }
-
-                keyPair = kp;
             }));
 
             if (activeSession == null)
@@ -138,7 +135,14 @@ namespace Beam
             actionResult.Invoke(new BeamResult<BeamSession>(activeSession));
         }
 
-        public async Task<BeamResult<BeamSession>> GetActiveSessionAsync(
+        /// <summary>
+        /// Retrieves active, valid session.
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
+        public async UniTask<BeamResult<BeamSession>> GetActiveSessionAsync(
             string entityId,
             int chainId = Constants.DefaultChainId,
             CancellationToken cancellationToken = default)
@@ -156,13 +160,14 @@ namespace Beam
         }
 
         /// <summary>
-        /// A Coroutine that opens an external browser to sign a Session, returns the result via callback arg.
+        /// Opens an external browser to sign a Session, returns the result via callback arg.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
         /// <param name="actionResult">Callback to return a result of Session creation</param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <returns>IEnumerator</returns>
+        [Obsolete("Prefer async version, this will be removed in future versions")]
         public IEnumerator CreateSession(
             string entityId,
             Action<BeamResult<BeamSession>> actionResult,
@@ -291,7 +296,15 @@ namespace Beam
             }
         }
 
-        public async Task<BeamResult<BeamSession>> CreateSessionAsync(
+        /// <summary>
+        /// Opens an external browser to sign a Session, returns the result via callback arg.
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
+        public async UniTask<BeamResult<BeamSession>> CreateSessionAsync(
             string entityId,
             int chainId = Constants.DefaultChainId,
             int secondsTimeout = DefaultTimeoutInSeconds,
@@ -388,7 +401,7 @@ namespace Beam
         }
 
         /// <summary>
-        /// A Coroutine that opens an external browser to sign a transaction, returns the result via callback arg.
+        /// Opens an external browser to sign a transaction, returns the result via callback arg.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
         /// <param name="operationId">Id of the Operation to sign. Returned by Beam API.</param>
@@ -397,6 +410,7 @@ namespace Beam
         /// <param name="fallbackToBrowser">If true, opens the browser for the User to create new Session. Defaults to true. Returns an Error if false and there is no active session</param>
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <returns>IEnumerator</returns>
+        [Obsolete("Prefer async version, this will be removed in future versions")]
         public IEnumerator SignOperation(
             string entityId,
             string operationId,
@@ -471,7 +485,17 @@ namespace Beam
             }
         }
 
-        public async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationAsync(
+        /// <summary>
+        /// Opens an external browser to sign a transaction, returns the result via callback arg.
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="operationId">Id of the Operation to sign. Returned by Beam API.</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="fallbackToBrowser">If true, opens the browser for the User to create new Session. Defaults to true. Returns an Error if false and there is no active session</param>
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
+        public async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationAsync(
             string entityId,
             string operationId,
             int chainId = Constants.DefaultChainId,
@@ -483,7 +507,7 @@ namespace Beam
             var (activeSession, activeSessionKeyPair) =
                 await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
 
-            CommonOperationResponse operation = null;
+            CommonOperationResponse operation;
             Log($"Retrieving operation({operationId})");
             try
             {
@@ -586,7 +610,7 @@ namespace Beam
                 }, secondsTimeout));
         }
 
-        private async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
+        private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
             CommonOperationResponse operation,
             int secondsTimeout,
             CancellationToken cancellationToken = default)
@@ -636,7 +660,7 @@ namespace Beam
         {
             if (operation?.Transactions?.Any() != true)
             {
-                Log($"Operation({operation.Id}) has no transactions to sign, ending");
+                Log($"Operation({operation?.Id}) has no transactions to sign, ending");
                 callback.Invoke(new BeamResult<BeamOperationStatus>
                 {
                     Result = BeamOperationStatus.Error,
@@ -657,9 +681,9 @@ namespace Beam
             foreach (var transaction in operation.Transactions)
             {
                 Log($"Signing operation({operation.Id}) transaction({transaction.ExternalId})");
-                string signature;
                 try
                 {
+                    string signature;
                     switch (transaction.Type)
                     {
                         case BeamOperationTransactionType.OpenfortTransaction:
@@ -720,7 +744,7 @@ namespace Beam
             }));
         }
 
-        private async Task<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingSessionAsync(
+        private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingSessionAsync(
             string entityId,
             CommonOperationResponse operation,
             KeyPair activeSessionKeyPair,
@@ -728,7 +752,7 @@ namespace Beam
         {
             if (operation?.Transactions?.Any() != true)
             {
-                Log($"Operation({operation.Id}) has no transactions to sign, ending");
+                Log($"Operation({operation?.Id}) has no transactions to sign, ending");
                 return new BeamResult<CommonOperationResponse.StatusEnum>
                 {
                     Result = CommonOperationResponse.StatusEnum.Error,
@@ -747,11 +771,12 @@ namespace Beam
             foreach (var transaction in operation.Transactions)
             {
                 Log($"Signing operation({operation.Id}) transaction({transaction.ExternalId})");
-                string signature;
                 try
                 {
+                    string signature;
                     switch (transaction.Type)
                     {
+                        case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortRevokeSession:
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortTransaction:
                             signature = activeSessionKeyPair.SignMessage(transaction.Data.GetString());
                             break;
@@ -861,20 +886,20 @@ namespace Beam
             timeout.Invoke();
         }
 
-        private async Task<CommonOperationResponse> PollForOperationResultAsync(
+        private async UniTask<CommonOperationResponse> PollForOperationResultAsync(
             string opId,
             int secondsTimeout = DefaultTimeoutInSeconds,
             int secondsBetweenPolls = 1,
             CancellationToken cancellationToken = default)
         {
             var now = DateTimeOffset.Now;
-            await Task.Delay(2000, cancellationToken);
+            await UniTask.Delay(2000, cancellationToken: cancellationToken);
 
             var endTime = DateTime.Now.AddSeconds(secondsTimeout);
 
             while ((endTime - DateTime.Now).TotalSeconds > 0)
             {
-                CommonOperationResponse beamOperation = null;
+                CommonOperationResponse beamOperation;
                 try
                 {
                     var res = await OperationApi.GetOperationAsync(opId, cancellationToken);
@@ -899,7 +924,7 @@ namespace Beam
                     return beamOperation;
                 }
 
-                await Task.Delay(secondsBetweenPolls * 1000, cancellationToken);
+                await UniTask.Delay(secondsBetweenPolls * 1000, cancellationToken: cancellationToken);
             }
 
             return null;
@@ -954,19 +979,19 @@ namespace Beam
             timeout.Invoke();
         }
 
-        private async Task<GetSessionRequestResponse> PollForSessionRequestResultAsync(
+        private async UniTask<GetSessionRequestResponse> PollForSessionRequestResultAsync(
             string sessionRequestId,
             int secondsTimeout = DefaultTimeoutInSeconds,
             int secondsBetweenPolls = 1,
             CancellationToken cancellationToken = default)
         {
-            await Task.Delay(2000, cancellationToken);
+            await UniTask.Delay(2000, cancellationToken: cancellationToken);
 
             var endTime = DateTime.Now.AddSeconds(secondsTimeout);
 
             while ((endTime - DateTime.Now).TotalSeconds > 0)
             {
-                GetSessionRequestResponse beamSessionRequest = null;
+                GetSessionRequestResponse beamSessionRequest;
                 try
                 {
                     var res = await SessionsApi.GetSessionRequestAsync(sessionRequestId, cancellationToken);
@@ -987,7 +1012,7 @@ namespace Beam
                     return beamSessionRequest;
                 }
 
-                await Task.Delay(secondsBetweenPolls * 1000, cancellationToken);
+                await UniTask.Delay(secondsBetweenPolls * 1000, cancellationToken: cancellationToken);
             }
 
             return null;
@@ -1036,7 +1061,7 @@ namespace Beam
             activeSession.Invoke(null, keyPair);
         }
 
-        private async Task<(BeamSession, KeyPair)> GetActiveSessionAndKeysAsync(
+        private async UniTask<(BeamSession, KeyPair)> GetActiveSessionAndKeysAsync(
             string entityId,
             int chainId,
             CancellationToken cancellationToken = default)

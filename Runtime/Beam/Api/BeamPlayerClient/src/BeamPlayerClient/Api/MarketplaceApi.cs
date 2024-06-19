@@ -305,7 +305,7 @@ namespace BeamPlayerClient.Api
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> AcceptAssetOfferAsync(string entityId, string offerId, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> AcceptAssetOfferAsync(string entityId, string offerId, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Accept an offer for an asset
@@ -319,7 +319,7 @@ namespace BeamPlayerClient.Api
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> AcceptAssetOfferWithHttpInfoAsync(string entityId, string offerId, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> AcceptAssetOfferWithHttpInfoAsync(string entityId, string offerId, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Buy listed asset
         /// </summary>
@@ -332,7 +332,7 @@ namespace BeamPlayerClient.Api
         /// <param name="buyAssetRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> BuyListedAssetAsync(string entityId, string orderId, BuyAssetRequestInput buyAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> BuyListedAssetAsync(string entityId, string orderId, BuyAssetRequestInput buyAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Buy listed asset
@@ -346,7 +346,7 @@ namespace BeamPlayerClient.Api
         /// <param name="buyAssetRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> BuyListedAssetWithHttpInfoAsync(string entityId, string orderId, BuyAssetRequestInput buyAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> BuyListedAssetWithHttpInfoAsync(string entityId, string orderId, BuyAssetRequestInput buyAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Cancel an offer for an asset
         /// </summary>
@@ -359,7 +359,7 @@ namespace BeamPlayerClient.Api
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> CancelAssetOfferAsync(string entityId, string offerId, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> CancelAssetOfferAsync(string entityId, string offerId, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Cancel an offer for an asset
@@ -373,7 +373,7 @@ namespace BeamPlayerClient.Api
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> CancelAssetOfferWithHttpInfoAsync(string entityId, string offerId, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> CancelAssetOfferWithHttpInfoAsync(string entityId, string offerId, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Cancel asset listing
         /// </summary>
@@ -387,7 +387,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> CancelListingAsync(string entityId, string orderId, CancelAssetListingRequestInput cancelAssetListingRequestInput, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> CancelListingAsync(string entityId, string orderId, CancelAssetListingRequestInput cancelAssetListingRequestInput, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Cancel asset listing
@@ -402,7 +402,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> CancelListingWithHttpInfoAsync(string entityId, string orderId, CancelAssetListingRequestInput cancelAssetListingRequestInput, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> CancelListingWithHttpInfoAsync(string entityId, string orderId, CancelAssetListingRequestInput cancelAssetListingRequestInput, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Make an offer for an asset
         /// </summary>
@@ -414,7 +414,7 @@ namespace BeamPlayerClient.Api
         /// <param name="createAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> CreateAssetOfferAsync(string entityId, CreateAssetOfferRequestInput createAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> CreateAssetOfferAsync(string entityId, CreateAssetOfferRequestInput createAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Make an offer for an asset
@@ -427,7 +427,7 @@ namespace BeamPlayerClient.Api
         /// <param name="createAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> CreateAssetOfferWithHttpInfoAsync(string entityId, CreateAssetOfferRequestInput createAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> CreateAssetOfferWithHttpInfoAsync(string entityId, CreateAssetOfferRequestInput createAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get all offers for an asset
         /// </summary>
@@ -441,7 +441,7 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        System.Threading.Tasks.Task<GetAssetListingsResponse> GetAssetOffersAsync(string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetAssetOffersAsync(string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get all offers for an asset
@@ -456,7 +456,7 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetAssetListingsResponse>> GetAssetOffersWithHttpInfoAsync(string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetAssetListingsResponse>> GetAssetOffersWithHttpInfoAsync(string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get available currencies for given chain
         /// </summary>
@@ -467,7 +467,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetChainCurrenciesResponse</returns>
-        System.Threading.Tasks.Task<GetChainCurrenciesResponse> GetChainCurrenciesAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetChainCurrenciesResponse> GetChainCurrenciesAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get available currencies for given chain
@@ -479,7 +479,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetChainCurrenciesResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetChainCurrenciesResponse>> GetChainCurrenciesWithHttpInfoAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetChainCurrenciesResponse>> GetChainCurrenciesWithHttpInfoAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
@@ -490,7 +490,7 @@ namespace BeamPlayerClient.Api
         /// <param name="getListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        System.Threading.Tasks.Task<GetAssetListingsResponse> GetListedAssetsAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetListedAssetsAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
@@ -502,7 +502,7 @@ namespace BeamPlayerClient.Api
         /// <param name="getListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetAssetListingsResponse>> GetListedAssetsWithHttpInfoAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetAssetListingsResponse>> GetListedAssetsWithHttpInfoAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
@@ -514,7 +514,7 @@ namespace BeamPlayerClient.Api
         /// <param name="getListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        System.Threading.Tasks.Task<GetAssetListingsResponse> GetListedAssetsForUserAsync(string entityId, GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetListedAssetsForUserAsync(string entityId, GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
@@ -527,7 +527,7 @@ namespace BeamPlayerClient.Api
         /// <param name="getListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetAssetListingsResponse>> GetListedAssetsForUserWithHttpInfoAsync(string entityId, GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetAssetListingsResponse>> GetListedAssetsForUserWithHttpInfoAsync(string entityId, GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get all asset offers that a user created for a specific asset
         /// </summary>
@@ -542,7 +542,7 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        System.Threading.Tasks.Task<GetAssetListingsResponse> GetUserAssetOffersAsync(string entityId, string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetUserAssetOffersAsync(string entityId, string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get all asset offers that a user created for a specific asset
@@ -558,7 +558,7 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetAssetListingsResponse>> GetUserAssetOffersWithHttpInfoAsync(string entityId, string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetAssetListingsResponse>> GetUserAssetOffersWithHttpInfoAsync(string entityId, string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get all offers that a user created
         /// </summary>
@@ -571,7 +571,7 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        System.Threading.Tasks.Task<GetAssetListingsResponse> GetUserOffersAsync(string entityId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetUserOffersAsync(string entityId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get all offers that a user created
@@ -585,7 +585,7 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetAssetListingsResponse>> GetUserOffersWithHttpInfoAsync(string entityId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetAssetListingsResponse>> GetUserOffersWithHttpInfoAsync(string entityId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List an asset for sale
         /// </summary>
@@ -597,7 +597,7 @@ namespace BeamPlayerClient.Api
         /// <param name="sellAssetRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        System.Threading.Tasks.Task<CommonOperationResponse> ListAssetAsync(string entityId, SellAssetRequestInput sellAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> ListAssetAsync(string entityId, SellAssetRequestInput sellAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List an asset for sale
@@ -610,7 +610,7 @@ namespace BeamPlayerClient.Api
         /// <param name="sellAssetRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommonOperationResponse>> ListAssetWithHttpInfoAsync(string entityId, SellAssetRequestInput sellAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> ListAssetWithHttpInfoAsync(string entityId, SellAssetRequestInput sellAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -839,14 +839,10 @@ namespace BeamPlayerClient.Api
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> AcceptAssetOfferAsync(string entityId, string offerId, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> AcceptAssetOfferAsync(string entityId, string offerId, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = AcceptAssetOfferWithHttpInfoAsync(entityId, offerId, acceptAssetOfferRequestInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -859,7 +855,7 @@ namespace BeamPlayerClient.Api
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> AcceptAssetOfferWithHttpInfoAsync(string entityId, string offerId, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> AcceptAssetOfferWithHttpInfoAsync(string entityId, string offerId, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -906,11 +902,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.PostAsync<CommonOperationResponse>("/v1/player/marketplace/users/{entityId}/offers/{offerId}/accept", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -1005,14 +997,10 @@ namespace BeamPlayerClient.Api
         /// <param name="buyAssetRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> BuyListedAssetAsync(string entityId, string orderId, BuyAssetRequestInput buyAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> BuyListedAssetAsync(string entityId, string orderId, BuyAssetRequestInput buyAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = BuyListedAssetWithHttpInfoAsync(entityId, orderId, buyAssetRequestInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -1025,7 +1013,7 @@ namespace BeamPlayerClient.Api
         /// <param name="buyAssetRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> BuyListedAssetWithHttpInfoAsync(string entityId, string orderId, BuyAssetRequestInput buyAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> BuyListedAssetWithHttpInfoAsync(string entityId, string orderId, BuyAssetRequestInput buyAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -1072,11 +1060,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.PostAsync<CommonOperationResponse>("/v1/player/marketplace/users/{entityId}/listing/{orderId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -1171,14 +1155,10 @@ namespace BeamPlayerClient.Api
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> CancelAssetOfferAsync(string entityId, string offerId, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> CancelAssetOfferAsync(string entityId, string offerId, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = CancelAssetOfferWithHttpInfoAsync(entityId, offerId, cancelAssetOfferRequestInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -1191,7 +1171,7 @@ namespace BeamPlayerClient.Api
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> CancelAssetOfferWithHttpInfoAsync(string entityId, string offerId, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> CancelAssetOfferWithHttpInfoAsync(string entityId, string offerId, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -1238,11 +1218,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.DeleteAsync<CommonOperationResponse>("/v1/player/marketplace/users/{entityId}/offers/{offerId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -1344,14 +1320,10 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> CancelListingAsync(string entityId, string orderId, CancelAssetListingRequestInput cancelAssetListingRequestInput, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> CancelListingAsync(string entityId, string orderId, CancelAssetListingRequestInput cancelAssetListingRequestInput, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = CancelListingWithHttpInfoAsync(entityId, orderId, cancelAssetListingRequestInput, chainId, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -1365,7 +1337,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> CancelListingWithHttpInfoAsync(string entityId, string orderId, CancelAssetListingRequestInput cancelAssetListingRequestInput, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> CancelListingWithHttpInfoAsync(string entityId, string orderId, CancelAssetListingRequestInput cancelAssetListingRequestInput, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -1416,11 +1388,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.DeleteAsync<CommonOperationResponse>("/v1/player/marketplace/users/{entityId}/listing/{orderId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -1507,14 +1475,10 @@ namespace BeamPlayerClient.Api
         /// <param name="createAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> CreateAssetOfferAsync(string entityId, CreateAssetOfferRequestInput createAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> CreateAssetOfferAsync(string entityId, CreateAssetOfferRequestInput createAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = CreateAssetOfferWithHttpInfoAsync(entityId, createAssetOfferRequestInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -1526,7 +1490,7 @@ namespace BeamPlayerClient.Api
         /// <param name="createAssetOfferRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> CreateAssetOfferWithHttpInfoAsync(string entityId, CreateAssetOfferRequestInput createAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> CreateAssetOfferWithHttpInfoAsync(string entityId, CreateAssetOfferRequestInput createAssetOfferRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -1568,11 +1532,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.PostAsync<CommonOperationResponse>("/v1/player/marketplace/users/{entityId}/offers", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -1672,14 +1632,10 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        public async System.Threading.Tasks.Task<GetAssetListingsResponse> GetAssetOffersAsync(string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetAssetOffersAsync(string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetAssetOffersWithHttpInfoAsync(assetAddress, assetId, chainId, continuation, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -1693,7 +1649,7 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetAssetOffersWithHttpInfoAsync(string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetAssetOffersWithHttpInfoAsync(string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
@@ -1742,11 +1698,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.GetAsync<GetAssetListingsResponse>("/v1/player/marketplace/offers/asset/{assetAddress}/{assetId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -1820,14 +1772,10 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetChainCurrenciesResponse</returns>
-        public async System.Threading.Tasks.Task<GetChainCurrenciesResponse> GetChainCurrenciesAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetChainCurrenciesResponse> GetChainCurrenciesAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetChainCurrenciesWithHttpInfoAsync(chainId, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GetChainCurrenciesResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<GetChainCurrenciesResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -1838,7 +1786,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetChainCurrenciesResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GetChainCurrenciesResponse>> GetChainCurrenciesWithHttpInfoAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetChainCurrenciesResponse>> GetChainCurrenciesWithHttpInfoAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
@@ -1870,11 +1818,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.GetAsync<GetChainCurrenciesResponse>("/v1/player/marketplace/chain-currencies/{chainId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -1953,14 +1897,10 @@ namespace BeamPlayerClient.Api
         /// <param name="getListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        public async System.Threading.Tasks.Task<GetAssetListingsResponse> GetListedAssetsAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetListedAssetsAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetListedAssetsWithHttpInfoAsync(getListedAssetsBodyInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -1971,7 +1911,7 @@ namespace BeamPlayerClient.Api
         /// <param name="getListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetListedAssetsWithHttpInfoAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetListedAssetsWithHttpInfoAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'getListedAssetsBodyInput' is set
             if (getListedAssetsBodyInput == null)
@@ -2008,11 +1948,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.PostAsync<GetAssetListingsResponse>("/v1/player/marketplace", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -2099,14 +2035,10 @@ namespace BeamPlayerClient.Api
         /// <param name="getListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        public async System.Threading.Tasks.Task<GetAssetListingsResponse> GetListedAssetsForUserAsync(string entityId, GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetListedAssetsForUserAsync(string entityId, GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetListedAssetsForUserWithHttpInfoAsync(entityId, getListedAssetsBodyInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -2118,7 +2050,7 @@ namespace BeamPlayerClient.Api
         /// <param name="getListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetListedAssetsForUserWithHttpInfoAsync(string entityId, GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetListedAssetsForUserWithHttpInfoAsync(string entityId, GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -2160,11 +2092,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.PostAsync<GetAssetListingsResponse>("/v1/player/marketplace/users/{entityId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -2272,14 +2200,10 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        public async System.Threading.Tasks.Task<GetAssetListingsResponse> GetUserAssetOffersAsync(string entityId, string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetUserAssetOffersAsync(string entityId, string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetUserAssetOffersWithHttpInfoAsync(entityId, assetAddress, assetId, chainId, continuation, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -2294,7 +2218,7 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetUserAssetOffersWithHttpInfoAsync(string entityId, string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetUserAssetOffersWithHttpInfoAsync(string entityId, string assetAddress, string assetId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -2348,11 +2272,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.GetAsync<GetAssetListingsResponse>("/v1/player/marketplace/users/{entityId}/offers/asset/{assetAddress}/{assetId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -2444,14 +2364,10 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
-        public async System.Threading.Tasks.Task<GetAssetListingsResponse> GetUserOffersAsync(string entityId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetAssetListingsResponse> GetUserOffersAsync(string entityId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetUserOffersWithHttpInfoAsync(entityId, chainId, continuation, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -2464,7 +2380,7 @@ namespace BeamPlayerClient.Api
         /// <param name="continuation"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetUserOffersWithHttpInfoAsync(string entityId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetAssetListingsResponse>> GetUserOffersWithHttpInfoAsync(string entityId, decimal? chainId, string? continuation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -2508,11 +2424,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.GetAsync<GetAssetListingsResponse>("/v1/player/marketplace/users/{entityId}/offers", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -2599,14 +2511,10 @@ namespace BeamPlayerClient.Api
         /// <param name="sellAssetRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async System.Threading.Tasks.Task<CommonOperationResponse> ListAssetAsync(string entityId, SellAssetRequestInput sellAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> ListAssetAsync(string entityId, SellAssetRequestInput sellAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = ListAssetWithHttpInfoAsync(entityId, sellAssetRequestInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
-#endif
             return localVarResponse.Data;
         }
 
@@ -2618,7 +2526,7 @@ namespace BeamPlayerClient.Api
         /// <param name="sellAssetRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> ListAssetWithHttpInfoAsync(string entityId, SellAssetRequestInput sellAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> ListAssetWithHttpInfoAsync(string entityId, SellAssetRequestInput sellAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
@@ -2660,11 +2568,7 @@ namespace BeamPlayerClient.Api
 
             var task = this.AsynchronousClient.PostAsync<CommonOperationResponse>("/v1/player/marketplace/users/{entityId}/listing", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {

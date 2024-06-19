@@ -25,35 +25,43 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// GenerateLoginRequestResponse
+    /// WebConnectionRequestInput
     /// </summary>
-    [DataContract(Name = "GenerateLoginRequestResponse")]
-    public partial class GenerateLoginRequestResponse
+    [DataContract(Name = "WebConnectionRequestInput")]
+    public partial class WebConnectionRequestInput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateLoginRequestResponse" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionRequestInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GenerateLoginRequestResponse() { }
+        protected WebConnectionRequestInput() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateLoginRequestResponse" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionRequestInput" /> class.
         /// </summary>
-        /// <param name="url">url (required).</param>
-        public GenerateLoginRequestResponse(string url = default(string))
+        /// <param name="message">message (required).</param>
+        /// <param name="chainId">chainId (default to 13337M).</param>
+        public WebConnectionRequestInput(string message = default(string), decimal chainId = 13337M)
         {
-            // to ensure "url" is required (not null)
-            if (url == null)
+            // to ensure "message" is required (not null)
+            if (message == null)
             {
-                throw new ArgumentNullException("url is a required property for GenerateLoginRequestResponse and cannot be null");
+                throw new ArgumentNullException("message is a required property for WebConnectionRequestInput and cannot be null");
             }
-            this.Url = url;
+            this.Message = message;
+            this.ChainId = chainId;
         }
 
         /// <summary>
-        /// Gets or Sets Url
+        /// Gets or Sets Message
         /// </summary>
-        [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = true)]
-        public string Url { get; set; }
+        [DataMember(Name = "message", IsRequired = true, EmitDefaultValue = true)]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ChainId
+        /// </summary>
+        [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        public decimal ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -62,8 +70,9 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GenerateLoginRequestResponse {\n");
-            sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("class WebConnectionRequestInput {\n");
+            sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

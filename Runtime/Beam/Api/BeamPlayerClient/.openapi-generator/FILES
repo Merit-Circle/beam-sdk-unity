@@ -1,5 +1,3 @@
-.gitignore
-.openapi-generator-ignore
 README.md
 api/openapi.yaml
 git_push.sh
@@ -12,7 +10,6 @@ src/BeamPlayerClient/Api/OperationApi.cs
 src/BeamPlayerClient/Api/SessionsApi.cs
 src/BeamPlayerClient/Api/TransactionsApi.cs
 src/BeamPlayerClient/Api/UsersApi.cs
-src/BeamPlayerClient/BeamPlayerClient.asmdef
 src/BeamPlayerClient/Client/ApiClient.cs
 src/BeamPlayerClient/Client/ApiException.cs
 src/BeamPlayerClient/Client/ApiResponse.cs
@@ -48,8 +45,8 @@ src/BeamPlayerClient/Model/CreateAssetOfferRequestInput.cs
 src/BeamPlayerClient/Model/CreateOperationRequestInput.cs
 src/BeamPlayerClient/Model/CreateTransactionRequestInput.cs
 src/BeamPlayerClient/Model/CreateTransactionRequestInputInteractionsInner.cs
-src/BeamPlayerClient/Model/GenerateLoginRequestInput.cs
-src/BeamPlayerClient/Model/GenerateLoginRequestResponse.cs
+src/BeamPlayerClient/Model/GenerateConnectionRequestInput.cs
+src/BeamPlayerClient/Model/GenerateConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/GenerateSessionRequestResponse.cs
 src/BeamPlayerClient/Model/GenerateSessionUrlRequestInput.cs
 src/BeamPlayerClient/Model/GetActiveSessionResponse.cs
@@ -73,6 +70,7 @@ src/BeamPlayerClient/Model/GetAssetsForUserResponseDataInner.cs
 src/BeamPlayerClient/Model/GetAssetsForUserResponseDataInnerAttributesInner.cs
 src/BeamPlayerClient/Model/GetChainCurrenciesResponse.cs
 src/BeamPlayerClient/Model/GetChainCurrenciesResponseDataInner.cs
+src/BeamPlayerClient/Model/GetConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/GetListedAssetsBodyInput.cs
 src/BeamPlayerClient/Model/GetQuoteResponse.cs
 src/BeamPlayerClient/Model/GetSessionRequestResponse.cs
@@ -98,3 +96,5 @@ src/BeamPlayerClient/Model/TransferAssetRequestInput.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInputAssetsInner.cs
 src/BeamPlayerClient/Model/TransferNativeTokenRequestInput.cs
 src/BeamPlayerClient/Model/TransferTokenRequestInput.cs
+src/BeamPlayerClient/Model/WebConnectionRequestInput.cs
+src/BeamPlayerClient/Model/WebConnectionRequestResponse.cs

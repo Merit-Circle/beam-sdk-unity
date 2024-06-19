@@ -30,9 +30,9 @@ namespace BeamPlayerClient.Api
         /// 
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLoginRequestInput"></param>
-        /// <returns>GenerateLoginRequestResponse</returns>
-        GenerateLoginRequestResponse CreateConnectionRequest(GenerateLoginRequestInput generateLoginRequestInput);
+        /// <param name="generateConnectionRequestInput"></param>
+        /// <returns>GenerateConnectionRequestResponse</returns>
+        GenerateConnectionRequestResponse CreateConnectionRequest(GenerateConnectionRequestInput generateConnectionRequestInput);
 
         /// <summary>
         /// 
@@ -41,9 +41,45 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLoginRequestInput"></param>
-        /// <returns>ApiResponse of GenerateLoginRequestResponse</returns>
-        ApiResponse<GenerateLoginRequestResponse> CreateConnectionRequestWithHttpInfo(GenerateLoginRequestInput generateLoginRequestInput);
+        /// <param name="generateConnectionRequestInput"></param>
+        /// <returns>ApiResponse of GenerateConnectionRequestResponse</returns>
+        ApiResponse<GenerateConnectionRequestResponse> CreateConnectionRequestWithHttpInfo(GenerateConnectionRequestInput generateConnectionRequestInput);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="webConnectionRequestInput"></param>
+        /// <returns>WebConnectionRequestResponse</returns>
+        WebConnectionRequestResponse GenerateWebConnection(WebConnectionRequestInput webConnectionRequestInput);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="webConnectionRequestInput"></param>
+        /// <returns>ApiResponse of WebConnectionRequestResponse</returns>
+        ApiResponse<WebConnectionRequestResponse> GenerateWebConnectionWithHttpInfo(WebConnectionRequestInput webConnectionRequestInput);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <returns>GetConnectionRequestResponse</returns>
+        GetConnectionRequestResponse GetConnectionRequest(string requestId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <returns>ApiResponse of GetConnectionRequestResponse</returns>
+        ApiResponse<GetConnectionRequestResponse> GetConnectionRequestWithHttpInfo(string requestId);
         #endregion Synchronous Operations
     }
 
@@ -60,10 +96,10 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLoginRequestInput"></param>
+        /// <param name="generateConnectionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of GenerateLoginRequestResponse</returns>
-        System.Threading.Tasks.Task<GenerateLoginRequestResponse> CreateConnectionRequestAsync(GenerateLoginRequestInput generateLoginRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of GenerateConnectionRequestResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<GenerateConnectionRequestResponse> CreateConnectionRequestAsync(GenerateConnectionRequestInput generateConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -72,10 +108,56 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLoginRequestInput"></param>
+        /// <param name="generateConnectionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (GenerateLoginRequestResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenerateLoginRequestResponse>> CreateConnectionRequestWithHttpInfoAsync(GenerateLoginRequestInput generateLoginRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (GenerateConnectionRequestResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GenerateConnectionRequestResponse>> CreateConnectionRequestWithHttpInfoAsync(GenerateConnectionRequestInput generateConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="webConnectionRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of WebConnectionRequestResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<WebConnectionRequestResponse> GenerateWebConnectionAsync(WebConnectionRequestInput webConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="webConnectionRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (WebConnectionRequestResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<WebConnectionRequestResponse>> GenerateWebConnectionWithHttpInfoAsync(WebConnectionRequestInput webConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetConnectionRequestResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<GetConnectionRequestResponse> GetConnectionRequestAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetConnectionRequestResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetConnectionRequestResponse>> GetConnectionRequestWithHttpInfoAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -224,11 +306,11 @@ namespace BeamPlayerClient.Api
         ///  
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLoginRequestInput"></param>
-        /// <returns>GenerateLoginRequestResponse</returns>
-        public GenerateLoginRequestResponse CreateConnectionRequest(GenerateLoginRequestInput generateLoginRequestInput)
+        /// <param name="generateConnectionRequestInput"></param>
+        /// <returns>GenerateConnectionRequestResponse</returns>
+        public GenerateConnectionRequestResponse CreateConnectionRequest(GenerateConnectionRequestInput generateConnectionRequestInput)
         {
-            BeamPlayerClient.Client.ApiResponse<GenerateLoginRequestResponse> localVarResponse = CreateConnectionRequestWithHttpInfo(generateLoginRequestInput);
+            BeamPlayerClient.Client.ApiResponse<GenerateConnectionRequestResponse> localVarResponse = CreateConnectionRequestWithHttpInfo(generateConnectionRequestInput);
             return localVarResponse.Data;
         }
 
@@ -236,13 +318,13 @@ namespace BeamPlayerClient.Api
         ///  
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLoginRequestInput"></param>
-        /// <returns>ApiResponse of GenerateLoginRequestResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<GenerateLoginRequestResponse> CreateConnectionRequestWithHttpInfo(GenerateLoginRequestInput generateLoginRequestInput)
+        /// <param name="generateConnectionRequestInput"></param>
+        /// <returns>ApiResponse of GenerateConnectionRequestResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<GenerateConnectionRequestResponse> CreateConnectionRequestWithHttpInfo(GenerateConnectionRequestInput generateConnectionRequestInput)
         {
-            // verify the required parameter 'generateLoginRequestInput' is set
-            if (generateLoginRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'generateLoginRequestInput' when calling ConnectorApi->CreateConnectionRequest");
+            // verify the required parameter 'generateConnectionRequestInput' is set
+            if (generateConnectionRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'generateConnectionRequestInput' when calling ConnectorApi->CreateConnectionRequest");
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
 
@@ -261,7 +343,7 @@ namespace BeamPlayerClient.Api
             var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
-            localVarRequestOptions.Data = generateLoginRequestInput;
+            localVarRequestOptions.Data = generateConnectionRequestInput;
 
             // authentication (Beam API game key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -270,7 +352,7 @@ namespace BeamPlayerClient.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<GenerateLoginRequestResponse>("/v1/player/connector", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<GenerateConnectionRequestResponse>("/v1/player/connector", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -285,17 +367,13 @@ namespace BeamPlayerClient.Api
         ///  
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLoginRequestInput"></param>
+        /// <param name="generateConnectionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of GenerateLoginRequestResponse</returns>
-        public async System.Threading.Tasks.Task<GenerateLoginRequestResponse> CreateConnectionRequestAsync(GenerateLoginRequestInput generateLoginRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of GenerateConnectionRequestResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<GenerateConnectionRequestResponse> CreateConnectionRequestAsync(GenerateConnectionRequestInput generateConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var task = CreateConnectionRequestWithHttpInfoAsync(generateLoginRequestInput, cancellationToken);
-#if UNITY_EDITOR || !UNITY_WEBGL
-            BeamPlayerClient.Client.ApiResponse<GenerateLoginRequestResponse> localVarResponse = await task.ConfigureAwait(false);
-#else
-            BeamPlayerClient.Client.ApiResponse<GenerateLoginRequestResponse> localVarResponse = await task;
-#endif
+            var task = CreateConnectionRequestWithHttpInfoAsync(generateConnectionRequestInput, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<GenerateConnectionRequestResponse> localVarResponse = await task;
             return localVarResponse.Data;
         }
 
@@ -303,14 +381,14 @@ namespace BeamPlayerClient.Api
         ///  
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLoginRequestInput"></param>
+        /// <param name="generateConnectionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (GenerateLoginRequestResponse)</returns>
-        public async System.Threading.Tasks.Task<BeamPlayerClient.Client.ApiResponse<GenerateLoginRequestResponse>> CreateConnectionRequestWithHttpInfoAsync(GenerateLoginRequestInput generateLoginRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (GenerateConnectionRequestResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GenerateConnectionRequestResponse>> CreateConnectionRequestWithHttpInfoAsync(GenerateConnectionRequestInput generateConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            // verify the required parameter 'generateLoginRequestInput' is set
-            if (generateLoginRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'generateLoginRequestInput' when calling ConnectorApi->CreateConnectionRequest");
+            // verify the required parameter 'generateConnectionRequestInput' is set
+            if (generateConnectionRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'generateConnectionRequestInput' when calling ConnectorApi->CreateConnectionRequest");
 
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
@@ -331,7 +409,7 @@ namespace BeamPlayerClient.Api
             var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
-            localVarRequestOptions.Data = generateLoginRequestInput;
+            localVarRequestOptions.Data = generateConnectionRequestInput;
 
             // authentication (Beam API game key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -341,17 +419,271 @@ namespace BeamPlayerClient.Api
 
             // make the HTTP request
 
-            var task = this.AsynchronousClient.PostAsync<GenerateLoginRequestResponse>("/v1/player/connector", localVarRequestOptions, this.Configuration, cancellationToken);
+            var task = this.AsynchronousClient.PostAsync<GenerateConnectionRequestResponse>("/v1/player/connector", localVarRequestOptions, this.Configuration, cancellationToken);
 
-#if UNITY_EDITOR || !UNITY_WEBGL
-            var localVarResponse = await task.ConfigureAwait(false);
-#else
             var localVarResponse = await task;
-#endif
 
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("CreateConnectionRequest", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="webConnectionRequestInput"></param>
+        /// <returns>WebConnectionRequestResponse</returns>
+        public WebConnectionRequestResponse GenerateWebConnection(WebConnectionRequestInput webConnectionRequestInput)
+        {
+            BeamPlayerClient.Client.ApiResponse<WebConnectionRequestResponse> localVarResponse = GenerateWebConnectionWithHttpInfo(webConnectionRequestInput);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="webConnectionRequestInput"></param>
+        /// <returns>ApiResponse of WebConnectionRequestResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<WebConnectionRequestResponse> GenerateWebConnectionWithHttpInfo(WebConnectionRequestInput webConnectionRequestInput)
+        {
+            // verify the required parameter 'webConnectionRequestInput' is set
+            if (webConnectionRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'webConnectionRequestInput' when calling ConnectorApi->GenerateWebConnection");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = webConnectionRequestInput;
+
+            // authentication (Beam API game key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<WebConnectionRequestResponse>("/v1/player/connector/web-connection", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GenerateWebConnection", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="webConnectionRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of WebConnectionRequestResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<WebConnectionRequestResponse> GenerateWebConnectionAsync(WebConnectionRequestInput webConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = GenerateWebConnectionWithHttpInfoAsync(webConnectionRequestInput, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<WebConnectionRequestResponse> localVarResponse = await task;
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="webConnectionRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (WebConnectionRequestResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<WebConnectionRequestResponse>> GenerateWebConnectionWithHttpInfoAsync(WebConnectionRequestInput webConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'webConnectionRequestInput' is set
+            if (webConnectionRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'webConnectionRequestInput' when calling ConnectorApi->GenerateWebConnection");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = webConnectionRequestInput;
+
+            // authentication (Beam API game key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.PostAsync<WebConnectionRequestResponse>("/v1/player/connector/web-connection", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GenerateWebConnection", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <returns>GetConnectionRequestResponse</returns>
+        public GetConnectionRequestResponse GetConnectionRequest(string requestId)
+        {
+            BeamPlayerClient.Client.ApiResponse<GetConnectionRequestResponse> localVarResponse = GetConnectionRequestWithHttpInfo(requestId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <returns>ApiResponse of GetConnectionRequestResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<GetConnectionRequestResponse> GetConnectionRequestWithHttpInfo(string requestId)
+        {
+            // verify the required parameter 'requestId' is set
+            if (requestId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'requestId' when calling ConnectorApi->GetConnectionRequest");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("requestId", BeamPlayerClient.Client.ClientUtils.ParameterToString(requestId)); // path parameter
+
+            // authentication (Beam API game key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<GetConnectionRequestResponse>("/v1/player/connector/{requestId}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetConnectionRequest", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetConnectionRequestResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<GetConnectionRequestResponse> GetConnectionRequestAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = GetConnectionRequestWithHttpInfoAsync(requestId, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<GetConnectionRequestResponse> localVarResponse = await task;
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetConnectionRequestResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetConnectionRequestResponse>> GetConnectionRequestWithHttpInfoAsync(string requestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'requestId' is set
+            if (requestId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'requestId' when calling ConnectorApi->GetConnectionRequest");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("requestId", BeamPlayerClient.Client.ClientUtils.ParameterToString(requestId)); // path parameter
+
+            // authentication (Beam API game key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.GetAsync<GetConnectionRequestResponse>("/v1/player/connector/{requestId}", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetConnectionRequest", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
