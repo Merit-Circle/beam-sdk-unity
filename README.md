@@ -38,62 +38,67 @@ var beamClient = gameObject.AddComponent<BeamClient>()
 ### Checking for an active session
 
 ```csharp
-StartCoroutine(beamClient.GetActiveSession(
-                "entityIdOfYourUser",
-                actionResult =>
-                {
-                    if (actionResult.Status == BeamResultType.Success)
-                    {
-                        var session = actionResult.Result;
-                        // you have an active session that can sign operations
-                    }
-                    else
-                    {
-                        // you need to create a session using CreateSession(), or User will sign operations using browser
-                    }
-                },
-                chainId: 13337 // optional chainId, defaults to 13337
-            ));
+            var activeSessionResult = await m_BeamClient.GetActiveSessionAsync(BeamEntityId);
+            if (activeSessionResult.Status == BeamResultType.Success)
+            {
+                var session = activeSessionResult.Result;
+                var validUntil = session.EndTime;
+                // (...)
+            }
 ```
 
 ### Creating a session:
 ```csharp
-StartCoroutine(beamClient.CreateSession(
-                "entityIdOfYourUser",
-                actionResult =>
-                {
-                    if (actionResult.Status == BeamResultType.Success)
-                    {
-                        var session = actionResult.Result;
-                        // you now have an active session that can sign operations
-                    }
-                },
-                chainId: 13337, // optional chainId, defaults to 13337
-                secondsTimeout: 240 // timeout in seconds for getting a result of Session signing from the browser
-            ));
+            var activeSessionResult = await m_BeamClient.CreateSessionAsync(BeamEntityId);
+            if (activeSessionResult.Status == BeamResultType.Success)
+            {
+                var session = activeSessionResult.Result;
+                // you can now sign Operations without leaving the game
+            }
+```
+
+### Revoking a session:
+```csharp
+            var sessionAddress = "0x3c31...";
+            var operationResult = await m_BeamClient.RevokeSessionAsync(
+                entityId: BeamEntityId,
+                sessionAddress: sessionAddress
+                );
+            if (operationResult.Status == BeamResultType.Success)
+            {
+                var operationStatus = operationResult.Result;
+                // (...)
+            }
 ```
 
 ### Signing an operation:
 Once you get an operationId from Beam API, that requires signing by the user, you can call BeamClient.SignOperation() to sign and execute given operation:
 ```csharp
-StartCoroutine(beamClient.SignOperation(
-                "entityIdOfYourUser",
-                operationId,    // operationId from Beam API
-                actionResult =>
+var operationId = "clxn9u(...)0c4bz7av";
+            var operationResult = await m_BeamClient.SignOperationAsync(
+                entityId: BeamEntityId,
+                operationId: operationId,
+                signingBy: OperationSigningBy.Auto  // accepts Auto, Browser and Session
+                );
+            if (operationResult.Status == BeamResultType.Success)
+            {
+                var operationStatus = operationResult.Result;
+                switch (operationResult.Result)
                 {
-                    if (actionResult.Status == BeamResultType.Success)
-                    {
-                        // you can now check for actual Status of the signing f.e.:
-                        var isSigned = actionResult.Result == BeamOperationStatus.Signed;
-                        var isExecuted = actionResult.Result == BeamOperationStatus.Executed;
-                        var isRejected = actionResult.Result == BeamOperationStatus.Rejected;
-                        // (...)
-                    }
-                },
-                chainId: 13337, // optional chainId, defaults to 13337
-                fallbackToBrowser: true, // if true, will automatically open browser for the user to sign the operation, if there is no valid session
-                secondsTimeout: 240 // timeout in seconds for getting a result of message signing from the browser, used if there was no valid session
-            ));
+                    case CommonOperationResponse.StatusEnum.Signed:
+                        break;
+                    case CommonOperationResponse.StatusEnum.Pending:
+                        break;
+                    case CommonOperationResponse.StatusEnum.Rejected:
+                        break;
+                    case CommonOperationResponse.StatusEnum.Executed:
+                        break;
+                    case CommonOperationResponse.StatusEnum.Error:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
 ```
 
 ### Examples
