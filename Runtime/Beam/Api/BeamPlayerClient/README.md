@@ -148,7 +148,9 @@ Class | Method | HTTP request | Description
 *OperationApi* | [**ProcessOperation**](OperationApi.md#processoperation) | **PATCH** /v1/player/operation/{opId} | Updates operation result for given id
 *SessionsApi* | [**CreateSessionRequest**](SessionsApi.md#createsessionrequest) | **POST** /v1/player/sessions/users/{entityId}/request | 
 *SessionsApi* | [**GetActiveSession**](SessionsApi.md#getactivesession) | **GET** /v1/player/sessions/users/{entityId}/{accountAddress}/active | 
+*SessionsApi* | [**GetAllActiveSessions**](SessionsApi.md#getallactivesessions) | **GET** /v1/player/sessions/users/{entityId}/active | 
 *SessionsApi* | [**GetSessionRequest**](SessionsApi.md#getsessionrequest) | **GET** /v1/player/sessions/request/{requestId} | 
+*SessionsApi* | [**RevokeSession**](SessionsApi.md#revokesession) | **POST** /v1/player/sessions/users/{entityId}/revoke | 
 *TransactionsApi* | [**CreateUserTransaction**](TransactionsApi.md#createusertransaction) | **POST** /v1/player/transactions/users/{entityId} | Creating a new transaction on behalf of a user
 *TransactionsApi* | [**GetTransaction**](TransactionsApi.md#gettransaction) | **GET** /v1/player/transactions/{transactionId} | Getting a transaction
 *TransactionsApi* | [**GetTransactions**](TransactionsApi.md#gettransactions) | **GET** /v1/player/transactions | Get a paginated list of transactions from your game
@@ -182,6 +184,8 @@ Class | Method | HTTP request | Description
  - [Model.GenerateSessionRequestResponse](GenerateSessionRequestResponse.md)
  - [Model.GenerateSessionUrlRequestInput](GenerateSessionUrlRequestInput.md)
  - [Model.GetActiveSessionResponse](GetActiveSessionResponse.md)
+ - [Model.GetActiveSessionsResponse](GetActiveSessionsResponse.md)
+ - [Model.GetActiveSessionsResponseSessionsInner](GetActiveSessionsResponseSessionsInner.md)
  - [Model.GetAllUsersResponse](GetAllUsersResponse.md)
  - [Model.GetAllUsersResponseDataInner](GetAllUsersResponseDataInner.md)
  - [Model.GetAllUsersResponseDataInnerWalletsInner](GetAllUsersResponseDataInnerWalletsInner.md)
@@ -223,6 +227,7 @@ Class | Method | HTTP request | Description
  - [Model.GetUserNativeCurrencyResponse](GetUserNativeCurrencyResponse.md)
  - [Model.GetUserNativeCurrencyResponseNativeTokenBalance](GetUserNativeCurrencyResponseNativeTokenBalance.md)
  - [Model.GetUserResponse](GetUserResponse.md)
+ - [Model.RevokeSessionRequest](RevokeSessionRequest.md)
  - [Model.SellAssetRequestInput](SellAssetRequestInput.md)
  - [Model.TransferAssetRequestInput](TransferAssetRequestInput.md)
  - [Model.TransferAssetRequestInputAssetsInner](TransferAssetRequestInputAssetsInner.md)

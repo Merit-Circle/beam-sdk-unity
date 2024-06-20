@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Linq;
 using System.Threading;
-using Beam.Api;
 using Beam.Extensions;
 using Beam.Models;
 using Beam.Storage;
@@ -26,15 +24,16 @@ namespace Beam
         public ITransactionsApi TransactionsApi => new TransactionsApi(GetConfiguration());
         public IUsersApi UsersApi => new UsersApi(GetConfiguration());
         public IOperationApi OperationApi => new OperationApi(GetConfiguration());
+        public IConnectorApi ConnectorApi => new ConnectorApi(GetConfiguration());
 
         private const int DefaultTimeoutInSeconds = 240;
-
-        private readonly BeamCoroutineApi m_BeamCoroutineApi = new();
 
         private string m_BeamApiKey;
         private string m_BeamApiUrl;
         private bool m_DebugLog;
         private IStorage m_Storage = new PlayerPrefsStorage();
+
+        #region Config
 
         public BeamClient()
         {
@@ -49,7 +48,6 @@ namespace Beam
         public BeamClient SetBeamApiKey(string publishableApiKey)
         {
             m_BeamApiKey = publishableApiKey;
-            m_BeamCoroutineApi.SetApiKey(publishableApiKey);
             return this;
         }
 
@@ -72,7 +70,6 @@ namespace Beam
             }
 
             m_BeamApiUrl = apiUrl;
-            m_BeamCoroutineApi.SetBaseUrl(apiUrl);
 
             return this;
         }
@@ -99,42 +96,51 @@ namespace Beam
             return this;
         }
 
+        #endregion
+
         /// <summary>
-        /// Retrieves active, valid session.
+        /// Will connect given EntityId for your game to a User.
+        /// This will also happen on first possible action signed by user in the browser.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
-        /// <param name="actionResult">Callback to return a result with <see cref="BeamSession"/></param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
-        /// <returns>IEnumerator</returns>
-        [Obsolete("Prefer async version, this will be removed in future versions")]
-        public IEnumerator GetActiveSession(
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
+        public async UniTask<BeamResult<GetConnectionRequestResponse.StatusEnum>> ConnectUserToGame(
             string entityId,
-            Action<BeamResult<BeamSession>> actionResult,
-            int chainId = Constants.DefaultChainId)
+            int chainId = Constants.DefaultChainId,
+            int secondsTimeout = DefaultTimeoutInSeconds,
+            CancellationToken cancellationToken = default)
         {
-            Log("Retrieving active session");
-
-            BeamSession activeSession = null;
-            yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (res, _) =>
+            Log("Retrieving connection request");
+            GenerateConnectionRequestResponse connRequest;
+            try
             {
-                if (res != null)
-                {
-                    Log(
-                        $"Retrieved a session: {res.SessionAddress}, valid from: {res.StartTime:o}, to: {res.EndTime:o}");
-                    activeSession = res;
-                }
-            }));
-
-            if (activeSession == null)
+                connRequest = await ConnectorApi.CreateConnectionRequestAsync(
+                    new GenerateConnectionRequestInput(entityId, chainId), cancellationToken);
+            }
+            catch (ApiException e)
             {
-                Log("No active session found");
-                actionResult.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "No active session found"));
-                yield break;
+                return new BeamResult<GetConnectionRequestResponse.StatusEnum>(BeamResultType.Error, e.Message);
             }
 
-            actionResult.Invoke(new BeamResult<BeamSession>(activeSession));
-        }
+            Log("Opening browser for connection request");
+            // open browser to connect user
+            Application.OpenURL(connRequest.Url);
 
+            var pollingResult = await PollForResult(
+                actionToPerform: () => ConnectorApi.GetConnectionRequestAsync(connRequest.Id, cancellationToken),
+                shouldRetry: res => res.Status == GetConnectionRequestResponse.StatusEnum.Pending,
+                secondsTimeout: secondsTimeout,
+                secondsBetweenPolls: 1,
+                cancellationToken: cancellationToken);
+
+            Log($"Got polling connection request result: {pollingResult.Status.ToString()}");
+
+            return new BeamResult<GetConnectionRequestResponse.StatusEnum>(pollingResult.Status);
+        }
+        
         /// <summary>
         /// Retrieves active, valid session.
         /// </summary>
@@ -160,140 +166,38 @@ namespace Beam
         }
 
         /// <summary>
-        /// Opens an external browser to sign a Session, returns the result via callback arg.
+        /// Revokes given Session Address. Always opens Browser as User has to sign it with his key.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
-        /// <param name="actionResult">Callback to return a result of Session creation</param>
+        /// <param name="sessionAddress">address of a Session to revoke</param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
-        /// <returns>IEnumerator</returns>
-        [Obsolete("Prefer async version, this will be removed in future versions")]
-        public IEnumerator CreateSession(
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
+        public async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> RevokeSessionAsync(
             string entityId,
-            Action<BeamResult<BeamSession>> actionResult,
+            string sessionAddress,
             int chainId = Constants.DefaultChainId,
-            int secondsTimeout = DefaultTimeoutInSeconds)
+            int secondsTimeout = DefaultTimeoutInSeconds,
+            CancellationToken cancellationToken = default)
         {
-            BeamSession activeSession = null;
-            KeyPair keyPair = null;
             Log("Retrieving active session");
-            yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (res, kp) =>
-            {
-                if (res != null)
-                {
-                    Log(
-                        $"Retrieved a session: {res.SessionAddress}, valid from: {res.StartTime:o}, to: {res.EndTime:o}");
-                    activeSession = res;
-                }
 
-                keyPair = kp;
-            }));
+            CommonOperationResponse operation;
 
-            if (activeSession != null)
+            try
             {
-                Log("Already has an active session, ending early");
-                actionResult.Invoke(new BeamResult<BeamSession>(BeamResultType.Error, "Already has an active session")
-                {
-                    Result = activeSession
-                });
-                yield break;
+                operation = await SessionsApi.RevokeSessionAsync(entityId,
+                    new RevokeSessionRequest(sessionAddress, chainId: chainId), cancellationToken);
+            }
+            catch (ApiException e)
+            {
+                Log($"Failed RevokeSessionAsync: {e.Message}");
+                return new BeamResult<CommonOperationResponse.StatusEnum>(BeamResultType.Error, e.Message);
             }
 
-            Log("No active session found, refreshing local KeyPair");
-
-            // refresh keypair to make sure we have no conflicts with existing sessions
-            keyPair = GetOrCreateSigningKeyPair(refresh: true);
-
-            // retrieve operation Id to pass further and track result
-            BeamSessionRequest beamSessionRequest = null;
-            yield return StartCoroutine(m_BeamCoroutineApi.CreateSessionRequest(entityId, chainId,
-                keyPair.Account.Address,
-                res =>
-                {
-                    if (res.Success)
-                    {
-                        Log($"Created session request: {res.Result.Id} to check for session result");
-                        beamSessionRequest = res.Result;
-                    }
-                    else
-                    {
-                        Log($"Failed creating session request: {res.ErrorMessage}");
-                        actionResult.Invoke(new BeamResult<BeamSession>(
-                            status: BeamResultType.Error,
-                            error: res.ErrorMessage));
-                    }
-                }));
-
-            if (beamSessionRequest == null)
-            {
-                yield break;
-            }
-
-            Log($"Opening {beamSessionRequest.Url}");
-            // open identity.onbeam.com
-            Application.OpenURL(beamSessionRequest.Url);
-
-            var beamResultModel = new BeamResult<BeamSession>();
-
-            Log("Started polling for Session creation result");
-            // start polling for results of the operation
-            var error = false;
-            yield return StartCoroutine(PollForSessionRequestResult(beamSessionRequest.Id, operationResult =>
-                {
-                    switch (operationResult.Status)
-                    {
-                        case BeamSessionRequestStatus.Pending:
-                            beamResultModel.Status = BeamResultType.Pending;
-                            break;
-                        case BeamSessionRequestStatus.Accepted:
-                            beamResultModel.Status = BeamResultType.Success;
-                            break;
-                        case BeamSessionRequestStatus.Error:
-                            beamResultModel.Status = BeamResultType.Error;
-                            beamResultModel.Error = "Encountered an error when requesting a session";
-                            error = true;
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                },
-                () =>
-                {
-                    Log("Timed out when polling for Session");
-                    error = true;
-                    actionResult.Invoke(new BeamResult<BeamSession>(BeamResultType.Timeout,
-                        "Timed out polling for Session Request result"));
-                }, () =>
-                {
-                    Log("Session request was not found, something went wrong");
-                    error = true;
-                    actionResult.Invoke(
-                        new BeamResult<BeamSession>(BeamResultType.Error,
-                            $"Session Request with id: {beamSessionRequest.Id} could not be found"));
-                }, secondsTimeout));
-
-            Log("Retrieving newly created Session");
-            // retrieve newly created session
-            if (!error)
-            {
-                yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (bs, kp) =>
-                {
-                    if (bs != null)
-                    {
-                        beamResultModel.Result = bs;
-                        Log(
-                            $"Retrieved a session: {bs.SessionAddress}, valid from: {bs.StartTime:o}, to: {bs.EndTime:o}");
-                    }
-                    else
-                    {
-                        beamResultModel.Error = "Could not retrieve session after it was created";
-                        beamResultModel.Status = BeamResultType.Error;
-                    }
-
-                    keyPair = kp;
-                    actionResult.Invoke(beamResultModel);
-                }));
-            }
+            var result = await SignOperationUsingBrowserAsync(operation, secondsTimeout, cancellationToken);
+            return result;
         }
 
         /// <summary>
@@ -354,15 +258,21 @@ namespace Beam
             Log("Started polling for Session creation result");
             // start polling for results of the operation
             var error = false;
-            var pollingRes = await PollForSessionRequestResultAsync(beamSessionRequest.Id, secondsTimeout,
+
+            var pollingResult = await PollForResult(
+                actionToPerform: () => SessionsApi.GetSessionRequestAsync(beamSessionRequest.Id, cancellationToken),
+                shouldRetry: res => res.Status == GetSessionRequestResponse.StatusEnum.Pending,
+                secondsTimeout: secondsTimeout,
+                secondsBetweenPolls: 1,
                 cancellationToken: cancellationToken);
-            if (pollingRes == null)
+
+            if (pollingResult == null)
             {
                 return new BeamResult<BeamSession>(BeamResultType.Error,
                     "Polling for created session encountered an error or timed out");
             }
 
-            switch (pollingRes.Status)
+            switch (pollingResult.Status)
             {
                 case GetSessionRequestResponse.StatusEnum.Pending:
                     beamResultModel.Status = BeamResultType.Pending;
@@ -405,93 +315,8 @@ namespace Beam
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
         /// <param name="operationId">Id of the Operation to sign. Returned by Beam API.</param>
-        /// <param name="actionResult">Callback to return a result of signin g</param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
-        /// <param name="fallbackToBrowser">If true, opens the browser for the User to create new Session. Defaults to true. Returns an Error if false and there is no active session</param>
-        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
-        /// <returns>IEnumerator</returns>
-        [Obsolete("Prefer async version, this will be removed in future versions")]
-        public IEnumerator SignOperation(
-            string entityId,
-            string operationId,
-            Action<BeamResult<BeamOperationStatus>> actionResult,
-            int chainId = Constants.DefaultChainId,
-            bool fallbackToBrowser = true,
-            int secondsTimeout = DefaultTimeoutInSeconds)
-        {
-            BeamSession activeSession = null;
-            KeyPair activeSessionKeyPair = null;
-            Log("Retrieving active session");
-            yield return StartCoroutine(GetActiveSessionAndKeys(entityId, chainId, (sessionInfo, keyPair) =>
-            {
-                activeSession = sessionInfo;
-                activeSessionKeyPair = keyPair;
-            }));
-
-            BeamOperation operation = null;
-            Log($"Retrieving operation({operationId})");
-            yield return StartCoroutine(m_BeamCoroutineApi.GetOperationById(operationId, (res) =>
-            {
-                if (res.Success)
-                {
-                    operation = res.Result;
-                }
-                else if (res.StatusCode != 404) // 404 will be handled as operation == null below
-                {
-                    actionResult.Invoke(new BeamResult<BeamOperationStatus>
-                    {
-                        Status = BeamResultType.Error,
-                        Error = res.ErrorMessage
-                    });
-                }
-            }));
-
-            if (operation == null)
-            {
-                Log($"No operation({operationId}) was found, ending");
-                actionResult.Invoke(new BeamResult<BeamOperationStatus>
-                {
-                    Status = BeamResultType.Error,
-                    Error = "Operation was not found"
-                });
-
-                yield break;
-            }
-
-            var hasActiveSession = activeSessionKeyPair != null && activeSession != null;
-            if (hasActiveSession)
-            {
-                Log($"Has an active session until: {activeSession.EndTime:o}, using it to sign the operation");
-                yield return SignOperationUsingSession(
-                    entityId,
-                    operation,
-                    actionResult,
-                    activeSessionKeyPair);
-            }
-            else if (fallbackToBrowser)
-            {
-                Log("No active session found, using browser to sign the operation");
-                yield return SignOperationUsingBrowser(operation, actionResult, secondsTimeout);
-            }
-            else
-            {
-                Log($"No active session found, {nameof(fallbackToBrowser)} set to false");
-                actionResult.Invoke(new BeamResult<BeamOperationStatus>
-                {
-                    Result = BeamOperationStatus.Error,
-                    Status = BeamResultType.Error,
-                    Error = $"No active session and {nameof(fallbackToBrowser)} set to false"
-                });
-            }
-        }
-
-        /// <summary>
-        /// Opens an external browser to sign a transaction, returns the result via callback arg.
-        /// </summary>
-        /// <param name="entityId">Entity Id of the User performing signing</param>
-        /// <param name="operationId">Id of the Operation to sign. Returned by Beam API.</param>
-        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
-        /// <param name="fallbackToBrowser">If true, opens the browser for the User to create new Session. Defaults to true. Returns an Error if false and there is no active session</param>
+        /// <param name="signingBy">If set to Auto, will try to use a local Session and open Browser if there is no valid Session.</param>
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <param name="cancellationToken">Optional CancellationToken</param>
         /// <returns>UniTask</returns>
@@ -499,14 +324,10 @@ namespace Beam
             string entityId,
             string operationId,
             int chainId = Constants.DefaultChainId,
-            bool fallbackToBrowser = true,
+            OperationSigningBy signingBy = OperationSigningBy.Auto,
             int secondsTimeout = DefaultTimeoutInSeconds,
             CancellationToken cancellationToken = default)
         {
-            Log("Retrieving active session");
-            var (activeSession, activeSessionKeyPair) =
-                await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
-
             CommonOperationResponse operation;
             Log($"Retrieving operation({operationId})");
             try
@@ -534,80 +355,34 @@ namespace Beam
                 };
             }
 
-            var hasActiveSession = activeSessionKeyPair != null && activeSession != null;
-            if (hasActiveSession)
+            if (signingBy is OperationSigningBy.Auto or OperationSigningBy.Session)
             {
-                Log($"Has an active session until: {activeSession.EndTime:o}, using it to sign the operation");
-                return await SignOperationUsingSessionAsync(entityId, operation, activeSessionKeyPair,
-                    cancellationToken);
+                Log("Retrieving active session");
+                var (activeSession, activeSessionKeyPair) =
+                    await GetActiveSessionAndKeysAsync(entityId, chainId, cancellationToken);
+
+                var hasActiveSession = activeSessionKeyPair != null && activeSession != null;
+                if (hasActiveSession)
+                {
+                    Log($"Has an active session until: {activeSession.EndTime:o}, using it to sign the operation");
+                    return await SignOperationUsingSessionAsync(entityId, operation, activeSessionKeyPair,
+                        cancellationToken);
+                }
             }
 
-            if (fallbackToBrowser)
+            if (signingBy is OperationSigningBy.Auto or OperationSigningBy.Browser)
             {
                 Log("No active session found, using browser to sign the operation");
                 return await SignOperationUsingBrowserAsync(operation, secondsTimeout, cancellationToken);
             }
 
-            Log($"No active session found, {nameof(fallbackToBrowser)} set to false");
+            Log($"No active session found, {nameof(signingBy)} set to {signingBy.ToString()}");
             return new BeamResult<CommonOperationResponse.StatusEnum>
             {
                 Result = CommonOperationResponse.StatusEnum.Error,
                 Status = BeamResultType.Error,
-                Error = $"No active session and {nameof(fallbackToBrowser)} set to false"
+                Error = $"No active session found, {nameof(signingBy)} set to {signingBy.ToString()}"
             };
-        }
-
-        private IEnumerator SignOperationUsingBrowser(
-            BeamOperation operation,
-            Action<BeamResult<BeamOperationStatus>> callback,
-            int secondsTimeout)
-        {
-            var url = operation.Url;
-            Log($"Opening {url}");
-
-            // open identity.onbeam.com, give it operation id
-            Application.OpenURL(url);
-
-            // start polling for results of the operation
-            yield return StartCoroutine(PollForOperationResult(operation.Id, operationResult =>
-                {
-                    Log($"Got operation({operation.Id}) result: {operationResult.Status.ToString()}");
-                    var beamResult = new BeamResult<BeamOperationStatus>
-                    {
-                        Result = operationResult.Status
-                    };
-
-                    switch (operationResult.Status)
-                    {
-                        case BeamOperationStatus.Pending:
-                        case BeamOperationStatus.Executed:
-                        case BeamOperationStatus.Rejected:
-                        case BeamOperationStatus.Signed:
-                            beamResult.Status = BeamResultType.Success;
-                            break;
-                        case BeamOperationStatus.Error:
-                            beamResult.Status = BeamResultType.Error;
-                            beamResult.Error = "Operation encountered an error";
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                    callback.Invoke(beamResult);
-                },
-                () =>
-                {
-                    Log($"Timed out polling for Operation({operation.Id}) result");
-                    callback.Invoke(
-                        new BeamResult<BeamOperationStatus>(BeamResultType.Timeout,
-                            "Timed out polling for Operation result"));
-                }, () =>
-                {
-                    Log($"Operation with id: {operation.Id} could not be found, something went wrong");
-                    callback.Invoke(
-                        new BeamResult<BeamOperationStatus>(BeamResultType.Error,
-                            $"Operation with id: {operation.Id} could not be found"));
-                }, secondsTimeout));
         }
 
         private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
@@ -622,16 +397,21 @@ namespace Beam
             Application.OpenURL(url);
 
             // start polling for results of the operation
-            var res = await PollForOperationResultAsync(operation.Id, secondsTimeout,
+            var now = DateTimeOffset.Now;
+            var pollingResult = await PollForResult(
+                actionToPerform: () => OperationApi.GetOperationAsync(operation.Id, cancellationToken),
+                shouldRetry: res => res == null ||
+                                    res.Status != CommonOperationResponse.StatusEnum.Pending ||
+                                    res.Status == CommonOperationResponse.StatusEnum.Pending &&
+                                    res.UpdatedAt != null && res.UpdatedAt > now,
+                secondsTimeout: secondsTimeout,
+                secondsBetweenPolls: 1,
                 cancellationToken: cancellationToken);
 
-            Log($"Got operation({operation.Id}) result: {res.Status.ToString()}");
-            var beamResult = new BeamResult<CommonOperationResponse.StatusEnum>
-            {
-                Result = res.Status
-            };
+            Log($"Got operation({operation.Id}) result: {pollingResult.Status.ToString()}");
+            var beamResult = new BeamResult<CommonOperationResponse.StatusEnum>(pollingResult.Status);
 
-            switch (res.Status)
+            switch (pollingResult.Status)
             {
                 case CommonOperationResponse.StatusEnum.Pending:
                 case CommonOperationResponse.StatusEnum.Executed:
@@ -650,98 +430,6 @@ namespace Beam
             }
 
             return beamResult;
-        }
-
-        private IEnumerator SignOperationUsingSession(
-            string entityId,
-            BeamOperation operation,
-            Action<BeamResult<BeamOperationStatus>> callback,
-            KeyPair activeSessionKeyPair)
-        {
-            if (operation?.Transactions?.Any() != true)
-            {
-                Log($"Operation({operation?.Id}) has no transactions to sign, ending");
-                callback.Invoke(new BeamResult<BeamOperationStatus>
-                {
-                    Result = BeamOperationStatus.Error,
-                    Status = BeamResultType.Error,
-                    Error = "Operation has no transactions to sign"
-                });
-
-                yield break;
-            }
-
-            var confirmationModel = new BeamOperationConfirmation
-            {
-                GameId = operation.GameId,
-                EntityId = entityId,
-                Status = BeamOperationStatus.Pending
-            };
-
-            foreach (var transaction in operation.Transactions)
-            {
-                Log($"Signing operation({operation.Id}) transaction({transaction.ExternalId})");
-                try
-                {
-                    string signature;
-                    switch (transaction.Type)
-                    {
-                        case BeamOperationTransactionType.OpenfortTransaction:
-                        case BeamOperationTransactionType.OpenfortRevokeSession:
-                            signature = activeSessionKeyPair.SignMessage(transaction.Data);
-                            break;
-                        case BeamOperationTransactionType.OpenfortReservoirOrder:
-                            signature = activeSessionKeyPair.SignMarketplaceTransactionHash(transaction.Hash);
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                    confirmationModel.Transactions.Add(new TransactionConfirmation
-                    {
-                        Id = transaction.Id,
-                        Signature = signature
-                    });
-                }
-                catch (Exception e)
-                {
-                    Log($"Encountered an error when signing transaction({transaction.Id}): {e.Message}");
-                    confirmationModel.Status = BeamOperationStatus.Error;
-                    confirmationModel.Error =
-                        $"Encountered an exception while approving {transaction.Type.ToString()}: {e.Message}";
-                }
-            }
-
-            Log($"Confirming operation({operation.Id})");
-            yield return StartCoroutine(m_BeamCoroutineApi.ConfirmOperation(operation.Id, confirmationModel, res =>
-            {
-                if (res.Success)
-                {
-                    var didFail = res.Result.Status != BeamOperationStatus.Executed &&
-                                  res.Result.Status != BeamOperationStatus.Signed &&
-                                  res.Result.Status != BeamOperationStatus.Pending;
-
-                    Log(
-                        $"Confirming operation({operation.Id}) status: {res.Result.Status.ToString()} error: {res.Error}");
-                    callback.Invoke(new BeamResult<BeamOperationStatus>
-                    {
-                        Status = didFail ? BeamResultType.Error : BeamResultType.Success,
-                        Result = res.Result.Status,
-                        Error = didFail ? res.ErrorMessage : null
-                    });
-                }
-                else
-                {
-                    Log($"Confirming operation({operation.Id}) encountered an error: {res.ErrorMessage}");
-                    callback.Invoke(new BeamResult<BeamOperationStatus>
-                    {
-                        Result = BeamOperationStatus.Error,
-                        Status = BeamResultType.Error,
-                        Error = res.ErrorMessage ??
-                                $"Encountered unknown error when confirming operation {operation.Id}"
-                    });
-                }
-            }));
         }
 
         private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingSessionAsync(
@@ -835,75 +523,27 @@ namespace Beam
             }
         }
 
-        private IEnumerator PollForOperationResult(
-            string opId,
-            Action<BeamOperation> operationResult,
-            Action timeout,
-            Action operationNotFound,
-            int secondsTimeout = DefaultTimeoutInSeconds,
-            int secondsBetweenPolls = 1)
-        {
-            var now = DateTimeOffset.Now;
-            yield return new WaitForSecondsRealtime(2);
-
-            var endTime = DateTime.Now.AddSeconds(secondsTimeout);
-
-            while ((endTime - DateTime.Now).TotalSeconds > 0)
-            {
-                BeamOperation beamOperation = null;
-                var opNotFound = false;
-                yield return m_BeamCoroutineApi.GetOperationById(opId, res =>
-                {
-                    if (res.Success)
-                    {
-                        beamOperation = res.Result;
-                    }
-                    else if (res.StatusCode == 404)
-                    {
-                        opNotFound = true;
-                    }
-                });
-
-                if (opNotFound)
-                {
-                    operationNotFound.Invoke();
-                    yield break;
-                }
-
-                // check for status as well as updatedAt
-                // in case of retries, status can be set to Error, but we're interested in the newest actual result
-                if (beamOperation.Status != BeamOperationStatus.Pending &&
-                    (beamOperation.UpdatedAt != null && beamOperation.UpdatedAt > now))
-                {
-                    operationResult.Invoke(beamOperation);
-
-                    yield break;
-                }
-
-                yield return new WaitForSecondsRealtime(secondsBetweenPolls);
-            }
-
-            timeout.Invoke();
-        }
-
-        private async UniTask<CommonOperationResponse> PollForOperationResultAsync(
-            string opId,
+        /// <summary>
+        /// Will retry or return null if received 404.
+        /// </summary>
+        private static async UniTask<T> PollForResult<T>(
+            Func<UniTask<T>> actionToPerform,
+            Func<T, bool> shouldRetry,
             int secondsTimeout = DefaultTimeoutInSeconds,
             int secondsBetweenPolls = 1,
             CancellationToken cancellationToken = default)
+            where T : class
         {
-            var now = DateTimeOffset.Now;
             await UniTask.Delay(2000, cancellationToken: cancellationToken);
 
             var endTime = DateTime.Now.AddSeconds(secondsTimeout);
 
             while ((endTime - DateTime.Now).TotalSeconds > 0)
             {
-                CommonOperationResponse beamOperation;
+                T result;
                 try
                 {
-                    var res = await OperationApi.GetOperationAsync(opId, cancellationToken);
-                    beamOperation = res;
+                    result = await actionToPerform.Invoke();
                 }
                 catch (ApiException e)
                 {
@@ -915,150 +555,16 @@ namespace Beam
                     throw;
                 }
 
-                // check for status as well as updatedAt
-                // in case of retries, status can be set to Error, but we're interested in the newest actual result
-                if (beamOperation != null &&
-                    beamOperation.Status != CommonOperationResponse.StatusEnum.Pending &&
-                    beamOperation.UpdatedAt != null && beamOperation.UpdatedAt > now)
+                var retry = shouldRetry.Invoke(result);
+                if (!retry)
                 {
-                    return beamOperation;
+                    return result;
                 }
 
                 await UniTask.Delay(secondsBetweenPolls * 1000, cancellationToken: cancellationToken);
             }
 
             return null;
-        }
-
-        private IEnumerator PollForSessionRequestResult(
-            string sessionRequestId,
-            Action<BeamSessionRequest> sessionRequestResult,
-            Action timeout,
-            Action operationNotFound,
-            int secondsTimeout = DefaultTimeoutInSeconds,
-            int secondsBetweenPolls = 1)
-        {
-            yield return new WaitForSecondsRealtime(2);
-
-            var endTime = DateTime.Now.AddSeconds(secondsTimeout);
-
-            while ((endTime - DateTime.Now).TotalSeconds > 0)
-            {
-                BeamSessionRequest beamSessionRequest = null;
-                var sessionRequestNotFound = false;
-                yield return m_BeamCoroutineApi.GetSessionRequestById(sessionRequestId, res =>
-                {
-                    if (res.Success)
-                    {
-                        beamSessionRequest = res.Result;
-                    }
-                    else if (res.StatusCode == 404)
-                    {
-                        sessionRequestNotFound = true;
-                    }
-                });
-
-                if (sessionRequestNotFound)
-                {
-                    operationNotFound.Invoke();
-                    yield break;
-                }
-
-                // check for status as well as updatedAt
-                // in case of retries, status can be set to Error, but we're interested in the newest actual result
-                if (beamSessionRequest.Status != BeamSessionRequestStatus.Pending)
-                {
-                    sessionRequestResult.Invoke(beamSessionRequest);
-
-                    yield break;
-                }
-
-                yield return new WaitForSecondsRealtime(secondsBetweenPolls);
-            }
-
-            timeout.Invoke();
-        }
-
-        private async UniTask<GetSessionRequestResponse> PollForSessionRequestResultAsync(
-            string sessionRequestId,
-            int secondsTimeout = DefaultTimeoutInSeconds,
-            int secondsBetweenPolls = 1,
-            CancellationToken cancellationToken = default)
-        {
-            await UniTask.Delay(2000, cancellationToken: cancellationToken);
-
-            var endTime = DateTime.Now.AddSeconds(secondsTimeout);
-
-            while ((endTime - DateTime.Now).TotalSeconds > 0)
-            {
-                GetSessionRequestResponse beamSessionRequest;
-                try
-                {
-                    var res = await SessionsApi.GetSessionRequestAsync(sessionRequestId, cancellationToken);
-                    beamSessionRequest = res;
-                }
-                catch (ApiException e)
-                {
-                    if (e.ErrorCode == 404)
-                    {
-                        return null;
-                    }
-
-                    throw;
-                }
-
-                if (beamSessionRequest?.Status != GetSessionRequestResponse.StatusEnum.Pending)
-                {
-                    return beamSessionRequest;
-                }
-
-                await UniTask.Delay(secondsBetweenPolls * 1000, cancellationToken: cancellationToken);
-            }
-
-            return null;
-        }
-
-        private IEnumerator GetActiveSessionAndKeys(
-            string entityId,
-            int chainId,
-            Action<BeamSession, KeyPair> activeSession)
-        {
-            BeamSession beamSession = null;
-            var sessionInfo = m_Storage.Get(Constants.Storage.BeamSession);
-            if (sessionInfo != null)
-            {
-                beamSession = JsonConvert.DeserializeObject<BeamSession>(sessionInfo);
-            }
-
-            var keyPair = GetOrCreateSigningKeyPair();
-
-            // if session is no longer valid, check if we have one saved in the API
-            if (!beamSession.IsValidNow())
-            {
-                yield return m_BeamCoroutineApi.GetActiveSessionInfo(entityId, keyPair.Account.Address, (res) =>
-                {
-                    if (res.Success && res.Result != null)
-                    {
-                        beamSession = res.Result;
-                    }
-                    else
-                    {
-                        Log($"GetActiveSessionInfo returned: {res.ErrorMessage}");
-                    }
-                }, chainId);
-            }
-
-            // make sure session we just retrieved is valid and owned by current KeyPair
-            if (beamSession.IsValidNow() && beamSession.IsOwnedBy(keyPair))
-            {
-                m_Storage.Set(Constants.Storage.BeamSession, JsonConvert.SerializeObject(beamSession));
-                activeSession.Invoke(beamSession, keyPair);
-                yield break;
-            }
-
-            // if session is not valid or owned by different KeyPair, remove it from cache
-            m_Storage.Delete(Constants.Storage.BeamSession);
-            activeSession.Invoke(null, keyPair);
         }
 
         private async UniTask<(BeamSession, KeyPair)> GetActiveSessionAndKeysAsync(

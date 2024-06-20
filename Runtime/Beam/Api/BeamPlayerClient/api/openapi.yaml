@@ -1157,6 +1157,35 @@ paths:
       summary: ""
       tags:
       - Sessions
+  /v1/player/sessions/users/{entityId}/revoke:
+    post:
+      operationId: revokeSession
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeSessionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: ""
+      tags:
+      - Sessions
   /v1/player/sessions/request/{requestId}:
     get:
       operationId: getSessionRequest
@@ -1174,6 +1203,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetSessionRequestResponse'
+          description: ""
+      security:
+      - Beam API game key: []
+      summary: ""
+      tags:
+      - Sessions
+  /v1/player/sessions/users/{entityId}/active:
+    get:
+      operationId: getAllActiveSessions
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: chainId
+        required: false
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActiveSessionsResponse'
           description: ""
       security:
       - Beam API game key: []
@@ -2823,6 +2882,30 @@ components:
       - updatedAt
       - url
       type: object
+    RevokeSessionRequest:
+      example:
+        address: address
+        chainId: 0.8008281904610115
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        address:
+          type: string
+        operationId:
+          nullable: true
+          type: string
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        chainId:
+          default: 13337
+          type: number
+      required:
+      - address
+      type: object
     GetSessionRequestResponse:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2860,6 +2943,27 @@ components:
       - openfortId
       - status
       - updatedAt
+      type: object
+    GetActiveSessionsResponse:
+      example:
+        sessions:
+        - sessionAddress: sessionAddress
+          startTime: startTime
+          id: id
+          endTime: endTime
+          isActive: true
+        - sessionAddress: sessionAddress
+          startTime: startTime
+          id: id
+          endTime: endTime
+          isActive: true
+      properties:
+        sessions:
+          items:
+            $ref: '#/components/schemas/GetActiveSessionsResponse_sessions_inner'
+          type: array
+      required:
+      - sessions
       type: object
     GetActiveSessionResponse:
       example:
@@ -4000,6 +4104,31 @@ components:
       required:
       - id
       - signature
+      type: object
+    GetActiveSessionsResponse_sessions_inner:
+      example:
+        sessionAddress: sessionAddress
+        startTime: startTime
+        id: id
+        endTime: endTime
+        isActive: true
+      properties:
+        id:
+          type: string
+        isActive:
+          type: boolean
+        startTime:
+          type: string
+        endTime:
+          type: string
+        sessionAddress:
+          type: string
+      required:
+      - endTime
+      - id
+      - isActive
+      - sessionAddress
+      - startTime
       type: object
   securitySchemes:
     Beam API game key:

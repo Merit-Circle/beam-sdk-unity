@@ -34,9 +34,8 @@ var beamClient = gameObject.AddComponent<BeamClient>()
                 .SetDebugLogging(true) // optional, defaults to false
                 .SetStorage(yourCustomStorageImplementation); // optional, defaults to PlayerPrefs storage;
 ```
-BeamClient exposes methods that should be wrapped in Coroutines to not block UI thread.
 
-### Checking for active session
+### Checking for an active session
 
 ```csharp
 StartCoroutine(beamClient.GetActiveSession(
