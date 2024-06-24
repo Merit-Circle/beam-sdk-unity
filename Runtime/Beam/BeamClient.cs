@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Beam.Extensions;
@@ -188,7 +189,7 @@ namespace Beam
             try
             {
                 operation = await SessionsApi.RevokeSessionAsync(entityId,
-                    new RevokeSessionRequest(sessionAddress, chainId: chainId), cancellationToken);
+                    new RevokeSessionRequestInput(sessionAddress, chainId: chainId), cancellationToken);
             }
             catch (ApiException e)
             {
@@ -449,12 +450,11 @@ namespace Beam
                 };
             }
 
-            var confirmationModel = new ConfirmOperationRequest
-            {
-                GameId = operation.GameId,
-                EntityId = entityId,
-                Status = ConfirmOperationRequest.StatusEnum.Pending
-            };
+            var confirmationModel = new ConfirmOperationRequest(
+                ConfirmOperationRequest.StatusEnum.Pending,
+                entityId: entityId,
+                gameId: operation.GameId,
+                transactions: new List<ConfirmOperationRequestTransactionsInner>());
 
             foreach (var transaction in operation.Transactions)
             {
@@ -465,6 +465,7 @@ namespace Beam
                     switch (transaction.Type)
                     {
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortRevokeSession:
+                            throw new Exception($"Revoke Session Operation has to be performed via {nameof(RevokeSessionAsync)}() method only");
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortTransaction:
                             signature = activeSessionKeyPair.SignMessage(transaction.Data.GetString());
                             break;
@@ -475,11 +476,7 @@ namespace Beam
                             throw new ArgumentOutOfRangeException();
                     }
 
-                    confirmationModel.Transactions.Add(new ConfirmOperationRequestTransactionsInner
-                    {
-                        Id = transaction.Id,
-                        Signature = signature
-                    });
+                    confirmationModel.Transactions.Add(new ConfirmOperationRequestTransactionsInner(transaction.Id, signature));
                 }
                 catch (Exception e)
                 {
@@ -513,7 +510,7 @@ namespace Beam
             catch (ApiException e)
             {
                 Log(
-                    $"Confirming operation({operation.Id}) encountered an error: {e.Message}");
+                    $"Confirming operation({operation.Id}) encountered an error: {e.ErrorContent}");
                 return new BeamResult<CommonOperationResponse.StatusEnum>
                 {
                     Status = BeamResultType.Error,

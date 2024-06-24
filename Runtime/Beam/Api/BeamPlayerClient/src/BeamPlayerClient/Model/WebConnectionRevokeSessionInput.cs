@@ -25,10 +25,10 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// RevokeSessionRequest
+    /// WebConnectionRevokeSessionInput
     /// </summary>
-    [DataContract(Name = "RevokeSessionRequest")]
-    public partial class RevokeSessionRequest
+    [DataContract(Name = "WebConnectionRevokeSessionInput")]
+    public partial class WebConnectionRevokeSessionInput
     {
         /// <summary>
         /// Defines OperationProcessing
@@ -56,29 +56,42 @@ namespace BeamPlayerClient.Model
         [DataMember(Name = "operationProcessing", EmitDefaultValue = false)]
         public OperationProcessingEnum? OperationProcessing { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="RevokeSessionRequest" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionRevokeSessionInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected RevokeSessionRequest() { }
+        protected WebConnectionRevokeSessionInput() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="RevokeSessionRequest" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionRevokeSessionInput" /> class.
         /// </summary>
+        /// <param name="accountAddress">accountAddress (required).</param>
         /// <param name="address">address (required).</param>
         /// <param name="operationId">operationId.</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
-        public RevokeSessionRequest(string address = default(string), string operationId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, decimal chainId = 13337M)
+        public WebConnectionRevokeSessionInput(string accountAddress = default(string), string address = default(string), string operationId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, decimal chainId = 13337M)
         {
+            // to ensure "accountAddress" is required (not null)
+            if (accountAddress == null)
+            {
+                throw new ArgumentNullException("accountAddress is a required property for WebConnectionRevokeSessionInput and cannot be null");
+            }
+            this.AccountAddress = accountAddress;
             // to ensure "address" is required (not null)
             if (address == null)
             {
-                throw new ArgumentNullException("address is a required property for RevokeSessionRequest and cannot be null");
+                throw new ArgumentNullException("address is a required property for WebConnectionRevokeSessionInput and cannot be null");
             }
             this.Address = address;
             this.OperationId = operationId;
             this.OperationProcessing = operationProcessing;
             this.ChainId = chainId;
         }
+
+        /// <summary>
+        /// Gets or Sets AccountAddress
+        /// </summary>
+        [DataMember(Name = "accountAddress", IsRequired = true, EmitDefaultValue = true)]
+        public string AccountAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
@@ -105,7 +118,8 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class RevokeSessionRequest {\n");
+            sb.Append("class WebConnectionRevokeSessionInput {\n");
+            sb.Append("  AccountAddress: ").Append(AccountAddress).Append("\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");

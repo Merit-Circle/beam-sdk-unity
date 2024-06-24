@@ -373,7 +373,7 @@ namespace BeamPlayerClient.Model
         {
             if(reader.TokenType != JsonToken.Null)
             {
-                return CommonOperationResponseTransactionsInnerData.FromJson(JObject.Load(reader).ToString(Formatting.None));
+                return CommonOperationResponseTransactionsInnerData.FromJson(JToken.Load(reader).ToString(Formatting.None));
             }
             return null;
         }

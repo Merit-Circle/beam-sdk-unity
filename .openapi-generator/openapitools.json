@@ -21,7 +21,7 @@
           "packageName": "BeamPlayerClient",
           "returnICollection": true,
           "optionalMethodArgument": false,
-          "nullableReferenceTypes": true,
+          "nullableReferenceTypes": false,
           "optionalProjectFile": false
         }
       }

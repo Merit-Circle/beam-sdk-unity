@@ -111,9 +111,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="revokeSessionRequest"></param>
+        /// <param name="revokeSessionRequestInput"></param>
         /// <returns>CommonOperationResponse</returns>
-        CommonOperationResponse RevokeSession(string entityId, RevokeSessionRequest revokeSessionRequest);
+        CommonOperationResponse RevokeSession(string entityId, RevokeSessionRequestInput revokeSessionRequestInput);
 
         /// <summary>
         /// 
@@ -123,9 +123,9 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="revokeSessionRequest"></param>
+        /// <param name="revokeSessionRequestInput"></param>
         /// <returns>ApiResponse of CommonOperationResponse</returns>
-        ApiResponse<CommonOperationResponse> RevokeSessionWithHttpInfo(string entityId, RevokeSessionRequest revokeSessionRequest);
+        ApiResponse<CommonOperationResponse> RevokeSessionWithHttpInfo(string entityId, RevokeSessionRequestInput revokeSessionRequestInput);
         #endregion Synchronous Operations
     }
 
@@ -243,10 +243,10 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="revokeSessionRequest"></param>
+        /// <param name="revokeSessionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> RevokeSessionAsync(string entityId, RevokeSessionRequest revokeSessionRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> RevokeSessionAsync(string entityId, RevokeSessionRequestInput revokeSessionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -256,10 +256,10 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="revokeSessionRequest"></param>
+        /// <param name="revokeSessionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> RevokeSessionWithHttpInfoAsync(string entityId, RevokeSessionRequest revokeSessionRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> RevokeSessionWithHttpInfoAsync(string entityId, RevokeSessionRequestInput revokeSessionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -975,11 +975,11 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="revokeSessionRequest"></param>
+        /// <param name="revokeSessionRequestInput"></param>
         /// <returns>CommonOperationResponse</returns>
-        public CommonOperationResponse RevokeSession(string entityId, RevokeSessionRequest revokeSessionRequest)
+        public CommonOperationResponse RevokeSession(string entityId, RevokeSessionRequestInput revokeSessionRequestInput)
         {
-            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = RevokeSessionWithHttpInfo(entityId, revokeSessionRequest);
+            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = RevokeSessionWithHttpInfo(entityId, revokeSessionRequestInput);
             return localVarResponse.Data;
         }
 
@@ -988,17 +988,17 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="revokeSessionRequest"></param>
+        /// <param name="revokeSessionRequestInput"></param>
         /// <returns>ApiResponse of CommonOperationResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> RevokeSessionWithHttpInfo(string entityId, RevokeSessionRequest revokeSessionRequest)
+        public BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> RevokeSessionWithHttpInfo(string entityId, RevokeSessionRequestInput revokeSessionRequestInput)
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling SessionsApi->RevokeSession");
 
-            // verify the required parameter 'revokeSessionRequest' is set
-            if (revokeSessionRequest == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'revokeSessionRequest' when calling SessionsApi->RevokeSession");
+            // verify the required parameter 'revokeSessionRequestInput' is set
+            if (revokeSessionRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'revokeSessionRequestInput' when calling SessionsApi->RevokeSession");
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
 
@@ -1018,7 +1018,7 @@ namespace BeamPlayerClient.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
-            localVarRequestOptions.Data = revokeSessionRequest;
+            localVarRequestOptions.Data = revokeSessionRequestInput;
 
             // authentication (Beam API game key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -1043,12 +1043,12 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="revokeSessionRequest"></param>
+        /// <param name="revokeSessionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonOperationResponse</returns>
-        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> RevokeSessionAsync(string entityId, RevokeSessionRequest revokeSessionRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> RevokeSessionAsync(string entityId, RevokeSessionRequestInput revokeSessionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var task = RevokeSessionWithHttpInfoAsync(entityId, revokeSessionRequest, cancellationToken);
+            var task = RevokeSessionWithHttpInfoAsync(entityId, revokeSessionRequestInput, cancellationToken);
             BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
             return localVarResponse.Data;
         }
@@ -1058,18 +1058,18 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="revokeSessionRequest"></param>
+        /// <param name="revokeSessionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
-        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> RevokeSessionWithHttpInfoAsync(string entityId, RevokeSessionRequest revokeSessionRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> RevokeSessionWithHttpInfoAsync(string entityId, RevokeSessionRequestInput revokeSessionRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling SessionsApi->RevokeSession");
 
-            // verify the required parameter 'revokeSessionRequest' is set
-            if (revokeSessionRequest == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'revokeSessionRequest' when calling SessionsApi->RevokeSession");
+            // verify the required parameter 'revokeSessionRequestInput' is set
+            if (revokeSessionRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'revokeSessionRequestInput' when calling SessionsApi->RevokeSession");
 
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
@@ -1091,7 +1091,7 @@ namespace BeamPlayerClient.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
-            localVarRequestOptions.Data = revokeSessionRequest;
+            localVarRequestOptions.Data = revokeSessionRequestInput;
 
             // authentication (Beam API game key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
