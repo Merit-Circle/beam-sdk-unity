@@ -107,7 +107,7 @@ namespace Beam
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <param name="cancellationToken">Optional CancellationToken</param>
         /// <returns>UniTask</returns>
-        public async UniTask<BeamResult<GetConnectionRequestResponse.StatusEnum>> ConnectUserToGame(
+        public async UniTask<BeamResult<GetConnectionRequestResponse.StatusEnum>> ConnectUserToGameAsync(
             string entityId,
             int chainId = Constants.DefaultChainId,
             int secondsTimeout = DefaultTimeoutInSeconds,
