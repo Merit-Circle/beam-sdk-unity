@@ -25,10 +25,10 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// CreateOperationRequestInput
+    /// WebConnectionCreateOperationInput
     /// </summary>
-    [DataContract(Name = "CreateOperationRequestInput")]
-    public partial class CreateOperationRequestInput
+    [DataContract(Name = "WebConnectionCreateOperationInput")]
+    public partial class WebConnectionCreateOperationInput
     {
         /// <summary>
         /// Defines OperationProcessing
@@ -56,31 +56,31 @@ namespace BeamPlayerClient.Model
         [DataMember(Name = "operationProcessing", EmitDefaultValue = false)]
         public OperationProcessingEnum? OperationProcessing { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateOperationRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionCreateOperationInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateOperationRequestInput() { }
+        protected WebConnectionCreateOperationInput() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateOperationRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionCreateOperationInput" /> class.
         /// </summary>
-        /// <param name="entityId">entityId (required).</param>
+        /// <param name="accountAddress">accountAddress (required).</param>
         /// <param name="chainId">chainId (required).</param>
         /// <param name="transactions">transactions (required).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
-        public CreateOperationRequestInput(string entityId = default(string), decimal chainId = default(decimal), List<CreateOperationRequestInputTransactionsInner> transactions = default(List<CreateOperationRequestInputTransactionsInner>), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
+        public WebConnectionCreateOperationInput(string accountAddress = default(string), decimal chainId = default(decimal), List<CreateOperationRequestInputTransactionsInner> transactions = default(List<CreateOperationRequestInputTransactionsInner>), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
         {
-            // to ensure "entityId" is required (not null)
-            if (entityId == null)
+            // to ensure "accountAddress" is required (not null)
+            if (accountAddress == null)
             {
-                throw new ArgumentNullException("entityId is a required property for CreateOperationRequestInput and cannot be null");
+                throw new ArgumentNullException("accountAddress is a required property for WebConnectionCreateOperationInput and cannot be null");
             }
-            this.EntityId = entityId;
+            this.AccountAddress = accountAddress;
             this.ChainId = chainId;
             // to ensure "transactions" is required (not null)
             if (transactions == null)
             {
-                throw new ArgumentNullException("transactions is a required property for CreateOperationRequestInput and cannot be null");
+                throw new ArgumentNullException("transactions is a required property for WebConnectionCreateOperationInput and cannot be null");
             }
             this.Transactions = transactions;
             this.OperationProcessing = operationProcessing;
@@ -88,10 +88,10 @@ namespace BeamPlayerClient.Model
         }
 
         /// <summary>
-        /// Gets or Sets EntityId
+        /// Gets or Sets AccountAddress
         /// </summary>
-        [DataMember(Name = "entityId", IsRequired = true, EmitDefaultValue = true)]
-        public string EntityId { get; set; }
+        [DataMember(Name = "accountAddress", IsRequired = true, EmitDefaultValue = true)]
+        public string AccountAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
@@ -118,8 +118,8 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CreateOperationRequestInput {\n");
-            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
+            sb.Append("class WebConnectionCreateOperationInput {\n");
+            sb.Append("  AccountAddress: ").Append(AccountAddress).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Transactions: ").Append(Transactions).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");

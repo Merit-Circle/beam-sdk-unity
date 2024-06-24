@@ -274,7 +274,7 @@
         {
             if(reader.TokenType != JsonToken.Null)
             {
-                return {{classname}}.FromJson(JObject.Load(reader).ToString(Formatting.None));
+                return {{classname}}.FromJson(JToken.Load(reader).ToString(Formatting.None));
             }
             return null;
         }

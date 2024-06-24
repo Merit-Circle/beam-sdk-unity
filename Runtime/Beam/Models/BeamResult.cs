@@ -1,5 +1,3 @@
-using BeamPlayerClient.Model;
-
 namespace Beam.Models
 {
     public class BeamResult<T>
@@ -29,7 +27,6 @@ namespace Beam.Models
     {
         Pending,
         Success,
-        Error,
-        Timeout
+        Error
     }
 }

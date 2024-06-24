@@ -25,10 +25,10 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// CreateOperationRequestInput
+    /// WebConnectionRevokeSessionInput
     /// </summary>
-    [DataContract(Name = "CreateOperationRequestInput")]
-    public partial class CreateOperationRequestInput
+    [DataContract(Name = "WebConnectionRevokeSessionInput")]
+    public partial class WebConnectionRevokeSessionInput
     {
         /// <summary>
         /// Defines OperationProcessing
@@ -56,54 +56,48 @@ namespace BeamPlayerClient.Model
         [DataMember(Name = "operationProcessing", EmitDefaultValue = false)]
         public OperationProcessingEnum? OperationProcessing { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateOperationRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionRevokeSessionInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateOperationRequestInput() { }
+        protected WebConnectionRevokeSessionInput() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateOperationRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionRevokeSessionInput" /> class.
         /// </summary>
-        /// <param name="entityId">entityId (required).</param>
-        /// <param name="chainId">chainId (required).</param>
-        /// <param name="transactions">transactions (required).</param>
-        /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
+        /// <param name="accountAddress">accountAddress (required).</param>
+        /// <param name="address">address (required).</param>
         /// <param name="operationId">operationId.</param>
-        public CreateOperationRequestInput(string entityId = default(string), decimal chainId = default(decimal), List<CreateOperationRequestInputTransactionsInner> transactions = default(List<CreateOperationRequestInputTransactionsInner>), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
+        /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
+        /// <param name="chainId">chainId (default to 13337M).</param>
+        public WebConnectionRevokeSessionInput(string accountAddress = default(string), string address = default(string), string operationId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, decimal chainId = 13337M)
         {
-            // to ensure "entityId" is required (not null)
-            if (entityId == null)
+            // to ensure "accountAddress" is required (not null)
+            if (accountAddress == null)
             {
-                throw new ArgumentNullException("entityId is a required property for CreateOperationRequestInput and cannot be null");
+                throw new ArgumentNullException("accountAddress is a required property for WebConnectionRevokeSessionInput and cannot be null");
             }
-            this.EntityId = entityId;
-            this.ChainId = chainId;
-            // to ensure "transactions" is required (not null)
-            if (transactions == null)
+            this.AccountAddress = accountAddress;
+            // to ensure "address" is required (not null)
+            if (address == null)
             {
-                throw new ArgumentNullException("transactions is a required property for CreateOperationRequestInput and cannot be null");
+                throw new ArgumentNullException("address is a required property for WebConnectionRevokeSessionInput and cannot be null");
             }
-            this.Transactions = transactions;
-            this.OperationProcessing = operationProcessing;
+            this.Address = address;
             this.OperationId = operationId;
+            this.OperationProcessing = operationProcessing;
+            this.ChainId = chainId;
         }
 
         /// <summary>
-        /// Gets or Sets EntityId
+        /// Gets or Sets AccountAddress
         /// </summary>
-        [DataMember(Name = "entityId", IsRequired = true, EmitDefaultValue = true)]
-        public string EntityId { get; set; }
+        [DataMember(Name = "accountAddress", IsRequired = true, EmitDefaultValue = true)]
+        public string AccountAddress { get; set; }
 
         /// <summary>
-        /// Gets or Sets ChainId
+        /// Gets or Sets Address
         /// </summary>
-        [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
-        public decimal ChainId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Transactions
-        /// </summary>
-        [DataMember(Name = "transactions", IsRequired = true, EmitDefaultValue = true)]
-        public List<CreateOperationRequestInputTransactionsInner> Transactions { get; set; }
+        [DataMember(Name = "address", IsRequired = true, EmitDefaultValue = true)]
+        public string Address { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId
@@ -112,18 +106,24 @@ namespace BeamPlayerClient.Model
         public string OperationId { get; set; }
 
         /// <summary>
+        /// Gets or Sets ChainId
+        /// </summary>
+        [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        public decimal ChainId { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CreateOperationRequestInput {\n");
-            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
-            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
-            sb.Append("  Transactions: ").Append(Transactions).Append("\n");
-            sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
+            sb.Append("class WebConnectionRevokeSessionInput {\n");
+            sb.Append("  AccountAddress: ").Append(AccountAddress).Append("\n");
+            sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
+            sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
