@@ -25,10 +25,10 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// GenerateConnectionRequestResponse
+    /// CreateConnectionRequestResponse
     /// </summary>
-    [DataContract(Name = "GenerateConnectionRequestResponse")]
-    public partial class GenerateConnectionRequestResponse
+    [DataContract(Name = "CreateConnectionRequestResponse")]
+    public partial class CreateConnectionRequestResponse
     {
         /// <summary>
         /// Defines Status
@@ -62,38 +62,38 @@ namespace BeamPlayerClient.Model
         [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = true)]
         public StatusEnum Status { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateConnectionRequestResponse" /> class.
+        /// Initializes a new instance of the <see cref="CreateConnectionRequestResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GenerateConnectionRequestResponse() { }
+        protected CreateConnectionRequestResponse() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateConnectionRequestResponse" /> class.
+        /// Initializes a new instance of the <see cref="CreateConnectionRequestResponse" /> class.
         /// </summary>
         /// <param name="status">status (required).</param>
         /// <param name="id">id (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
         /// <param name="updatedAt">updatedAt (required).</param>
         /// <param name="url">url (required).</param>
-        public GenerateConnectionRequestResponse(StatusEnum status = default(StatusEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), string url = default(string))
+        public CreateConnectionRequestResponse(StatusEnum status = default(StatusEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), string url = default(string))
         {
             this.Status = status;
             // to ensure "id" is required (not null)
             if (id == null)
             {
-                throw new ArgumentNullException("id is a required property for GenerateConnectionRequestResponse and cannot be null");
+                throw new ArgumentNullException("id is a required property for CreateConnectionRequestResponse and cannot be null");
             }
             this.Id = id;
             this.CreatedAt = createdAt;
             // to ensure "updatedAt" is required (not null)
             if (updatedAt == null)
             {
-                throw new ArgumentNullException("updatedAt is a required property for GenerateConnectionRequestResponse and cannot be null");
+                throw new ArgumentNullException("updatedAt is a required property for CreateConnectionRequestResponse and cannot be null");
             }
             this.UpdatedAt = updatedAt;
             // to ensure "url" is required (not null)
             if (url == null)
             {
-                throw new ArgumentNullException("url is a required property for GenerateConnectionRequestResponse and cannot be null");
+                throw new ArgumentNullException("url is a required property for CreateConnectionRequestResponse and cannot be null");
             }
             this.Url = url;
         }
@@ -129,7 +129,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GenerateConnectionRequestResponse {\n");
+            sb.Append("class CreateConnectionRequestResponse {\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");

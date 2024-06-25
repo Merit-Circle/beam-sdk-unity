@@ -42,12 +42,12 @@ src/BeamPlayerClient/Model/ConfirmOperationRequest.cs
 src/BeamPlayerClient/Model/ConfirmOperationRequestTransactionsInner.cs
 src/BeamPlayerClient/Model/ConvertTokenRequestInput.cs
 src/BeamPlayerClient/Model/CreateAssetOfferRequestInput.cs
+src/BeamPlayerClient/Model/CreateConnectionRequestInput.cs
+src/BeamPlayerClient/Model/CreateConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/CreateOperationRequestInput.cs
 src/BeamPlayerClient/Model/CreateOperationRequestInputTransactionsInner.cs
 src/BeamPlayerClient/Model/CreateTransactionRequestInput.cs
 src/BeamPlayerClient/Model/CreateTransactionRequestInputInteractionsInner.cs
-src/BeamPlayerClient/Model/GenerateConnectionRequestInput.cs
-src/BeamPlayerClient/Model/GenerateConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/GenerateSessionRequestResponse.cs
 src/BeamPlayerClient/Model/GenerateSessionUrlRequestInput.cs
 src/BeamPlayerClient/Model/GetActiveSessionResponse.cs
@@ -100,11 +100,3 @@ src/BeamPlayerClient/Model/TransferAssetRequestInput.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInputAssetsInner.cs
 src/BeamPlayerClient/Model/TransferNativeTokenRequestInput.cs
 src/BeamPlayerClient/Model/TransferTokenRequestInput.cs
-src/BeamPlayerClient/Model/WebConnectionCreateOperationInput.cs
-src/BeamPlayerClient/Model/WebConnectionRequestInput.cs
-src/BeamPlayerClient/Model/WebConnectionRequestResponse.cs
-src/BeamPlayerClient/Model/WebConnectionRevokeSessionInput.cs
-src/BeamPlayerClient/Model/WebConnectionTransactionInput.cs
-src/BeamPlayerClient/Model/WebConnectionTransactionInputInteractionsInner.cs
-src/BeamPlayerClient/Model/WebConnectionVerifyRequestInput.cs
-src/BeamPlayerClient/Model/WebConnectionVerifyRequestResponse.cs

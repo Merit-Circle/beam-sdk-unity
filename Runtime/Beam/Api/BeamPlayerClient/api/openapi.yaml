@@ -215,7 +215,7 @@ paths:
           description: ""
       security:
       - Beam API game key: []
-      summary: Transfer the native token (BEAM)
+      summary: Transfer the native token
       tags:
       - Assets
   /v1/player/assets/{assetAddress}:
@@ -1276,7 +1276,7 @@ paths:
       summary: ""
       tags:
       - Sessions
-  /v1/player/connector:
+  /v1/connection/request:
     post:
       operationId: createConnectionRequest
       parameters: []
@@ -1284,21 +1284,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GenerateConnectionRequestInput'
+              $ref: '#/components/schemas/CreateConnectionRequestInput'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenerateConnectionRequestResponse'
+                $ref: '#/components/schemas/CreateConnectionRequestResponse'
           description: ""
       security:
       - Beam API game key: []
       summary: ""
       tags:
       - Connector
-  /v1/player/connector/{requestId}:
+  /v1/connection/request/{requestId}:
     get:
       operationId: getConnectionRequest
       parameters:
@@ -1315,116 +1315,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetConnectionRequestResponse'
-          description: ""
-      security:
-      - Beam API game key: []
-      summary: ""
-      tags:
-      - Connector
-  /v1/player/connector/web-connection:
-    post:
-      operationId: generateWebConnection
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebConnectionRequestInput'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WebConnectionRequestResponse'
-          description: ""
-      security:
-      - Beam API game key: []
-      summary: ""
-      tags:
-      - Connector
-  /v1/player/connector/web-connection/user/verify:
-    post:
-      operationId: verifyOwnership
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebConnectionVerifyRequestInput'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WebConnectionVerifyRequestResponse'
-          description: ""
-      security:
-      - Beam API game key: []
-      summary: ""
-      tags:
-      - Connector
-  /v1/player/connector/web-connection/operation:
-    post:
-      operationId: createWebConnectionOperation
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebConnectionCreateOperationInput'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonOperationResponse'
-          description: ""
-      security:
-      - Beam API game key: []
-      summary: ""
-      tags:
-      - Connector
-  /v1/player/connector/web-connection/session/revoke:
-    post:
-      operationId: revokeSessionByAccountAddress
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebConnectionRevokeSessionInput'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonOperationResponse'
-          description: ""
-      security:
-      - Beam API game key: []
-      summary: ""
-      tags:
-      - Connector
-  /v1/player/connector/web-connection/transaction:
-    post:
-      operationId: createTransactionForAddress
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebConnectionTransactionInput'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
       - Beam API game key: []
@@ -1636,6 +1526,7 @@ components:
           operationId: operationId
           id: id
           type: OpenfortTransaction
+          transactionHash: transactionHash
           hash: hash
           status: Pending
         - data: null
@@ -1644,6 +1535,7 @@ components:
           operationId: operationId
           id: id
           type: OpenfortTransaction
+          transactionHash: transactionHash
           hash: hash
           status: Pending
         userId: userId
@@ -3091,7 +2983,7 @@ components:
       - sessionAddress
       - startTime
       type: object
-    GenerateConnectionRequestInput:
+    CreateConnectionRequestInput:
       example:
         chainId: 0.8008281904610115
         entityId: entityId
@@ -3104,7 +2996,7 @@ components:
       required:
       - entityId
       type: object
-    GenerateConnectionRequestResponse:
+    CreateConnectionRequestResponse:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
         id: id
@@ -3166,162 +3058,6 @@ components:
       - id
       - status
       - updatedAt
-      type: object
-    WebConnectionRequestInput:
-      example:
-        chainId: 0.8008281904610115
-        message: message
-      properties:
-        message:
-          type: string
-        chainId:
-          default: 13337
-          type: number
-      required:
-      - message
-      type: object
-    WebConnectionRequestResponse:
-      example:
-        url: https://openapi-generator.tech
-      properties:
-        url:
-          format: uri
-          type: string
-      required:
-      - url
-      type: object
-    WebConnectionVerifyRequestInput:
-      example:
-        accountAddress: accountAddress
-        chainId: 0.8008281904610115
-        ownerAddress: ownerAddress
-      properties:
-        accountAddress:
-          type: string
-        ownerAddress:
-          type: string
-        chainId:
-          default: 13337
-          type: number
-      required:
-      - accountAddress
-      - ownerAddress
-      type: object
-    WebConnectionVerifyRequestResponse:
-      example:
-        success: true
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      type: object
-    WebConnectionCreateOperationInput:
-      example:
-        accountAddress: accountAddress
-        chainId: 0.8008281904610115
-        operationId: operationId
-        transactions:
-        - data: ""
-          type: OpenfortTransaction
-        - data: ""
-          type: OpenfortTransaction
-        operationProcessing: Execute
-      properties:
-        accountAddress:
-          type: string
-        chainId:
-          type: number
-        transactions:
-          items:
-            $ref: '#/components/schemas/CreateOperationRequestInput_transactions_inner'
-          nullable: true
-          type: array
-        operationProcessing:
-          default: Execute
-          enum:
-          - SignOnly
-          - Execute
-          type: string
-        operationId:
-          nullable: true
-          type: string
-      required:
-      - accountAddress
-      - chainId
-      - transactions
-      type: object
-    WebConnectionRevokeSessionInput:
-      example:
-        address: address
-        accountAddress: accountAddress
-        chainId: 0.8008281904610115
-        operationId: operationId
-        operationProcessing: Execute
-      properties:
-        accountAddress:
-          type: string
-        address:
-          type: string
-        operationId:
-          nullable: true
-          type: string
-        operationProcessing:
-          default: Execute
-          enum:
-          - SignOnly
-          - Execute
-          type: string
-        chainId:
-          default: 13337
-          type: number
-      required:
-      - accountAddress
-      - address
-      type: object
-    WebConnectionTransactionInput:
-      example:
-        accountAddress: accountAddress
-        chainId: 0.8008281904610115
-        operationId: operationId
-        operationProcessing: Execute
-        interactions:
-        - data: data
-          gas: gas
-          from: from
-          to: to
-          value: value
-          nonce: nonce
-          gasPrice: gasPrice
-        - data: data
-          gas: gas
-          from: from
-          to: to
-          value: value
-          nonce: nonce
-          gasPrice: gasPrice
-      properties:
-        accountAddress:
-          type: string
-        operationId:
-          nullable: true
-          type: string
-        operationProcessing:
-          default: Execute
-          enum:
-          - SignOnly
-          - Execute
-          type: string
-        interactions:
-          items:
-            $ref: '#/components/schemas/WebConnectionTransactionInput_interactions_inner'
-          type: array
-        chainId:
-          default: 13337
-          type: number
-      required:
-      - accountAddress
-      - interactions
       type: object
     check_200_response_info_value:
       additionalProperties: true
@@ -3601,6 +3337,7 @@ components:
         operationId: operationId
         id: id
         type: OpenfortTransaction
+        transactionHash: transactionHash
         hash: hash
         status: Pending
       properties:
@@ -3627,6 +3364,9 @@ components:
         signature:
           nullable: true
           type: string
+        transactionHash:
+          nullable: true
+          type: string
         operationId:
           nullable: true
           type: string
@@ -3641,6 +3381,7 @@ components:
       - operationId
       - signature
       - status
+      - transactionHash
       - type
       type: object
     GetAssetsForContractBodyInput_attributes_inner:
@@ -4377,39 +4118,6 @@ components:
       - isActive
       - sessionAddress
       - startTime
-      type: object
-    WebConnectionTransactionInput_interactions_inner:
-      example:
-        data: data
-        gas: gas
-        from: from
-        to: to
-        value: value
-        nonce: nonce
-        gasPrice: gasPrice
-      properties:
-        from:
-          type: string
-        to:
-          nullable: true
-          type: string
-        gas:
-          nullable: true
-          type: string
-        gasPrice:
-          nullable: true
-          type: string
-        value:
-          nullable: true
-          type: string
-        data:
-          nullable: true
-          type: string
-        nonce:
-          nullable: true
-          type: string
-      required:
-      - from
       type: object
   securitySchemes:
     Beam API game key:

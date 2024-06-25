@@ -120,15 +120,10 @@ Class | Method | HTTP request | Description
 *AssetsApi* | [**GetUserCurrencies**](AssetsApi.md#getusercurrencies) | **GET** /v1/player/assets/users/{entityId}/currencies | Get all the currencies owned by an account (ERC20)
 *AssetsApi* | [**GetUserNativeCurrency**](AssetsApi.md#getusernativecurrency) | **GET** /v1/player/assets/users/{entityId}/native | Get the native token balance
 *AssetsApi* | [**TransferAsset**](AssetsApi.md#transferasset) | **POST** /v1/player/assets/users/{entityId}/transfer-asset | Transfer an asset (NFT assets, ERC721 / ERC1155)
-*AssetsApi* | [**TransferNativeToken**](AssetsApi.md#transfernativetoken) | **POST** /v1/player/assets/users/{entityId}/transfer-native | Transfer the native token (BEAM)
+*AssetsApi* | [**TransferNativeToken**](AssetsApi.md#transfernativetoken) | **POST** /v1/player/assets/users/{entityId}/transfer-native | Transfer the native token
 *AssetsApi* | [**TransferToken**](AssetsApi.md#transfertoken) | **POST** /v1/player/assets/users/{entityId}/transfer-token | Transfer a token (token assets, ERC20)
-*ConnectorApi* | [**CreateConnectionRequest**](ConnectorApi.md#createconnectionrequest) | **POST** /v1/player/connector | 
-*ConnectorApi* | [**CreateTransactionForAddress**](ConnectorApi.md#createtransactionforaddress) | **POST** /v1/player/connector/web-connection/transaction | 
-*ConnectorApi* | [**CreateWebConnectionOperation**](ConnectorApi.md#createwebconnectionoperation) | **POST** /v1/player/connector/web-connection/operation | 
-*ConnectorApi* | [**GenerateWebConnection**](ConnectorApi.md#generatewebconnection) | **POST** /v1/player/connector/web-connection | 
-*ConnectorApi* | [**GetConnectionRequest**](ConnectorApi.md#getconnectionrequest) | **GET** /v1/player/connector/{requestId} | 
-*ConnectorApi* | [**RevokeSessionByAccountAddress**](ConnectorApi.md#revokesessionbyaccountaddress) | **POST** /v1/player/connector/web-connection/session/revoke | 
-*ConnectorApi* | [**VerifyOwnership**](ConnectorApi.md#verifyownership) | **POST** /v1/player/connector/web-connection/user/verify | 
+*ConnectorApi* | [**CreateConnectionRequest**](ConnectorApi.md#createconnectionrequest) | **POST** /v1/connection/request | 
+*ConnectorApi* | [**GetConnectionRequest**](ConnectorApi.md#getconnectionrequest) | **GET** /v1/connection/request/{requestId} | 
 *ExchangeApi* | [**ConvertInput**](ExchangeApi.md#convertinput) | **POST** /v1/player/exchange/users/{entityId}/convert/input | Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`
 *ExchangeApi* | [**ConvertToOutput**](ExchangeApi.md#converttooutput) | **POST** /v1/player/exchange/users/{entityId}/convert/output | Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`
 *ExchangeApi* | [**GetQuoteForInput**](ExchangeApi.md#getquoteforinput) | **GET** /v1/player/exchange/quote/input | Returns the maximum necessary input amount for a token trade, given a desired output amount
@@ -180,12 +175,12 @@ Class | Method | HTTP request | Description
  - [Model.ConfirmOperationRequestTransactionsInner](ConfirmOperationRequestTransactionsInner.md)
  - [Model.ConvertTokenRequestInput](ConvertTokenRequestInput.md)
  - [Model.CreateAssetOfferRequestInput](CreateAssetOfferRequestInput.md)
+ - [Model.CreateConnectionRequestInput](CreateConnectionRequestInput.md)
+ - [Model.CreateConnectionRequestResponse](CreateConnectionRequestResponse.md)
  - [Model.CreateOperationRequestInput](CreateOperationRequestInput.md)
  - [Model.CreateOperationRequestInputTransactionsInner](CreateOperationRequestInputTransactionsInner.md)
  - [Model.CreateTransactionRequestInput](CreateTransactionRequestInput.md)
  - [Model.CreateTransactionRequestInputInteractionsInner](CreateTransactionRequestInputInteractionsInner.md)
- - [Model.GenerateConnectionRequestInput](GenerateConnectionRequestInput.md)
- - [Model.GenerateConnectionRequestResponse](GenerateConnectionRequestResponse.md)
  - [Model.GenerateSessionRequestResponse](GenerateSessionRequestResponse.md)
  - [Model.GenerateSessionUrlRequestInput](GenerateSessionUrlRequestInput.md)
  - [Model.GetActiveSessionResponse](GetActiveSessionResponse.md)
@@ -238,14 +233,6 @@ Class | Method | HTTP request | Description
  - [Model.TransferAssetRequestInputAssetsInner](TransferAssetRequestInputAssetsInner.md)
  - [Model.TransferNativeTokenRequestInput](TransferNativeTokenRequestInput.md)
  - [Model.TransferTokenRequestInput](TransferTokenRequestInput.md)
- - [Model.WebConnectionCreateOperationInput](WebConnectionCreateOperationInput.md)
- - [Model.WebConnectionRequestInput](WebConnectionRequestInput.md)
- - [Model.WebConnectionRequestResponse](WebConnectionRequestResponse.md)
- - [Model.WebConnectionRevokeSessionInput](WebConnectionRevokeSessionInput.md)
- - [Model.WebConnectionTransactionInput](WebConnectionTransactionInput.md)
- - [Model.WebConnectionTransactionInputInteractionsInner](WebConnectionTransactionInputInteractionsInner.md)
- - [Model.WebConnectionVerifyRequestInput](WebConnectionVerifyRequestInput.md)
- - [Model.WebConnectionVerifyRequestResponse](WebConnectionVerifyRequestResponse.md)
 
 
 <a id="documentation-for-authorization"></a>

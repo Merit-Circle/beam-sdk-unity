@@ -117,10 +117,11 @@ namespace BeamPlayerClient.Model
         /// <param name="id">id (required).</param>
         /// <param name="externalId">externalId (required).</param>
         /// <param name="signature">signature (required).</param>
+        /// <param name="transactionHash">transactionHash (required).</param>
         /// <param name="operationId">operationId (required).</param>
         /// <param name="data">data.</param>
         /// <param name="hash">hash (required).</param>
-        public CommonOperationResponseTransactionsInner(TypeEnum type = default(TypeEnum), StatusEnum status = default(StatusEnum), string id = default(string), string externalId = default(string), string signature = default(string), string operationId = default(string), CommonOperationResponseTransactionsInnerData data = default(CommonOperationResponseTransactionsInnerData), string hash = default(string))
+        public CommonOperationResponseTransactionsInner(TypeEnum type = default(TypeEnum), StatusEnum status = default(StatusEnum), string id = default(string), string externalId = default(string), string signature = default(string), string transactionHash = default(string), string operationId = default(string), CommonOperationResponseTransactionsInnerData data = default(CommonOperationResponseTransactionsInnerData), string hash = default(string))
         {
             this.Type = type;
             this.Status = status;
@@ -142,6 +143,12 @@ namespace BeamPlayerClient.Model
                 throw new ArgumentNullException("signature is a required property for CommonOperationResponseTransactionsInner and cannot be null");
             }
             this.Signature = signature;
+            // to ensure "transactionHash" is required (not null)
+            if (transactionHash == null)
+            {
+                throw new ArgumentNullException("transactionHash is a required property for CommonOperationResponseTransactionsInner and cannot be null");
+            }
+            this.TransactionHash = transactionHash;
             // to ensure "operationId" is required (not null)
             if (operationId == null)
             {
@@ -176,6 +183,12 @@ namespace BeamPlayerClient.Model
         public string Signature { get; set; }
 
         /// <summary>
+        /// Gets or Sets TransactionHash
+        /// </summary>
+        [DataMember(Name = "transactionHash", IsRequired = true, EmitDefaultValue = true)]
+        public string TransactionHash { get; set; }
+
+        /// <summary>
         /// Gets or Sets OperationId
         /// </summary>
         [DataMember(Name = "operationId", IsRequired = true, EmitDefaultValue = true)]
@@ -206,6 +219,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  Signature: ").Append(Signature).Append("\n");
+            sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  Hash: ").Append(Hash).Append("\n");

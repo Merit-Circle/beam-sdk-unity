@@ -25,27 +25,27 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// GenerateConnectionRequestInput
+    /// CreateConnectionRequestInput
     /// </summary>
-    [DataContract(Name = "GenerateConnectionRequestInput")]
-    public partial class GenerateConnectionRequestInput
+    [DataContract(Name = "CreateConnectionRequestInput")]
+    public partial class CreateConnectionRequestInput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateConnectionRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="CreateConnectionRequestInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GenerateConnectionRequestInput() { }
+        protected CreateConnectionRequestInput() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateConnectionRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="CreateConnectionRequestInput" /> class.
         /// </summary>
         /// <param name="entityId">entityId (required).</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
-        public GenerateConnectionRequestInput(string entityId = default(string), decimal chainId = 13337M)
+        public CreateConnectionRequestInput(string entityId = default(string), decimal chainId = 13337M)
         {
             // to ensure "entityId" is required (not null)
             if (entityId == null)
             {
-                throw new ArgumentNullException("entityId is a required property for GenerateConnectionRequestInput and cannot be null");
+                throw new ArgumentNullException("entityId is a required property for CreateConnectionRequestInput and cannot be null");
             }
             this.EntityId = entityId;
             this.ChainId = chainId;
@@ -70,7 +70,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GenerateConnectionRequestInput {\n");
+            sb.Append("class CreateConnectionRequestInput {\n");
             sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");

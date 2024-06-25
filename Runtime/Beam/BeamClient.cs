@@ -115,11 +115,11 @@ namespace Beam
             CancellationToken cancellationToken = default)
         {
             Log("Retrieving connection request");
-            GenerateConnectionRequestResponse connRequest;
+            CreateConnectionRequestResponse connRequest;
             try
             {
                 connRequest = await ConnectorApi.CreateConnectionRequestAsync(
-                    new GenerateConnectionRequestInput(entityId, chainId), cancellationToken);
+                    new CreateConnectionRequestInput(entityId, chainId), cancellationToken);
             }
             catch (ApiException e)
             {
@@ -409,10 +409,10 @@ namespace Beam
                 secondsBetweenPolls: 1,
                 cancellationToken: cancellationToken);
 
-            Log($"Got operation({operation.Id}) result: {pollingResult.Status.ToString()}");
-            var beamResult = new BeamResult<CommonOperationResponse.StatusEnum>(pollingResult.Status);
+            Log($"Got operation({operation.Id}) result: {pollingResult?.Status.ToString()}");
+            var beamResult = new BeamResult<CommonOperationResponse.StatusEnum>(pollingResult?.Status ?? CommonOperationResponse.StatusEnum.Error);
 
-            switch (pollingResult.Status)
+            switch (pollingResult?.Status)
             {
                 case CommonOperationResponse.StatusEnum.Pending:
                 case CommonOperationResponse.StatusEnum.Executed:

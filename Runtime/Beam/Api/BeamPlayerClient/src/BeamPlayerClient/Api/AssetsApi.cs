@@ -153,7 +153,7 @@ namespace BeamPlayerClient.Api
         /// <returns>ApiResponse of CommonOperationResponse</returns>
         ApiResponse<CommonOperationResponse> TransferAssetWithHttpInfo(string entityId, TransferAssetRequestInput transferAssetRequestInput);
         /// <summary>
-        /// Transfer the native token (BEAM)
+        /// Transfer the native token
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -162,7 +162,7 @@ namespace BeamPlayerClient.Api
         CommonOperationResponse TransferNativeToken(string entityId, TransferNativeTokenRequestInput transferNativeTokenRequestInput);
 
         /// <summary>
-        /// Transfer the native token (BEAM)
+        /// Transfer the native token
         /// </summary>
         /// <remarks>
         /// 
@@ -358,7 +358,7 @@ namespace BeamPlayerClient.Api
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
         Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> TransferAssetWithHttpInfoAsync(string entityId, TransferAssetRequestInput transferAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Transfer the native token (BEAM)
+        /// Transfer the native token
         /// </summary>
         /// <remarks>
         /// 
@@ -371,7 +371,7 @@ namespace BeamPlayerClient.Api
         Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> TransferNativeTokenAsync(string entityId, TransferNativeTokenRequestInput transferNativeTokenRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Transfer the native token (BEAM)
+        /// Transfer the native token
         /// </summary>
         /// <remarks>
         /// 
@@ -1442,7 +1442,7 @@ namespace BeamPlayerClient.Api
         }
 
         /// <summary>
-        /// Transfer the native token (BEAM) 
+        /// Transfer the native token 
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -1455,7 +1455,7 @@ namespace BeamPlayerClient.Api
         }
 
         /// <summary>
-        /// Transfer the native token (BEAM) 
+        /// Transfer the native token 
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -1510,7 +1510,7 @@ namespace BeamPlayerClient.Api
         }
 
         /// <summary>
-        /// Transfer the native token (BEAM) 
+        /// Transfer the native token 
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -1525,7 +1525,7 @@ namespace BeamPlayerClient.Api
         }
 
         /// <summary>
-        /// Transfer the native token (BEAM) 
+        /// Transfer the native token 
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
