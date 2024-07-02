@@ -467,7 +467,7 @@ namespace Beam
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortRevokeSession:
                             throw new Exception($"Revoke Session Operation has to be performed via {nameof(RevokeSessionAsync)}() method only");
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortTransaction:
-                            signature = activeSessionKeyPair.SignMessage(transaction.Data.GetString());
+                            signature = activeSessionKeyPair.SignMessage(Convert.ToString(transaction.Data));
                             break;
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortReservoirOrder:
                             signature = activeSessionKeyPair.SignMarketplaceTransactionHash(transaction.Hash);

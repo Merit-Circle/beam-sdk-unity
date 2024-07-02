@@ -43,7 +43,7 @@ namespace BeamPlayerClient.Model
         /// <param name="startTime">startTime (required).</param>
         /// <param name="endTime">endTime (required).</param>
         /// <param name="sessionAddress">sessionAddress (required).</param>
-        public GetActiveSessionsResponseSessionsInner(string id = default(string), bool isActive = default(bool), string startTime = default(string), string endTime = default(string), string sessionAddress = default(string))
+        public GetActiveSessionsResponseSessionsInner(string id = default(string), bool isActive = default(bool), DateTime startTime = default(DateTime), DateTime endTime = default(DateTime), string sessionAddress = default(string))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -52,17 +52,7 @@ namespace BeamPlayerClient.Model
             }
             this.Id = id;
             this.IsActive = isActive;
-            // to ensure "startTime" is required (not null)
-            if (startTime == null)
-            {
-                throw new ArgumentNullException("startTime is a required property for GetActiveSessionsResponseSessionsInner and cannot be null");
-            }
             this.StartTime = startTime;
-            // to ensure "endTime" is required (not null)
-            if (endTime == null)
-            {
-                throw new ArgumentNullException("endTime is a required property for GetActiveSessionsResponseSessionsInner and cannot be null");
-            }
             this.EndTime = endTime;
             // to ensure "sessionAddress" is required (not null)
             if (sessionAddress == null)
@@ -88,13 +78,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets StartTime
         /// </summary>
         [DataMember(Name = "startTime", IsRequired = true, EmitDefaultValue = true)]
-        public string StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         /// <summary>
         /// Gets or Sets EndTime
         /// </summary>
         [DataMember(Name = "endTime", IsRequired = true, EmitDefaultValue = true)]
-        public string EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets SessionAddress

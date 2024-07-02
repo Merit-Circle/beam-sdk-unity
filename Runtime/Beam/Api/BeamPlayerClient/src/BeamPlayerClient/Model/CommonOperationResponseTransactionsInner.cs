@@ -121,7 +121,7 @@ namespace BeamPlayerClient.Model
         /// <param name="operationId">operationId (required).</param>
         /// <param name="data">data.</param>
         /// <param name="hash">hash (required).</param>
-        public CommonOperationResponseTransactionsInner(TypeEnum type = default(TypeEnum), StatusEnum status = default(StatusEnum), string id = default(string), string externalId = default(string), string signature = default(string), string transactionHash = default(string), string operationId = default(string), CommonOperationResponseTransactionsInnerData data = default(CommonOperationResponseTransactionsInnerData), string hash = default(string))
+        public CommonOperationResponseTransactionsInner(TypeEnum type = default(TypeEnum), StatusEnum status = default(StatusEnum), string id = default(string), string externalId = default(string), string signature = default(string), string transactionHash = default(string), string operationId = default(string), Object data = default(Object), string hash = default(string))
         {
             this.Type = type;
             this.Status = status;
@@ -198,7 +198,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = true)]
-        public CommonOperationResponseTransactionsInnerData Data { get; set; }
+        public Object Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Hash

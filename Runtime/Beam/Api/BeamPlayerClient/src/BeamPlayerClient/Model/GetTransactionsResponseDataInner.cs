@@ -44,7 +44,7 @@ namespace BeamPlayerClient.Model
         /// <param name="chainId">chainId (required).</param>
         /// <param name="intent">intent (required).</param>
         /// <param name="transaction">transaction.</param>
-        public GetTransactionsResponseDataInner(string id = default(string), Object createdAt = default(Object), Object updatedAt = default(Object), decimal chainId = default(decimal), GetTransactionsResponseDataInnerIntent intent = default(GetTransactionsResponseDataInnerIntent), GetTransactionsResponseDataInnerTransaction transaction = default(GetTransactionsResponseDataInnerTransaction))
+        public GetTransactionsResponseDataInner(string id = default(string), DateTime createdAt = default(DateTime), DateTime updatedAt = default(DateTime), decimal chainId = default(decimal), GetTransactionsResponseDataInnerIntent intent = default(GetTransactionsResponseDataInnerIntent), GetTransactionsResponseDataInnerTransaction transaction = default(GetTransactionsResponseDataInnerTransaction))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -52,17 +52,7 @@ namespace BeamPlayerClient.Model
                 throw new ArgumentNullException("id is a required property for GetTransactionsResponseDataInner and cannot be null");
             }
             this.Id = id;
-            // to ensure "createdAt" is required (not null)
-            if (createdAt == null)
-            {
-                throw new ArgumentNullException("createdAt is a required property for GetTransactionsResponseDataInner and cannot be null");
-            }
             this.CreatedAt = createdAt;
-            // to ensure "updatedAt" is required (not null)
-            if (updatedAt == null)
-            {
-                throw new ArgumentNullException("updatedAt is a required property for GetTransactionsResponseDataInner and cannot be null");
-            }
             this.UpdatedAt = updatedAt;
             this.ChainId = chainId;
             // to ensure "intent" is required (not null)
@@ -84,13 +74,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
-        public Object CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = true)]
-        public Object UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId

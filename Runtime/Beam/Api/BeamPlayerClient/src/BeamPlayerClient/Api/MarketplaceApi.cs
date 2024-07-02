@@ -812,7 +812,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("offerId", BeamPlayerClient.Client.ClientUtils.ParameterToString(offerId)); // path parameter
             localVarRequestOptions.Data = acceptAssetOfferRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -892,7 +892,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("offerId", BeamPlayerClient.Client.ClientUtils.ParameterToString(offerId)); // path parameter
             localVarRequestOptions.Data = acceptAssetOfferRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -970,7 +970,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("orderId", BeamPlayerClient.Client.ClientUtils.ParameterToString(orderId)); // path parameter
             localVarRequestOptions.Data = buyAssetRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1050,7 +1050,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("orderId", BeamPlayerClient.Client.ClientUtils.ParameterToString(orderId)); // path parameter
             localVarRequestOptions.Data = buyAssetRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1128,7 +1128,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("offerId", BeamPlayerClient.Client.ClientUtils.ParameterToString(offerId)); // path parameter
             localVarRequestOptions.Data = cancelAssetOfferRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1208,7 +1208,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("offerId", BeamPlayerClient.Client.ClientUtils.ParameterToString(offerId)); // path parameter
             localVarRequestOptions.Data = cancelAssetOfferRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1292,7 +1292,7 @@ namespace BeamPlayerClient.Api
             }
             localVarRequestOptions.Data = cancelAssetListingRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1378,7 +1378,7 @@ namespace BeamPlayerClient.Api
             }
             localVarRequestOptions.Data = cancelAssetListingRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1449,7 +1449,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
             localVarRequestOptions.Data = createAssetOfferRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1522,7 +1522,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
             localVarRequestOptions.Data = createAssetOfferRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1604,7 +1604,7 @@ namespace BeamPlayerClient.Api
                 localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "continuation", continuation));
             }
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1688,7 +1688,7 @@ namespace BeamPlayerClient.Api
                 localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "continuation", continuation));
             }
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1747,7 +1747,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.PathParameters.Add("chainId", BeamPlayerClient.Client.ClientUtils.ParameterToString(chainId)); // path parameter
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1808,7 +1808,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.PathParameters.Add("chainId", BeamPlayerClient.Client.ClientUtils.ParameterToString(chainId)); // path parameter
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1872,7 +1872,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.Data = getListedAssetsBodyInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -1938,7 +1938,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.Data = getListedAssetsBodyInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -2009,7 +2009,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
             localVarRequestOptions.Data = getListedAssetsBodyInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -2082,7 +2082,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
             localVarRequestOptions.Data = getListedAssetsBodyInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -2171,7 +2171,7 @@ namespace BeamPlayerClient.Api
                 localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "continuation", continuation));
             }
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -2262,7 +2262,7 @@ namespace BeamPlayerClient.Api
                 localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "continuation", continuation));
             }
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -2337,7 +2337,7 @@ namespace BeamPlayerClient.Api
                 localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "continuation", continuation));
             }
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -2414,7 +2414,7 @@ namespace BeamPlayerClient.Api
                 localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "continuation", continuation));
             }
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -2485,7 +2485,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
             localVarRequestOptions.Data = sellAssetRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -2558,7 +2558,7 @@ namespace BeamPlayerClient.Api
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
             localVarRequestOptions.Data = sellAssetRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));

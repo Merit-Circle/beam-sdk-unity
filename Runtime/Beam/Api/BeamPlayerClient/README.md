@@ -77,7 +77,7 @@ namespace Example
 
             Configuration config = new Configuration();
             config.BasePath = "http://localhost";
-            // Configure API key authorization: Beam API game key
+            // Configure API key authorization: beam-api-key
             config.ApiKey.Add("x-api-key", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
             // config.ApiKeyPrefix.Add("x-api-key", "Bearer");
@@ -170,7 +170,6 @@ Class | Method | HTTP request | Description
  - [Model.Check503Response](Check503Response.md)
  - [Model.CommonOperationResponse](CommonOperationResponse.md)
  - [Model.CommonOperationResponseTransactionsInner](CommonOperationResponseTransactionsInner.md)
- - [Model.CommonOperationResponseTransactionsInnerData](CommonOperationResponseTransactionsInnerData.md)
  - [Model.ConfirmOperationRequest](ConfirmOperationRequest.md)
  - [Model.ConfirmOperationRequestTransactionsInner](ConfirmOperationRequestTransactionsInner.md)
  - [Model.ConvertTokenRequestInput](ConvertTokenRequestInput.md)
@@ -240,8 +239,8 @@ Class | Method | HTTP request | Description
 
 
 Authentication schemes defined for the API:
-<a id="Beam API game key"></a>
-### Beam API game key
+<a id="beam-api-key"></a>
+### beam-api-key
 
 - **Type**: API key
 - **API key parameter name**: x-api-key

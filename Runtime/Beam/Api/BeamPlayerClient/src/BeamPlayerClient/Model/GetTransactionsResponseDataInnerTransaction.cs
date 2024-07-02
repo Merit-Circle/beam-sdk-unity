@@ -45,13 +45,8 @@ namespace BeamPlayerClient.Model
         /// <param name="gasFee">gasFee.</param>
         /// <param name="status">status.</param>
         /// <param name="logs">logs.</param>
-        public GetTransactionsResponseDataInnerTransaction(Object createdAt = default(Object), decimal blockNumber = default(decimal), string hash = default(string), string gasUsed = default(string), string gasFee = default(string), decimal status = default(decimal), List<GetTransactionsResponseDataInnerTransactionLogsInner> logs = default(List<GetTransactionsResponseDataInnerTransactionLogsInner>))
+        public GetTransactionsResponseDataInnerTransaction(DateTime createdAt = default(DateTime), decimal blockNumber = default(decimal), string hash = default(string), string gasUsed = default(string), string gasFee = default(string), decimal status = default(decimal), List<GetTransactionsResponseDataInnerTransactionLogsInner> logs = default(List<GetTransactionsResponseDataInnerTransactionLogsInner>))
         {
-            // to ensure "createdAt" is required (not null)
-            if (createdAt == null)
-            {
-                throw new ArgumentNullException("createdAt is a required property for GetTransactionsResponseDataInnerTransaction and cannot be null");
-            }
             this.CreatedAt = createdAt;
             this.BlockNumber = blockNumber;
             this.Hash = hash;
@@ -65,7 +60,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
-        public Object CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets BlockNumber

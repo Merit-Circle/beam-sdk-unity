@@ -96,7 +96,7 @@ namespace BeamPlayerClient.Model
         /// <param name="expiresAt">expiresAt.</param>
         /// <param name="createdAt">createdAt.</param>
         /// <param name="updatedAt">updatedAt.</param>
-        public GetAssetListingsResponseDataInner(string id = default(string), string side = default(string), StatusEnum? status = default(StatusEnum?), string assetAddress = default(string), string assetId = default(string), string contractKind = default(string), string maker = default(string), GetAssetListingsResponseDataInnerPrice price = default(GetAssetListingsResponseDataInnerPrice), Object validFrom = default(Object), Object validUntil = default(Object), decimal quantityFilled = default(decimal), decimal quantityRemaining = default(decimal), Object expiresAt = default(Object), Object createdAt = default(Object), Object updatedAt = default(Object))
+        public GetAssetListingsResponseDataInner(string id = default(string), string side = default(string), StatusEnum? status = default(StatusEnum?), string assetAddress = default(string), string assetId = default(string), string contractKind = default(string), string maker = default(string), GetAssetListingsResponseDataInnerPrice price = default(GetAssetListingsResponseDataInnerPrice), DateTime? validFrom = default(DateTime?), DateTime? validUntil = default(DateTime?), decimal quantityFilled = default(decimal), decimal quantityRemaining = default(decimal), DateTime? expiresAt = default(DateTime?), DateTime? createdAt = default(DateTime?), DateTime? updatedAt = default(DateTime?))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -191,13 +191,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets ValidFrom
         /// </summary>
         [DataMember(Name = "validFrom", EmitDefaultValue = true)]
-        public Object ValidFrom { get; set; }
+        public DateTime? ValidFrom { get; set; }
 
         /// <summary>
         /// Gets or Sets ValidUntil
         /// </summary>
         [DataMember(Name = "validUntil", EmitDefaultValue = true)]
-        public Object ValidUntil { get; set; }
+        public DateTime? ValidUntil { get; set; }
 
         /// <summary>
         /// Gets or Sets QuantityFilled
@@ -215,19 +215,19 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets ExpiresAt
         /// </summary>
         [DataMember(Name = "expiresAt", EmitDefaultValue = true)]
-        public Object ExpiresAt { get; set; }
+        public DateTime? ExpiresAt { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", EmitDefaultValue = true)]
-        public Object CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [DataMember(Name = "updatedAt", EmitDefaultValue = true)]
-        public Object UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

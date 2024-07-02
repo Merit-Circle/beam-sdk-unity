@@ -304,7 +304,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.Data = createConnectionRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -370,7 +370,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.Data = createConnectionRequestInput;
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -433,7 +433,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.PathParameters.Add("requestId", BeamPlayerClient.Client.ClientUtils.ParameterToString(requestId)); // path parameter
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
@@ -498,7 +498,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.PathParameters.Add("requestId", BeamPlayerClient.Client.ClientUtils.ParameterToString(requestId)); // path parameter
 
-            // authentication (Beam API game key) required
+            // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
             {
                 localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));

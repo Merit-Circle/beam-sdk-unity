@@ -67,7 +67,7 @@ paths:
                 $ref: '#/components/schemas/GetAssetsForUserResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: "Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)"
       tags:
       - Assets
@@ -97,7 +97,7 @@ paths:
                 $ref: '#/components/schemas/GetUserCurrenciesResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Get all the currencies owned by an account (ERC20)
       tags:
       - Assets
@@ -127,7 +127,7 @@ paths:
                 $ref: '#/components/schemas/GetUserNativeCurrencyResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Get the native token balance
       tags:
       - Assets
@@ -156,7 +156,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: "Transfer an asset (NFT assets, ERC721 / ERC1155)"
       tags:
       - Assets
@@ -185,7 +185,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: "Transfer a token (token assets, ERC20)"
       tags:
       - Assets
@@ -214,7 +214,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Transfer the native token
       tags:
       - Assets
@@ -243,7 +243,7 @@ paths:
                 $ref: '#/components/schemas/GetAssetsForContractResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: "Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)"
       tags:
       - Assets
@@ -295,7 +295,7 @@ paths:
                 $ref: '#/components/schemas/GetAssetResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Get a single NFT (e.g. ERC721 / ERC1155)
       tags:
       - Assets
@@ -317,7 +317,7 @@ paths:
                 $ref: '#/components/schemas/GetAssetListingsResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: "Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)"
       tags:
       - Marketplace
@@ -346,7 +346,7 @@ paths:
                 $ref: '#/components/schemas/GetAssetListingsResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: "Get all the assets listed by a profile (NFT assets, e.g. ERC721 /\
         \ ERC1155)"
       tags:
@@ -376,7 +376,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: List an asset for sale
       tags:
       - Marketplace
@@ -419,7 +419,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Cancel asset listing
       tags:
       - Marketplace
@@ -454,7 +454,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Buy listed asset
       tags:
       - Marketplace
@@ -491,7 +491,7 @@ paths:
                 $ref: '#/components/schemas/GetAssetListingsResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Get all offers that a user created
       tags:
       - Marketplace
@@ -519,7 +519,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Make an offer for an asset
       tags:
       - Marketplace
@@ -570,7 +570,7 @@ paths:
                 $ref: '#/components/schemas/GetAssetListingsResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Get all asset offers that a user created for a specific asset
       tags:
       - Marketplace
@@ -606,7 +606,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Accept an offer for an asset
       tags:
       - Marketplace
@@ -642,7 +642,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Cancel an offer for an asset
       tags:
       - Marketplace
@@ -686,7 +686,7 @@ paths:
                 $ref: '#/components/schemas/GetAssetListingsResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Get all offers for an asset
       tags:
       - Marketplace
@@ -709,7 +709,7 @@ paths:
                 $ref: '#/components/schemas/GetChainCurrenciesResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Get available currencies for given chain
       tags:
       - Marketplace
@@ -739,7 +739,7 @@ paths:
                 $ref: '#/components/schemas/GetTransactionsResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Get a paginated list of transactions from your game
       tags:
       - Transactions
@@ -762,7 +762,7 @@ paths:
                 $ref: '#/components/schemas/GetTransactionResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Getting a transaction
       tags:
       - Transactions
@@ -799,7 +799,7 @@ paths:
                 $ref: '#/components/schemas/GetTransactionsResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Get a paginated list of transactions created on behalf of a user
       tags:
       - Transactions
@@ -827,7 +827,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Creating a new transaction on behalf of a user
       tags:
       - Transactions
@@ -857,7 +857,7 @@ paths:
                 $ref: '#/components/schemas/GetAllUsersResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Returns a list of users
       tags:
       - Users
@@ -880,7 +880,7 @@ paths:
                 $ref: '#/components/schemas/GetUserResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Returns a particular user
       tags:
       - Users
@@ -903,7 +903,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Delete an operation
       tags:
       - Operation
@@ -925,7 +925,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Returns operation data for given id. Used by Game SDKs to get transaction
         results.
       tags:
@@ -954,7 +954,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Updates operation result for given id
       tags:
       - Operation
@@ -976,7 +976,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Initializes an operation. Used by Game SDKs to get transaction results.
       tags:
       - Operation
@@ -1020,7 +1020,7 @@ paths:
                 $ref: '#/components/schemas/GetQuoteResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: "Returns the maximum necessary input amount for a token trade, given\
         \ a desired output amount"
       tags:
@@ -1065,7 +1065,7 @@ paths:
                 $ref: '#/components/schemas/GetQuoteResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: "Returns the minimum expected output amount for a token trade, given\
         \ an input amount"
       tags:
@@ -1095,7 +1095,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`
       tags:
       - Exchange
@@ -1124,7 +1124,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`
       tags:
       - Exchange
@@ -1153,7 +1153,7 @@ paths:
                 $ref: '#/components/schemas/GenerateSessionRequestResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: ""
       tags:
       - Sessions
@@ -1182,7 +1182,7 @@ paths:
                 $ref: '#/components/schemas/CommonOperationResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: ""
       tags:
       - Sessions
@@ -1205,7 +1205,7 @@ paths:
                 $ref: '#/components/schemas/GetSessionRequestResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: ""
       tags:
       - Sessions
@@ -1235,7 +1235,7 @@ paths:
                 $ref: '#/components/schemas/GetActiveSessionsResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: ""
       tags:
       - Sessions
@@ -1272,7 +1272,7 @@ paths:
                 $ref: '#/components/schemas/GetActiveSessionResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: ""
       tags:
       - Sessions
@@ -1294,7 +1294,7 @@ paths:
                 $ref: '#/components/schemas/CreateConnectionRequestResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: ""
       tags:
       - Connector
@@ -1317,7 +1317,7 @@ paths:
                 $ref: '#/components/schemas/GetConnectionRequestResponse'
           description: ""
       security:
-      - Beam API game key: []
+      - beam-api-key: []
       summary: ""
       tags:
       - Connector
@@ -1360,8 +1360,6 @@ components:
           type: number
         limit:
           default: 20
-          exclusiveMaximum: false
-          exclusiveMinimum: false
           maximum: 100
           minimum: 1
           type: number
@@ -1469,12 +1467,12 @@ components:
         sponsor: true
         assets:
         - receiverWalletAddress: receiverWalletAddress
-          amountToTransfer: 0.08008281904610115
+          amountToTransfer: 1.0800828190461012
           assetAddress: assetAddress
           assetId: assetId
           receiverEntityId: receiverEntityId
         - receiverWalletAddress: receiverWalletAddress
-          amountToTransfer: 0.08008281904610115
+          amountToTransfer: 1.0800828190461012
           assetAddress: assetAddress
           assetId: assetId
           receiverEntityId: receiverEntityId
@@ -1520,7 +1518,7 @@ components:
         processing: SignOnly
         id: id
         transactions:
-        - data: null
+        - data: ""
           signature: signature
           externalId: externalId
           operationId: operationId
@@ -1529,7 +1527,7 @@ components:
           transactionHash: transactionHash
           hash: hash
           status: Pending
-        - data: null
+        - data: ""
           signature: signature
           externalId: externalId
           operationId: operationId
@@ -1740,8 +1738,6 @@ components:
           type: string
         limit:
           default: 20
-          exclusiveMaximum: false
-          exclusiveMinimum: false
           maximum: 100
           minimum: 1
           type: number
@@ -1857,12 +1853,6 @@ components:
           - ExtremelyRare
           nullable: true
           type: string
-          x-enumNames:
-          - Common
-          - Uncommon
-          - Rare
-          - VeryRare
-          - ExtremelyRare
         rarityScore:
           nullable: true
           type: number
@@ -1915,8 +1905,6 @@ components:
           type: string
         limit:
           default: 50
-          exclusiveMaximum: false
-          exclusiveMinimum: false
           maximum: 1000
           minimum: 1
           type: integer
@@ -1934,10 +1922,10 @@ components:
           contractKind: contractKind
           assetAddress: assetAddress
           maker: maker
-          validFrom: ""
-          expiresAt: ""
+          validFrom: 2000-01-23T04:56:07.000+00:00
+          expiresAt: 2000-01-23T04:56:07.000+00:00
           quantityFilled: 5.637376656633329
-          createdAt: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
           assetId: assetId
           price:
             amount:
@@ -1955,18 +1943,18 @@ components:
               address: address
               decimals: 0
           quantityRemaining: 2.3021358869347655
-          validUntil: ""
+          validUntil: 2000-01-23T04:56:07.000+00:00
           id: id
           status: active
-          updatedAt: ""
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         - side: side
           contractKind: contractKind
           assetAddress: assetAddress
           maker: maker
-          validFrom: ""
-          expiresAt: ""
+          validFrom: 2000-01-23T04:56:07.000+00:00
+          expiresAt: 2000-01-23T04:56:07.000+00:00
           quantityFilled: 5.637376656633329
-          createdAt: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
           assetId: assetId
           price:
             amount:
@@ -1984,10 +1972,10 @@ components:
               address: address
               decimals: 0
           quantityRemaining: 2.3021358869347655
-          validUntil: ""
+          validUntil: 2000-01-23T04:56:07.000+00:00
           id: id
           status: active
-          updatedAt: ""
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         continuation: continuation
       properties:
         data:
@@ -2043,11 +2031,6 @@ components:
           - AscendingAuction
           - NotForSale
           type: string
-          x-enumNames:
-          - FixedPrice
-          - DescendingAuction
-          - AscendingAuction
-          - NotForSale
         currency:
           default: BEAM
           enum:
@@ -2058,13 +2041,6 @@ components:
           - IMX
           - WIMX
           type: string
-          x-enumNames:
-          - BEAM
-          - WBEAM
-          - USDC
-          - USDT
-          - IMX
-          - WIMX
         sponsor:
           default: true
           type: boolean
@@ -2171,7 +2147,6 @@ components:
         assetId:
           type: string
         quantity:
-          exclusiveMinimum: false
           minimum: 1
           type: number
         price:
@@ -2218,7 +2193,6 @@ components:
         operationProcessing: Execute
       properties:
         quantity:
-          exclusiveMinimum: false
           minimum: 1
           type: number
         optimistic:
@@ -2300,7 +2274,7 @@ components:
           count: 7.061401241503109
           limit: 9.301444243932576
         data:
-        - createdAt: ""
+        - createdAt: 2000-01-23T04:56:07.000+00:00
           chainId: 0.8008281904610115
           id: id
           intent:
@@ -2321,7 +2295,7 @@ components:
               to: to
               value: value
           transaction:
-            createdAt: ""
+            createdAt: 2000-01-23T04:56:07.000+00:00
             gasUsed: gasUsed
             gasFee: gasFee
             blockNumber: 6.027456183070403
@@ -2352,8 +2326,8 @@ components:
               transactionHash: transactionHash
             hash: hash
             status: 1.4658129805029452
-          updatedAt: ""
-        - createdAt: ""
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
           chainId: 0.8008281904610115
           id: id
           intent:
@@ -2374,7 +2348,7 @@ components:
               to: to
               value: value
           transaction:
-            createdAt: ""
+            createdAt: 2000-01-23T04:56:07.000+00:00
             gasUsed: gasUsed
             gasFee: gasFee
             blockNumber: 6.027456183070403
@@ -2405,7 +2379,7 @@ components:
               transactionHash: transactionHash
             hash: hash
             status: 1.4658129805029452
-          updatedAt: ""
+          updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         data:
           items:
@@ -2446,7 +2420,7 @@ components:
           - entityId: entityId
           - entityId: entityId
         transaction:
-          createdAt: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
           gasUsed: gasUsed
           gasFee: gasFee
           blockNumber: 6.027456183070403
@@ -2589,43 +2563,43 @@ components:
           - entityId: entityId
           - entityId: entityId
           wallets:
-          - createdAt: ""
+          - createdAt: 2000-01-23T04:56:07.000+00:00
             address: address
             chainId: 0
             profileId: profileId
             externalId: externalId
             id: id
             userId: userId
-            updatedAt: ""
-          - createdAt: ""
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
             address: address
             chainId: 0
             profileId: profileId
             externalId: externalId
             id: id
             userId: userId
-            updatedAt: ""
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           id: id
         - entities:
           - entityId: entityId
           - entityId: entityId
           wallets:
-          - createdAt: ""
+          - createdAt: 2000-01-23T04:56:07.000+00:00
             address: address
             chainId: 0
             profileId: profileId
             externalId: externalId
             id: id
             userId: userId
-            updatedAt: ""
-          - createdAt: ""
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
             address: address
             chainId: 0
             profileId: profileId
             externalId: externalId
             id: id
             userId: userId
-            updatedAt: ""
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           id: id
       properties:
         data:
@@ -2643,22 +2617,22 @@ components:
         externalEntityId: externalEntityId
         gameId: gameId
         wallets:
-        - createdAt: ""
+        - createdAt: 2000-01-23T04:56:07.000+00:00
           address: address
           chainId: 0
           profileId: profileId
           externalId: externalId
           id: id
           userId: userId
-          updatedAt: ""
-        - createdAt: ""
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
           address: address
           chainId: 0
           profileId: profileId
           externalId: externalId
           id: id
           userId: userId
-          updatedAt: ""
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         userId: userId
       properties:
         externalEntityId:
@@ -2939,14 +2913,14 @@ components:
       example:
         sessions:
         - sessionAddress: sessionAddress
-          startTime: startTime
+          startTime: 2000-01-23T04:56:07.000+00:00
           id: id
-          endTime: endTime
+          endTime: 2000-01-23T04:56:07.000+00:00
           isActive: true
         - sessionAddress: sessionAddress
-          startTime: startTime
+          startTime: 2000-01-23T04:56:07.000+00:00
           id: id
-          endTime: endTime
+          endTime: 2000-01-23T04:56:07.000+00:00
           isActive: true
       properties:
         sessions:
@@ -3205,12 +3179,6 @@ components:
           - ExtremelyRare
           nullable: true
           type: string
-          x-enumNames:
-          - Common
-          - Uncommon
-          - Rare
-          - VeryRare
-          - ExtremelyRare
         rarityScore:
           nullable: true
           type: number
@@ -3296,7 +3264,7 @@ components:
     TransferAssetRequestInput_assets_inner:
       example:
         receiverWalletAddress: receiverWalletAddress
-        amountToTransfer: 0.08008281904610115
+        amountToTransfer: 1.0800828190461012
         assetAddress: assetAddress
         assetId: assetId
         receiverEntityId: receiverEntityId
@@ -3311,27 +3279,16 @@ components:
           type: string
         amountToTransfer:
           default: 1
-          exclusiveMinimum: true
-          minimum: 0
+          minimum: 1
           multipleOf: 1
           type: number
       required:
       - assetAddress
       - assetId
       type: object
-    CommonOperationResponse_transactions_inner_data:
-      nullable: true
-      oneOf:
-      - type: string
-      - type: number
-      - type: boolean
-      - additionalProperties: {}
-        type: object
-      - items: {}
-        type: array
     CommonOperationResponse_transactions_inner:
       example:
-        data: null
+        data: ""
         signature: signature
         externalId: externalId
         operationId: operationId
@@ -3371,7 +3328,7 @@ components:
           nullable: true
           type: string
         data:
-          $ref: '#/components/schemas/CommonOperationResponse_transactions_inner_data'
+          nullable: true
         hash:
           type: string
       required:
@@ -3441,12 +3398,6 @@ components:
           - ExtremelyRare
           nullable: true
           type: string
-          x-enumNames:
-          - Common
-          - Uncommon
-          - Rare
-          - VeryRare
-          - ExtremelyRare
         rarityScore:
           nullable: true
           type: number
@@ -3501,13 +3452,6 @@ components:
           - WIMX
           nullable: true
           type: string
-          x-enumNames:
-          - BEAM
-          - WBEAM
-          - USDC
-          - USDT
-          - IMX
-          - WIMX
         decimals:
           type: integer
       required:
@@ -3567,10 +3511,10 @@ components:
         contractKind: contractKind
         assetAddress: assetAddress
         maker: maker
-        validFrom: ""
-        expiresAt: ""
+        validFrom: 2000-01-23T04:56:07.000+00:00
+        expiresAt: 2000-01-23T04:56:07.000+00:00
         quantityFilled: 5.637376656633329
-        createdAt: ""
+        createdAt: 2000-01-23T04:56:07.000+00:00
         assetId: assetId
         price:
           amount:
@@ -3588,10 +3532,10 @@ components:
             address: address
             decimals: 0
         quantityRemaining: 2.3021358869347655
-        validUntil: ""
+        validUntil: 2000-01-23T04:56:07.000+00:00
         id: id
         status: active
-        updatedAt: ""
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           type: string
@@ -3606,12 +3550,6 @@ components:
           - filled
           nullable: true
           type: string
-          x-enumNames:
-          - Active
-          - Inactive
-          - Expired
-          - Canceled
-          - Filled
         assetAddress:
           type: string
         assetId:
@@ -3623,19 +3561,29 @@ components:
         price:
           $ref: '#/components/schemas/GetAssetListingsResponse_data_inner_price'
         validFrom:
+          format: date-time
           nullable: true
+          type: string
         validUntil:
+          format: date-time
           nullable: true
+          type: string
         quantityFilled:
           type: number
         quantityRemaining:
           type: number
         expiresAt:
+          format: date-time
           nullable: true
+          type: string
         createdAt:
+          format: date-time
           nullable: true
+          type: string
         updatedAt:
+          format: date-time
           nullable: true
+          type: string
       required:
       - assetAddress
       - assetId
@@ -3661,13 +3609,6 @@ components:
           - IMX
           - WIMX
           type: string
-          x-enumNames:
-          - BEAM
-          - WBEAM
-          - USDC
-          - USDT
-          - IMX
-          - WIMX
         address:
           type: string
       required:
@@ -3778,7 +3719,7 @@ components:
       description: The transaction object exists if you created the transaction deterministically
         and contains information about the on-chain transaction
       example:
-        createdAt: ""
+        createdAt: 2000-01-23T04:56:07.000+00:00
         gasUsed: gasUsed
         gasFee: gasFee
         blockNumber: 6.027456183070403
@@ -3811,7 +3752,9 @@ components:
         status: 1.4658129805029452
       nullable: true
       properties:
-        createdAt: {}
+        createdAt:
+          format: date-time
+          type: string
         blockNumber:
           type: number
         hash:
@@ -3831,7 +3774,7 @@ components:
       type: object
     GetTransactionsResponse_data_inner:
       example:
-        createdAt: ""
+        createdAt: 2000-01-23T04:56:07.000+00:00
         chainId: 0.8008281904610115
         id: id
         intent:
@@ -3852,7 +3795,7 @@ components:
             to: to
             value: value
         transaction:
-          createdAt: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
           gasUsed: gasUsed
           gasFee: gasFee
           blockNumber: 6.027456183070403
@@ -3883,12 +3826,16 @@ components:
             transactionHash: transactionHash
           hash: hash
           status: 1.4658129805029452
-        updatedAt: ""
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           type: string
-        createdAt: {}
-        updatedAt: {}
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         chainId:
           type: number
         intent:
@@ -3990,20 +3937,24 @@ components:
       type: object
     GetAllUsersResponse_data_inner_wallets_inner:
       example:
-        createdAt: ""
+        createdAt: 2000-01-23T04:56:07.000+00:00
         address: address
         chainId: 0
         profileId: profileId
         externalId: externalId
         id: id
         userId: userId
-        updatedAt: ""
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           format: cuid
           type: string
-        createdAt: {}
-        updatedAt: {}
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         externalId:
           type: string
         address:
@@ -4032,22 +3983,22 @@ components:
         - entityId: entityId
         - entityId: entityId
         wallets:
-        - createdAt: ""
+        - createdAt: 2000-01-23T04:56:07.000+00:00
           address: address
           chainId: 0
           profileId: profileId
           externalId: externalId
           id: id
           userId: userId
-          updatedAt: ""
-        - createdAt: ""
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
           address: address
           chainId: 0
           profileId: profileId
           externalId: externalId
           id: id
           userId: userId
-          updatedAt: ""
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         id: id
       properties:
         id:
@@ -4078,7 +4029,6 @@ components:
           - OpenfortRevokeSession
           type: string
       required:
-      - data
       - type
       type: object
     ConfirmOperationRequest_transactions_inner:
@@ -4097,9 +4047,9 @@ components:
     GetActiveSessionsResponse_sessions_inner:
       example:
         sessionAddress: sessionAddress
-        startTime: startTime
+        startTime: 2000-01-23T04:56:07.000+00:00
         id: id
-        endTime: endTime
+        endTime: 2000-01-23T04:56:07.000+00:00
         isActive: true
       properties:
         id:
@@ -4107,8 +4057,10 @@ components:
         isActive:
           type: boolean
         startTime:
+          format: date-time
           type: string
         endTime:
+          format: date-time
           type: string
         sessionAddress:
           type: string
@@ -4120,7 +4072,7 @@ components:
       - startTime
       type: object
   securitySchemes:
-    Beam API game key:
+    beam-api-key:
       in: header
       name: x-api-key
       type: apiKey

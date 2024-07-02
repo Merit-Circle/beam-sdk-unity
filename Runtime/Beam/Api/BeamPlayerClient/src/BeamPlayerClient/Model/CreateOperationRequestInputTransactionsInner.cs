@@ -69,23 +69,18 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateOperationRequestInputTransactionsInner" /> class.
         /// </summary>
-        /// <param name="data">data (required).</param>
+        /// <param name="data">data.</param>
         /// <param name="type">type (required).</param>
         public CreateOperationRequestInputTransactionsInner(Object data = default(Object), TypeEnum type = default(TypeEnum))
         {
-            // to ensure "data" is required (not null)
-            if (data == null)
-            {
-                throw new ArgumentNullException("data is a required property for CreateOperationRequestInputTransactionsInner and cannot be null");
-            }
-            this.Data = data;
             this.Type = type;
+            this.Data = data;
         }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
-        [DataMember(Name = "data", IsRequired = true, EmitDefaultValue = true)]
+        [DataMember(Name = "data", EmitDefaultValue = true)]
         public Object Data { get; set; }
 
         /// <summary>
