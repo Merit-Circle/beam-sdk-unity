@@ -114,8 +114,10 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AssetsApi* | [**GetAsset**](AssetsApi.md#getasset) | **GET** /v1/player/assets/{assetAddress}/{assetId} | Get a single NFT (e.g. ERC721 / ERC1155)
-*AssetsApi* | [**GetContractAssetsPost**](AssetsApi.md#getcontractassetspost) | **POST** /v1/player/assets/{assetAddress} | Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
+*AssetsApi* | [**GetAsset**](AssetsApi.md#getasset) | **GET** /v1/player/assets/{assetAddress}/assets/{assetId} | Get a single NFT (e.g. ERC721 / ERC1155)
+*AssetsApi* | [**GetAssetsForContract**](AssetsApi.md#getassetsforcontract) | **POST** /v1/player/assets/{assetAddress}/assets | Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
+*AssetsApi* | [**GetAttributes**](AssetsApi.md#getattributes) | **GET** /v1/player/assets/{assetAddress}/attributes | 
+*AssetsApi* | [**GetOwners**](AssetsApi.md#getowners) | **GET** /v1/player/assets/{assetAddress}/owners | 
 *AssetsApi* | [**GetUserAssetsForGamePost**](AssetsApi.md#getuserassetsforgamepost) | **POST** /v1/player/assets/users/{entityId} | Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
 *AssetsApi* | [**GetUserCurrencies**](AssetsApi.md#getusercurrencies) | **GET** /v1/player/assets/users/{entityId}/currencies | Get all the currencies owned by an account (ERC20)
 *AssetsApi* | [**GetUserNativeCurrency**](AssetsApi.md#getusernativecurrency) | **GET** /v1/player/assets/users/{entityId}/native | Get the native token balance
@@ -141,6 +143,8 @@ Class | Method | HTTP request | Description
 *MarketplaceApi* | [**GetUserAssetOffers**](MarketplaceApi.md#getuserassetoffers) | **GET** /v1/player/marketplace/users/{entityId}/offers/asset/{assetAddress}/{assetId} | Get all asset offers that a user created for a specific asset
 *MarketplaceApi* | [**GetUserOffers**](MarketplaceApi.md#getuseroffers) | **GET** /v1/player/marketplace/users/{entityId}/offers | Get all offers that a user created
 *MarketplaceApi* | [**ListAsset**](MarketplaceApi.md#listasset) | **POST** /v1/player/marketplace/users/{entityId}/listing | List an asset for sale
+*MarketplaceApi* | [**RefreshContract**](MarketplaceApi.md#refreshcontract) | **POST** /v1/player/marketplace/refresh/contract | Schedule a contract refresh in the indexer
+*MarketplaceApi* | [**RefreshToken**](MarketplaceApi.md#refreshtoken) | **POST** /v1/player/marketplace/refresh/token | Schedule a token refresh in the indexer
 *OperationApi* | [**CreateOperation**](OperationApi.md#createoperation) | **POST** /v1/player/operation | Initializes an operation. Used by Game SDKs to get transaction results.
 *OperationApi* | [**DeleteOperation**](OperationApi.md#deleteoperation) | **DELETE** /v1/player/operation/{opId} | Delete an operation
 *OperationApi* | [**GetOperation**](OperationApi.md#getoperation) | **GET** /v1/player/operation/{opId} | Returns operation data for given id. Used by Game SDKs to get transaction results.
@@ -203,10 +207,15 @@ Class | Method | HTTP request | Description
  - [Model.GetAssetsForUserResponse](GetAssetsForUserResponse.md)
  - [Model.GetAssetsForUserResponseDataInner](GetAssetsForUserResponseDataInner.md)
  - [Model.GetAssetsForUserResponseDataInnerAttributesInner](GetAssetsForUserResponseDataInnerAttributesInner.md)
+ - [Model.GetAttributesResponse](GetAttributesResponse.md)
+ - [Model.GetAttributesResponseDataInner](GetAttributesResponseDataInner.md)
+ - [Model.GetAttributesResponseDataInnerValuesInner](GetAttributesResponseDataInnerValuesInner.md)
  - [Model.GetChainCurrenciesResponse](GetChainCurrenciesResponse.md)
  - [Model.GetChainCurrenciesResponseDataInner](GetChainCurrenciesResponseDataInner.md)
  - [Model.GetConnectionRequestResponse](GetConnectionRequestResponse.md)
  - [Model.GetListedAssetsBodyInput](GetListedAssetsBodyInput.md)
+ - [Model.GetOwnersResponse](GetOwnersResponse.md)
+ - [Model.GetOwnersResponseDataInner](GetOwnersResponseDataInner.md)
  - [Model.GetQuoteResponse](GetQuoteResponse.md)
  - [Model.GetSessionRequestResponse](GetSessionRequestResponse.md)
  - [Model.GetTransactionResponse](GetTransactionResponse.md)
@@ -226,6 +235,8 @@ Class | Method | HTTP request | Description
  - [Model.GetUserNativeCurrencyResponse](GetUserNativeCurrencyResponse.md)
  - [Model.GetUserNativeCurrencyResponseNativeTokenBalance](GetUserNativeCurrencyResponseNativeTokenBalance.md)
  - [Model.GetUserResponse](GetUserResponse.md)
+ - [Model.RefreshContractRequestBody](RefreshContractRequestBody.md)
+ - [Model.RefreshTokenRequestBody](RefreshTokenRequestBody.md)
  - [Model.RevokeSessionRequestInput](RevokeSessionRequestInput.md)
  - [Model.SellAssetRequestInput](SellAssetRequestInput.md)
  - [Model.TransferAssetRequestInput](TransferAssetRequestInput.md)

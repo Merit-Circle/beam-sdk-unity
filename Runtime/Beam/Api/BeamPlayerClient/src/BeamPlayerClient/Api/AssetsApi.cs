@@ -59,7 +59,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="getAssetsForContractBodyInput"></param>
         /// <returns>GetAssetsForContractResponse</returns>
-        GetAssetsForContractResponse GetContractAssetsPost(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput);
+        GetAssetsForContractResponse GetAssetsForContract(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput);
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
@@ -71,7 +71,51 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="getAssetsForContractBodyInput"></param>
         /// <returns>ApiResponse of GetAssetsForContractResponse</returns>
-        ApiResponse<GetAssetsForContractResponse> GetContractAssetsPostWithHttpInfo(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput);
+        ApiResponse<GetAssetsForContractResponse> GetAssetsForContractWithHttpInfo(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <returns>GetAttributesResponse</returns>
+        GetAttributesResponse GetAttributes(string assetAddress, decimal chainId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <returns>ApiResponse of GetAttributesResponse</returns>
+        ApiResponse<GetAttributesResponse> GetAttributesWithHttpInfo(string assetAddress, decimal chainId);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
+        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <returns>GetOwnersResponse</returns>
+        GetOwnersResponse GetOwners(string assetAddress, decimal chainId, string limit, string offset);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
+        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <returns>ApiResponse of GetOwnersResponse</returns>
+        ApiResponse<GetOwnersResponse> GetOwnersWithHttpInfo(string assetAddress, decimal chainId, string limit, string offset);
         /// <summary>
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
@@ -243,7 +287,7 @@ namespace BeamPlayerClient.Api
         /// <param name="getAssetsForContractBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetsForContractResponse</returns>
-        Cysharp.Threading.Tasks.UniTask<GetAssetsForContractResponse> GetContractAssetsPostAsync(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetAssetsForContractResponse> GetAssetsForContractAsync(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
@@ -256,7 +300,61 @@ namespace BeamPlayerClient.Api
         /// <param name="getAssetsForContractBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetsForContractResponse)</returns>
-        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetAssetsForContractResponse>> GetContractAssetsPostWithHttpInfoAsync(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetAssetsForContractResponse>> GetAssetsForContractWithHttpInfoAsync(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetAttributesResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<GetAttributesResponse> GetAttributesAsync(string assetAddress, decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetAttributesResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetAttributesResponse>> GetAttributesWithHttpInfoAsync(string assetAddress, decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
+        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetOwnersResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<GetOwnersResponse> GetOwnersAsync(string assetAddress, decimal chainId, string limit, string offset, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
+        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetOwnersResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetOwnersResponse>> GetOwnersWithHttpInfoAsync(string assetAddress, decimal chainId, string limit, string offset, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
@@ -625,7 +723,7 @@ namespace BeamPlayerClient.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<GetAssetResponse>("/v1/player/assets/{assetAddress}/{assetId}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<GetAssetResponse>("/v1/player/assets/{assetAddress}/assets/{assetId}", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -716,7 +814,7 @@ namespace BeamPlayerClient.Api
 
             // make the HTTP request
 
-            var task = this.AsynchronousClient.GetAsync<GetAssetResponse>("/v1/player/assets/{assetAddress}/{assetId}", localVarRequestOptions, this.Configuration, cancellationToken);
+            var task = this.AsynchronousClient.GetAsync<GetAssetResponse>("/v1/player/assets/{assetAddress}/assets/{assetId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
             var localVarResponse = await task;
 
@@ -736,9 +834,9 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="getAssetsForContractBodyInput"></param>
         /// <returns>GetAssetsForContractResponse</returns>
-        public GetAssetsForContractResponse GetContractAssetsPost(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput)
+        public GetAssetsForContractResponse GetAssetsForContract(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput)
         {
-            BeamPlayerClient.Client.ApiResponse<GetAssetsForContractResponse> localVarResponse = GetContractAssetsPostWithHttpInfo(assetAddress, getAssetsForContractBodyInput);
+            BeamPlayerClient.Client.ApiResponse<GetAssetsForContractResponse> localVarResponse = GetAssetsForContractWithHttpInfo(assetAddress, getAssetsForContractBodyInput);
             return localVarResponse.Data;
         }
 
@@ -749,15 +847,15 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="getAssetsForContractBodyInput"></param>
         /// <returns>ApiResponse of GetAssetsForContractResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<GetAssetsForContractResponse> GetContractAssetsPostWithHttpInfo(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput)
+        public BeamPlayerClient.Client.ApiResponse<GetAssetsForContractResponse> GetAssetsForContractWithHttpInfo(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput)
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling AssetsApi->GetContractAssetsPost");
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling AssetsApi->GetAssetsForContract");
 
             // verify the required parameter 'getAssetsForContractBodyInput' is set
             if (getAssetsForContractBodyInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'getAssetsForContractBodyInput' when calling AssetsApi->GetContractAssetsPost");
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'getAssetsForContractBodyInput' when calling AssetsApi->GetAssetsForContract");
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
 
@@ -786,11 +884,11 @@ namespace BeamPlayerClient.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<GetAssetsForContractResponse>("/v1/player/assets/{assetAddress}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<GetAssetsForContractResponse>("/v1/player/assets/{assetAddress}/assets", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetContractAssetsPost", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetAssetsForContract", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -805,9 +903,9 @@ namespace BeamPlayerClient.Api
         /// <param name="getAssetsForContractBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetsForContractResponse</returns>
-        public async Cysharp.Threading.Tasks.UniTask<GetAssetsForContractResponse> GetContractAssetsPostAsync(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetAssetsForContractResponse> GetAssetsForContractAsync(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var task = GetContractAssetsPostWithHttpInfoAsync(assetAddress, getAssetsForContractBodyInput, cancellationToken);
+            var task = GetAssetsForContractWithHttpInfoAsync(assetAddress, getAssetsForContractBodyInput, cancellationToken);
             BeamPlayerClient.Client.ApiResponse<GetAssetsForContractResponse> localVarResponse = await task;
             return localVarResponse.Data;
         }
@@ -820,15 +918,15 @@ namespace BeamPlayerClient.Api
         /// <param name="getAssetsForContractBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetsForContractResponse)</returns>
-        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetAssetsForContractResponse>> GetContractAssetsPostWithHttpInfoAsync(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetAssetsForContractResponse>> GetAssetsForContractWithHttpInfoAsync(string assetAddress, GetAssetsForContractBodyInput getAssetsForContractBodyInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling AssetsApi->GetContractAssetsPost");
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling AssetsApi->GetAssetsForContract");
 
             // verify the required parameter 'getAssetsForContractBodyInput' is set
             if (getAssetsForContractBodyInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'getAssetsForContractBodyInput' when calling AssetsApi->GetContractAssetsPost");
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'getAssetsForContractBodyInput' when calling AssetsApi->GetAssetsForContract");
 
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
@@ -860,13 +958,305 @@ namespace BeamPlayerClient.Api
 
             // make the HTTP request
 
-            var task = this.AsynchronousClient.PostAsync<GetAssetsForContractResponse>("/v1/player/assets/{assetAddress}", localVarRequestOptions, this.Configuration, cancellationToken);
+            var task = this.AsynchronousClient.PostAsync<GetAssetsForContractResponse>("/v1/player/assets/{assetAddress}/assets", localVarRequestOptions, this.Configuration, cancellationToken);
 
             var localVarResponse = await task;
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetContractAssetsPost", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetAssetsForContract", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <returns>GetAttributesResponse</returns>
+        public GetAttributesResponse GetAttributes(string assetAddress, decimal chainId)
+        {
+            BeamPlayerClient.Client.ApiResponse<GetAttributesResponse> localVarResponse = GetAttributesWithHttpInfo(assetAddress, chainId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <returns>ApiResponse of GetAttributesResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<GetAttributesResponse> GetAttributesWithHttpInfo(string assetAddress, decimal chainId)
+        {
+            // verify the required parameter 'assetAddress' is set
+            if (assetAddress == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling AssetsApi->GetAttributes");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "chainId", chainId));
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<GetAttributesResponse>("/v1/player/assets/{assetAddress}/attributes", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAttributes", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetAttributesResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<GetAttributesResponse> GetAttributesAsync(string assetAddress, decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = GetAttributesWithHttpInfoAsync(assetAddress, chainId, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<GetAttributesResponse> localVarResponse = await task;
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetAttributesResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetAttributesResponse>> GetAttributesWithHttpInfoAsync(string assetAddress, decimal chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'assetAddress' is set
+            if (assetAddress == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling AssetsApi->GetAttributes");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "chainId", chainId));
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.GetAsync<GetAttributesResponse>("/v1/player/assets/{assetAddress}/attributes", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAttributes", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
+        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <returns>GetOwnersResponse</returns>
+        public GetOwnersResponse GetOwners(string assetAddress, decimal chainId, string limit, string offset)
+        {
+            BeamPlayerClient.Client.ApiResponse<GetOwnersResponse> localVarResponse = GetOwnersWithHttpInfo(assetAddress, chainId, limit, offset);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
+        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <returns>ApiResponse of GetOwnersResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<GetOwnersResponse> GetOwnersWithHttpInfo(string assetAddress, decimal chainId, string limit, string offset)
+        {
+            // verify the required parameter 'assetAddress' is set
+            if (assetAddress == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling AssetsApi->GetOwners");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "chainId", chainId));
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
+            }
+            if (offset != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "offset", offset));
+            }
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<GetOwnersResponse>("/v1/player/assets/{assetAddress}/owners", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetOwners", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
+        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetOwnersResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<GetOwnersResponse> GetOwnersAsync(string assetAddress, decimal chainId, string limit, string offset, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = GetOwnersWithHttpInfoAsync(assetAddress, chainId, limit, offset, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<GetOwnersResponse> localVarResponse = await task;
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="assetAddress"></param>
+        /// <param name="chainId"></param>
+        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
+        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetOwnersResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetOwnersResponse>> GetOwnersWithHttpInfoAsync(string assetAddress, decimal chainId, string limit, string offset, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'assetAddress' is set
+            if (assetAddress == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling AssetsApi->GetOwners");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "chainId", chainId));
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "limit", limit));
+            }
+            if (offset != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(BeamPlayerClient.Client.ClientUtils.ParameterToMultiMap("", "offset", offset));
+            }
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.GetAsync<GetOwnersResponse>("/v1/player/assets/{assetAddress}/owners", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetOwners", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

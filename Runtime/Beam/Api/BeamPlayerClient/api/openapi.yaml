@@ -218,9 +218,9 @@ paths:
       summary: Transfer the native token
       tags:
       - Assets
-  /v1/player/assets/{assetAddress}:
+  /v1/player/assets/{assetAddress}/assets:
     post:
-      operationId: getContractAssetsPost
+      operationId: getAssetsForContract
       parameters:
       - explode: false
         in: path
@@ -247,7 +247,7 @@ paths:
       summary: "Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)"
       tags:
       - Assets
-  /v1/player/assets/{assetAddress}/{assetId}:
+  /v1/player/assets/{assetAddress}/assets/{assetId}:
     get:
       operationId: getAsset
       parameters:
@@ -297,6 +297,82 @@ paths:
       security:
       - beam-api-key: []
       summary: Get a single NFT (e.g. ERC721 / ERC1155)
+      tags:
+      - Assets
+  /v1/player/assets/{assetAddress}/attributes:
+    get:
+      operationId: getAttributes
+      parameters:
+      - explode: false
+        in: path
+        name: assetAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: chainId
+        required: true
+        schema:
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAttributesResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: ""
+      tags:
+      - Assets
+  /v1/player/assets/{assetAddress}/owners:
+    get:
+      operationId: getOwners
+      parameters:
+      - explode: false
+        in: path
+        name: assetAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: chainId
+        required: true
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: "10"
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: "0"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOwnersResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: ""
       tags:
       - Assets
   /v1/player/marketplace:
@@ -711,6 +787,42 @@ paths:
       security:
       - beam-api-key: []
       summary: Get available currencies for given chain
+      tags:
+      - Marketplace
+  /v1/player/marketplace/refresh/token:
+    post:
+      operationId: refreshToken
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequestBody'
+        required: true
+      responses:
+        "201":
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Schedule a token refresh in the indexer
+      tags:
+      - Marketplace
+  /v1/player/marketplace/refresh/contract:
+    post:
+      operationId: refreshContract
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshContractRequestBody'
+        required: true
+      responses:
+        "201":
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Schedule a contract refresh in the indexer
       tags:
       - Marketplace
   /v1/player/transactions:
@@ -1493,6 +1605,7 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
         chainId:
@@ -1617,6 +1730,7 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
         chainId:
@@ -1660,6 +1774,7 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
         chainId:
@@ -1873,6 +1988,46 @@ components:
       - owners
       - supply
       type: object
+    GetAttributesResponse:
+      example:
+        data:
+        - kind: string
+          values:
+          - count: 0.8008281904610115
+            value: value
+          - count: 0.8008281904610115
+            value: value
+          key: key
+        - kind: string
+          values:
+          - count: 0.8008281904610115
+            value: value
+          - count: 0.8008281904610115
+            value: value
+          key: key
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetAttributesResponse_data_inner'
+          type: array
+      required:
+      - data
+      type: object
+    GetOwnersResponse:
+      example:
+        data:
+        - address: address
+          quantity: 0.8008281904610115
+        - address: address
+          quantity: 0.8008281904610115
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetOwnersResponse_data_inner'
+          type: array
+      required:
+      - data
+      type: object
     GetListedAssetsBodyInput:
       example:
         sortDirection: desc
@@ -2045,6 +2200,7 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
         chainId:
@@ -2085,6 +2241,7 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
         chainId:
@@ -2117,6 +2274,7 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
         operationProcessing:
@@ -2202,6 +2360,7 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
         chainId:
@@ -2235,11 +2394,9 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
-        chainId:
-          default: 13337
-          type: number
         operationProcessing:
           default: Execute
           enum:
@@ -2249,6 +2406,9 @@ components:
         operationId:
           nullable: true
           type: string
+        chainId:
+          default: 13337
+          type: number
       type: object
     GetChainCurrenciesResponse:
       example:
@@ -2266,6 +2426,36 @@ components:
           type: array
       required:
       - data
+      type: object
+    RefreshTokenRequestBody:
+      example:
+        tokenId: tokenId
+        chainId: 0.8008281904610115
+        assetAddress: assetAddress
+      properties:
+        assetAddress:
+          type: string
+        tokenId:
+          type: string
+        chainId:
+          default: 13337
+          type: number
+      required:
+      - assetAddress
+      - tokenId
+      type: object
+    RefreshContractRequestBody:
+      example:
+        chainId: 0.8008281904610115
+        assetAddress: assetAddress
+      properties:
+        assetAddress:
+          type: string
+        chainId:
+          default: 13337
+          type: number
+      required:
+      - assetAddress
       type: object
     GetTransactionsResponse:
       example:
@@ -2535,6 +2725,7 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
         chainId:
@@ -2713,6 +2904,7 @@ components:
         entityId:
           type: string
         gameId:
+          format: cuid
           type: string
       required:
       - entityId
@@ -2771,6 +2963,7 @@ components:
           default: true
           type: boolean
         policyId:
+          format: cuid
           nullable: true
           type: string
         chainId:
@@ -2963,6 +3156,8 @@ components:
         entityId: entityId
       properties:
         entityId:
+          maxLength: 250
+          minLength: 3
           type: string
         chainId:
           default: 13337
@@ -3432,6 +3627,59 @@ components:
       required:
       - address
       - quantity
+      type: object
+    GetAttributesResponse_data_inner_values_inner:
+      example:
+        count: 0.8008281904610115
+        value: value
+      properties:
+        count:
+          nullable: true
+          type: number
+        value:
+          type: string
+      required:
+      - value
+      type: object
+    GetAttributesResponse_data_inner:
+      example:
+        kind: string
+        values:
+        - count: 0.8008281904610115
+          value: value
+        - count: 0.8008281904610115
+          value: value
+        key: key
+      properties:
+        key:
+          type: string
+        kind:
+          enum:
+          - string
+          - number
+          - date
+          - range
+          type: string
+        values:
+          items:
+            $ref: '#/components/schemas/GetAttributesResponse_data_inner_values_inner'
+          nullable: true
+          type: array
+      required:
+      - key
+      - kind
+      type: object
+    GetOwnersResponse_data_inner:
+      example:
+        address: address
+        quantity: 0.8008281904610115
+      properties:
+        address:
+          nullable: true
+          type: string
+        quantity:
+          nullable: true
+          type: number
       type: object
     GetAssetListingsResponse_data_inner_price_currency:
       example:

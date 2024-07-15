@@ -284,6 +284,42 @@ namespace BeamPlayerClient.Api
         /// <param name="sellAssetRequestInput"></param>
         /// <returns>ApiResponse of CommonOperationResponse</returns>
         ApiResponse<CommonOperationResponse> ListAssetWithHttpInfo(string entityId, SellAssetRequestInput sellAssetRequestInput);
+        /// <summary>
+        /// Schedule a contract refresh in the indexer
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <returns></returns>
+        void RefreshContract(RefreshContractRequestBody refreshContractRequestBody);
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> RefreshContractWithHttpInfo(RefreshContractRequestBody refreshContractRequestBody);
+        /// <summary>
+        /// Schedule a token refresh in the indexer
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <returns></returns>
+        void RefreshToken(RefreshTokenRequestBody refreshTokenRequestBody);
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> RefreshTokenWithHttpInfo(RefreshTokenRequestBody refreshTokenRequestBody);
         #endregion Synchronous Operations
     }
 
@@ -611,6 +647,52 @@ namespace BeamPlayerClient.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
         Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> ListAssetWithHttpInfoAsync(string entityId, SellAssetRequestInput sellAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Schedule a contract refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        Cysharp.Threading.Tasks.UniTask RefreshContractAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<Object>> RefreshContractWithHttpInfoAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Schedule a token refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        Cysharp.Threading.Tasks.UniTask RefreshTokenAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<Object>> RefreshTokenWithHttpInfoAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -2573,6 +2655,258 @@ namespace BeamPlayerClient.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ListAsset", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <returns></returns>
+        public void RefreshContract(RefreshContractRequestBody refreshContractRequestBody)
+        {
+            RefreshContractWithHttpInfo(refreshContractRequestBody);
+        }
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public BeamPlayerClient.Client.ApiResponse<Object> RefreshContractWithHttpInfo(RefreshContractRequestBody refreshContractRequestBody)
+        {
+            // verify the required parameter 'refreshContractRequestBody' is set
+            if (refreshContractRequestBody == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'refreshContractRequestBody' when calling MarketplaceApi->RefreshContract");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = refreshContractRequestBody;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/v1/player/marketplace/refresh/contract", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RefreshContract", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async Cysharp.Threading.Tasks.UniTask RefreshContractAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = RefreshContractWithHttpInfoAsync(refreshContractRequestBody, cancellationToken);
+            await task;
+        }
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<Object>> RefreshContractWithHttpInfoAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'refreshContractRequestBody' is set
+            if (refreshContractRequestBody == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'refreshContractRequestBody' when calling MarketplaceApi->RefreshContract");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = refreshContractRequestBody;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.PostAsync<Object>("/v1/player/marketplace/refresh/contract", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RefreshContract", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <returns></returns>
+        public void RefreshToken(RefreshTokenRequestBody refreshTokenRequestBody)
+        {
+            RefreshTokenWithHttpInfo(refreshTokenRequestBody);
+        }
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public BeamPlayerClient.Client.ApiResponse<Object> RefreshTokenWithHttpInfo(RefreshTokenRequestBody refreshTokenRequestBody)
+        {
+            // verify the required parameter 'refreshTokenRequestBody' is set
+            if (refreshTokenRequestBody == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'refreshTokenRequestBody' when calling MarketplaceApi->RefreshToken");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = refreshTokenRequestBody;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/v1/player/marketplace/refresh/token", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RefreshToken", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async Cysharp.Threading.Tasks.UniTask RefreshTokenAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = RefreshTokenWithHttpInfoAsync(refreshTokenRequestBody, cancellationToken);
+            await task;
+        }
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<Object>> RefreshTokenWithHttpInfoAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'refreshTokenRequestBody' is set
+            if (refreshTokenRequestBody == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'refreshTokenRequestBody' when calling MarketplaceApi->RefreshToken");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = refreshTokenRequestBody;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.PostAsync<Object>("/v1/player/marketplace/refresh/token", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RefreshToken", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

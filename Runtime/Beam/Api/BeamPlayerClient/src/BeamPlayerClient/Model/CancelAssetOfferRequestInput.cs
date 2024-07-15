@@ -61,17 +61,17 @@ namespace BeamPlayerClient.Model
         /// <param name="optimistic">optimistic (default to false).</param>
         /// <param name="sponsor">sponsor (default to true).</param>
         /// <param name="policyId">policyId.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
-        public CancelAssetOfferRequestInput(bool optimistic = false, bool sponsor = true, string policyId = default(string), decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
+        /// <param name="chainId">chainId (default to 13337M).</param>
+        public CancelAssetOfferRequestInput(bool optimistic = false, bool sponsor = true, string policyId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string), decimal chainId = 13337M)
         {
             this.Optimistic = optimistic;
             this.Sponsor = sponsor;
             this.PolicyId = policyId;
-            this.ChainId = chainId;
             this.OperationProcessing = operationProcessing;
             this.OperationId = operationId;
+            this.ChainId = chainId;
         }
 
         /// <summary>
@@ -93,16 +93,16 @@ namespace BeamPlayerClient.Model
         public string PolicyId { get; set; }
 
         /// <summary>
-        /// Gets or Sets ChainId
-        /// </summary>
-        [DataMember(Name = "chainId", EmitDefaultValue = false)]
-        public decimal ChainId { get; set; }
-
-        /// <summary>
         /// Gets or Sets OperationId
         /// </summary>
         [DataMember(Name = "operationId", EmitDefaultValue = true)]
         public string OperationId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ChainId
+        /// </summary>
+        [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        public decimal ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -115,9 +115,9 @@ namespace BeamPlayerClient.Model
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
-            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
