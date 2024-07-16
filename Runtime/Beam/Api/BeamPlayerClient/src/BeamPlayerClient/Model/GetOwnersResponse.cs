@@ -39,7 +39,8 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="GetOwnersResponse" /> class.
         /// </summary>
         /// <param name="data">data (required).</param>
-        public GetOwnersResponse(List<GetOwnersResponseDataInner> data = default(List<GetOwnersResponseDataInner>))
+        /// <param name="pagination">pagination (required).</param>
+        public GetOwnersResponse(List<GetOwnersResponseDataInner> data = default(List<GetOwnersResponseDataInner>), GetOwnersResponsePagination pagination = default(GetOwnersResponsePagination))
         {
             // to ensure "data" is required (not null)
             if (data == null)
@@ -47,6 +48,12 @@ namespace BeamPlayerClient.Model
                 throw new ArgumentNullException("data is a required property for GetOwnersResponse and cannot be null");
             }
             this.Data = data;
+            // to ensure "pagination" is required (not null)
+            if (pagination == null)
+            {
+                throw new ArgumentNullException("pagination is a required property for GetOwnersResponse and cannot be null");
+            }
+            this.Pagination = pagination;
         }
 
         /// <summary>
@@ -54,6 +61,12 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "data", IsRequired = true, EmitDefaultValue = true)]
         public List<GetOwnersResponseDataInner> Data { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Pagination
+        /// </summary>
+        [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = true)]
+        public GetOwnersResponsePagination Pagination { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -64,6 +77,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetOwnersResponse {\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
+            sb.Append("  Pagination: ").Append(Pagination).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

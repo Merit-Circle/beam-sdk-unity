@@ -40,7 +40,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="data">data (required).</param>
         /// <param name="pagination">pagination (required).</param>
-        public GetTransactionsResponse(List<GetTransactionsResponseDataInner> data = default(List<GetTransactionsResponseDataInner>), GetTransactionsResponsePagination pagination = default(GetTransactionsResponsePagination))
+        public GetTransactionsResponse(List<GetTransactionsResponseDataInner> data = default(List<GetTransactionsResponseDataInner>), GetOwnersResponsePagination pagination = default(GetOwnersResponsePagination))
         {
             // to ensure "data" is required (not null)
             if (data == null)
@@ -66,7 +66,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Pagination
         /// </summary>
         [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = true)]
-        public GetTransactionsResponsePagination Pagination { get; set; }
+        public GetOwnersResponsePagination Pagination { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

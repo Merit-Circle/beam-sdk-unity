@@ -25,23 +25,23 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// GetTransactionsResponsePagination
+    /// GetOwnersResponsePagination
     /// </summary>
-    [DataContract(Name = "GetTransactionsResponse_pagination")]
-    public partial class GetTransactionsResponsePagination
+    [DataContract(Name = "GetOwnersResponse_pagination")]
+    public partial class GetOwnersResponsePagination
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetTransactionsResponsePagination" /> class.
+        /// Initializes a new instance of the <see cref="GetOwnersResponsePagination" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GetTransactionsResponsePagination() { }
+        protected GetOwnersResponsePagination() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetTransactionsResponsePagination" /> class.
+        /// Initializes a new instance of the <see cref="GetOwnersResponsePagination" /> class.
         /// </summary>
         /// <param name="count">count (required).</param>
         /// <param name="limit">limit (default to 10M).</param>
         /// <param name="offset">offset (default to 0M).</param>
-        public GetTransactionsResponsePagination(decimal count = default(decimal), decimal limit = 10M, decimal offset = 0M)
+        public GetOwnersResponsePagination(decimal count = default(decimal), decimal limit = 10M, decimal offset = 0M)
         {
             this.Count = count;
             this.Limit = limit;
@@ -73,7 +73,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetTransactionsResponsePagination {\n");
+            sb.Append("class GetOwnersResponsePagination {\n");
             sb.Append("  Count: ").Append(Count).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");

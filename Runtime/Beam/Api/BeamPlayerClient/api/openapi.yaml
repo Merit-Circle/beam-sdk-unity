@@ -2015,6 +2015,10 @@ components:
       type: object
     GetOwnersResponse:
       example:
+        pagination:
+          offset: 5.962133916683182
+          count: 6.027456183070403
+          limit: 1.4658129805029452
         data:
         - address: address
           quantity: 0.8008281904610115
@@ -2025,8 +2029,11 @@ components:
           items:
             $ref: '#/components/schemas/GetOwnersResponse_data_inner'
           type: array
+        pagination:
+          $ref: '#/components/schemas/GetOwnersResponse_pagination'
       required:
       - data
+      - pagination
       type: object
     GetListedAssetsBodyInput:
       example:
@@ -2460,9 +2467,9 @@ components:
     GetTransactionsResponse:
       example:
         pagination:
-          offset: 3.616076749251911
-          count: 7.061401241503109
-          limit: 9.301444243932576
+          offset: 5.962133916683182
+          count: 6.027456183070403
+          limit: 1.4658129805029452
         data:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           chainId: 0.8008281904610115
@@ -2576,7 +2583,7 @@ components:
             $ref: '#/components/schemas/GetTransactionsResponse_data_inner'
           type: array
         pagination:
-          $ref: '#/components/schemas/GetTransactionsResponse_pagination'
+          $ref: '#/components/schemas/GetOwnersResponse_pagination'
       required:
       - data
       - pagination
@@ -2746,9 +2753,9 @@ components:
     GetAllUsersResponse:
       example:
         pagination:
-          offset: 3.616076749251911
-          count: 7.061401241503109
-          limit: 9.301444243932576
+          offset: 5.962133916683182
+          count: 6.027456183070403
+          limit: 1.4658129805029452
         data:
         - entities:
           - entityId: entityId
@@ -2798,7 +2805,7 @@ components:
             $ref: '#/components/schemas/GetAllUsersResponse_data_inner'
           type: array
         pagination:
-          $ref: '#/components/schemas/GetTransactionsResponse_pagination'
+          $ref: '#/components/schemas/GetOwnersResponse_pagination'
       required:
       - data
       - pagination
@@ -3681,6 +3688,23 @@ components:
           nullable: true
           type: number
       type: object
+    GetOwnersResponse_pagination:
+      example:
+        offset: 5.962133916683182
+        count: 6.027456183070403
+        limit: 1.4658129805029452
+      properties:
+        count:
+          type: number
+        limit:
+          default: 10
+          type: number
+        offset:
+          default: 0
+          type: number
+      required:
+      - count
+      type: object
     GetAssetListingsResponse_data_inner_price_currency:
       example:
         symbol: BEAM
@@ -4096,23 +4120,6 @@ components:
       - id
       - intent
       - updatedAt
-      type: object
-    GetTransactionsResponse_pagination:
-      example:
-        offset: 3.616076749251911
-        count: 7.061401241503109
-        limit: 9.301444243932576
-      properties:
-        count:
-          type: number
-        limit:
-          default: 10
-          type: number
-        offset:
-          default: 0
-          type: number
-      required:
-      - count
       type: object
     GetTransactionResponse_policy:
       description: Policy information related to the transaction
