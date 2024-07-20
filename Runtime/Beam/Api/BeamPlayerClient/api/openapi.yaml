@@ -272,14 +272,16 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: true
+      - description: "If true, will always return 'owners' record for this User if\
+          \ he owns the asset"
+        explode: true
         in: query
         name: entityId
         required: false
         schema:
           type: string
         style: form
-      - description: "If true, will return owners of the token"
+      - description: "If true, will return all owners of the asset"
         explode: true
         in: query
         name: owners
@@ -352,16 +354,14 @@ paths:
         name: limit
         required: false
         schema:
-          default: "10"
-          type: string
+          type: number
         style: form
       - explode: true
         in: query
         name: offset
         required: false
         schema:
-          default: "0"
-          type: string
+          type: number
         style: form
       responses:
         "200":
@@ -369,6 +369,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetOwnersResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: ""
+      tags:
+      - Assets
+  /v1/player/assets/{assetAddress}/owners/{ownerAddress}/assets:
+    post:
+      operationId: getOwnerAssets
+      parameters:
+      - explode: false
+        in: path
+        name: assetAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ownerAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOwnerAssetsBodyInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOwnerAssetsResponse'
           description: ""
       security:
       - beam-api-key: []
@@ -2035,6 +2071,100 @@ components:
       - data
       - pagination
       type: object
+    GetOwnerAssetsBodyInput:
+      example:
+        sortDirection: asc
+        chainId: 0.8008281904610115
+        limit: 60.67181621239699
+        sortBy: acquiredAt
+        includeAttributes: false
+        continuation: continuation
+      properties:
+        sortDirection:
+          default: asc
+          enum:
+          - asc
+          - desc
+          type: string
+        sortBy:
+          default: acquiredAt
+          enum:
+          - acquiredAt
+          - lastAppraisalValue
+          type: string
+        includeAttributes:
+          default: false
+          nullable: true
+          type: boolean
+        continuation:
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        limit:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: number
+      type: object
+    GetOwnerAssetsResponse:
+      example:
+        data:
+        - ownedQuantity: 2.3021358869347655
+          chainId: 5.637376656633329
+          assetAddress: assetAddress
+          assetId: assetId
+          imageUrl: imageUrl
+          name: name
+          rarityScore: 6.027456183070403
+          attributes:
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          supply: 0.8008281904610115
+          assetType: assetType
+          rarity: Common
+        - ownedQuantity: 2.3021358869347655
+          chainId: 5.637376656633329
+          assetAddress: assetAddress
+          assetId: assetId
+          imageUrl: imageUrl
+          name: name
+          rarityScore: 6.027456183070403
+          attributes:
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          - displayType: displayType
+            maxValue: 1.4658129805029452
+            type: type
+            value: value
+            rarity: 5.962133916683182
+          supply: 0.8008281904610115
+          assetType: assetType
+          rarity: Common
+        continuation: continuation
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GetAssetsForUserResponse_data_inner'
+          type: array
+        continuation:
+          nullable: true
+          type: string
+      required:
+      - data
+      type: object
     GetListedAssetsBodyInput:
       example:
         sortDirection: desc
@@ -2886,8 +3016,6 @@ components:
       type: object
     ConfirmOperationRequest:
       example:
-        gameId: gameId
-        entityId: entityId
         transactions:
         - signature: signature
           id: id
@@ -2908,14 +3036,7 @@ components:
             $ref: '#/components/schemas/ConfirmOperationRequest_transactions_inner'
           nullable: true
           type: array
-        entityId:
-          type: string
-        gameId:
-          format: cuid
-          type: string
       required:
-      - entityId
-      - gameId
       - status
       type: object
     GetQuoteResponse:
@@ -3057,6 +3178,7 @@ components:
         address:
           type: string
         operationId:
+          format: cuid
           nullable: true
           type: string
         operationProcessing:
@@ -4127,6 +4249,7 @@ components:
         id: id
       properties:
         id:
+          format: cuid
           nullable: true
           type: string
       type: object

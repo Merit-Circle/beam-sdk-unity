@@ -66,7 +66,7 @@ namespace Beam
                     apiUrl = "https://api.onbeam.com";
                     break;
                 default:
-                    apiUrl = "https://api.testnet.onbeam.com";
+                    apiUrl = "https://api.preview.onbeam.com";
                     break;
             }
 
@@ -230,7 +230,7 @@ namespace Beam
             Log("No active session found, refreshing local KeyPair");
 
             // refresh keypair to make sure we have no conflicts with existing sessions
-            var newKeyPair = GetOrCreateSigningKeyPair(refresh: true);
+            var newKeyPair = GetOrCreateSigningKeyPair(entityId, refresh: true);
 
             // retrieve operation Id to pass further and track result
             GenerateSessionRequestResponse beamSessionRequest;
@@ -366,7 +366,7 @@ namespace Beam
                 if (hasActiveSession)
                 {
                     Log($"Has an active session until: {activeSession.EndTime:o}, using it to sign the operation");
-                    return await SignOperationUsingSessionAsync(entityId, operation, activeSessionKeyPair,
+                    return await SignOperationUsingSessionAsync(operation, activeSessionKeyPair,
                         cancellationToken);
                 }
             }
@@ -434,7 +434,6 @@ namespace Beam
         }
 
         private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingSessionAsync(
-            string entityId,
             CommonOperationResponse operation,
             KeyPair activeSessionKeyPair,
             CancellationToken cancellationToken = default)
@@ -452,8 +451,6 @@ namespace Beam
 
             var confirmationModel = new ConfirmOperationRequest(
                 ConfirmOperationRequest.StatusEnum.Pending,
-                entityId: entityId,
-                gameId: operation.GameId,
                 transactions: new List<ConfirmOperationRequestTransactionsInner>());
 
             foreach (var transaction in operation.Transactions)
@@ -570,13 +567,13 @@ namespace Beam
             CancellationToken cancellationToken = default)
         {
             BeamSession beamSession = null;
-            var sessionInfo = m_Storage.Get(Constants.Storage.BeamSession);
+            var sessionInfo = m_Storage.Get(Constants.Storage.BeamSession + entityId);
             if (sessionInfo != null)
             {
                 beamSession = JsonConvert.DeserializeObject<BeamSession>(sessionInfo);
             }
 
-            var keyPair = GetOrCreateSigningKeyPair();
+            var keyPair = GetOrCreateSigningKeyPair(entityId);
 
             // if session is no longer valid, check if we have one saved in the API
             if (!beamSession.IsValidNow())
@@ -602,20 +599,20 @@ namespace Beam
             // make sure session we just retrieved is valid and owned by current KeyPair
             if (beamSession.IsValidNow() && beamSession.IsOwnedBy(keyPair))
             {
-                m_Storage.Set(Constants.Storage.BeamSession, JsonConvert.SerializeObject(beamSession));
+                m_Storage.Set(Constants.Storage.BeamSession + entityId, JsonConvert.SerializeObject(beamSession));
                 return (beamSession, keyPair);
             }
 
             // if session is not valid or owned by different KeyPair, remove it from cache
-            m_Storage.Delete(Constants.Storage.BeamSession);
+            m_Storage.Delete(Constants.Storage.BeamSession + entityId);
             return (null, keyPair);
         }
 
-        private KeyPair GetOrCreateSigningKeyPair(bool refresh = false)
+        private KeyPair GetOrCreateSigningKeyPair(string entityId, bool refresh = false)
         {
             if (!refresh)
             {
-                var privateKey = m_Storage.Get(Constants.Storage.BeamSigningKey);
+                var privateKey = m_Storage.Get(Constants.Storage.BeamSigningKey + entityId);
                 if (privateKey != null)
                 {
                     return KeyPair.Load(privateKey);
@@ -623,7 +620,7 @@ namespace Beam
             }
 
             var newKeyPair = KeyPair.Generate();
-            m_Storage.Set(Constants.Storage.BeamSigningKey, newKeyPair.PrivateHex);
+            m_Storage.Set(Constants.Storage.BeamSigningKey + entityId, newKeyPair.PrivateHex);
 
             return newKeyPair;
         }

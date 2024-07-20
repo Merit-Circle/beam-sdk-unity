@@ -86,8 +86,8 @@ namespace Example
             var assetAddress = "assetAddress_example";  // string | 
             var assetId = "assetId_example";  // string | 
             var chainId = 8.14D;  // decimal? |  (optional) 
-            var entityId = "entityId_example";  // string |  (optional) 
-            var owners = true;  // bool? | If true, will return owners of the token (optional) 
+            var entityId = "entityId_example";  // string | If true, will always return 'owners' record for this User if he owns the asset (optional) 
+            var owners = true;  // bool? | If true, will return all owners of the asset (optional) 
 
             try
             {
@@ -117,6 +117,7 @@ Class | Method | HTTP request | Description
 *AssetsApi* | [**GetAsset**](AssetsApi.md#getasset) | **GET** /v1/player/assets/{assetAddress}/assets/{assetId} | Get a single NFT (e.g. ERC721 / ERC1155)
 *AssetsApi* | [**GetAssetsForContract**](AssetsApi.md#getassetsforcontract) | **POST** /v1/player/assets/{assetAddress}/assets | Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
 *AssetsApi* | [**GetAttributes**](AssetsApi.md#getattributes) | **GET** /v1/player/assets/{assetAddress}/attributes | 
+*AssetsApi* | [**GetOwnerAssets**](AssetsApi.md#getownerassets) | **POST** /v1/player/assets/{assetAddress}/owners/{ownerAddress}/assets | 
 *AssetsApi* | [**GetOwners**](AssetsApi.md#getowners) | **GET** /v1/player/assets/{assetAddress}/owners | 
 *AssetsApi* | [**GetUserAssetsForGamePost**](AssetsApi.md#getuserassetsforgamepost) | **POST** /v1/player/assets/users/{entityId} | Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
 *AssetsApi* | [**GetUserCurrencies**](AssetsApi.md#getusercurrencies) | **GET** /v1/player/assets/users/{entityId}/currencies | Get all the currencies owned by an account (ERC20)
@@ -214,6 +215,8 @@ Class | Method | HTTP request | Description
  - [Model.GetChainCurrenciesResponseDataInner](GetChainCurrenciesResponseDataInner.md)
  - [Model.GetConnectionRequestResponse](GetConnectionRequestResponse.md)
  - [Model.GetListedAssetsBodyInput](GetListedAssetsBodyInput.md)
+ - [Model.GetOwnerAssetsBodyInput](GetOwnerAssetsBodyInput.md)
+ - [Model.GetOwnerAssetsResponse](GetOwnerAssetsResponse.md)
  - [Model.GetOwnersResponse](GetOwnersResponse.md)
  - [Model.GetOwnersResponseDataInner](GetOwnersResponseDataInner.md)
  - [Model.GetOwnersResponsePagination](GetOwnersResponsePagination.md)

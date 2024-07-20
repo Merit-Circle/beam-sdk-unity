@@ -83,23 +83,9 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="status">status (required).</param>
         /// <param name="transactions">transactions.</param>
-        /// <param name="entityId">entityId (required).</param>
-        /// <param name="gameId">gameId (required).</param>
-        public ConfirmOperationRequest(StatusEnum status = default(StatusEnum), List<ConfirmOperationRequestTransactionsInner> transactions = default(List<ConfirmOperationRequestTransactionsInner>), string entityId = default(string), string gameId = default(string))
+        public ConfirmOperationRequest(StatusEnum status = default(StatusEnum), List<ConfirmOperationRequestTransactionsInner> transactions = default(List<ConfirmOperationRequestTransactionsInner>))
         {
             this.Status = status;
-            // to ensure "entityId" is required (not null)
-            if (entityId == null)
-            {
-                throw new ArgumentNullException("entityId is a required property for ConfirmOperationRequest and cannot be null");
-            }
-            this.EntityId = entityId;
-            // to ensure "gameId" is required (not null)
-            if (gameId == null)
-            {
-                throw new ArgumentNullException("gameId is a required property for ConfirmOperationRequest and cannot be null");
-            }
-            this.GameId = gameId;
             this.Transactions = transactions;
         }
 
@@ -108,18 +94,6 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "transactions", EmitDefaultValue = true)]
         public List<ConfirmOperationRequestTransactionsInner> Transactions { get; set; }
-
-        /// <summary>
-        /// Gets or Sets EntityId
-        /// </summary>
-        [DataMember(Name = "entityId", IsRequired = true, EmitDefaultValue = true)]
-        public string EntityId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets GameId
-        /// </summary>
-        [DataMember(Name = "gameId", IsRequired = true, EmitDefaultValue = true)]
-        public string GameId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -131,8 +105,6 @@ namespace BeamPlayerClient.Model
             sb.Append("class ConfirmOperationRequest {\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Transactions: ").Append(Transactions).Append("\n");
-            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
-            sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
