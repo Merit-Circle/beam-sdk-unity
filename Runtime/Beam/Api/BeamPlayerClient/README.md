@@ -148,6 +148,7 @@ Class | Method | HTTP request | Description
 *MarketplaceApi* | [**RefreshToken**](MarketplaceApi.md#refreshtoken) | **POST** /v1/player/marketplace/refresh/token | Schedule a token refresh in the indexer
 *OperationApi* | [**CreateOperation**](OperationApi.md#createoperation) | **POST** /v1/player/operation | Initializes an operation. Used by Game SDKs to get transaction results.
 *OperationApi* | [**DeleteOperation**](OperationApi.md#deleteoperation) | **DELETE** /v1/player/operation/{opId} | Delete an operation
+*OperationApi* | [**ExecuteSignedOperation**](OperationApi.md#executesignedoperation) | **POST** /v1/player/operation/{opId}/execute | Executes operation for given id
 *OperationApi* | [**GetOperation**](OperationApi.md#getoperation) | **GET** /v1/player/operation/{opId} | Returns operation data for given id. Used by Game SDKs to get transaction results.
 *OperationApi* | [**ProcessOperation**](OperationApi.md#processoperation) | **PATCH** /v1/player/operation/{opId} | Updates operation result for given id
 *SessionsApi* | [**CreateSessionRequest**](SessionsApi.md#createsessionrequest) | **POST** /v1/player/sessions/users/{entityId}/request | 
@@ -155,6 +156,8 @@ Class | Method | HTTP request | Description
 *SessionsApi* | [**GetAllActiveSessions**](SessionsApi.md#getallactivesessions) | **GET** /v1/player/sessions/users/{entityId}/active | 
 *SessionsApi* | [**GetSessionRequest**](SessionsApi.md#getsessionrequest) | **GET** /v1/player/sessions/request/{requestId} | 
 *SessionsApi* | [**RevokeSession**](SessionsApi.md#revokesession) | **POST** /v1/player/sessions/users/{entityId}/revoke | 
+*StatsApi* | [**GetAssetStats**](StatsApi.md#getassetstats) | **POST** /v1/player/stats/{assetAddress}/assets/{assetId} | Get asset stats
+*StatsApi* | [**GetAssetsStats**](StatsApi.md#getassetsstats) | **POST** /v1/player/stats/{assetAddress} | Get assets stats
 *TransactionsApi* | [**CreateUserTransaction**](TransactionsApi.md#createusertransaction) | **POST** /v1/player/transactions/users/{entityId} | Creating a new transaction on behalf of a user
 *TransactionsApi* | [**GetTransaction**](TransactionsApi.md#gettransaction) | **GET** /v1/player/transactions/{transactionId} | Getting a transaction
 *TransactionsApi* | [**GetTransactions**](TransactionsApi.md#gettransactions) | **GET** /v1/player/transactions | Get a paginated list of transactions from your game
@@ -242,6 +245,9 @@ Class | Method | HTTP request | Description
  - [Model.RefreshTokenRequestBody](RefreshTokenRequestBody.md)
  - [Model.RevokeSessionRequestInput](RevokeSessionRequestInput.md)
  - [Model.SellAssetRequestInput](SellAssetRequestInput.md)
+ - [Model.StatsRequestInput](StatsRequestInput.md)
+ - [Model.StatsResponse](StatsResponse.md)
+ - [Model.StatsResponseCount](StatsResponseCount.md)
  - [Model.TransferAssetRequestInput](TransferAssetRequestInput.md)
  - [Model.TransferAssetRequestInputAssetsInner](TransferAssetRequestInputAssetsInner.md)
  - [Model.TransferNativeTokenRequestInput](TransferNativeTokenRequestInput.md)
