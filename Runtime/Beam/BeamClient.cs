@@ -386,6 +386,16 @@ namespace Beam
             };
         }
 
+        /// <summary>
+        /// Clears any details of local Session like private key, or Session validity details. Useful when f.e. switching users on the same device.
+        /// </summary>
+        /// <param name="entityId">EntityId</param>
+        public void ClearLocalSession(string entityId)
+        {
+            m_Storage.Delete(Constants.Storage.BeamSession + entityId);
+            m_Storage.Delete(Constants.Storage.BeamSigningKey + entityId);
+        }
+
         private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
             CommonOperationResponse operation,
             int secondsTimeout,
