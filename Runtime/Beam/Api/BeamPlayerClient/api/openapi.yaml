@@ -22,6 +22,10 @@ tags:
   name: Exchange
 - description: Retrieve and manage users in Beam
   name: Users
+- description: Retrieve activity for the users and tokens in your game
+  name: Activity
+- description: Retrieve stats for the assets in your game
+  name: Stats
 paths:
   /v1/health/services:
     get:
@@ -1494,7 +1498,7 @@ paths:
       - Connector
   /v1/player/stats/{assetAddress}:
     post:
-      operationId: getAssetsStats
+      operationId: getContractStats
       parameters:
       - explode: false
         in: path
@@ -1507,18 +1511,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StatsRequestInput'
+              $ref: '#/components/schemas/CommonStatsRequestInput'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatsResponse'
+                $ref: '#/components/schemas/CommonStatsResponse'
           description: ""
       security:
       - beam-api-key: []
-      summary: Get assets stats
+      summary: Get contract stats
       tags:
       - Stats
   /v1/player/stats/{assetAddress}/assets/{assetId}:
@@ -1543,20 +1547,114 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StatsRequestInput'
+              $ref: '#/components/schemas/CommonStatsRequestInput'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatsResponse'
+                $ref: '#/components/schemas/CommonStatsResponse'
           description: ""
       security:
       - beam-api-key: []
       summary: Get asset stats
       tags:
       - Stats
+  /v1/player/activity/users/{entityId}:
+    post:
+      operationId: getUserActivity
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonActivityRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonActivityResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Get user activity
+      tags:
+      - Activity
+  /v1/player/activity/assets/{assetAddress}:
+    post:
+      operationId: getContractActivity
+      parameters:
+      - explode: false
+        in: path
+        name: assetAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonActivityRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonActivityResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Get contract activity
+      tags:
+      - Activity
+  /v1/player/activity/assets/{assetAddress}/asset/{assetId}:
+    post:
+      operationId: getAssetActivity
+      parameters:
+      - explode: false
+        in: path
+        name: assetAddress
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: assetId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonActivityRequestInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonActivityResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Get asset activity
+      tags:
+      - Activity
 components:
   schemas:
     GetAssetsForUserBodyInput:
@@ -3445,7 +3543,7 @@ components:
       - status
       - updatedAt
       type: object
-    StatsRequestInput:
+    CommonStatsRequestInput:
       example:
         chainId: 0.8008281904610115
         attributes:
@@ -3463,16 +3561,87 @@ components:
           default: 13337
           type: number
       type: object
-    StatsResponse:
+    CommonStatsResponse:
       example:
         count:
           listed: 6.027456183070403
           tokens: 0.8008281904610115
       properties:
         count:
-          $ref: '#/components/schemas/StatsResponse_count'
+          $ref: '#/components/schemas/CommonStatsResponse_count'
       required:
       - count
+      type: object
+    CommonActivityRequestInput:
+      example:
+        types:
+        - ask
+        - ask
+        chainId: 6.027456183070403
+        limit: 8.928199085564014
+      properties:
+        limit:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: number
+        types:
+          items:
+            enum:
+            - ask
+            - ask_cancel
+            - bid
+            - bid_cancel
+            - sale
+            - mint
+            - transfer
+            type: string
+          nullable: true
+          type: array
+        chainId:
+          default: 13337
+          type: number
+      type: object
+    CommonActivityResponse:
+      example:
+        data:
+        - createdAt: createdAt
+          contract:
+            address: address
+          asset:
+            id: id
+          type: ask
+          transaction:
+            from: from
+            to: to
+            hash: hash
+            timestamp: 0.8008281904610115
+          order:
+            id: id
+        - createdAt: createdAt
+          contract:
+            address: address
+          asset:
+            id: id
+          type: ask
+          transaction:
+            from: from
+            to: to
+            hash: hash
+            timestamp: 0.8008281904610115
+          order:
+            id: id
+        continuation: continuation
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CommonActivityResponse_data_inner'
+          type: array
+        continuation:
+          nullable: true
+          type: string
+      required:
+      - data
       type: object
     check_200_response_info_value:
       additionalProperties: true
@@ -4566,7 +4735,7 @@ components:
       - sessionAddress
       - startTime
       type: object
-    StatsResponse_count:
+    CommonStatsResponse_count:
       example:
         listed: 6.027456183070403
         tokens: 0.8008281904610115
@@ -4578,6 +4747,94 @@ components:
       required:
       - listed
       - tokens
+      type: object
+    CommonActivityResponse_data_inner_contract:
+      example:
+        address: address
+      properties:
+        address:
+          nullable: true
+          type: string
+      type: object
+    CommonActivityResponse_data_inner_transaction:
+      example:
+        from: from
+        to: to
+        hash: hash
+        timestamp: 0.8008281904610115
+      properties:
+        timestamp:
+          nullable: true
+          type: number
+        from:
+          nullable: true
+          type: string
+        to:
+          nullable: true
+          type: string
+        hash:
+          nullable: true
+          type: string
+      type: object
+    CommonActivityResponse_data_inner_asset:
+      example:
+        id: id
+      properties:
+        id:
+          nullable: true
+          type: string
+      type: object
+    CommonActivityResponse_data_inner_order:
+      example:
+        id: id
+      nullable: true
+      properties:
+        id:
+          nullable: true
+          type: string
+      type: object
+    CommonActivityResponse_data_inner:
+      example:
+        createdAt: createdAt
+        contract:
+          address: address
+        asset:
+          id: id
+        type: ask
+        transaction:
+          from: from
+          to: to
+          hash: hash
+          timestamp: 0.8008281904610115
+        order:
+          id: id
+      properties:
+        createdAt:
+          nullable: true
+          type: string
+        contract:
+          $ref: '#/components/schemas/CommonActivityResponse_data_inner_contract'
+        transaction:
+          $ref: '#/components/schemas/CommonActivityResponse_data_inner_transaction'
+        asset:
+          $ref: '#/components/schemas/CommonActivityResponse_data_inner_asset'
+        order:
+          $ref: '#/components/schemas/CommonActivityResponse_data_inner_order'
+        type:
+          enum:
+          - ask
+          - ask_cancel
+          - bid
+          - bid_cancel
+          - sale
+          - mint
+          - transfer
+          nullable: true
+          type: string
+      required:
+      - asset
+      - contract
+      - transaction
       type: object
   securitySchemes:
     beam-api-key:

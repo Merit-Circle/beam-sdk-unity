@@ -32,9 +32,9 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="statsRequestInput"></param>
-        /// <returns>StatsResponse</returns>
-        StatsResponse GetAssetStats(string assetAddress, string assetId, StatsRequestInput statsRequestInput);
+        /// <param name="commonStatsRequestInput"></param>
+        /// <returns>CommonStatsResponse</returns>
+        CommonStatsResponse GetAssetStats(string assetAddress, string assetId, CommonStatsRequestInput commonStatsRequestInput);
 
         /// <summary>
         /// Get asset stats
@@ -45,29 +45,29 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="statsRequestInput"></param>
-        /// <returns>ApiResponse of StatsResponse</returns>
-        ApiResponse<StatsResponse> GetAssetStatsWithHttpInfo(string assetAddress, string assetId, StatsRequestInput statsRequestInput);
+        /// <param name="commonStatsRequestInput"></param>
+        /// <returns>ApiResponse of CommonStatsResponse</returns>
+        ApiResponse<CommonStatsResponse> GetAssetStatsWithHttpInfo(string assetAddress, string assetId, CommonStatsRequestInput commonStatsRequestInput);
         /// <summary>
-        /// Get assets stats
+        /// Get contract stats
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="statsRequestInput"></param>
-        /// <returns>StatsResponse</returns>
-        StatsResponse GetAssetsStats(string assetAddress, StatsRequestInput statsRequestInput);
+        /// <param name="commonStatsRequestInput"></param>
+        /// <returns>CommonStatsResponse</returns>
+        CommonStatsResponse GetContractStats(string assetAddress, CommonStatsRequestInput commonStatsRequestInput);
 
         /// <summary>
-        /// Get assets stats
+        /// Get contract stats
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="statsRequestInput"></param>
-        /// <returns>ApiResponse of StatsResponse</returns>
-        ApiResponse<StatsResponse> GetAssetsStatsWithHttpInfo(string assetAddress, StatsRequestInput statsRequestInput);
+        /// <param name="commonStatsRequestInput"></param>
+        /// <returns>ApiResponse of CommonStatsResponse</returns>
+        ApiResponse<CommonStatsResponse> GetContractStatsWithHttpInfo(string assetAddress, CommonStatsRequestInput commonStatsRequestInput);
         #endregion Synchronous Operations
     }
 
@@ -86,10 +86,10 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="statsRequestInput"></param>
+        /// <param name="commonStatsRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StatsResponse</returns>
-        Cysharp.Threading.Tasks.UniTask<StatsResponse> GetAssetStatsAsync(string assetAddress, string assetId, StatsRequestInput statsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of CommonStatsResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<CommonStatsResponse> GetAssetStatsAsync(string assetAddress, string assetId, CommonStatsRequestInput commonStatsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get asset stats
@@ -100,35 +100,35 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="statsRequestInput"></param>
+        /// <param name="commonStatsRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StatsResponse)</returns>
-        Cysharp.Threading.Tasks.UniTask<ApiResponse<StatsResponse>> GetAssetStatsWithHttpInfoAsync(string assetAddress, string assetId, StatsRequestInput statsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (CommonStatsResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonStatsResponse>> GetAssetStatsWithHttpInfoAsync(string assetAddress, string assetId, CommonStatsRequestInput commonStatsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get assets stats
+        /// Get contract stats
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="statsRequestInput"></param>
+        /// <param name="commonStatsRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StatsResponse</returns>
-        Cysharp.Threading.Tasks.UniTask<StatsResponse> GetAssetsStatsAsync(string assetAddress, StatsRequestInput statsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of CommonStatsResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<CommonStatsResponse> GetContractStatsAsync(string assetAddress, CommonStatsRequestInput commonStatsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get assets stats
+        /// Get contract stats
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="statsRequestInput"></param>
+        /// <param name="commonStatsRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StatsResponse)</returns>
-        Cysharp.Threading.Tasks.UniTask<ApiResponse<StatsResponse>> GetAssetsStatsWithHttpInfoAsync(string assetAddress, StatsRequestInput statsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (CommonStatsResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonStatsResponse>> GetContractStatsWithHttpInfoAsync(string assetAddress, CommonStatsRequestInput commonStatsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -279,11 +279,11 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="statsRequestInput"></param>
-        /// <returns>StatsResponse</returns>
-        public StatsResponse GetAssetStats(string assetAddress, string assetId, StatsRequestInput statsRequestInput)
+        /// <param name="commonStatsRequestInput"></param>
+        /// <returns>CommonStatsResponse</returns>
+        public CommonStatsResponse GetAssetStats(string assetAddress, string assetId, CommonStatsRequestInput commonStatsRequestInput)
         {
-            BeamPlayerClient.Client.ApiResponse<StatsResponse> localVarResponse = GetAssetStatsWithHttpInfo(assetAddress, assetId, statsRequestInput);
+            BeamPlayerClient.Client.ApiResponse<CommonStatsResponse> localVarResponse = GetAssetStatsWithHttpInfo(assetAddress, assetId, commonStatsRequestInput);
             return localVarResponse.Data;
         }
 
@@ -293,9 +293,9 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="statsRequestInput"></param>
-        /// <returns>ApiResponse of StatsResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<StatsResponse> GetAssetStatsWithHttpInfo(string assetAddress, string assetId, StatsRequestInput statsRequestInput)
+        /// <param name="commonStatsRequestInput"></param>
+        /// <returns>ApiResponse of CommonStatsResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<CommonStatsResponse> GetAssetStatsWithHttpInfo(string assetAddress, string assetId, CommonStatsRequestInput commonStatsRequestInput)
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
@@ -305,9 +305,9 @@ namespace BeamPlayerClient.Api
             if (assetId == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetId' when calling StatsApi->GetAssetStats");
 
-            // verify the required parameter 'statsRequestInput' is set
-            if (statsRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'statsRequestInput' when calling StatsApi->GetAssetStats");
+            // verify the required parameter 'commonStatsRequestInput' is set
+            if (commonStatsRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonStatsRequestInput' when calling StatsApi->GetAssetStats");
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
 
@@ -328,7 +328,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
             localVarRequestOptions.PathParameters.Add("assetId", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetId)); // path parameter
-            localVarRequestOptions.Data = statsRequestInput;
+            localVarRequestOptions.Data = commonStatsRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -337,7 +337,7 @@ namespace BeamPlayerClient.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<StatsResponse>("/v1/player/stats/{assetAddress}/assets/{assetId}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<CommonStatsResponse>("/v1/player/stats/{assetAddress}/assets/{assetId}", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -354,13 +354,13 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="statsRequestInput"></param>
+        /// <param name="commonStatsRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StatsResponse</returns>
-        public async Cysharp.Threading.Tasks.UniTask<StatsResponse> GetAssetStatsAsync(string assetAddress, string assetId, StatsRequestInput statsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of CommonStatsResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<CommonStatsResponse> GetAssetStatsAsync(string assetAddress, string assetId, CommonStatsRequestInput commonStatsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var task = GetAssetStatsWithHttpInfoAsync(assetAddress, assetId, statsRequestInput, cancellationToken);
-            BeamPlayerClient.Client.ApiResponse<StatsResponse> localVarResponse = await task;
+            var task = GetAssetStatsWithHttpInfoAsync(assetAddress, assetId, commonStatsRequestInput, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<CommonStatsResponse> localVarResponse = await task;
             return localVarResponse.Data;
         }
 
@@ -370,10 +370,10 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="statsRequestInput"></param>
+        /// <param name="commonStatsRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StatsResponse)</returns>
-        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<StatsResponse>> GetAssetStatsWithHttpInfoAsync(string assetAddress, string assetId, StatsRequestInput statsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (CommonStatsResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonStatsResponse>> GetAssetStatsWithHttpInfoAsync(string assetAddress, string assetId, CommonStatsRequestInput commonStatsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
@@ -383,9 +383,9 @@ namespace BeamPlayerClient.Api
             if (assetId == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetId' when calling StatsApi->GetAssetStats");
 
-            // verify the required parameter 'statsRequestInput' is set
-            if (statsRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'statsRequestInput' when calling StatsApi->GetAssetStats");
+            // verify the required parameter 'commonStatsRequestInput' is set
+            if (commonStatsRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonStatsRequestInput' when calling StatsApi->GetAssetStats");
 
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
@@ -408,7 +408,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
             localVarRequestOptions.PathParameters.Add("assetId", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetId)); // path parameter
-            localVarRequestOptions.Data = statsRequestInput;
+            localVarRequestOptions.Data = commonStatsRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -418,7 +418,7 @@ namespace BeamPlayerClient.Api
 
             // make the HTTP request
 
-            var task = this.AsynchronousClient.PostAsync<StatsResponse>("/v1/player/stats/{assetAddress}/assets/{assetId}", localVarRequestOptions, this.Configuration, cancellationToken);
+            var task = this.AsynchronousClient.PostAsync<CommonStatsResponse>("/v1/player/stats/{assetAddress}/assets/{assetId}", localVarRequestOptions, this.Configuration, cancellationToken);
 
             var localVarResponse = await task;
 
@@ -432,34 +432,34 @@ namespace BeamPlayerClient.Api
         }
 
         /// <summary>
-        /// Get assets stats 
+        /// Get contract stats 
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="statsRequestInput"></param>
-        /// <returns>StatsResponse</returns>
-        public StatsResponse GetAssetsStats(string assetAddress, StatsRequestInput statsRequestInput)
+        /// <param name="commonStatsRequestInput"></param>
+        /// <returns>CommonStatsResponse</returns>
+        public CommonStatsResponse GetContractStats(string assetAddress, CommonStatsRequestInput commonStatsRequestInput)
         {
-            BeamPlayerClient.Client.ApiResponse<StatsResponse> localVarResponse = GetAssetsStatsWithHttpInfo(assetAddress, statsRequestInput);
+            BeamPlayerClient.Client.ApiResponse<CommonStatsResponse> localVarResponse = GetContractStatsWithHttpInfo(assetAddress, commonStatsRequestInput);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get assets stats 
+        /// Get contract stats 
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="statsRequestInput"></param>
-        /// <returns>ApiResponse of StatsResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<StatsResponse> GetAssetsStatsWithHttpInfo(string assetAddress, StatsRequestInput statsRequestInput)
+        /// <param name="commonStatsRequestInput"></param>
+        /// <returns>ApiResponse of CommonStatsResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<CommonStatsResponse> GetContractStatsWithHttpInfo(string assetAddress, CommonStatsRequestInput commonStatsRequestInput)
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling StatsApi->GetAssetsStats");
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling StatsApi->GetContractStats");
 
-            // verify the required parameter 'statsRequestInput' is set
-            if (statsRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'statsRequestInput' when calling StatsApi->GetAssetsStats");
+            // verify the required parameter 'commonStatsRequestInput' is set
+            if (commonStatsRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonStatsRequestInput' when calling StatsApi->GetContractStats");
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
 
@@ -479,7 +479,7 @@ namespace BeamPlayerClient.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
             localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
-            localVarRequestOptions.Data = statsRequestInput;
+            localVarRequestOptions.Data = commonStatsRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -488,11 +488,11 @@ namespace BeamPlayerClient.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<StatsResponse>("/v1/player/stats/{assetAddress}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<CommonStatsResponse>("/v1/player/stats/{assetAddress}", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetAssetsStats", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetContractStats", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -500,37 +500,37 @@ namespace BeamPlayerClient.Api
         }
 
         /// <summary>
-        /// Get assets stats 
+        /// Get contract stats 
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="statsRequestInput"></param>
+        /// <param name="commonStatsRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StatsResponse</returns>
-        public async Cysharp.Threading.Tasks.UniTask<StatsResponse> GetAssetsStatsAsync(string assetAddress, StatsRequestInput statsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of CommonStatsResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<CommonStatsResponse> GetContractStatsAsync(string assetAddress, CommonStatsRequestInput commonStatsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var task = GetAssetsStatsWithHttpInfoAsync(assetAddress, statsRequestInput, cancellationToken);
-            BeamPlayerClient.Client.ApiResponse<StatsResponse> localVarResponse = await task;
+            var task = GetContractStatsWithHttpInfoAsync(assetAddress, commonStatsRequestInput, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<CommonStatsResponse> localVarResponse = await task;
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get assets stats 
+        /// Get contract stats 
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="statsRequestInput"></param>
+        /// <param name="commonStatsRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StatsResponse)</returns>
-        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<StatsResponse>> GetAssetsStatsWithHttpInfoAsync(string assetAddress, StatsRequestInput statsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (CommonStatsResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonStatsResponse>> GetContractStatsWithHttpInfoAsync(string assetAddress, CommonStatsRequestInput commonStatsRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling StatsApi->GetAssetsStats");
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling StatsApi->GetContractStats");
 
-            // verify the required parameter 'statsRequestInput' is set
-            if (statsRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'statsRequestInput' when calling StatsApi->GetAssetsStats");
+            // verify the required parameter 'commonStatsRequestInput' is set
+            if (commonStatsRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonStatsRequestInput' when calling StatsApi->GetContractStats");
 
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
@@ -552,7 +552,7 @@ namespace BeamPlayerClient.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
             localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
-            localVarRequestOptions.Data = statsRequestInput;
+            localVarRequestOptions.Data = commonStatsRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -562,13 +562,13 @@ namespace BeamPlayerClient.Api
 
             // make the HTTP request
 
-            var task = this.AsynchronousClient.PostAsync<StatsResponse>("/v1/player/stats/{assetAddress}", localVarRequestOptions, this.Configuration, cancellationToken);
+            var task = this.AsynchronousClient.PostAsync<CommonStatsResponse>("/v1/player/stats/{assetAddress}", localVarRequestOptions, this.Configuration, cancellationToken);
 
             var localVarResponse = await task;
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetAssetsStats", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetContractStats", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

@@ -25,17 +25,17 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// StatsRequestInput
+    /// CommonStatsRequestInput
     /// </summary>
-    [DataContract(Name = "StatsRequestInput")]
-    public partial class StatsRequestInput
+    [DataContract(Name = "CommonStatsRequestInput")]
+    public partial class CommonStatsRequestInput
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="StatsRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="CommonStatsRequestInput" /> class.
         /// </summary>
         /// <param name="attributes">attributes.</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
-        public StatsRequestInput(List<GetAssetsForContractBodyInputAttributesInner> attributes = default(List<GetAssetsForContractBodyInputAttributesInner>), decimal chainId = 13337M)
+        public CommonStatsRequestInput(List<GetAssetsForContractBodyInputAttributesInner> attributes = default(List<GetAssetsForContractBodyInputAttributesInner>), decimal chainId = 13337M)
         {
             this.Attributes = attributes;
             this.ChainId = chainId;
@@ -60,7 +60,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class StatsRequestInput {\n");
+            sb.Append("class CommonStatsRequestInput {\n");
             sb.Append("  Attributes: ").Append(Attributes).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");

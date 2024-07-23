@@ -25,38 +25,25 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// StatsResponseCount
+    /// CommonActivityResponseDataInnerOrder
     /// </summary>
-    [DataContract(Name = "StatsResponse_count")]
-    public partial class StatsResponseCount
+    [DataContract(Name = "CommonActivityResponse_data_inner_order")]
+    public partial class CommonActivityResponseDataInnerOrder
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="StatsResponseCount" /> class.
+        /// Initializes a new instance of the <see cref="CommonActivityResponseDataInnerOrder" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        protected StatsResponseCount() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StatsResponseCount" /> class.
-        /// </summary>
-        /// <param name="tokens">tokens (required).</param>
-        /// <param name="listed">listed (required).</param>
-        public StatsResponseCount(decimal tokens = default(decimal), decimal listed = default(decimal))
+        /// <param name="id">id.</param>
+        public CommonActivityResponseDataInnerOrder(string id = default(string))
         {
-            this.Tokens = tokens;
-            this.Listed = listed;
+            this.Id = id;
         }
 
         /// <summary>
-        /// Gets or Sets Tokens
+        /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name = "tokens", IsRequired = true, EmitDefaultValue = true)]
-        public decimal Tokens { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Listed
-        /// </summary>
-        [DataMember(Name = "listed", IsRequired = true, EmitDefaultValue = true)]
-        public decimal Listed { get; set; }
+        [DataMember(Name = "id", EmitDefaultValue = true)]
+        public string Id { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -65,9 +52,8 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class StatsResponseCount {\n");
-            sb.Append("  Tokens: ").Append(Tokens).Append("\n");
-            sb.Append("  Listed: ").Append(Listed).Append("\n");
+            sb.Append("class CommonActivityResponseDataInnerOrder {\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

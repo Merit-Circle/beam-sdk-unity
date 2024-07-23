@@ -25,35 +25,25 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// StatsResponse
+    /// CommonActivityResponseDataInnerContract
     /// </summary>
-    [DataContract(Name = "StatsResponse")]
-    public partial class StatsResponse
+    [DataContract(Name = "CommonActivityResponse_data_inner_contract")]
+    public partial class CommonActivityResponseDataInnerContract
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="StatsResponse" /> class.
+        /// Initializes a new instance of the <see cref="CommonActivityResponseDataInnerContract" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        protected StatsResponse() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StatsResponse" /> class.
-        /// </summary>
-        /// <param name="count">count (required).</param>
-        public StatsResponse(StatsResponseCount count = default(StatsResponseCount))
+        /// <param name="address">address.</param>
+        public CommonActivityResponseDataInnerContract(string address = default(string))
         {
-            // to ensure "count" is required (not null)
-            if (count == null)
-            {
-                throw new ArgumentNullException("count is a required property for StatsResponse and cannot be null");
-            }
-            this.Count = count;
+            this.Address = address;
         }
 
         /// <summary>
-        /// Gets or Sets Count
+        /// Gets or Sets Address
         /// </summary>
-        [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-        public StatsResponseCount Count { get; set; }
+        [DataMember(Name = "address", EmitDefaultValue = true)]
+        public string Address { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -62,8 +52,8 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class StatsResponse {\n");
-            sb.Append("  Count: ").Append(Count).Append("\n");
+            sb.Append("class CommonActivityResponseDataInnerContract {\n");
+            sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

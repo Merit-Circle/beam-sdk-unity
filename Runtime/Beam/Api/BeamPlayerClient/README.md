@@ -82,22 +82,20 @@ namespace Example
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
             // config.ApiKeyPrefix.Add("x-api-key", "Bearer");
 
-            var apiInstance = new AssetsApi(config);
+            var apiInstance = new ActivityApi(config);
             var assetAddress = "assetAddress_example";  // string | 
             var assetId = "assetId_example";  // string | 
-            var chainId = 8.14D;  // decimal? |  (optional) 
-            var entityId = "entityId_example";  // string | If true, will always return 'owners' record for this User if he owns the asset (optional) 
-            var owners = true;  // bool? | If true, will return all owners of the asset (optional) 
+            var commonActivityRequestInput = new CommonActivityRequestInput(); // CommonActivityRequestInput | 
 
             try
             {
-                // Get a single NFT (e.g. ERC721 / ERC1155)
-                GetAssetResponse result = apiInstance.GetAsset(assetAddress, assetId, chainId, entityId, owners);
+                // Get asset activity
+                CommonActivityResponse result = apiInstance.GetAssetActivity(assetAddress, assetId, commonActivityRequestInput);
                 Debug.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AssetsApi.GetAsset: " + e.Message );
+                Debug.Print("Exception when calling ActivityApi.GetAssetActivity: " + e.Message );
                 Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -114,6 +112,9 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*ActivityApi* | [**GetAssetActivity**](ActivityApi.md#getassetactivity) | **POST** /v1/player/activity/assets/{assetAddress}/asset/{assetId} | Get asset activity
+*ActivityApi* | [**GetContractActivity**](ActivityApi.md#getcontractactivity) | **POST** /v1/player/activity/assets/{assetAddress} | Get contract activity
+*ActivityApi* | [**GetUserActivity**](ActivityApi.md#getuseractivity) | **POST** /v1/player/activity/users/{entityId} | Get user activity
 *AssetsApi* | [**GetAsset**](AssetsApi.md#getasset) | **GET** /v1/player/assets/{assetAddress}/assets/{assetId} | Get a single NFT (e.g. ERC721 / ERC1155)
 *AssetsApi* | [**GetAssetsForContract**](AssetsApi.md#getassetsforcontract) | **POST** /v1/player/assets/{assetAddress}/assets | Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
 *AssetsApi* | [**GetAttributes**](AssetsApi.md#getattributes) | **GET** /v1/player/assets/{assetAddress}/attributes | 
@@ -157,7 +158,7 @@ Class | Method | HTTP request | Description
 *SessionsApi* | [**GetSessionRequest**](SessionsApi.md#getsessionrequest) | **GET** /v1/player/sessions/request/{requestId} | 
 *SessionsApi* | [**RevokeSession**](SessionsApi.md#revokesession) | **POST** /v1/player/sessions/users/{entityId}/revoke | 
 *StatsApi* | [**GetAssetStats**](StatsApi.md#getassetstats) | **POST** /v1/player/stats/{assetAddress}/assets/{assetId} | Get asset stats
-*StatsApi* | [**GetAssetsStats**](StatsApi.md#getassetsstats) | **POST** /v1/player/stats/{assetAddress} | Get assets stats
+*StatsApi* | [**GetContractStats**](StatsApi.md#getcontractstats) | **POST** /v1/player/stats/{assetAddress} | Get contract stats
 *TransactionsApi* | [**CreateUserTransaction**](TransactionsApi.md#createusertransaction) | **POST** /v1/player/transactions/users/{entityId} | Creating a new transaction on behalf of a user
 *TransactionsApi* | [**GetTransaction**](TransactionsApi.md#gettransaction) | **GET** /v1/player/transactions/{transactionId} | Getting a transaction
 *TransactionsApi* | [**GetTransactions**](TransactionsApi.md#gettransactions) | **GET** /v1/player/transactions | Get a paginated list of transactions from your game
@@ -176,8 +177,18 @@ Class | Method | HTTP request | Description
  - [Model.Check200Response](Check200Response.md)
  - [Model.Check200ResponseInfoValue](Check200ResponseInfoValue.md)
  - [Model.Check503Response](Check503Response.md)
+ - [Model.CommonActivityRequestInput](CommonActivityRequestInput.md)
+ - [Model.CommonActivityResponse](CommonActivityResponse.md)
+ - [Model.CommonActivityResponseDataInner](CommonActivityResponseDataInner.md)
+ - [Model.CommonActivityResponseDataInnerAsset](CommonActivityResponseDataInnerAsset.md)
+ - [Model.CommonActivityResponseDataInnerContract](CommonActivityResponseDataInnerContract.md)
+ - [Model.CommonActivityResponseDataInnerOrder](CommonActivityResponseDataInnerOrder.md)
+ - [Model.CommonActivityResponseDataInnerTransaction](CommonActivityResponseDataInnerTransaction.md)
  - [Model.CommonOperationResponse](CommonOperationResponse.md)
  - [Model.CommonOperationResponseTransactionsInner](CommonOperationResponseTransactionsInner.md)
+ - [Model.CommonStatsRequestInput](CommonStatsRequestInput.md)
+ - [Model.CommonStatsResponse](CommonStatsResponse.md)
+ - [Model.CommonStatsResponseCount](CommonStatsResponseCount.md)
  - [Model.ConfirmOperationRequest](ConfirmOperationRequest.md)
  - [Model.ConfirmOperationRequestTransactionsInner](ConfirmOperationRequestTransactionsInner.md)
  - [Model.ConvertTokenRequestInput](ConvertTokenRequestInput.md)
@@ -245,9 +256,6 @@ Class | Method | HTTP request | Description
  - [Model.RefreshTokenRequestBody](RefreshTokenRequestBody.md)
  - [Model.RevokeSessionRequestInput](RevokeSessionRequestInput.md)
  - [Model.SellAssetRequestInput](SellAssetRequestInput.md)
- - [Model.StatsRequestInput](StatsRequestInput.md)
- - [Model.StatsResponse](StatsResponse.md)
- - [Model.StatsResponseCount](StatsResponseCount.md)
  - [Model.TransferAssetRequestInput](TransferAssetRequestInput.md)
  - [Model.TransferAssetRequestInputAssetsInner](TransferAssetRequestInputAssetsInner.md)
  - [Model.TransferNativeTokenRequestInput](TransferNativeTokenRequestInput.md)
