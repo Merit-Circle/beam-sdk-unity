@@ -2485,6 +2485,7 @@ components:
         assetAddress:
           type: string
         assetId:
+          pattern: ^\d+$
           type: string
         quantity:
           type: number
@@ -2626,6 +2627,7 @@ components:
         assetAddress:
           type: string
         assetId:
+          pattern: ^\d+$
           type: string
         quantity:
           minimum: 1
@@ -2759,6 +2761,7 @@ components:
         assetAddress:
           type: string
         tokenId:
+          pattern: ^\d+$
           type: string
         chainId:
           default: 13337
@@ -3130,6 +3133,9 @@ components:
       example:
         externalEntityId: externalEntityId
         gameId: gameId
+        entities:
+        - entityId: entityId
+        - entityId: entityId
         wallets:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           address: address
@@ -3159,7 +3165,12 @@ components:
           items:
             $ref: '#/components/schemas/GetAllUsersResponse_data_inner_wallets_inner'
           type: array
+        entities:
+          items:
+            $ref: '#/components/schemas/GetTransactionResponse_user_entities_inner'
+          type: array
       required:
+      - entities
       - externalEntityId
       - gameId
       - userId
@@ -3886,6 +3897,7 @@ components:
         assetAddress:
           type: string
         assetId:
+          pattern: ^\d+$
           type: string
         amountToTransfer:
           default: 1

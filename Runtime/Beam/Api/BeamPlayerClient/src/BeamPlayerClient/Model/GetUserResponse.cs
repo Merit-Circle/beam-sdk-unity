@@ -42,7 +42,8 @@ namespace BeamPlayerClient.Model
         /// <param name="userId">userId (required).</param>
         /// <param name="gameId">gameId (required).</param>
         /// <param name="wallets">wallets (required).</param>
-        public GetUserResponse(string externalEntityId = default(string), string userId = default(string), string gameId = default(string), List<GetAllUsersResponseDataInnerWalletsInner> wallets = default(List<GetAllUsersResponseDataInnerWalletsInner>))
+        /// <param name="entities">entities (required).</param>
+        public GetUserResponse(string externalEntityId = default(string), string userId = default(string), string gameId = default(string), List<GetAllUsersResponseDataInnerWalletsInner> wallets = default(List<GetAllUsersResponseDataInnerWalletsInner>), List<GetTransactionResponseUserEntitiesInner> entities = default(List<GetTransactionResponseUserEntitiesInner>))
         {
             // to ensure "externalEntityId" is required (not null)
             if (externalEntityId == null)
@@ -68,6 +69,12 @@ namespace BeamPlayerClient.Model
                 throw new ArgumentNullException("wallets is a required property for GetUserResponse and cannot be null");
             }
             this.Wallets = wallets;
+            // to ensure "entities" is required (not null)
+            if (entities == null)
+            {
+                throw new ArgumentNullException("entities is a required property for GetUserResponse and cannot be null");
+            }
+            this.Entities = entities;
         }
 
         /// <summary>
@@ -95,6 +102,12 @@ namespace BeamPlayerClient.Model
         public List<GetAllUsersResponseDataInnerWalletsInner> Wallets { get; set; }
 
         /// <summary>
+        /// Gets or Sets Entities
+        /// </summary>
+        [DataMember(Name = "entities", IsRequired = true, EmitDefaultValue = true)]
+        public List<GetTransactionResponseUserEntitiesInner> Entities { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -106,6 +119,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Wallets: ").Append(Wallets).Append("\n");
+            sb.Append("  Entities: ").Append(Entities).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
