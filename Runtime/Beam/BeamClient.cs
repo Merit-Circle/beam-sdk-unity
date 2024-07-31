@@ -126,7 +126,7 @@ namespace Beam
                 return new BeamResult<GetConnectionRequestResponse.StatusEnum>(BeamResultType.Error, e.Message);
             }
 
-            Log("Opening browser for connection request");
+            Log($"Opening ${connRequest.Url}");
             // open browser to connect user
             Application.OpenURL(connRequest.Url);
 
@@ -193,7 +193,7 @@ namespace Beam
             }
             catch (ApiException e)
             {
-                Log($"Failed RevokeSessionAsync: {e.Message}");
+                Log($"Failed RevokeSessionAsync: {e.Message} {e.ErrorContent}");
                 return new BeamResult<CommonOperationResponse.StatusEnum>(BeamResultType.Error, e.Message);
             }
 
@@ -244,10 +244,8 @@ namespace Beam
             }
             catch (ApiException e)
             {
-                Log($"Failed creating session request: {e.Message}");
-                return new BeamResult<BeamSession>(
-                    status: BeamResultType.Error,
-                    error: e.Message);
+                Log($"Failed creating session request: {e.Message} {e.ErrorContent}");
+                return new BeamResult<BeamSession>(e);
             }
 
             Log($"Opening {beamSessionRequest.Url}");
@@ -348,12 +346,8 @@ namespace Beam
                     };
                 }
 
-                Log($"Encountered an error retrieving operation({operationId}): {e.Message}");
-                return new BeamResult<CommonOperationResponse.StatusEnum>
-                {
-                    Status = BeamResultType.Error,
-                    Error = e.Message
-                };
+                Log($"Encountered an error retrieving operation({operationId}): {e.Message} {e.ErrorContent}");
+                return new BeamResult<CommonOperationResponse.StatusEnum>(e);
             }
 
             if (signingBy is OperationSigningBy.Auto or OperationSigningBy.Session)
@@ -402,7 +396,7 @@ namespace Beam
             CancellationToken cancellationToken = default)
         {
             var url = operation.Url;
-            Log($"Opening {url}");
+            Log($"Opening {url}...");
 
             // open identity.onbeam.com, give it operation id
             Application.OpenURL(url);
@@ -465,7 +459,7 @@ namespace Beam
 
             foreach (var transaction in operation.Transactions)
             {
-                Log($"Signing operation({operation.Id}) transaction({transaction.ExternalId})");
+                Log($"Signing operation({operation.Id}) transaction({transaction.ExternalId})...");
                 try
                 {
                     string signature;
@@ -485,19 +479,14 @@ namespace Beam
 
                     confirmationModel.Transactions.Add(new ConfirmOperationRequestTransactionsInner(transaction.Id, signature));
                 }
-                catch (Exception e)
+                catch (ApiException e)
                 {
-                    Log($"Encountered an error when signing transaction({transaction.Id}): {e.Message}");
-                    return new BeamResult<CommonOperationResponse.StatusEnum>
-                    {
-                        Status = BeamResultType.Error,
-                        Result = CommonOperationResponse.StatusEnum.Error,
-                        Error = $"Encountered an exception while approving {transaction.Type.ToString()}: {e.Message}"
-                    };
+                    Log($"Encountered an error when signing transaction({transaction.Id}): {e.Message} {e.ErrorContent}");
+                    return new BeamResult<CommonOperationResponse.StatusEnum>(e, $"Encountered an exception while approving {transaction.Type.ToString()}");
                 }
             }
 
-            Log($"Confirming operation({operation.Id})");
+            Log($"Confirming operation({operation.Id})...");
             try
             {
                 var res = await OperationApi.ProcessOperationAsync(operation.Id, confirmationModel,
@@ -507,7 +496,7 @@ namespace Beam
                               res.Status != CommonOperationResponse.StatusEnum.Pending;
 
                 Log(
-                    $"Confirming operation({operation.Id}) status: {res.Status.ToString()}");
+                    $"Confirmed operation({operation.Id}), status: {res.Status.ToString()}");
                 return new BeamResult<CommonOperationResponse.StatusEnum>
                 {
                     Status = didFail ? BeamResultType.Error : BeamResultType.Success,
@@ -602,7 +591,7 @@ namespace Beam
                 }
                 catch (ApiException e)
                 {
-                    Log($"GetActiveSessionInfo returned: {e.Message}");
+                    Log($"GetActiveSessionInfo returned: {e.Message} {e.ErrorContent}");
                 }
             }
 
