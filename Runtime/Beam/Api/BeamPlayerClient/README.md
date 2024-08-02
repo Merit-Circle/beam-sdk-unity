@@ -132,6 +132,8 @@ Class | Method | HTTP request | Description
 *ExchangeApi* | [**ConvertToOutput**](ExchangeApi.md#converttooutput) | **POST** /v1/player/exchange/users/{entityId}/convert/output | Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`
 *ExchangeApi* | [**GetQuoteForInput**](ExchangeApi.md#getquoteforinput) | **GET** /v1/player/exchange/quote/input | Returns the maximum necessary input amount for a token trade, given a desired output amount
 *ExchangeApi* | [**GetQuoteForOutput**](ExchangeApi.md#getquoteforoutput) | **GET** /v1/player/exchange/quote/output | Returns the minimum expected output amount for a token trade, given an input amount
+*ExchangeApi* | [**UnwrapNative**](ExchangeApi.md#unwrapnative) | **POST** /v1/player/exchange/users/{entityId}/native/unwrap | Unwrap an amount of wrapped to native token
+*ExchangeApi* | [**WrapNative**](ExchangeApi.md#wrapnative) | **POST** /v1/player/exchange/users/{entityId}/native/wrap | Wrap an amount of native token to wrapped native token
 *HealthApi* | [**Check**](HealthApi.md#check) | **GET** /v1/health/services | 
 *MarketplaceApi* | [**AcceptAssetOffer**](MarketplaceApi.md#acceptassetoffer) | **POST** /v1/player/marketplace/users/{entityId}/offers/{offerId}/accept | Accept an offer for an asset
 *MarketplaceApi* | [**BuyListedAsset**](MarketplaceApi.md#buylistedasset) | **POST** /v1/player/marketplace/users/{entityId}/listing/{orderId} | Buy listed asset
@@ -260,6 +262,8 @@ Class | Method | HTTP request | Description
  - [Model.TransferAssetRequestInputAssetsInner](TransferAssetRequestInputAssetsInner.md)
  - [Model.TransferNativeTokenRequestInput](TransferNativeTokenRequestInput.md)
  - [Model.TransferTokenRequestInput](TransferTokenRequestInput.md)
+ - [Model.UnwrappingTokenInput](UnwrappingTokenInput.md)
+ - [Model.WrappingTokenInput](WrappingTokenInput.md)
 
 
 <a id="documentation-for-authorization"></a>

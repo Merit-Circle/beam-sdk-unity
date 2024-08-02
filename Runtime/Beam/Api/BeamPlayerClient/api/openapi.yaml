@@ -1303,6 +1303,64 @@ paths:
       summary: Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`
       tags:
       - Exchange
+  /v1/player/exchange/users/{entityId}/native/wrap:
+    post:
+      operationId: wrapNative
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WrappingTokenInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Wrap an amount of native token to wrapped native token
+      tags:
+      - Exchange
+  /v1/player/exchange/users/{entityId}/native/unwrap:
+    post:
+      operationId: unwrapNative
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnwrappingTokenInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonOperationResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Unwrap an amount of wrapped to native token
+      tags:
+      - Exchange
   /v1/player/sessions/users/{entityId}/request:
     post:
       operationId: createSessionRequest
@@ -3190,13 +3248,14 @@ components:
       properties:
         entityId:
           type: string
-        chainId:
-          type: number
         transactions:
           items:
             $ref: '#/components/schemas/CreateOperationRequestInput_transactions_inner'
           nullable: true
           type: array
+        chainId:
+          default: 13337
+          type: number
         operationProcessing:
           default: Execute
           enum:
@@ -3207,7 +3266,6 @@ components:
           nullable: true
           type: string
       required:
-      - chainId
       - entityId
       - transactions
       type: object
@@ -3309,6 +3367,80 @@ components:
       - tokenIn
       - tokenOut
       type: object
+    WrappingTokenInput:
+      example:
+        optimistic: false
+        sponsor: true
+        amount: amount
+        policyId: policyId
+        chainId: 0.8008281904610115
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        amount:
+          type: string
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          format: cuid
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - amount
+      type: object
+    UnwrappingTokenInput:
+      example:
+        optimistic: false
+        sponsor: true
+        amount: amount
+        policyId: policyId
+        chainId: 0.8008281904610115
+        operationId: operationId
+        operationProcessing: Execute
+      properties:
+        amount:
+          type: string
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          format: cuid
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          type: number
+        operationProcessing:
+          default: Execute
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        operationId:
+          nullable: true
+          type: string
+      required:
+      - amount
+      type: object
     GenerateSessionUrlRequestInput:
       example:
         address: address
@@ -3325,6 +3457,7 @@ components:
     GenerateSessionRequestResponse:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
+        address: address
         chainId: 0
         id: id
         openfortId: openfortId
@@ -3353,10 +3486,13 @@ components:
         openfortId:
           nullable: true
           type: string
+        address:
+          type: string
         url:
           format: uri
           type: string
       required:
+      - address
       - chainId
       - createdAt
       - id
@@ -3393,6 +3529,7 @@ components:
     GetSessionRequestResponse:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
+        address: address
         chainId: 0
         id: id
         openfortId: openfortId
@@ -3420,7 +3557,10 @@ components:
         openfortId:
           nullable: true
           type: string
+        address:
+          type: string
       required:
+      - address
       - chainId
       - createdAt
       - id

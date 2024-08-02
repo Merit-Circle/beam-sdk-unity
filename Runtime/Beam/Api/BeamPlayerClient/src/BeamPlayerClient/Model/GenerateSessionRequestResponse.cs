@@ -75,8 +75,9 @@ namespace BeamPlayerClient.Model
         /// <param name="updatedAt">updatedAt (required).</param>
         /// <param name="chainId">chainId (required).</param>
         /// <param name="openfortId">openfortId (required).</param>
+        /// <param name="address">address (required).</param>
         /// <param name="url">url (required).</param>
-        public GenerateSessionRequestResponse(StatusEnum status = default(StatusEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), int chainId = default(int), string openfortId = default(string), string url = default(string))
+        public GenerateSessionRequestResponse(StatusEnum status = default(StatusEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), int chainId = default(int), string openfortId = default(string), string address = default(string), string url = default(string))
         {
             this.Status = status;
             // to ensure "id" is required (not null)
@@ -99,6 +100,12 @@ namespace BeamPlayerClient.Model
                 throw new ArgumentNullException("openfortId is a required property for GenerateSessionRequestResponse and cannot be null");
             }
             this.OpenfortId = openfortId;
+            // to ensure "address" is required (not null)
+            if (address == null)
+            {
+                throw new ArgumentNullException("address is a required property for GenerateSessionRequestResponse and cannot be null");
+            }
+            this.Address = address;
             // to ensure "url" is required (not null)
             if (url == null)
             {
@@ -138,6 +145,12 @@ namespace BeamPlayerClient.Model
         public string OpenfortId { get; set; }
 
         /// <summary>
+        /// Gets or Sets Address
+        /// </summary>
+        [DataMember(Name = "address", IsRequired = true, EmitDefaultValue = true)]
+        public string Address { get; set; }
+
+        /// <summary>
         /// Gets or Sets Url
         /// </summary>
         [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = true)]
@@ -157,6 +170,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  OpenfortId: ").Append(OpenfortId).Append("\n");
+            sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

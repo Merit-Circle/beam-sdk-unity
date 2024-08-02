@@ -25,10 +25,10 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// CreateOperationRequestInput
+    /// UnwrappingTokenInput
     /// </summary>
-    [DataContract(Name = "CreateOperationRequestInput")]
-    public partial class CreateOperationRequestInput
+    [DataContract(Name = "UnwrappingTokenInput")]
+    public partial class UnwrappingTokenInput
     {
         /// <summary>
         /// Defines OperationProcessing
@@ -56,48 +56,59 @@ namespace BeamPlayerClient.Model
         [DataMember(Name = "operationProcessing", EmitDefaultValue = false)]
         public OperationProcessingEnum? OperationProcessing { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateOperationRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="UnwrappingTokenInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateOperationRequestInput() { }
+        protected UnwrappingTokenInput() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateOperationRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="UnwrappingTokenInput" /> class.
         /// </summary>
-        /// <param name="entityId">entityId (required).</param>
-        /// <param name="transactions">transactions (required).</param>
+        /// <param name="amount">amount (required).</param>
+        /// <param name="optimistic">optimistic (default to false).</param>
+        /// <param name="sponsor">sponsor (default to true).</param>
+        /// <param name="policyId">policyId.</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
-        public CreateOperationRequestInput(string entityId = default(string), List<CreateOperationRequestInputTransactionsInner> transactions = default(List<CreateOperationRequestInputTransactionsInner>), decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
+        public UnwrappingTokenInput(string amount = default(string), bool optimistic = false, bool sponsor = true, string policyId = default(string), decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
         {
-            // to ensure "entityId" is required (not null)
-            if (entityId == null)
+            // to ensure "amount" is required (not null)
+            if (amount == null)
             {
-                throw new ArgumentNullException("entityId is a required property for CreateOperationRequestInput and cannot be null");
+                throw new ArgumentNullException("amount is a required property for UnwrappingTokenInput and cannot be null");
             }
-            this.EntityId = entityId;
-            // to ensure "transactions" is required (not null)
-            if (transactions == null)
-            {
-                throw new ArgumentNullException("transactions is a required property for CreateOperationRequestInput and cannot be null");
-            }
-            this.Transactions = transactions;
+            this.Amount = amount;
+            this.Optimistic = optimistic;
+            this.Sponsor = sponsor;
+            this.PolicyId = policyId;
             this.ChainId = chainId;
             this.OperationProcessing = operationProcessing;
             this.OperationId = operationId;
         }
 
         /// <summary>
-        /// Gets or Sets EntityId
+        /// Gets or Sets Amount
         /// </summary>
-        [DataMember(Name = "entityId", IsRequired = true, EmitDefaultValue = true)]
-        public string EntityId { get; set; }
+        [DataMember(Name = "amount", IsRequired = true, EmitDefaultValue = true)]
+        public string Amount { get; set; }
 
         /// <summary>
-        /// Gets or Sets Transactions
+        /// Gets or Sets Optimistic
         /// </summary>
-        [DataMember(Name = "transactions", IsRequired = true, EmitDefaultValue = true)]
-        public List<CreateOperationRequestInputTransactionsInner> Transactions { get; set; }
+        [DataMember(Name = "optimistic", EmitDefaultValue = true)]
+        public bool Optimistic { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Sponsor
+        /// </summary>
+        [DataMember(Name = "sponsor", EmitDefaultValue = true)]
+        public bool Sponsor { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PolicyId
+        /// </summary>
+        [DataMember(Name = "policyId", EmitDefaultValue = true)]
+        public string PolicyId { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
@@ -118,9 +129,11 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CreateOperationRequestInput {\n");
-            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
-            sb.Append("  Transactions: ").Append(Transactions).Append("\n");
+            sb.Append("class UnwrappingTokenInput {\n");
+            sb.Append("  Amount: ").Append(Amount).Append("\n");
+            sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
+            sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
+            sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");

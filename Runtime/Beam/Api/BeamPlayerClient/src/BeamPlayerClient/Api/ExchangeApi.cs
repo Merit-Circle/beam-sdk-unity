@@ -114,6 +114,46 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <returns>ApiResponse of GetQuoteResponse</returns>
         ApiResponse<GetQuoteResponse> GetQuoteForOutputWithHttpInfo(string tokenIn, string tokenOut, string amountIn, decimal? chainId);
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="unwrappingTokenInput"></param>
+        /// <returns>CommonOperationResponse</returns>
+        CommonOperationResponse UnwrapNative(string entityId, UnwrappingTokenInput unwrappingTokenInput);
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="unwrappingTokenInput"></param>
+        /// <returns>ApiResponse of CommonOperationResponse</returns>
+        ApiResponse<CommonOperationResponse> UnwrapNativeWithHttpInfo(string entityId, UnwrappingTokenInput unwrappingTokenInput);
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="wrappingTokenInput"></param>
+        /// <returns>CommonOperationResponse</returns>
+        CommonOperationResponse WrapNative(string entityId, WrappingTokenInput wrappingTokenInput);
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="wrappingTokenInput"></param>
+        /// <returns>ApiResponse of CommonOperationResponse</returns>
+        ApiResponse<CommonOperationResponse> WrapNativeWithHttpInfo(string entityId, WrappingTokenInput wrappingTokenInput);
         #endregion Synchronous Operations
     }
 
@@ -231,6 +271,56 @@ namespace BeamPlayerClient.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetQuoteResponse)</returns>
         Cysharp.Threading.Tasks.UniTask<ApiResponse<GetQuoteResponse>> GetQuoteForOutputWithHttpInfoAsync(string tokenIn, string tokenOut, string amountIn, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="unwrappingTokenInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of CommonOperationResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> UnwrapNativeAsync(string entityId, UnwrappingTokenInput unwrappingTokenInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="unwrappingTokenInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> UnwrapNativeWithHttpInfoAsync(string entityId, UnwrappingTokenInput unwrappingTokenInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="wrappingTokenInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of CommonOperationResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> WrapNativeAsync(string entityId, WrappingTokenInput wrappingTokenInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="wrappingTokenInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonOperationResponse>> WrapNativeWithHttpInfoAsync(string entityId, WrappingTokenInput wrappingTokenInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -993,6 +1083,294 @@ namespace BeamPlayerClient.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetQuoteForOutput", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="unwrappingTokenInput"></param>
+        /// <returns>CommonOperationResponse</returns>
+        public CommonOperationResponse UnwrapNative(string entityId, UnwrappingTokenInput unwrappingTokenInput)
+        {
+            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = UnwrapNativeWithHttpInfo(entityId, unwrappingTokenInput);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="unwrappingTokenInput"></param>
+        /// <returns>ApiResponse of CommonOperationResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> UnwrapNativeWithHttpInfo(string entityId, UnwrappingTokenInput unwrappingTokenInput)
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling ExchangeApi->UnwrapNative");
+
+            // verify the required parameter 'unwrappingTokenInput' is set
+            if (unwrappingTokenInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'unwrappingTokenInput' when calling ExchangeApi->UnwrapNative");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+            localVarRequestOptions.Data = unwrappingTokenInput;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<CommonOperationResponse>("/v1/player/exchange/users/{entityId}/native/unwrap", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UnwrapNative", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="unwrappingTokenInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of CommonOperationResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> UnwrapNativeAsync(string entityId, UnwrappingTokenInput unwrappingTokenInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = UnwrapNativeWithHttpInfoAsync(entityId, unwrappingTokenInput, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="unwrappingTokenInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> UnwrapNativeWithHttpInfoAsync(string entityId, UnwrappingTokenInput unwrappingTokenInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling ExchangeApi->UnwrapNative");
+
+            // verify the required parameter 'unwrappingTokenInput' is set
+            if (unwrappingTokenInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'unwrappingTokenInput' when calling ExchangeApi->UnwrapNative");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+            localVarRequestOptions.Data = unwrappingTokenInput;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.PostAsync<CommonOperationResponse>("/v1/player/exchange/users/{entityId}/native/unwrap", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UnwrapNative", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="wrappingTokenInput"></param>
+        /// <returns>CommonOperationResponse</returns>
+        public CommonOperationResponse WrapNative(string entityId, WrappingTokenInput wrappingTokenInput)
+        {
+            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = WrapNativeWithHttpInfo(entityId, wrappingTokenInput);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="wrappingTokenInput"></param>
+        /// <returns>ApiResponse of CommonOperationResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> WrapNativeWithHttpInfo(string entityId, WrappingTokenInput wrappingTokenInput)
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling ExchangeApi->WrapNative");
+
+            // verify the required parameter 'wrappingTokenInput' is set
+            if (wrappingTokenInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'wrappingTokenInput' when calling ExchangeApi->WrapNative");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+            localVarRequestOptions.Data = wrappingTokenInput;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<CommonOperationResponse>("/v1/player/exchange/users/{entityId}/native/wrap", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("WrapNative", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="wrappingTokenInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of CommonOperationResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<CommonOperationResponse> WrapNativeAsync(string entityId, WrappingTokenInput wrappingTokenInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = WrapNativeWithHttpInfoAsync(entityId, wrappingTokenInput, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<CommonOperationResponse> localVarResponse = await task;
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="wrappingTokenInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (CommonOperationResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonOperationResponse>> WrapNativeWithHttpInfoAsync(string entityId, WrappingTokenInput wrappingTokenInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling ExchangeApi->WrapNative");
+
+            // verify the required parameter 'wrappingTokenInput' is set
+            if (wrappingTokenInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'wrappingTokenInput' when calling ExchangeApi->WrapNative");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+            localVarRequestOptions.Data = wrappingTokenInput;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.PostAsync<CommonOperationResponse>("/v1/player/exchange/users/{entityId}/native/wrap", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("WrapNative", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

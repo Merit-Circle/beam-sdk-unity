@@ -75,7 +75,8 @@ namespace BeamPlayerClient.Model
         /// <param name="updatedAt">updatedAt (required).</param>
         /// <param name="chainId">chainId (required).</param>
         /// <param name="openfortId">openfortId (required).</param>
-        public GetSessionRequestResponse(StatusEnum status = default(StatusEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), int chainId = default(int), string openfortId = default(string))
+        /// <param name="address">address (required).</param>
+        public GetSessionRequestResponse(StatusEnum status = default(StatusEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), int chainId = default(int), string openfortId = default(string), string address = default(string))
         {
             this.Status = status;
             // to ensure "id" is required (not null)
@@ -98,6 +99,12 @@ namespace BeamPlayerClient.Model
                 throw new ArgumentNullException("openfortId is a required property for GetSessionRequestResponse and cannot be null");
             }
             this.OpenfortId = openfortId;
+            // to ensure "address" is required (not null)
+            if (address == null)
+            {
+                throw new ArgumentNullException("address is a required property for GetSessionRequestResponse and cannot be null");
+            }
+            this.Address = address;
         }
 
         /// <summary>
@@ -131,6 +138,12 @@ namespace BeamPlayerClient.Model
         public string OpenfortId { get; set; }
 
         /// <summary>
+        /// Gets or Sets Address
+        /// </summary>
+        [DataMember(Name = "address", IsRequired = true, EmitDefaultValue = true)]
+        public string Address { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -144,6 +157,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  OpenfortId: ").Append(OpenfortId).Append("\n");
+            sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
