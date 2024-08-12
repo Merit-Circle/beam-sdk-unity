@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetAssetsForContractBodyInput
     /// </summary>
     [DataContract(Name = "GetAssetsForContractBodyInput")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAssetsForContractBodyInput
     {
         /// <summary>
@@ -54,6 +55,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets SortDirection
         /// </summary>
         [DataMember(Name = "sortDirection", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public SortDirectionEnum? SortDirection { get; set; }
         /// <summary>
         /// Defines SortBy
@@ -91,6 +93,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets SortBy
         /// </summary>
         [DataMember(Name = "sortBy", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public SortByEnum? SortBy { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAssetsForContractBodyInput" /> class.
@@ -106,6 +109,7 @@ namespace BeamPlayerClient.Model
         /// <param name="sortDirection">sortDirection (default to SortDirectionEnum.Asc).</param>
         /// <param name="sortBy">sortBy (default to SortByEnum.FloorAskPrice).</param>
         /// <param name="limit">limit (default to 20M).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAssetsForContractBodyInput(string continuation = default(string), decimal chainId = 13337M, int? minRarityRank = default(int?), int? maxRarityRank = default(int?), decimal? minFloorAskPrice = default(decimal?), decimal? maxFloorAskPrice = default(decimal?), bool? includeAttributes = false, List<GetAssetsForContractBodyInputAttributesInner> attributes = default(List<GetAssetsForContractBodyInputAttributesInner>), SortDirectionEnum? sortDirection = SortDirectionEnum.Asc, SortByEnum? sortBy = SortByEnum.FloorAskPrice, decimal limit = 20M)
         {
             this.Continuation = continuation;
@@ -126,60 +130,70 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Continuation
         /// </summary>
         [DataMember(Name = "continuation", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Continuation { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets MinRarityRank
         /// </summary>
         [DataMember(Name = "minRarityRank", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public int? MinRarityRank { get; set; }
 
         /// <summary>
         /// Gets or Sets MaxRarityRank
         /// </summary>
         [DataMember(Name = "maxRarityRank", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public int? MaxRarityRank { get; set; }
 
         /// <summary>
         /// Gets or Sets MinFloorAskPrice
         /// </summary>
         [DataMember(Name = "minFloorAskPrice", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal? MinFloorAskPrice { get; set; }
 
         /// <summary>
         /// Gets or Sets MaxFloorAskPrice
         /// </summary>
         [DataMember(Name = "maxFloorAskPrice", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal? MaxFloorAskPrice { get; set; }
 
         /// <summary>
         /// Gets or Sets IncludeAttributes
         /// </summary>
         [DataMember(Name = "includeAttributes", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public bool? IncludeAttributes { get; set; }
 
         /// <summary>
         /// Gets or Sets Attributes
         /// </summary>
         [DataMember(Name = "attributes", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetAssetsForContractBodyInputAttributesInner> Attributes { get; set; }
 
         /// <summary>
         /// Gets or Sets Limit
         /// </summary>
         [DataMember(Name = "limit", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Limit { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -203,6 +217,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

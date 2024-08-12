@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetUserNativeCurrencyResponseNativeTokenBalance
     /// </summary>
     [DataContract(Name = "GetUserNativeCurrencyResponse_nativeTokenBalance")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetUserNativeCurrencyResponseNativeTokenBalance
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUserNativeCurrencyResponseNativeTokenBalance" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetUserNativeCurrencyResponseNativeTokenBalance() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUserNativeCurrencyResponseNativeTokenBalance" /> class.
@@ -44,6 +46,7 @@ namespace BeamPlayerClient.Model
         /// <param name="logoUri">logoUri.</param>
         /// <param name="chainId">chainId (required).</param>
         /// <param name="balance">balance (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetUserNativeCurrencyResponseNativeTokenBalance(string name = default(string), string symbol = default(string), decimal decimals = default(decimal), string logoUri = default(string), decimal chainId = default(decimal), string balance = default(string))
         {
             // to ensure "name" is required (not null)
@@ -73,42 +76,49 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol
         /// </summary>
         [DataMember(Name = "symbol", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Symbol { get; set; }
 
         /// <summary>
         /// Gets or Sets Decimals
         /// </summary>
         [DataMember(Name = "decimals", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Decimals { get; set; }
 
         /// <summary>
         /// Gets or Sets LogoUri
         /// </summary>
         [DataMember(Name = "logoUri", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string LogoUri { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Balance
         /// </summary>
         [DataMember(Name = "balance", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Balance { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -127,6 +137,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

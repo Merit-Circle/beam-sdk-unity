@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction
     /// </summary>
     [DataContract(Name = "GetTransactionsResponse_data_inner_transaction")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetTransactionsResponseDataInnerTransaction
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionsResponseDataInnerTransaction" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetTransactionsResponseDataInnerTransaction() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionsResponseDataInnerTransaction" /> class.
@@ -45,6 +47,7 @@ namespace BeamPlayerClient.Model
         /// <param name="gasFee">gasFee.</param>
         /// <param name="status">status.</param>
         /// <param name="logs">logs.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionsResponseDataInnerTransaction(DateTime createdAt = default(DateTime), decimal blockNumber = default(decimal), string hash = default(string), string gasUsed = default(string), string gasFee = default(string), decimal status = default(decimal), List<GetTransactionsResponseDataInnerTransactionLogsInner> logs = default(List<GetTransactionsResponseDataInnerTransactionLogsInner>))
         {
             this.CreatedAt = createdAt;
@@ -60,48 +63,56 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets BlockNumber
         /// </summary>
         [DataMember(Name = "blockNumber", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal BlockNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Hash
         /// </summary>
         [DataMember(Name = "hash", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string Hash { get; set; }
 
         /// <summary>
         /// Gets or Sets GasUsed
         /// </summary>
         [DataMember(Name = "gasUsed", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string GasUsed { get; set; }
 
         /// <summary>
         /// Gets or Sets GasFee
         /// </summary>
         [DataMember(Name = "gasFee", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string GasFee { get; set; }
 
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Status { get; set; }
 
         /// <summary>
         /// Gets or Sets Logs
         /// </summary>
         [DataMember(Name = "logs", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetTransactionsResponseDataInnerTransactionLogsInner> Logs { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -121,6 +132,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

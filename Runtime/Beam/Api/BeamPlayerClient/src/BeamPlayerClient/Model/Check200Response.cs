@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// Check200Response
     /// </summary>
     [DataContract(Name = "check_200_response")]
+    [UnityEngine.Scripting.Preserve]
     public partial class Check200Response
     {
         /// <summary>
@@ -37,6 +38,7 @@ namespace BeamPlayerClient.Model
         /// <param name="info">info.</param>
         /// <param name="error">error.</param>
         /// <param name="details">details.</param>
+        [UnityEngine.Scripting.Preserve]
         public Check200Response(string status = default(string), Dictionary<string, Check200ResponseInfoValue> info = default(Dictionary<string, Check200ResponseInfoValue>), Dictionary<string, Check200ResponseInfoValue> error = default(Dictionary<string, Check200ResponseInfoValue>), Dictionary<string, Check200ResponseInfoValue> details = default(Dictionary<string, Check200ResponseInfoValue>))
         {
             this.Status = status;
@@ -50,6 +52,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <example>ok</example>
         [DataMember(Name = "status", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string Status { get; set; }
 
         /// <summary>
@@ -57,6 +60,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <example>{&quot;database&quot;:{&quot;status&quot;:&quot;up&quot;}}</example>
         [DataMember(Name = "info", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public Dictionary<string, Check200ResponseInfoValue> Info { get; set; }
 
         /// <summary>
@@ -64,6 +68,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <example>{}</example>
         [DataMember(Name = "error", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public Dictionary<string, Check200ResponseInfoValue> Error { get; set; }
 
         /// <summary>
@@ -71,12 +76,14 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <example>{&quot;database&quot;:{&quot;status&quot;:&quot;up&quot;}}</example>
         [DataMember(Name = "details", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public Dictionary<string, Check200ResponseInfoValue> Details { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -93,6 +100,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

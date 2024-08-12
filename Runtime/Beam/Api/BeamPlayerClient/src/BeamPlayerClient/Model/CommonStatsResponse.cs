@@ -28,17 +28,20 @@ namespace BeamPlayerClient.Model
     /// CommonStatsResponse
     /// </summary>
     [DataContract(Name = "CommonStatsResponse")]
+    [UnityEngine.Scripting.Preserve]
     public partial class CommonStatsResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonStatsResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected CommonStatsResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonStatsResponse" /> class.
         /// </summary>
         /// <param name="count">count (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public CommonStatsResponse(CommonStatsResponseCount count = default(CommonStatsResponseCount))
         {
             // to ensure "count" is required (not null)
@@ -53,12 +56,14 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Count
         /// </summary>
         [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public CommonStatsResponseCount Count { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -72,6 +77,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

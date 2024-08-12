@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetChainCurrenciesResponseDataInner
     /// </summary>
     [DataContract(Name = "GetChainCurrenciesResponse_data_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetChainCurrenciesResponseDataInner
     {
         /// <summary>
@@ -78,11 +79,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Symbol
         /// </summary>
         [DataMember(Name = "symbol", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public SymbolEnum Symbol { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetChainCurrenciesResponseDataInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetChainCurrenciesResponseDataInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetChainCurrenciesResponseDataInner" /> class.
@@ -90,6 +93,7 @@ namespace BeamPlayerClient.Model
         /// <param name="decimals">decimals (required).</param>
         /// <param name="symbol">symbol (required).</param>
         /// <param name="address">address (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetChainCurrenciesResponseDataInner(decimal decimals = default(decimal), SymbolEnum symbol = default(SymbolEnum), string address = default(string))
         {
             this.Decimals = decimals;
@@ -106,18 +110,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Decimals
         /// </summary>
         [DataMember(Name = "decimals", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Decimals { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name = "address", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Address { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -133,6 +140,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

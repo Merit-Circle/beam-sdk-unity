@@ -28,17 +28,20 @@ namespace BeamPlayerClient.Model
     /// GetTransactionResponseUserEntitiesInner
     /// </summary>
     [DataContract(Name = "GetTransactionResponse_user_entities_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetTransactionResponseUserEntitiesInner
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponseUserEntitiesInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetTransactionResponseUserEntitiesInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponseUserEntitiesInner" /> class.
         /// </summary>
         /// <param name="entityId">entityId (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionResponseUserEntitiesInner(string entityId = default(string))
         {
             // to ensure "entityId" is required (not null)
@@ -53,12 +56,14 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets EntityId
         /// </summary>
         [DataMember(Name = "entityId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string EntityId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -72,6 +77,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

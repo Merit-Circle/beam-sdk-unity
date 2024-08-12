@@ -28,17 +28,20 @@ namespace BeamPlayerClient.Model
     /// GetActiveSessionsResponse
     /// </summary>
     [DataContract(Name = "GetActiveSessionsResponse")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetActiveSessionsResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActiveSessionsResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetActiveSessionsResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActiveSessionsResponse" /> class.
         /// </summary>
         /// <param name="sessions">sessions (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetActiveSessionsResponse(List<GetActiveSessionsResponseSessionsInner> sessions = default(List<GetActiveSessionsResponseSessionsInner>))
         {
             // to ensure "sessions" is required (not null)
@@ -53,12 +56,14 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Sessions
         /// </summary>
         [DataMember(Name = "sessions", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetActiveSessionsResponseSessionsInner> Sessions { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -72,6 +77,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

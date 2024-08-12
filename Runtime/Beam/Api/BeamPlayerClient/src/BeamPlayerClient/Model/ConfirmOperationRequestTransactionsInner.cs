@@ -28,18 +28,21 @@ namespace BeamPlayerClient.Model
     /// ConfirmOperationRequestTransactionsInner
     /// </summary>
     [DataContract(Name = "ConfirmOperationRequest_transactions_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class ConfirmOperationRequestTransactionsInner
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfirmOperationRequestTransactionsInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected ConfirmOperationRequestTransactionsInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfirmOperationRequestTransactionsInner" /> class.
         /// </summary>
         /// <param name="id">id (required).</param>
         /// <param name="signature">signature (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public ConfirmOperationRequestTransactionsInner(string id = default(string), string signature = default(string))
         {
             // to ensure "id" is required (not null)
@@ -60,18 +63,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Signature
         /// </summary>
         [DataMember(Name = "signature", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Signature { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -86,6 +92,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetQuoteResponse
     /// </summary>
     [DataContract(Name = "GetQuoteResponse")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetQuoteResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetQuoteResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetQuoteResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetQuoteResponse" /> class.
@@ -42,6 +44,7 @@ namespace BeamPlayerClient.Model
         /// <param name="tokenOut">tokenOut (required).</param>
         /// <param name="amountIn">amountIn (required).</param>
         /// <param name="amountOut">amountOut (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetQuoteResponse(string tokenIn = default(string), string tokenOut = default(string), string amountIn = default(string), string amountOut = default(string))
         {
             // to ensure "tokenIn" is required (not null)
@@ -74,30 +77,35 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets TokenIn
         /// </summary>
         [DataMember(Name = "tokenIn", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string TokenIn { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenOut
         /// </summary>
         [DataMember(Name = "tokenOut", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string TokenOut { get; set; }
 
         /// <summary>
         /// Gets or Sets AmountIn
         /// </summary>
         [DataMember(Name = "amountIn", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AmountIn { get; set; }
 
         /// <summary>
         /// Gets or Sets AmountOut
         /// </summary>
         [DataMember(Name = "amountOut", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AmountOut { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -114,6 +122,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

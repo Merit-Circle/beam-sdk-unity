@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// ConvertTokenRequestInput
     /// </summary>
     [DataContract(Name = "ConvertTokenRequestInput")]
+    [UnityEngine.Scripting.Preserve]
     public partial class ConvertTokenRequestInput
     {
         /// <summary>
@@ -54,11 +55,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets OperationProcessing
         /// </summary>
         [DataMember(Name = "operationProcessing", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public OperationProcessingEnum? OperationProcessing { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ConvertTokenRequestInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected ConvertTokenRequestInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ConvertTokenRequestInput" /> class.
@@ -74,6 +77,7 @@ namespace BeamPlayerClient.Model
         /// <param name="chainId">chainId (default to 13337M).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
+        [UnityEngine.Scripting.Preserve]
         public ConvertTokenRequestInput(string tokenIn = default(string), string tokenOut = default(string), string amountIn = default(string), string amountOut = default(string), string receiverEntityId = default(string), bool optimistic = false, bool sponsor = true, string policyId = default(string), decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
         {
             // to ensure "tokenIn" is required (not null)
@@ -113,66 +117,77 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets TokenIn
         /// </summary>
         [DataMember(Name = "tokenIn", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string TokenIn { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenOut
         /// </summary>
         [DataMember(Name = "tokenOut", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string TokenOut { get; set; }
 
         /// <summary>
         /// Gets or Sets AmountIn
         /// </summary>
         [DataMember(Name = "amountIn", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AmountIn { get; set; }
 
         /// <summary>
         /// Gets or Sets AmountOut
         /// </summary>
         [DataMember(Name = "amountOut", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AmountOut { get; set; }
 
         /// <summary>
         /// Gets or Sets ReceiverEntityId
         /// </summary>
         [DataMember(Name = "receiverEntityId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string ReceiverEntityId { get; set; }
 
         /// <summary>
         /// Gets or Sets Optimistic
         /// </summary>
         [DataMember(Name = "optimistic", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public bool Optimistic { get; set; }
 
         /// <summary>
         /// Gets or Sets Sponsor
         /// </summary>
         [DataMember(Name = "sponsor", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public bool Sponsor { get; set; }
 
         /// <summary>
         /// Gets or Sets PolicyId
         /// </summary>
         [DataMember(Name = "policyId", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string PolicyId { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId
         /// </summary>
         [DataMember(Name = "operationId", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string OperationId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -196,6 +211,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

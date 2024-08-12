@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// RevokeSessionRequestInput
     /// </summary>
     [DataContract(Name = "RevokeSessionRequestInput")]
+    [UnityEngine.Scripting.Preserve]
     public partial class RevokeSessionRequestInput
     {
         /// <summary>
@@ -54,11 +55,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets OperationProcessing
         /// </summary>
         [DataMember(Name = "operationProcessing", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public OperationProcessingEnum? OperationProcessing { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="RevokeSessionRequestInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected RevokeSessionRequestInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="RevokeSessionRequestInput" /> class.
@@ -67,6 +70,7 @@ namespace BeamPlayerClient.Model
         /// <param name="operationId">operationId.</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
+        [UnityEngine.Scripting.Preserve]
         public RevokeSessionRequestInput(string address = default(string), string operationId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, decimal chainId = 13337M)
         {
             // to ensure "address" is required (not null)
@@ -84,24 +88,28 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name = "address", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId
         /// </summary>
         [DataMember(Name = "operationId", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string OperationId { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -118,6 +126,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

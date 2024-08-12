@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetAllUsersResponseDataInnerWalletsInner
     /// </summary>
     [DataContract(Name = "GetAllUsersResponse_data_inner_wallets_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAllUsersResponseDataInnerWalletsInner
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAllUsersResponseDataInnerWalletsInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetAllUsersResponseDataInnerWalletsInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAllUsersResponseDataInnerWalletsInner" /> class.
@@ -46,6 +48,7 @@ namespace BeamPlayerClient.Model
         /// <param name="chainId">chainId (required).</param>
         /// <param name="profileId">profileId (required).</param>
         /// <param name="userId">userId (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAllUsersResponseDataInnerWalletsInner(string id = default(string), DateTime createdAt = default(DateTime), DateTime updatedAt = default(DateTime), string externalId = default(string), string address = default(string), int chainId = default(int), string profileId = default(string), string userId = default(string))
         {
             // to ensure "id" is required (not null)
@@ -87,54 +90,63 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets ExternalId
         /// </summary>
         [DataMember(Name = "externalId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string ExternalId { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name = "address", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public int ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets ProfileId
         /// </summary>
         [DataMember(Name = "profileId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string ProfileId { get; set; }
 
         /// <summary>
         /// Gets or Sets UserId
         /// </summary>
         [DataMember(Name = "userId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string UserId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -155,6 +167,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

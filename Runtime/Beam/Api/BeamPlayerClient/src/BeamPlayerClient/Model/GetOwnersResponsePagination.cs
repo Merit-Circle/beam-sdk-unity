@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetOwnersResponsePagination
     /// </summary>
     [DataContract(Name = "GetOwnersResponse_pagination")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetOwnersResponsePagination
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOwnersResponsePagination" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetOwnersResponsePagination() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOwnersResponsePagination" /> class.
@@ -41,6 +43,7 @@ namespace BeamPlayerClient.Model
         /// <param name="count">count (required).</param>
         /// <param name="limit">limit (default to 10M).</param>
         /// <param name="offset">offset (default to 0M).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetOwnersResponsePagination(decimal count = default(decimal), decimal limit = 10M, decimal offset = 0M)
         {
             this.Count = count;
@@ -52,24 +55,28 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Count
         /// </summary>
         [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Count { get; set; }
 
         /// <summary>
         /// Gets or Sets Limit
         /// </summary>
         [DataMember(Name = "limit", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Limit { get; set; }
 
         /// <summary>
         /// Gets or Sets Offset
         /// </summary>
         [DataMember(Name = "offset", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Offset { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -85,6 +92,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

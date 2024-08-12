@@ -28,17 +28,20 @@ namespace BeamPlayerClient.Model
     /// GetUserNativeCurrencyResponse
     /// </summary>
     [DataContract(Name = "GetUserNativeCurrencyResponse")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetUserNativeCurrencyResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUserNativeCurrencyResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetUserNativeCurrencyResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUserNativeCurrencyResponse" /> class.
         /// </summary>
         /// <param name="nativeTokenBalance">nativeTokenBalance (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetUserNativeCurrencyResponse(GetUserNativeCurrencyResponseNativeTokenBalance nativeTokenBalance = default(GetUserNativeCurrencyResponseNativeTokenBalance))
         {
             // to ensure "nativeTokenBalance" is required (not null)
@@ -53,12 +56,14 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets NativeTokenBalance
         /// </summary>
         [DataMember(Name = "nativeTokenBalance", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetUserNativeCurrencyResponseNativeTokenBalance NativeTokenBalance { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -72,6 +77,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// CommonStatsRequestInput
     /// </summary>
     [DataContract(Name = "CommonStatsRequestInput")]
+    [UnityEngine.Scripting.Preserve]
     public partial class CommonStatsRequestInput
     {
         /// <summary>
@@ -35,6 +36,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="attributes">attributes.</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
+        [UnityEngine.Scripting.Preserve]
         public CommonStatsRequestInput(List<GetAssetsForContractBodyInputAttributesInner> attributes = default(List<GetAssetsForContractBodyInputAttributesInner>), decimal chainId = 13337M)
         {
             this.Attributes = attributes;
@@ -45,18 +47,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Attributes
         /// </summary>
         [DataMember(Name = "attributes", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetAssetsForContractBodyInputAttributesInner> Attributes { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -71,6 +76,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// Check503Response
     /// </summary>
     [DataContract(Name = "check_503_response")]
+    [UnityEngine.Scripting.Preserve]
     public partial class Check503Response
     {
         /// <summary>
@@ -37,6 +38,7 @@ namespace BeamPlayerClient.Model
         /// <param name="info">info.</param>
         /// <param name="error">error.</param>
         /// <param name="details">details.</param>
+        [UnityEngine.Scripting.Preserve]
         public Check503Response(string status = default(string), Dictionary<string, Check200ResponseInfoValue> info = default(Dictionary<string, Check200ResponseInfoValue>), Dictionary<string, Check200ResponseInfoValue> error = default(Dictionary<string, Check200ResponseInfoValue>), Dictionary<string, Check200ResponseInfoValue> details = default(Dictionary<string, Check200ResponseInfoValue>))
         {
             this.Status = status;
@@ -50,6 +52,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <example>error</example>
         [DataMember(Name = "status", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string Status { get; set; }
 
         /// <summary>
@@ -57,6 +60,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <example>{&quot;database&quot;:{&quot;status&quot;:&quot;up&quot;}}</example>
         [DataMember(Name = "info", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public Dictionary<string, Check200ResponseInfoValue> Info { get; set; }
 
         /// <summary>
@@ -64,6 +68,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <example>{&quot;redis&quot;:{&quot;status&quot;:&quot;down&quot;,&quot;message&quot;:&quot;Could not connect&quot;}}</example>
         [DataMember(Name = "error", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public Dictionary<string, Check200ResponseInfoValue> Error { get; set; }
 
         /// <summary>
@@ -71,12 +76,14 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <example>{&quot;database&quot;:{&quot;status&quot;:&quot;up&quot;},&quot;redis&quot;:{&quot;status&quot;:&quot;down&quot;,&quot;message&quot;:&quot;Could not connect&quot;}}</example>
         [DataMember(Name = "details", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public Dictionary<string, Check200ResponseInfoValue> Details { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -93,6 +100,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

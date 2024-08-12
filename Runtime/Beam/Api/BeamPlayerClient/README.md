@@ -85,12 +85,12 @@ namespace Example
             var apiInstance = new ActivityApi(config);
             var assetAddress = "assetAddress_example";  // string | 
             var assetId = "assetId_example";  // string | 
-            var commonActivityRequestInput = new CommonActivityRequestInput(); // CommonActivityRequestInput | 
+            var commonAssetActivityRequestInput = new CommonAssetActivityRequestInput(); // CommonAssetActivityRequestInput | 
 
             try
             {
                 // Get asset activity
-                CommonActivityResponse result = apiInstance.GetAssetActivity(assetAddress, assetId, commonActivityRequestInput);
+                CommonActivityResponse result = apiInstance.GetAssetActivity(assetAddress, assetId, commonAssetActivityRequestInput);
                 Debug.WriteLine(result);
             }
             catch (ApiException e)
@@ -179,18 +179,20 @@ Class | Method | HTTP request | Description
  - [Model.Check200Response](Check200Response.md)
  - [Model.Check200ResponseInfoValue](Check200ResponseInfoValue.md)
  - [Model.Check503Response](Check503Response.md)
- - [Model.CommonActivityRequestInput](CommonActivityRequestInput.md)
  - [Model.CommonActivityResponse](CommonActivityResponse.md)
  - [Model.CommonActivityResponseDataInner](CommonActivityResponseDataInner.md)
  - [Model.CommonActivityResponseDataInnerAsset](CommonActivityResponseDataInnerAsset.md)
  - [Model.CommonActivityResponseDataInnerContract](CommonActivityResponseDataInnerContract.md)
  - [Model.CommonActivityResponseDataInnerOrder](CommonActivityResponseDataInnerOrder.md)
  - [Model.CommonActivityResponseDataInnerTransaction](CommonActivityResponseDataInnerTransaction.md)
+ - [Model.CommonAssetActivityRequestInput](CommonAssetActivityRequestInput.md)
+ - [Model.CommonContractActivityRequestInput](CommonContractActivityRequestInput.md)
  - [Model.CommonOperationResponse](CommonOperationResponse.md)
  - [Model.CommonOperationResponseTransactionsInner](CommonOperationResponseTransactionsInner.md)
  - [Model.CommonStatsRequestInput](CommonStatsRequestInput.md)
  - [Model.CommonStatsResponse](CommonStatsResponse.md)
  - [Model.CommonStatsResponseCount](CommonStatsResponseCount.md)
+ - [Model.CommonUserActivityRequestInput](CommonUserActivityRequestInput.md)
  - [Model.ConfirmOperationRequest](ConfirmOperationRequest.md)
  - [Model.ConfirmOperationRequestTransactionsInner](ConfirmOperationRequestTransactionsInner.md)
  - [Model.ConvertTokenRequestInput](ConvertTokenRequestInput.md)

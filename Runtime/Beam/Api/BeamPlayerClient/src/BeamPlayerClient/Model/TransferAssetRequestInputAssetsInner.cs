@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// TransferAssetRequestInputAssetsInner
     /// </summary>
     [DataContract(Name = "TransferAssetRequestInput_assets_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class TransferAssetRequestInputAssetsInner
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TransferAssetRequestInputAssetsInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected TransferAssetRequestInputAssetsInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TransferAssetRequestInputAssetsInner" /> class.
@@ -43,6 +45,7 @@ namespace BeamPlayerClient.Model
         /// <param name="assetAddress">assetAddress (required).</param>
         /// <param name="assetId">assetId (required).</param>
         /// <param name="amountToTransfer">amountToTransfer (default to 1M).</param>
+        [UnityEngine.Scripting.Preserve]
         public TransferAssetRequestInputAssetsInner(string receiverEntityId = default(string), string receiverWalletAddress = default(string), string assetAddress = default(string), string assetId = default(string), decimal amountToTransfer = 1M)
         {
             // to ensure "assetAddress" is required (not null)
@@ -66,36 +69,42 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets ReceiverEntityId
         /// </summary>
         [DataMember(Name = "receiverEntityId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string ReceiverEntityId { get; set; }
 
         /// <summary>
         /// Gets or Sets ReceiverWalletAddress
         /// </summary>
         [DataMember(Name = "receiverWalletAddress", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string ReceiverWalletAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets AssetAddress
         /// </summary>
         [DataMember(Name = "assetAddress", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AssetAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets AssetId
         /// </summary>
         [DataMember(Name = "assetId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AssetId { get; set; }
 
         /// <summary>
         /// Gets or Sets AmountToTransfer
         /// </summary>
         [DataMember(Name = "amountToTransfer", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal AmountToTransfer { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -113,6 +122,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

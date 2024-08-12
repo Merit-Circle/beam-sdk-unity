@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// CommonActivityResponseDataInner
     /// </summary>
     [DataContract(Name = "CommonActivityResponse_data_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class CommonActivityResponseDataInner
     {
         /// <summary>
@@ -84,11 +85,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public TypeEnum? Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonActivityResponseDataInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected CommonActivityResponseDataInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonActivityResponseDataInner" /> class.
@@ -99,6 +102,7 @@ namespace BeamPlayerClient.Model
         /// <param name="asset">asset (required).</param>
         /// <param name="order">order.</param>
         /// <param name="type">type.</param>
+        [UnityEngine.Scripting.Preserve]
         public CommonActivityResponseDataInner(string createdAt = default(string), CommonActivityResponseDataInnerContract contract = default(CommonActivityResponseDataInnerContract), CommonActivityResponseDataInnerTransaction transaction = default(CommonActivityResponseDataInnerTransaction), CommonActivityResponseDataInnerAsset asset = default(CommonActivityResponseDataInnerAsset), CommonActivityResponseDataInnerOrder order = default(CommonActivityResponseDataInnerOrder), TypeEnum? type = default(TypeEnum?))
         {
             // to ensure "contract" is required (not null)
@@ -128,36 +132,42 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets Contract
         /// </summary>
         [DataMember(Name = "contract", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public CommonActivityResponseDataInnerContract Contract { get; set; }
 
         /// <summary>
         /// Gets or Sets Transaction
         /// </summary>
         [DataMember(Name = "transaction", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public CommonActivityResponseDataInnerTransaction Transaction { get; set; }
 
         /// <summary>
         /// Gets or Sets Asset
         /// </summary>
         [DataMember(Name = "asset", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public CommonActivityResponseDataInnerAsset Asset { get; set; }
 
         /// <summary>
         /// Gets or Sets Order
         /// </summary>
         [DataMember(Name = "order", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public CommonActivityResponseDataInnerOrder Order { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -176,6 +186,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

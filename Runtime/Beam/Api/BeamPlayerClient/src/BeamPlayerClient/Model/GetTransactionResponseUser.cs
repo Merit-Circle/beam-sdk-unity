@@ -28,18 +28,21 @@ namespace BeamPlayerClient.Model
     /// User and wallet information related to the transaction
     /// </summary>
     [DataContract(Name = "GetTransactionResponse_user")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetTransactionResponseUser
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponseUser" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetTransactionResponseUser() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponseUser" /> class.
         /// </summary>
         /// <param name="entities">entities (required).</param>
         /// <param name="wallet">wallet (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionResponseUser(List<GetTransactionResponseUserEntitiesInner> entities = default(List<GetTransactionResponseUserEntitiesInner>), GetTransactionResponseUserWallet wallet = default(GetTransactionResponseUserWallet))
         {
             // to ensure "entities" is required (not null)
@@ -60,18 +63,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Entities
         /// </summary>
         [DataMember(Name = "entities", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetTransactionResponseUserEntitiesInner> Entities { get; set; }
 
         /// <summary>
         /// Gets or Sets Wallet
         /// </summary>
         [DataMember(Name = "wallet", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionResponseUserWallet Wallet { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -86,6 +92,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetTransactionsResponseDataInnerIntentInteractionsInner
     /// </summary>
     [DataContract(Name = "GetTransactionsResponse_data_inner_intent_interactions_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetTransactionsResponseDataInnerIntentInteractionsInner
     {
         /// <summary>
@@ -38,6 +39,7 @@ namespace BeamPlayerClient.Model
         /// <param name="contract">contract.</param>
         /// <param name="functionName">functionName.</param>
         /// <param name="functionArgs">functionArgs.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionsResponseDataInnerIntentInteractionsInner(string to = default(string), string value = default(string), string contract = default(string), string functionName = default(string), List<Object> functionArgs = default(List<Object>))
         {
             this.To = to;
@@ -51,36 +53,42 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets To
         /// </summary>
         [DataMember(Name = "to", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string To { get; set; }
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string Value { get; set; }
 
         /// <summary>
         /// Gets or Sets Contract
         /// </summary>
         [DataMember(Name = "contract", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string Contract { get; set; }
 
         /// <summary>
         /// Gets or Sets FunctionName
         /// </summary>
         [DataMember(Name = "functionName", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string FunctionName { get; set; }
 
         /// <summary>
         /// Gets or Sets FunctionArgs
         /// </summary>
         [DataMember(Name = "functionArgs", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public List<Object> FunctionArgs { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -98,6 +106,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

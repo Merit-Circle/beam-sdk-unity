@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetAssetListingsResponseDataInnerPrice
     /// </summary>
     [DataContract(Name = "GetAssetListingsResponse_data_inner_price")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAssetListingsResponseDataInnerPrice
     {
         /// <summary>
@@ -36,6 +37,7 @@ namespace BeamPlayerClient.Model
         /// <param name="currency">currency.</param>
         /// <param name="amount">amount.</param>
         /// <param name="netAmount">netAmount.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAssetListingsResponseDataInnerPrice(GetAssetListingsResponseDataInnerPriceCurrency currency = default(GetAssetListingsResponseDataInnerPriceCurrency), GetAssetListingsResponseDataInnerPriceAmount amount = default(GetAssetListingsResponseDataInnerPriceAmount), GetAssetListingsResponseDataInnerPriceAmount netAmount = default(GetAssetListingsResponseDataInnerPriceAmount))
         {
             this.Currency = currency;
@@ -47,24 +49,28 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Currency
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetAssetListingsResponseDataInnerPriceCurrency Currency { get; set; }
 
         /// <summary>
         /// Gets or Sets Amount
         /// </summary>
         [DataMember(Name = "amount", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetAssetListingsResponseDataInnerPriceAmount Amount { get; set; }
 
         /// <summary>
         /// Gets or Sets NetAmount
         /// </summary>
         [DataMember(Name = "netAmount", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetAssetListingsResponseDataInnerPriceAmount NetAmount { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -80,6 +86,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// CancelAssetOfferRequestInput
     /// </summary>
     [DataContract(Name = "CancelAssetOfferRequestInput")]
+    [UnityEngine.Scripting.Preserve]
     public partial class CancelAssetOfferRequestInput
     {
         /// <summary>
@@ -54,6 +55,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets OperationProcessing
         /// </summary>
         [DataMember(Name = "operationProcessing", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public OperationProcessingEnum? OperationProcessing { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="CancelAssetOfferRequestInput" /> class.
@@ -64,6 +66,7 @@ namespace BeamPlayerClient.Model
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
+        [UnityEngine.Scripting.Preserve]
         public CancelAssetOfferRequestInput(bool optimistic = false, bool sponsor = true, string policyId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string), decimal chainId = 13337M)
         {
             this.Optimistic = optimistic;
@@ -78,36 +81,42 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Optimistic
         /// </summary>
         [DataMember(Name = "optimistic", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public bool Optimistic { get; set; }
 
         /// <summary>
         /// Gets or Sets Sponsor
         /// </summary>
         [DataMember(Name = "sponsor", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public bool Sponsor { get; set; }
 
         /// <summary>
         /// Gets or Sets PolicyId
         /// </summary>
         [DataMember(Name = "policyId", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string PolicyId { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId
         /// </summary>
         [DataMember(Name = "operationId", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string OperationId { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -126,6 +135,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -1,0 +1,3 @@
+<linker>
+    <assembly fullname="Beam" preserve="all"/>
+</linker>

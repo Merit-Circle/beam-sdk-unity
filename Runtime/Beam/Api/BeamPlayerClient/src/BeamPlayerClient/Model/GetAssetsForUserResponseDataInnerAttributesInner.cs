@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetAssetsForUserResponseDataInnerAttributesInner
     /// </summary>
     [DataContract(Name = "GetAssetsForUserResponse_data_inner_attributes_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAssetsForUserResponseDataInnerAttributesInner
     {
         /// <summary>
@@ -38,6 +39,7 @@ namespace BeamPlayerClient.Model
         /// <param name="rarity">rarity.</param>
         /// <param name="type">type.</param>
         /// <param name="value">value.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAssetsForUserResponseDataInnerAttributesInner(string displayType = default(string), decimal? maxValue = default(decimal?), decimal? rarity = default(decimal?), string type = default(string), string value = default(string))
         {
             this.DisplayType = displayType;
@@ -51,36 +53,42 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets DisplayType
         /// </summary>
         [DataMember(Name = "displayType", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string DisplayType { get; set; }
 
         /// <summary>
         /// Gets or Sets MaxValue
         /// </summary>
         [DataMember(Name = "maxValue", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal? MaxValue { get; set; }
 
         /// <summary>
         /// Gets or Sets Rarity
         /// </summary>
         [DataMember(Name = "rarity", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal? Rarity { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Value { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -98,6 +106,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

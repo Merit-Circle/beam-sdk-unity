@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetUserResponse
     /// </summary>
     [DataContract(Name = "GetUserResponse")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetUserResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUserResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetUserResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetUserResponse" /> class.
@@ -43,6 +45,7 @@ namespace BeamPlayerClient.Model
         /// <param name="gameId">gameId (required).</param>
         /// <param name="wallets">wallets (required).</param>
         /// <param name="entities">entities (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetUserResponse(string externalEntityId = default(string), string userId = default(string), string gameId = default(string), List<GetAllUsersResponseDataInnerWalletsInner> wallets = default(List<GetAllUsersResponseDataInnerWalletsInner>), List<GetTransactionResponseUserEntitiesInner> entities = default(List<GetTransactionResponseUserEntitiesInner>))
         {
             // to ensure "externalEntityId" is required (not null)
@@ -81,36 +84,42 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets ExternalEntityId
         /// </summary>
         [DataMember(Name = "externalEntityId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string ExternalEntityId { get; set; }
 
         /// <summary>
         /// Gets or Sets UserId
         /// </summary>
         [DataMember(Name = "userId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string UserId { get; set; }
 
         /// <summary>
         /// Gets or Sets GameId
         /// </summary>
         [DataMember(Name = "gameId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string GameId { get; set; }
 
         /// <summary>
         /// Gets or Sets Wallets
         /// </summary>
         [DataMember(Name = "wallets", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetAllUsersResponseDataInnerWalletsInner> Wallets { get; set; }
 
         /// <summary>
         /// Gets or Sets Entities
         /// </summary>
         [DataMember(Name = "entities", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetTransactionResponseUserEntitiesInner> Entities { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -128,6 +137,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

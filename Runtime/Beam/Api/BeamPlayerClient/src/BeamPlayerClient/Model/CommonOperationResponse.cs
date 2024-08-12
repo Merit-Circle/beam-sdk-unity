@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// CommonOperationResponse
     /// </summary>
     [DataContract(Name = "CommonOperationResponse")]
+    [UnityEngine.Scripting.Preserve]
     public partial class CommonOperationResponse
     {
         /// <summary>
@@ -72,6 +73,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Status
         /// </summary>
         [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public StatusEnum Status { get; set; }
         /// <summary>
         /// Defines Processing
@@ -97,11 +99,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Processing
         /// </summary>
         [DataMember(Name = "processing", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public ProcessingEnum Processing { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonOperationResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected CommonOperationResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonOperationResponse" /> class.
@@ -116,6 +120,7 @@ namespace BeamPlayerClient.Model
         /// <param name="chainId">chainId (required).</param>
         /// <param name="url">url (required).</param>
         /// <param name="transactions">transactions (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public CommonOperationResponse(StatusEnum status = default(StatusEnum), ProcessingEnum processing = default(ProcessingEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), string gameId = default(string), string userId = default(string), int chainId = default(int), string url = default(string), List<CommonOperationResponseTransactionsInner> transactions = default(List<CommonOperationResponseTransactionsInner>))
         {
             this.Status = status;
@@ -164,54 +169,63 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets GameId
         /// </summary>
         [DataMember(Name = "gameId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string GameId { get; set; }
 
         /// <summary>
         /// Gets or Sets UserId
         /// </summary>
         [DataMember(Name = "userId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string UserId { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public int ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Url
         /// </summary>
         [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Url { get; set; }
 
         /// <summary>
         /// Gets or Sets Transactions
         /// </summary>
         [DataMember(Name = "transactions", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<CommonOperationResponseTransactionsInner> Transactions { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -234,6 +248,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

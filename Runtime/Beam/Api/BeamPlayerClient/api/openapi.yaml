@@ -1634,7 +1634,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CommonActivityRequestInput'
+              $ref: '#/components/schemas/CommonUserActivityRequestInput'
         required: true
       responses:
         "200":
@@ -1663,7 +1663,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CommonActivityRequestInput'
+              $ref: '#/components/schemas/CommonContractActivityRequestInput'
         required: true
       responses:
         "200":
@@ -1699,7 +1699,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CommonActivityRequestInput'
+              $ref: '#/components/schemas/CommonAssetActivityRequestInput'
         required: true
       responses:
         "200":
@@ -3723,17 +3723,18 @@ components:
       required:
       - count
       type: object
-    CommonActivityRequestInput:
+    CommonUserActivityRequestInput:
       example:
         types:
         - ask
         - ask
         chainId: 6.027456183070403
-        limit: 8.928199085564014
+        limit: 2.521573561875922
+        continuation: continuation
       properties:
         limit:
           default: 20
-          maximum: 100
+          maximum: 20
           minimum: 1
           type: number
         types:
@@ -3752,6 +3753,9 @@ components:
         chainId:
           default: 13337
           type: number
+        continuation:
+          nullable: true
+          type: string
       type: object
     CommonActivityResponse:
       example:
@@ -3793,6 +3797,74 @@ components:
           type: string
       required:
       - data
+      type: object
+    CommonContractActivityRequestInput:
+      example:
+        types:
+        - ask
+        - ask
+        chainId: 6.027456183070403
+        limit: 4.924058133258956
+        continuation: continuation
+      properties:
+        limit:
+          default: 20
+          maximum: 50
+          minimum: 1
+          type: number
+        types:
+          items:
+            enum:
+            - ask
+            - ask_cancel
+            - bid
+            - bid_cancel
+            - sale
+            - mint
+            - transfer
+            type: string
+          nullable: true
+          type: array
+        chainId:
+          default: 13337
+          type: number
+        continuation:
+          nullable: true
+          type: string
+      type: object
+    CommonAssetActivityRequestInput:
+      example:
+        types:
+        - ask
+        - ask
+        chainId: 6.027456183070403
+        limit: 2.521573561875922
+        continuation: continuation
+      properties:
+        limit:
+          default: 20
+          maximum: 20
+          minimum: 1
+          type: number
+        types:
+          items:
+            enum:
+            - ask
+            - ask_cancel
+            - bid
+            - bid_cancel
+            - sale
+            - mint
+            - transfer
+            type: string
+          nullable: true
+          type: array
+        chainId:
+          default: 13337
+          type: number
+        continuation:
+          nullable: true
+          type: string
       type: object
     check_200_response_info_value:
       additionalProperties: true

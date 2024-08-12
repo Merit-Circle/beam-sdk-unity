@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetAttributesResponseDataInner
     /// </summary>
     [DataContract(Name = "GetAttributesResponse_data_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAttributesResponseDataInner
     {
         /// <summary>
@@ -66,11 +67,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Kind
         /// </summary>
         [DataMember(Name = "kind", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public KindEnum Kind { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAttributesResponseDataInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetAttributesResponseDataInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAttributesResponseDataInner" /> class.
@@ -78,6 +81,7 @@ namespace BeamPlayerClient.Model
         /// <param name="key">key (required).</param>
         /// <param name="kind">kind (required).</param>
         /// <param name="values">values.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAttributesResponseDataInner(string key = default(string), KindEnum kind = default(KindEnum), List<GetAttributesResponseDataInnerValuesInner> values = default(List<GetAttributesResponseDataInnerValuesInner>))
         {
             // to ensure "key" is required (not null)
@@ -94,18 +98,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Key
         /// </summary>
         [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Key { get; set; }
 
         /// <summary>
         /// Gets or Sets Values
         /// </summary>
         [DataMember(Name = "values", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetAttributesResponseDataInnerValuesInner> Values { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -121,6 +128,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

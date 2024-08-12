@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetTransactionsResponseDataInnerTransactionLogsInner
     /// </summary>
     [DataContract(Name = "GetTransactionsResponse_data_inner_transaction_logs_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetTransactionsResponseDataInnerTransactionLogsInner
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionsResponseDataInnerTransactionLogsInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetTransactionsResponseDataInnerTransactionLogsInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionsResponseDataInnerTransactionLogsInner" /> class.
@@ -48,6 +50,7 @@ namespace BeamPlayerClient.Model
         /// <param name="transactionHash">transactionHash (required).</param>
         /// <param name="logIndex">logIndex (required).</param>
         /// <param name="orphaned">orphaned.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionsResponseDataInnerTransactionLogsInner(decimal blockNumber = default(decimal), string blockHash = default(string), decimal transactionIndex = default(decimal), bool removed = default(bool), string address = default(string), string data = default(string), List<string> topics = default(List<string>), string transactionHash = default(string), decimal logIndex = default(decimal), bool? orphaned = default(bool?))
         {
             this.BlockNumber = blockNumber;
@@ -91,66 +94,77 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets BlockNumber
         /// </summary>
         [DataMember(Name = "blockNumber", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal BlockNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets BlockHash
         /// </summary>
         [DataMember(Name = "blockHash", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string BlockHash { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionIndex
         /// </summary>
         [DataMember(Name = "transactionIndex", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal TransactionIndex { get; set; }
 
         /// <summary>
         /// Gets or Sets Removed
         /// </summary>
         [DataMember(Name = "removed", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public bool Removed { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name = "address", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Topics
         /// </summary>
         [DataMember(Name = "topics", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<string> Topics { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionHash
         /// </summary>
         [DataMember(Name = "transactionHash", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string TransactionHash { get; set; }
 
         /// <summary>
         /// Gets or Sets LogIndex
         /// </summary>
         [DataMember(Name = "logIndex", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal LogIndex { get; set; }
 
         /// <summary>
         /// Gets or Sets Orphaned
         /// </summary>
         [DataMember(Name = "orphaned", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public bool? Orphaned { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -173,6 +187,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

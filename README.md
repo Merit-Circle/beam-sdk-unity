@@ -103,3 +103,8 @@ var operationId = "clxn9u(...)0c4bz7av";
 
 ### Examples
 You can find an example implementation using this demo in [beam-sdk-unity-example](https://github.com/Merit-Circle/beam-sdk-unity-example/tree/main)
+
+### Notes
+
+#### WebGL
+WebGL builds are optimized and have Code Stripping enabled by default. We made sure that our models are not stripped using [Preserve] attributes but if you notice a functionality that seemingly breaks with stripping, please let us know, so we can adjust accordingly.

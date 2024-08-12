@@ -32,9 +32,9 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonAssetActivityRequestInput"></param>
         /// <returns>CommonActivityResponse</returns>
-        CommonActivityResponse GetAssetActivity(string assetAddress, string assetId, CommonActivityRequestInput commonActivityRequestInput);
+        CommonActivityResponse GetAssetActivity(string assetAddress, string assetId, CommonAssetActivityRequestInput commonAssetActivityRequestInput);
 
         /// <summary>
         /// Get asset activity
@@ -45,17 +45,17 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonAssetActivityRequestInput"></param>
         /// <returns>ApiResponse of CommonActivityResponse</returns>
-        ApiResponse<CommonActivityResponse> GetAssetActivityWithHttpInfo(string assetAddress, string assetId, CommonActivityRequestInput commonActivityRequestInput);
+        ApiResponse<CommonActivityResponse> GetAssetActivityWithHttpInfo(string assetAddress, string assetId, CommonAssetActivityRequestInput commonAssetActivityRequestInput);
         /// <summary>
         /// Get contract activity
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonContractActivityRequestInput"></param>
         /// <returns>CommonActivityResponse</returns>
-        CommonActivityResponse GetContractActivity(string assetAddress, CommonActivityRequestInput commonActivityRequestInput);
+        CommonActivityResponse GetContractActivity(string assetAddress, CommonContractActivityRequestInput commonContractActivityRequestInput);
 
         /// <summary>
         /// Get contract activity
@@ -65,17 +65,17 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonContractActivityRequestInput"></param>
         /// <returns>ApiResponse of CommonActivityResponse</returns>
-        ApiResponse<CommonActivityResponse> GetContractActivityWithHttpInfo(string assetAddress, CommonActivityRequestInput commonActivityRequestInput);
+        ApiResponse<CommonActivityResponse> GetContractActivityWithHttpInfo(string assetAddress, CommonContractActivityRequestInput commonContractActivityRequestInput);
         /// <summary>
         /// Get user activity
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonUserActivityRequestInput"></param>
         /// <returns>CommonActivityResponse</returns>
-        CommonActivityResponse GetUserActivity(string entityId, CommonActivityRequestInput commonActivityRequestInput);
+        CommonActivityResponse GetUserActivity(string entityId, CommonUserActivityRequestInput commonUserActivityRequestInput);
 
         /// <summary>
         /// Get user activity
@@ -85,9 +85,9 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonUserActivityRequestInput"></param>
         /// <returns>ApiResponse of CommonActivityResponse</returns>
-        ApiResponse<CommonActivityResponse> GetUserActivityWithHttpInfo(string entityId, CommonActivityRequestInput commonActivityRequestInput);
+        ApiResponse<CommonActivityResponse> GetUserActivityWithHttpInfo(string entityId, CommonUserActivityRequestInput commonUserActivityRequestInput);
         #endregion Synchronous Operations
     }
 
@@ -106,10 +106,10 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonAssetActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonActivityResponse</returns>
-        Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetAssetActivityAsync(string assetAddress, string assetId, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetAssetActivityAsync(string assetAddress, string assetId, CommonAssetActivityRequestInput commonAssetActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get asset activity
@@ -120,10 +120,10 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonAssetActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonActivityResponse)</returns>
-        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonActivityResponse>> GetAssetActivityWithHttpInfoAsync(string assetAddress, string assetId, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonActivityResponse>> GetAssetActivityWithHttpInfoAsync(string assetAddress, string assetId, CommonAssetActivityRequestInput commonAssetActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get contract activity
         /// </summary>
@@ -132,10 +132,10 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonContractActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonActivityResponse</returns>
-        Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetContractActivityAsync(string assetAddress, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetContractActivityAsync(string assetAddress, CommonContractActivityRequestInput commonContractActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get contract activity
@@ -145,10 +145,10 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonContractActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonActivityResponse)</returns>
-        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonActivityResponse>> GetContractActivityWithHttpInfoAsync(string assetAddress, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonActivityResponse>> GetContractActivityWithHttpInfoAsync(string assetAddress, CommonContractActivityRequestInput commonContractActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get user activity
         /// </summary>
@@ -157,10 +157,10 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonUserActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonActivityResponse</returns>
-        Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetUserActivityAsync(string entityId, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetUserActivityAsync(string entityId, CommonUserActivityRequestInput commonUserActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get user activity
@@ -170,10 +170,10 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonUserActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonActivityResponse)</returns>
-        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonActivityResponse>> GetUserActivityWithHttpInfoAsync(string entityId, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<CommonActivityResponse>> GetUserActivityWithHttpInfoAsync(string entityId, CommonUserActivityRequestInput commonUserActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -324,11 +324,11 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonAssetActivityRequestInput"></param>
         /// <returns>CommonActivityResponse</returns>
-        public CommonActivityResponse GetAssetActivity(string assetAddress, string assetId, CommonActivityRequestInput commonActivityRequestInput)
+        public CommonActivityResponse GetAssetActivity(string assetAddress, string assetId, CommonAssetActivityRequestInput commonAssetActivityRequestInput)
         {
-            BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> localVarResponse = GetAssetActivityWithHttpInfo(assetAddress, assetId, commonActivityRequestInput);
+            BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> localVarResponse = GetAssetActivityWithHttpInfo(assetAddress, assetId, commonAssetActivityRequestInput);
             return localVarResponse.Data;
         }
 
@@ -338,9 +338,9 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonAssetActivityRequestInput"></param>
         /// <returns>ApiResponse of CommonActivityResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> GetAssetActivityWithHttpInfo(string assetAddress, string assetId, CommonActivityRequestInput commonActivityRequestInput)
+        public BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> GetAssetActivityWithHttpInfo(string assetAddress, string assetId, CommonAssetActivityRequestInput commonAssetActivityRequestInput)
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
@@ -350,9 +350,9 @@ namespace BeamPlayerClient.Api
             if (assetId == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetId' when calling ActivityApi->GetAssetActivity");
 
-            // verify the required parameter 'commonActivityRequestInput' is set
-            if (commonActivityRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonActivityRequestInput' when calling ActivityApi->GetAssetActivity");
+            // verify the required parameter 'commonAssetActivityRequestInput' is set
+            if (commonAssetActivityRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonAssetActivityRequestInput' when calling ActivityApi->GetAssetActivity");
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
 
@@ -373,7 +373,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
             localVarRequestOptions.PathParameters.Add("assetId", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetId)); // path parameter
-            localVarRequestOptions.Data = commonActivityRequestInput;
+            localVarRequestOptions.Data = commonAssetActivityRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -399,12 +399,12 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonAssetActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonActivityResponse</returns>
-        public async Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetAssetActivityAsync(string assetAddress, string assetId, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetAssetActivityAsync(string assetAddress, string assetId, CommonAssetActivityRequestInput commonAssetActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var task = GetAssetActivityWithHttpInfoAsync(assetAddress, assetId, commonActivityRequestInput, cancellationToken);
+            var task = GetAssetActivityWithHttpInfoAsync(assetAddress, assetId, commonAssetActivityRequestInput, cancellationToken);
             BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> localVarResponse = await task;
             return localVarResponse.Data;
         }
@@ -415,10 +415,10 @@ namespace BeamPlayerClient.Api
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonAssetActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonActivityResponse)</returns>
-        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonActivityResponse>> GetAssetActivityWithHttpInfoAsync(string assetAddress, string assetId, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonActivityResponse>> GetAssetActivityWithHttpInfoAsync(string assetAddress, string assetId, CommonAssetActivityRequestInput commonAssetActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
@@ -428,9 +428,9 @@ namespace BeamPlayerClient.Api
             if (assetId == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetId' when calling ActivityApi->GetAssetActivity");
 
-            // verify the required parameter 'commonActivityRequestInput' is set
-            if (commonActivityRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonActivityRequestInput' when calling ActivityApi->GetAssetActivity");
+            // verify the required parameter 'commonAssetActivityRequestInput' is set
+            if (commonAssetActivityRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonAssetActivityRequestInput' when calling ActivityApi->GetAssetActivity");
 
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
@@ -453,7 +453,7 @@ namespace BeamPlayerClient.Api
 
             localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
             localVarRequestOptions.PathParameters.Add("assetId", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetId)); // path parameter
-            localVarRequestOptions.Data = commonActivityRequestInput;
+            localVarRequestOptions.Data = commonAssetActivityRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -481,11 +481,11 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonContractActivityRequestInput"></param>
         /// <returns>CommonActivityResponse</returns>
-        public CommonActivityResponse GetContractActivity(string assetAddress, CommonActivityRequestInput commonActivityRequestInput)
+        public CommonActivityResponse GetContractActivity(string assetAddress, CommonContractActivityRequestInput commonContractActivityRequestInput)
         {
-            BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> localVarResponse = GetContractActivityWithHttpInfo(assetAddress, commonActivityRequestInput);
+            BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> localVarResponse = GetContractActivityWithHttpInfo(assetAddress, commonContractActivityRequestInput);
             return localVarResponse.Data;
         }
 
@@ -494,17 +494,17 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonContractActivityRequestInput"></param>
         /// <returns>ApiResponse of CommonActivityResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> GetContractActivityWithHttpInfo(string assetAddress, CommonActivityRequestInput commonActivityRequestInput)
+        public BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> GetContractActivityWithHttpInfo(string assetAddress, CommonContractActivityRequestInput commonContractActivityRequestInput)
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling ActivityApi->GetContractActivity");
 
-            // verify the required parameter 'commonActivityRequestInput' is set
-            if (commonActivityRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonActivityRequestInput' when calling ActivityApi->GetContractActivity");
+            // verify the required parameter 'commonContractActivityRequestInput' is set
+            if (commonContractActivityRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonContractActivityRequestInput' when calling ActivityApi->GetContractActivity");
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
 
@@ -524,7 +524,7 @@ namespace BeamPlayerClient.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
             localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
-            localVarRequestOptions.Data = commonActivityRequestInput;
+            localVarRequestOptions.Data = commonContractActivityRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -549,12 +549,12 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonContractActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonActivityResponse</returns>
-        public async Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetContractActivityAsync(string assetAddress, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetContractActivityAsync(string assetAddress, CommonContractActivityRequestInput commonContractActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var task = GetContractActivityWithHttpInfoAsync(assetAddress, commonActivityRequestInput, cancellationToken);
+            var task = GetContractActivityWithHttpInfoAsync(assetAddress, commonContractActivityRequestInput, cancellationToken);
             BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> localVarResponse = await task;
             return localVarResponse.Data;
         }
@@ -564,18 +564,18 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonContractActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonActivityResponse)</returns>
-        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonActivityResponse>> GetContractActivityWithHttpInfoAsync(string assetAddress, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonActivityResponse>> GetContractActivityWithHttpInfoAsync(string assetAddress, CommonContractActivityRequestInput commonContractActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'assetAddress' is set
             if (assetAddress == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'assetAddress' when calling ActivityApi->GetContractActivity");
 
-            // verify the required parameter 'commonActivityRequestInput' is set
-            if (commonActivityRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonActivityRequestInput' when calling ActivityApi->GetContractActivity");
+            // verify the required parameter 'commonContractActivityRequestInput' is set
+            if (commonContractActivityRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonContractActivityRequestInput' when calling ActivityApi->GetContractActivity");
 
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
@@ -597,7 +597,7 @@ namespace BeamPlayerClient.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
             localVarRequestOptions.PathParameters.Add("assetAddress", BeamPlayerClient.Client.ClientUtils.ParameterToString(assetAddress)); // path parameter
-            localVarRequestOptions.Data = commonActivityRequestInput;
+            localVarRequestOptions.Data = commonContractActivityRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -625,11 +625,11 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonUserActivityRequestInput"></param>
         /// <returns>CommonActivityResponse</returns>
-        public CommonActivityResponse GetUserActivity(string entityId, CommonActivityRequestInput commonActivityRequestInput)
+        public CommonActivityResponse GetUserActivity(string entityId, CommonUserActivityRequestInput commonUserActivityRequestInput)
         {
-            BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> localVarResponse = GetUserActivityWithHttpInfo(entityId, commonActivityRequestInput);
+            BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> localVarResponse = GetUserActivityWithHttpInfo(entityId, commonUserActivityRequestInput);
             return localVarResponse.Data;
         }
 
@@ -638,17 +638,17 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonUserActivityRequestInput"></param>
         /// <returns>ApiResponse of CommonActivityResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> GetUserActivityWithHttpInfo(string entityId, CommonActivityRequestInput commonActivityRequestInput)
+        public BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> GetUserActivityWithHttpInfo(string entityId, CommonUserActivityRequestInput commonUserActivityRequestInput)
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling ActivityApi->GetUserActivity");
 
-            // verify the required parameter 'commonActivityRequestInput' is set
-            if (commonActivityRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonActivityRequestInput' when calling ActivityApi->GetUserActivity");
+            // verify the required parameter 'commonUserActivityRequestInput' is set
+            if (commonUserActivityRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonUserActivityRequestInput' when calling ActivityApi->GetUserActivity");
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
 
@@ -668,7 +668,7 @@ namespace BeamPlayerClient.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
-            localVarRequestOptions.Data = commonActivityRequestInput;
+            localVarRequestOptions.Data = commonUserActivityRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
@@ -693,12 +693,12 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonUserActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommonActivityResponse</returns>
-        public async Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetUserActivityAsync(string entityId, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<CommonActivityResponse> GetUserActivityAsync(string entityId, CommonUserActivityRequestInput commonUserActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            var task = GetUserActivityWithHttpInfoAsync(entityId, commonActivityRequestInput, cancellationToken);
+            var task = GetUserActivityWithHttpInfoAsync(entityId, commonUserActivityRequestInput, cancellationToken);
             BeamPlayerClient.Client.ApiResponse<CommonActivityResponse> localVarResponse = await task;
             return localVarResponse.Data;
         }
@@ -708,18 +708,18 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="commonUserActivityRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommonActivityResponse)</returns>
-        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonActivityResponse>> GetUserActivityWithHttpInfoAsync(string entityId, CommonActivityRequestInput commonActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<CommonActivityResponse>> GetUserActivityWithHttpInfoAsync(string entityId, CommonUserActivityRequestInput commonUserActivityRequestInput, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'entityId' is set
             if (entityId == null)
                 throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling ActivityApi->GetUserActivity");
 
-            // verify the required parameter 'commonActivityRequestInput' is set
-            if (commonActivityRequestInput == null)
-                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonActivityRequestInput' when calling ActivityApi->GetUserActivity");
+            // verify the required parameter 'commonUserActivityRequestInput' is set
+            if (commonUserActivityRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'commonUserActivityRequestInput' when calling ActivityApi->GetUserActivity");
 
 
             BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
@@ -741,7 +741,7 @@ namespace BeamPlayerClient.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
             localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
-            localVarRequestOptions.Data = commonActivityRequestInput;
+            localVarRequestOptions.Data = commonUserActivityRequestInput;
 
             // authentication (beam-api-key) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))

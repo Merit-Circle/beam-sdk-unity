@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// CommonActivityResponseDataInnerTransaction
     /// </summary>
     [DataContract(Name = "CommonActivityResponse_data_inner_transaction")]
+    [UnityEngine.Scripting.Preserve]
     public partial class CommonActivityResponseDataInnerTransaction
     {
         /// <summary>
@@ -37,6 +38,7 @@ namespace BeamPlayerClient.Model
         /// <param name="from">from.</param>
         /// <param name="to">to.</param>
         /// <param name="hash">hash.</param>
+        [UnityEngine.Scripting.Preserve]
         public CommonActivityResponseDataInnerTransaction(decimal? timestamp = default(decimal?), string from = default(string), string to = default(string), string hash = default(string))
         {
             this.Timestamp = timestamp;
@@ -49,30 +51,35 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Timestamp
         /// </summary>
         [DataMember(Name = "timestamp", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal? Timestamp { get; set; }
 
         /// <summary>
         /// Gets or Sets From
         /// </summary>
         [DataMember(Name = "from", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string From { get; set; }
 
         /// <summary>
         /// Gets or Sets To
         /// </summary>
         [DataMember(Name = "to", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string To { get; set; }
 
         /// <summary>
         /// Gets or Sets Hash
         /// </summary>
         [DataMember(Name = "hash", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Hash { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -89,6 +96,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

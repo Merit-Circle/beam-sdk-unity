@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// CreateAssetOfferRequestInput
     /// </summary>
     [DataContract(Name = "CreateAssetOfferRequestInput")]
+    [UnityEngine.Scripting.Preserve]
     public partial class CreateAssetOfferRequestInput
     {
         /// <summary>
@@ -60,6 +61,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Currency
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public CurrencyEnum? Currency { get; set; }
         /// <summary>
         /// Defines OperationProcessing
@@ -85,11 +87,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets OperationProcessing
         /// </summary>
         [DataMember(Name = "operationProcessing", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public OperationProcessingEnum? OperationProcessing { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAssetOfferRequestInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected CreateAssetOfferRequestInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAssetOfferRequestInput" /> class.
@@ -104,6 +108,7 @@ namespace BeamPlayerClient.Model
         /// <param name="chainId">chainId (default to 13337M).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
+        [UnityEngine.Scripting.Preserve]
         public CreateAssetOfferRequestInput(string assetAddress = default(string), string assetId = default(string), decimal quantity = default(decimal), string price = default(string), DateTime startTime = default(DateTime), DateTime endTime = default(DateTime), CurrencyEnum? currency = CurrencyEnum.WBEAM, decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
         {
             // to ensure "assetAddress" is required (not null)
@@ -137,54 +142,63 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets AssetAddress
         /// </summary>
         [DataMember(Name = "assetAddress", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AssetAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets AssetId
         /// </summary>
         [DataMember(Name = "assetId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AssetId { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "quantity", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Quantity { get; set; }
 
         /// <summary>
         /// Gets or Sets Price
         /// </summary>
         [DataMember(Name = "price", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Price { get; set; }
 
         /// <summary>
         /// Gets or Sets StartTime
         /// </summary>
         [DataMember(Name = "startTime", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime StartTime { get; set; }
 
         /// <summary>
         /// Gets or Sets EndTime
         /// </summary>
         [DataMember(Name = "endTime", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime EndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId
         /// </summary>
         [DataMember(Name = "operationId", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string OperationId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -207,6 +221,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// CreateTransactionRequestInputInteractionsInner
     /// </summary>
     [DataContract(Name = "CreateTransactionRequestInput_interactions_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class CreateTransactionRequestInputInteractionsInner
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateTransactionRequestInputInteractionsInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected CreateTransactionRequestInputInteractionsInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateTransactionRequestInputInteractionsInner" /> class.
@@ -42,6 +44,7 @@ namespace BeamPlayerClient.Model
         /// <param name="functionName">functionName (required).</param>
         /// <param name="functionArgs">functionArgs.</param>
         /// <param name="value">value.</param>
+        [UnityEngine.Scripting.Preserve]
         public CreateTransactionRequestInputInteractionsInner(string contractAddress = default(string), string functionName = default(string), List<Object> functionArgs = default(List<Object>), string value = default(string))
         {
             // to ensure "contractAddress" is required (not null)
@@ -64,30 +67,35 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets ContractAddress
         /// </summary>
         [DataMember(Name = "contractAddress", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string ContractAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets FunctionName
         /// </summary>
         [DataMember(Name = "functionName", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string FunctionName { get; set; }
 
         /// <summary>
         /// Gets or Sets FunctionArgs
         /// </summary>
         [DataMember(Name = "functionArgs", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public List<Object> FunctionArgs { get; set; }
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public string Value { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -104,6 +112,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetTransactionsResponseDataInnerIntent
     /// </summary>
     [DataContract(Name = "GetTransactionsResponse_data_inner_intent")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetTransactionsResponseDataInnerIntent
     {
         /// <summary>
@@ -35,6 +36,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="interactions">interactions.</param>
         /// <param name="message">message.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionsResponseDataInnerIntent(List<GetTransactionsResponseDataInnerIntentInteractionsInner> interactions = default(List<GetTransactionsResponseDataInnerIntentInteractionsInner>), string message = default(string))
         {
             this.Interactions = interactions;
@@ -45,18 +47,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Interactions
         /// </summary>
         [DataMember(Name = "interactions", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetTransactionsResponseDataInnerIntentInteractionsInner> Interactions { get; set; }
 
         /// <summary>
         /// Gets or Sets Message
         /// </summary>
         [DataMember(Name = "message", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Message { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -71,6 +76,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

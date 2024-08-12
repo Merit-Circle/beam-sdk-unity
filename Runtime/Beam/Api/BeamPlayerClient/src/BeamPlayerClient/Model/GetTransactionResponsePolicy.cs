@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// Policy information related to the transaction
     /// </summary>
     [DataContract(Name = "GetTransactionResponse_policy")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetTransactionResponsePolicy
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponsePolicy" /> class.
         /// </summary>
         /// <param name="id">id.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionResponsePolicy(string id = default(string))
         {
             this.Id = id;
@@ -43,12 +45,14 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -62,6 +66,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

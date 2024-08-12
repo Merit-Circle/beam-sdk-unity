@@ -25,10 +25,11 @@ using OpenAPIDateConverter = BeamPlayerClient.Client.OpenAPIDateConverter;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// CommonActivityRequestInput
+    /// CommonAssetActivityRequestInput
     /// </summary>
-    [DataContract(Name = "CommonActivityRequestInput")]
-    public partial class CommonActivityRequestInput
+    [DataContract(Name = "CommonAssetActivityRequestInput")]
+    [UnityEngine.Scripting.Preserve]
+    public partial class CommonAssetActivityRequestInput
     {
         /// <summary>
         /// Defines Types
@@ -80,47 +81,62 @@ namespace BeamPlayerClient.Model
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommonActivityRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="CommonAssetActivityRequestInput" /> class.
         /// </summary>
         /// <param name="limit">limit (default to 20M).</param>
         /// <param name="types">types.</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
-        public CommonActivityRequestInput(decimal limit = 20M, List<TypesEnum> types = default(List<TypesEnum>), decimal chainId = 13337M)
+        /// <param name="continuation">continuation.</param>
+        [UnityEngine.Scripting.Preserve]
+        public CommonAssetActivityRequestInput(decimal limit = 20M, List<TypesEnum> types = default(List<TypesEnum>), decimal chainId = 13337M, string continuation = default(string))
         {
             this.Limit = limit;
             this.Types = types;
             this.ChainId = chainId;
+            this.Continuation = continuation;
         }
 
         /// <summary>
         /// Gets or Sets Limit
         /// </summary>
         [DataMember(Name = "limit", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Limit { get; set; }
 
         /// <summary>
         /// Gets or Sets Types
         /// </summary>
         [DataMember(Name = "types", EmitDefaultValue = true)]
-        public List<CommonActivityRequestInput.TypesEnum> Types { get; set; }
+        [UnityEngine.Scripting.Preserve]
+        public List<CommonAssetActivityRequestInput.TypesEnum> Types { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Continuation
+        /// </summary>
+        [DataMember(Name = "continuation", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
+        public string Continuation { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CommonActivityRequestInput {\n");
+            sb.Append("class CommonAssetActivityRequestInput {\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Types: ").Append(Types).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  Continuation: ").Append(Continuation).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -129,6 +145,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetAssetListingsResponseDataInnerPriceAmount
     /// </summary>
     [DataContract(Name = "GetAssetListingsResponse_data_inner_price_amount")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAssetListingsResponseDataInnerPriceAmount
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAssetListingsResponseDataInnerPriceAmount" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetAssetListingsResponseDataInnerPriceAmount() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAssetListingsResponseDataInnerPriceAmount" /> class.
@@ -42,6 +44,7 @@ namespace BeamPlayerClient.Model
         /// <param name="varDecimal">varDecimal (required).</param>
         /// <param name="usd">usd (required).</param>
         /// <param name="native">native (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAssetListingsResponseDataInnerPriceAmount(string raw = default(string), decimal varDecimal = default(decimal), decimal usd = default(decimal), decimal native = default(decimal))
         {
             // to ensure "raw" is required (not null)
@@ -59,30 +62,35 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Raw
         /// </summary>
         [DataMember(Name = "raw", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Raw { get; set; }
 
         /// <summary>
         /// Gets or Sets VarDecimal
         /// </summary>
         [DataMember(Name = "decimal", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal VarDecimal { get; set; }
 
         /// <summary>
         /// Gets or Sets Usd
         /// </summary>
         [DataMember(Name = "usd", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Usd { get; set; }
 
         /// <summary>
         /// Gets or Sets Native
         /// </summary>
         [DataMember(Name = "native", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Native { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -99,6 +107,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

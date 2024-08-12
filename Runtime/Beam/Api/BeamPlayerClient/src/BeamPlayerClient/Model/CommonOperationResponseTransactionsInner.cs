@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// CommonOperationResponseTransactionsInner
     /// </summary>
     [DataContract(Name = "CommonOperationResponse_transactions_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class CommonOperationResponseTransactionsInner
     {
         /// <summary>
@@ -60,6 +61,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public TypeEnum Type { get; set; }
         /// <summary>
         /// Defines Status
@@ -103,11 +105,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Status
         /// </summary>
         [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public StatusEnum Status { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonOperationResponseTransactionsInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected CommonOperationResponseTransactionsInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonOperationResponseTransactionsInner" /> class.
@@ -121,6 +125,7 @@ namespace BeamPlayerClient.Model
         /// <param name="operationId">operationId (required).</param>
         /// <param name="data">data.</param>
         /// <param name="hash">hash (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public CommonOperationResponseTransactionsInner(TypeEnum type = default(TypeEnum), StatusEnum status = default(StatusEnum), string id = default(string), string externalId = default(string), string signature = default(string), string transactionHash = default(string), string operationId = default(string), Object data = default(Object), string hash = default(string))
         {
             this.Type = type;
@@ -168,48 +173,56 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets ExternalId
         /// </summary>
         [DataMember(Name = "externalId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string ExternalId { get; set; }
 
         /// <summary>
         /// Gets or Sets Signature
         /// </summary>
         [DataMember(Name = "signature", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Signature { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionHash
         /// </summary>
         [DataMember(Name = "transactionHash", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string TransactionHash { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId
         /// </summary>
         [DataMember(Name = "operationId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string OperationId { get; set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public Object Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Hash
         /// </summary>
         [DataMember(Name = "hash", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Hash { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -231,6 +244,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

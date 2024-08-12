@@ -28,17 +28,20 @@ namespace BeamPlayerClient.Model
     /// GetChainCurrenciesResponse
     /// </summary>
     [DataContract(Name = "GetChainCurrenciesResponse")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetChainCurrenciesResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetChainCurrenciesResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetChainCurrenciesResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetChainCurrenciesResponse" /> class.
         /// </summary>
         /// <param name="data">data (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetChainCurrenciesResponse(List<GetChainCurrenciesResponseDataInner> data = default(List<GetChainCurrenciesResponseDataInner>))
         {
             // to ensure "data" is required (not null)
@@ -53,12 +56,14 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetChainCurrenciesResponseDataInner> Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -72,6 +77,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

@@ -28,18 +28,21 @@ namespace BeamPlayerClient.Model
     /// GetAllUsersResponse
     /// </summary>
     [DataContract(Name = "GetAllUsersResponse")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAllUsersResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAllUsersResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetAllUsersResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAllUsersResponse" /> class.
         /// </summary>
         /// <param name="data">data (required).</param>
         /// <param name="pagination">pagination (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAllUsersResponse(List<GetAllUsersResponseDataInner> data = default(List<GetAllUsersResponseDataInner>), GetOwnersResponsePagination pagination = default(GetOwnersResponsePagination))
         {
             // to ensure "data" is required (not null)
@@ -60,18 +63,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetAllUsersResponseDataInner> Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Pagination
         /// </summary>
         [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetOwnersResponsePagination Pagination { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -86,6 +92,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

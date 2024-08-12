@@ -28,17 +28,20 @@ namespace BeamPlayerClient.Model
     /// GetTransactionResponseUserWallet
     /// </summary>
     [DataContract(Name = "GetTransactionResponse_user_wallet")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetTransactionResponseUserWallet
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponseUserWallet" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetTransactionResponseUserWallet() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponseUserWallet" /> class.
         /// </summary>
         /// <param name="address">address (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionResponseUserWallet(string address = default(string))
         {
             // to ensure "address" is required (not null)
@@ -53,12 +56,14 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name = "address", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Address { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -72,6 +77,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

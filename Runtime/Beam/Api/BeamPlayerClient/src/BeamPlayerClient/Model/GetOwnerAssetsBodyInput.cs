@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetOwnerAssetsBodyInput
     /// </summary>
     [DataContract(Name = "GetOwnerAssetsBodyInput")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetOwnerAssetsBodyInput
     {
         /// <summary>
@@ -54,6 +55,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets SortDirection
         /// </summary>
         [DataMember(Name = "sortDirection", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public SortDirectionEnum? SortDirection { get; set; }
         /// <summary>
         /// Defines SortBy
@@ -79,6 +81,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets SortBy
         /// </summary>
         [DataMember(Name = "sortBy", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public SortByEnum? SortBy { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOwnerAssetsBodyInput" /> class.
@@ -89,6 +92,7 @@ namespace BeamPlayerClient.Model
         /// <param name="continuation">continuation.</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
         /// <param name="limit">limit (default to 20M).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetOwnerAssetsBodyInput(SortDirectionEnum? sortDirection = SortDirectionEnum.Asc, SortByEnum? sortBy = SortByEnum.AcquiredAt, bool? includeAttributes = false, string continuation = default(string), decimal chainId = 13337M, decimal limit = 20M)
         {
             this.SortDirection = sortDirection;
@@ -104,30 +108,35 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets IncludeAttributes
         /// </summary>
         [DataMember(Name = "includeAttributes", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public bool? IncludeAttributes { get; set; }
 
         /// <summary>
         /// Gets or Sets Continuation
         /// </summary>
         [DataMember(Name = "continuation", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Continuation { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Limit
         /// </summary>
         [DataMember(Name = "limit", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Limit { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -146,6 +155,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

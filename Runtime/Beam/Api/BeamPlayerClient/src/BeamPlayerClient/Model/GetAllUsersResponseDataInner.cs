@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetAllUsersResponseDataInner
     /// </summary>
     [DataContract(Name = "GetAllUsersResponse_data_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAllUsersResponseDataInner
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAllUsersResponseDataInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetAllUsersResponseDataInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAllUsersResponseDataInner" /> class.
@@ -41,6 +43,7 @@ namespace BeamPlayerClient.Model
         /// <param name="id">id (required).</param>
         /// <param name="wallets">wallets (required).</param>
         /// <param name="entities">entities (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAllUsersResponseDataInner(string id = default(string), List<GetAllUsersResponseDataInnerWalletsInner> wallets = default(List<GetAllUsersResponseDataInnerWalletsInner>), List<GetTransactionResponseUserEntitiesInner> entities = default(List<GetTransactionResponseUserEntitiesInner>))
         {
             // to ensure "id" is required (not null)
@@ -67,24 +70,28 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Wallets
         /// </summary>
         [DataMember(Name = "wallets", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetAllUsersResponseDataInnerWalletsInner> Wallets { get; set; }
 
         /// <summary>
         /// Gets or Sets Entities
         /// </summary>
         [DataMember(Name = "entities", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetTransactionResponseUserEntitiesInner> Entities { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -100,6 +107,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

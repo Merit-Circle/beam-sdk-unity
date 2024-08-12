@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetAssetListingsResponseDataInner
     /// </summary>
     [DataContract(Name = "GetAssetListingsResponse_data_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAssetListingsResponseDataInner
     {
         /// <summary>
@@ -72,11 +73,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Status
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public StatusEnum? Status { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAssetListingsResponseDataInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetAssetListingsResponseDataInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAssetListingsResponseDataInner" /> class.
@@ -96,6 +99,7 @@ namespace BeamPlayerClient.Model
         /// <param name="expiresAt">expiresAt.</param>
         /// <param name="createdAt">createdAt.</param>
         /// <param name="updatedAt">updatedAt.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAssetListingsResponseDataInner(string id = default(string), string side = default(string), StatusEnum? status = default(StatusEnum?), string assetAddress = default(string), string assetId = default(string), string contractKind = default(string), string maker = default(string), GetAssetListingsResponseDataInnerPrice price = default(GetAssetListingsResponseDataInnerPrice), DateTime? validFrom = default(DateTime?), DateTime? validUntil = default(DateTime?), decimal quantityFilled = default(decimal), decimal quantityRemaining = default(decimal), DateTime? expiresAt = default(DateTime?), DateTime? createdAt = default(DateTime?), DateTime? updatedAt = default(DateTime?))
         {
             // to ensure "id" is required (not null)
@@ -149,90 +153,105 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Side
         /// </summary>
         [DataMember(Name = "side", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Side { get; set; }
 
         /// <summary>
         /// Gets or Sets AssetAddress
         /// </summary>
         [DataMember(Name = "assetAddress", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AssetAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets AssetId
         /// </summary>
         [DataMember(Name = "assetId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AssetId { get; set; }
 
         /// <summary>
         /// Gets or Sets ContractKind
         /// </summary>
         [DataMember(Name = "contractKind", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string ContractKind { get; set; }
 
         /// <summary>
         /// Gets or Sets Maker
         /// </summary>
         [DataMember(Name = "maker", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Maker { get; set; }
 
         /// <summary>
         /// Gets or Sets Price
         /// </summary>
         [DataMember(Name = "price", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetAssetListingsResponseDataInnerPrice Price { get; set; }
 
         /// <summary>
         /// Gets or Sets ValidFrom
         /// </summary>
         [DataMember(Name = "validFrom", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime? ValidFrom { get; set; }
 
         /// <summary>
         /// Gets or Sets ValidUntil
         /// </summary>
         [DataMember(Name = "validUntil", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime? ValidUntil { get; set; }
 
         /// <summary>
         /// Gets or Sets QuantityFilled
         /// </summary>
         [DataMember(Name = "quantityFilled", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal QuantityFilled { get; set; }
 
         /// <summary>
         /// Gets or Sets QuantityRemaining
         /// </summary>
         [DataMember(Name = "quantityRemaining", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal QuantityRemaining { get; set; }
 
         /// <summary>
         /// Gets or Sets ExpiresAt
         /// </summary>
         [DataMember(Name = "expiresAt", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime? ExpiresAt { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime? CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [DataMember(Name = "updatedAt", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -260,6 +279,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

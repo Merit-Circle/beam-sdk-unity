@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetActiveSessionsResponseSessionsInner
     /// </summary>
     [DataContract(Name = "GetActiveSessionsResponse_sessions_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetActiveSessionsResponseSessionsInner
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActiveSessionsResponseSessionsInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetActiveSessionsResponseSessionsInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActiveSessionsResponseSessionsInner" /> class.
@@ -43,6 +45,7 @@ namespace BeamPlayerClient.Model
         /// <param name="startTime">startTime (required).</param>
         /// <param name="endTime">endTime (required).</param>
         /// <param name="sessionAddress">sessionAddress (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetActiveSessionsResponseSessionsInner(string id = default(string), bool isActive = default(bool), DateTime startTime = default(DateTime), DateTime endTime = default(DateTime), string sessionAddress = default(string))
         {
             // to ensure "id" is required (not null)
@@ -66,36 +69,42 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets IsActive
         /// </summary>
         [DataMember(Name = "isActive", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public bool IsActive { get; set; }
 
         /// <summary>
         /// Gets or Sets StartTime
         /// </summary>
         [DataMember(Name = "startTime", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime StartTime { get; set; }
 
         /// <summary>
         /// Gets or Sets EndTime
         /// </summary>
         [DataMember(Name = "endTime", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime EndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets SessionAddress
         /// </summary>
         [DataMember(Name = "sessionAddress", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string SessionAddress { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -113,6 +122,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

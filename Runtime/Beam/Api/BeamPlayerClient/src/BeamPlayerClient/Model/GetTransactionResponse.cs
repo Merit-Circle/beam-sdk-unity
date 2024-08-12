@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// GetTransactionResponse
     /// </summary>
     [DataContract(Name = "GetTransactionResponse")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetTransactionResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetTransactionResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponse" /> class.
@@ -46,6 +48,7 @@ namespace BeamPlayerClient.Model
         /// <param name="transaction">transaction.</param>
         /// <param name="policy">policy (required).</param>
         /// <param name="user">user (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionResponse(string id = default(string), DateTime createdAt = default(DateTime), DateTime updatedAt = default(DateTime), decimal chainId = default(decimal), GetTransactionsResponseDataInnerIntent intent = default(GetTransactionsResponseDataInnerIntent), GetTransactionsResponseDataInnerTransaction transaction = default(GetTransactionsResponseDataInnerTransaction), GetTransactionResponsePolicy policy = default(GetTransactionResponsePolicy), GetTransactionResponseUser user = default(GetTransactionResponseUser))
         {
             // to ensure "id" is required (not null)
@@ -82,54 +85,63 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [DataMember(Name = "updatedAt", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public DateTime UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Intent
         /// </summary>
         [DataMember(Name = "intent", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionsResponseDataInnerIntent Intent { get; set; }
 
         /// <summary>
         /// Gets or Sets Transaction
         /// </summary>
         [DataMember(Name = "transaction", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionsResponseDataInnerTransaction Transaction { get; set; }
 
         /// <summary>
         /// Gets or Sets Policy
         /// </summary>
         [DataMember(Name = "policy", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionResponsePolicy Policy { get; set; }
 
         /// <summary>
         /// Gets or Sets User
         /// </summary>
         [DataMember(Name = "user", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public GetTransactionResponseUser User { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -150,6 +162,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

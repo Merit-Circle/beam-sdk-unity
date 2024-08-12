@@ -28,12 +28,14 @@ namespace BeamPlayerClient.Model
     /// Check200ResponseInfoValue
     /// </summary>
     [DataContract(Name = "check_200_response_info_value")]
+    [UnityEngine.Scripting.Preserve]
     public partial class Check200ResponseInfoValue
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Check200ResponseInfoValue" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected Check200ResponseInfoValue()
         {
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -42,6 +44,7 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="Check200ResponseInfoValue" /> class.
         /// </summary>
         /// <param name="status">status (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public Check200ResponseInfoValue(string status = default(string))
         {
             // to ensure "status" is required (not null)
@@ -57,18 +60,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Status
         /// </summary>
         [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
+        [UnityEngine.Scripting.Preserve]
         public IDictionary<string, object> AdditionalProperties { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -83,6 +89,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

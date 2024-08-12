@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetAssetsForUserResponseDataInner
     /// </summary>
     [DataContract(Name = "GetAssetsForUserResponse_data_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetAssetsForUserResponseDataInner
     {
         /// <summary>
@@ -72,11 +73,13 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Rarity
         /// </summary>
         [DataMember(Name = "rarity", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public RarityEnum? Rarity { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAssetsForUserResponseDataInner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GetAssetsForUserResponseDataInner() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAssetsForUserResponseDataInner" /> class.
@@ -92,6 +95,7 @@ namespace BeamPlayerClient.Model
         /// <param name="attributes">attributes.</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
         /// <param name="ownedQuantity">ownedQuantity (required).</param>
+        [UnityEngine.Scripting.Preserve]
         public GetAssetsForUserResponseDataInner(string name = default(string), string imageUrl = default(string), string assetType = default(string), string assetAddress = default(string), string assetId = default(string), decimal supply = default(decimal), RarityEnum? rarity = default(RarityEnum?), decimal? rarityScore = default(decimal?), List<GetAssetsForUserResponseDataInnerAttributesInner> attributes = default(List<GetAssetsForUserResponseDataInnerAttributesInner>), decimal chainId = 13337M, decimal ownedQuantity = default(decimal))
         {
             // to ensure "name" is required (not null)
@@ -136,66 +140,77 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets ImageUrl
         /// </summary>
         [DataMember(Name = "imageUrl", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string ImageUrl { get; set; }
 
         /// <summary>
         /// Gets or Sets AssetType
         /// </summary>
         [DataMember(Name = "assetType", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AssetType { get; set; }
 
         /// <summary>
         /// Gets or Sets AssetAddress
         /// </summary>
         [DataMember(Name = "assetAddress", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AssetAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets AssetId
         /// </summary>
         [DataMember(Name = "assetId", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string AssetId { get; set; }
 
         /// <summary>
         /// Gets or Sets Supply
         /// </summary>
         [DataMember(Name = "supply", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal Supply { get; set; }
 
         /// <summary>
         /// Gets or Sets RarityScore
         /// </summary>
         [DataMember(Name = "rarityScore", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal? RarityScore { get; set; }
 
         /// <summary>
         /// Gets or Sets Attributes
         /// </summary>
         [DataMember(Name = "attributes", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public List<GetAssetsForUserResponseDataInnerAttributesInner> Attributes { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets OwnedQuantity
         /// </summary>
         [DataMember(Name = "ownedQuantity", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal OwnedQuantity { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -219,6 +234,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

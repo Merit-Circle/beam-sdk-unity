@@ -28,6 +28,7 @@ namespace BeamPlayerClient.Model
     /// GetOwnersResponseDataInner
     /// </summary>
     [DataContract(Name = "GetOwnersResponse_data_inner")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GetOwnersResponseDataInner
     {
         /// <summary>
@@ -35,6 +36,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="address">address.</param>
         /// <param name="quantity">quantity.</param>
+        [UnityEngine.Scripting.Preserve]
         public GetOwnersResponseDataInner(string address = default(string), decimal? quantity = default(decimal?))
         {
             this.Address = address;
@@ -45,18 +47,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name = "address", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "quantity", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public decimal? Quantity { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -71,6 +76,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);

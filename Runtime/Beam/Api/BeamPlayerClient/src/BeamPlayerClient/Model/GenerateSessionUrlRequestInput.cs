@@ -28,18 +28,21 @@ namespace BeamPlayerClient.Model
     /// GenerateSessionUrlRequestInput
     /// </summary>
     [DataContract(Name = "GenerateSessionUrlRequestInput")]
+    [UnityEngine.Scripting.Preserve]
     public partial class GenerateSessionUrlRequestInput
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GenerateSessionUrlRequestInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        [UnityEngine.Scripting.Preserve]
         protected GenerateSessionUrlRequestInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GenerateSessionUrlRequestInput" /> class.
         /// </summary>
         /// <param name="address">address (required).</param>
         /// <param name="chainId">chainId (default to 13337M).</param>
+        [UnityEngine.Scripting.Preserve]
         public GenerateSessionUrlRequestInput(string address = default(string), decimal chainId = 13337M)
         {
             // to ensure "address" is required (not null)
@@ -55,18 +58,21 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name = "address", IsRequired = true, EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
         public decimal ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -81,6 +87,7 @@ namespace BeamPlayerClient.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
+        [UnityEngine.Scripting.Preserve]
         public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
