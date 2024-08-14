@@ -32,6 +32,7 @@ namespace Beam
         private string m_BeamApiKey;
         private string m_BeamApiUrl;
         private bool m_DebugLog;
+        private Action<string> m_UrlToOpen = url => Application.OpenURL(url);
         private IStorage m_Storage = new PlayerPrefsStorage();
 
         #region Config
@@ -97,6 +98,18 @@ namespace Beam
             return this;
         }
 
+        /// <summary>
+        /// Sets a custom callback that should open URLs. By default uses Application.OpenUrl().
+        /// Might be useful when running WebGL to avoid popup blocking, by using various js interop plugins, or when custom WebView is needed.
+        /// </summary>
+        /// <param name="url">Url to open in a browser or webview. Must keep all query params and casing to work.</param>
+        /// <returns>BeamClient</returns>
+        public BeamClient SetUrlOpener(Action<string> url)
+        {
+            m_UrlToOpen = url;
+            return this;
+        }
+
         #endregion
 
         /// <summary>
@@ -128,7 +141,7 @@ namespace Beam
 
             Log($"Opening ${connRequest.Url}");
             // open browser to connect user
-            Application.OpenURL(connRequest.Url);
+            m_UrlToOpen(connRequest.Url);
 
             var pollingResult = await PollForResult(
                 actionToPerform: () => ConnectorApi.GetConnectionRequestAsync(connRequest.Id, cancellationToken),
@@ -250,7 +263,7 @@ namespace Beam
 
             Log($"Opening {beamSessionRequest.Url}");
             // open identity.onbeam.com
-            Application.OpenURL(beamSessionRequest.Url);
+            m_UrlToOpen(beamSessionRequest.Url);
 
             var beamResultModel = new BeamResult<BeamSession>();
 
@@ -399,7 +412,7 @@ namespace Beam
             Log($"Opening {url}...");
 
             // open identity.onbeam.com, give it operation id
-            Application.OpenURL(url);
+            m_UrlToOpen(url);
 
             // start polling for results of the operation
             var now = DateTimeOffset.Now;
