@@ -13,7 +13,7 @@ using Account = Nethereum.Web3.Accounts.Account;
 
 namespace Beam.Util
 {
-    internal class KeyPair
+    public class KeyPair
     {
         private static readonly X9ECParameters Curve = ECNamedCurveTable.GetByName("secp256k1");
 

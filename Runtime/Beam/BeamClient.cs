@@ -27,13 +27,13 @@ namespace Beam
         public IOperationApi OperationApi => new OperationApi(GetConfiguration());
         public IConnectorApi ConnectorApi => new ConnectorApi(GetConfiguration());
 
-        private const int DefaultTimeoutInSeconds = 240;
+        protected const int DefaultTimeoutInSeconds = 240;
 
-        private string m_BeamApiKey;
-        private string m_BeamApiUrl;
-        private bool m_DebugLog;
-        private Action<string> m_UrlToOpen = url => Application.OpenURL(url);
-        private IStorage m_Storage = new PlayerPrefsStorage();
+        protected string m_BeamApiKey;
+        protected string m_BeamApiUrl;
+        protected bool m_DebugLog;
+        protected Action<string> m_UrlToOpen = url => Application.OpenURL(url);
+        protected IStorage m_Storage = new PlayerPrefsStorage();
 
         #region Config
 
@@ -403,7 +403,7 @@ namespace Beam
             m_Storage.Delete(Constants.Storage.BeamSigningKey + entityId);
         }
 
-        private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
+        protected async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingBrowserAsync(
             CommonOperationResponse operation,
             int secondsTimeout,
             CancellationToken cancellationToken = default)
@@ -450,7 +450,7 @@ namespace Beam
             return beamResult;
         }
 
-        private async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingSessionAsync(
+        protected async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> SignOperationUsingSessionAsync(
             CommonOperationResponse operation,
             KeyPair activeSessionKeyPair,
             CancellationToken cancellationToken = default)
@@ -532,7 +532,7 @@ namespace Beam
         /// <summary>
         /// Will retry or return null if received 404.
         /// </summary>
-        private static async UniTask<T> PollForResult<T>(
+        protected static async UniTask<T> PollForResult<T>(
             Func<UniTask<T>> actionToPerform,
             Func<T, bool> shouldRetry,
             int secondsTimeout = DefaultTimeoutInSeconds,
@@ -573,7 +573,7 @@ namespace Beam
             return null;
         }
 
-        private async UniTask<(BeamSession, KeyPair)> GetActiveSessionAndKeysAsync(
+        protected async UniTask<(BeamSession, KeyPair)> GetActiveSessionAndKeysAsync(
             string entityId,
             int chainId,
             CancellationToken cancellationToken = default)
@@ -620,7 +620,7 @@ namespace Beam
             return (null, keyPair);
         }
 
-        private KeyPair GetOrCreateSigningKeyPair(string entityId, bool refresh = false)
+        protected KeyPair GetOrCreateSigningKeyPair(string entityId, bool refresh = false)
         {
             if (!refresh)
             {
@@ -637,7 +637,7 @@ namespace Beam
             return newKeyPair;
         }
 
-        private Configuration GetConfiguration()
+        protected Configuration GetConfiguration()
         {
             var config = new Configuration
             {
@@ -648,7 +648,7 @@ namespace Beam
             return config;
         }
 
-        private void Log(string message)
+        protected void Log(string message)
         {
             if (m_DebugLog)
             {
