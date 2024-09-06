@@ -9,7 +9,6 @@ namespace Beam
         internal static class Storage
         {
             internal const string BeamSigningKey = "beam-session-signing-key:";
-            internal const string BeamSession = "beam-session-session-info:";   
         }
     }
 }

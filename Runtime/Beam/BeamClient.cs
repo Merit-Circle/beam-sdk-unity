@@ -154,7 +154,7 @@ namespace Beam
 
             return new BeamResult<GetConnectionRequestResponse.StatusEnum>(pollingResult.Status);
         }
-        
+
         /// <summary>
         /// Retrieves active, valid session.
         /// </summary>
@@ -399,7 +399,6 @@ namespace Beam
         /// <param name="entityId">EntityId</param>
         public void ClearLocalSession(string entityId)
         {
-            m_Storage.Delete(Constants.Storage.BeamSession + entityId);
             m_Storage.Delete(Constants.Storage.BeamSigningKey + entityId);
         }
 
@@ -427,7 +426,9 @@ namespace Beam
                 cancellationToken: cancellationToken);
 
             Log($"Got operation({operation.Id}) result: {pollingResult?.Status.ToString()}");
-            var beamResult = new BeamResult<CommonOperationResponse.StatusEnum>(pollingResult?.Status ?? CommonOperationResponse.StatusEnum.Error);
+            var beamResult =
+                new BeamResult<CommonOperationResponse.StatusEnum>(pollingResult?.Status ??
+                                                                   CommonOperationResponse.StatusEnum.Error);
 
             switch (pollingResult?.Status)
             {
@@ -479,7 +480,8 @@ namespace Beam
                     switch (transaction.Type)
                     {
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortRevokeSession:
-                            throw new Exception($"Revoke Session Operation has to be performed via {nameof(RevokeSessionAsync)}() method only");
+                            throw new Exception(
+                                $"Revoke Session Operation has to be performed via {nameof(RevokeSessionAsync)}() method only");
                         case CommonOperationResponseTransactionsInner.TypeEnum.OpenfortTransaction:
                             signature = activeSessionKeyPair.SignMessage(Convert.ToString(transaction.Data));
                             break;
@@ -490,12 +492,15 @@ namespace Beam
                             throw new ArgumentOutOfRangeException();
                     }
 
-                    confirmationModel.Transactions.Add(new ConfirmOperationRequestTransactionsInner(transaction.Id, signature));
+                    confirmationModel.Transactions.Add(
+                        new ConfirmOperationRequestTransactionsInner(transaction.Id, signature));
                 }
                 catch (ApiException e)
                 {
-                    Log($"Encountered an error when signing transaction({transaction.Id}): {e.Message} {e.ErrorContent}");
-                    return new BeamResult<CommonOperationResponse.StatusEnum>(e, $"Encountered an exception while approving {transaction.Type.ToString()}");
+                    Log(
+                        $"Encountered an error when signing transaction({transaction.Id}): {e.Message} {e.ErrorContent}");
+                    return new BeamResult<CommonOperationResponse.StatusEnum>(e,
+                        $"Encountered an exception while approving {transaction.Type.ToString()}");
                 }
             }
 
@@ -579,44 +584,33 @@ namespace Beam
             CancellationToken cancellationToken = default)
         {
             BeamSession beamSession = null;
-            var sessionInfo = m_Storage.Get(Constants.Storage.BeamSession + entityId);
-            if (sessionInfo != null)
-            {
-                beamSession = JsonConvert.DeserializeObject<BeamSession>(sessionInfo);
-            }
-
             var keyPair = GetOrCreateSigningKeyPair(entityId);
 
-            // if session is no longer valid, check if we have one saved in the API
-            if (!beamSession.IsValidNow())
+            // check if we have the session in API for current KeyPair
+            // we need to always get it from remote to make sure User didn't revoke it
+            try
             {
-                try
+                var res = await SessionsApi.GetActiveSessionAsync(entityId, keyPair.Account.Address,
+                    chainId, cancellationToken);
+                beamSession = new BeamSession
                 {
-                    var res = await SessionsApi.GetActiveSessionAsync(entityId, keyPair.Account.Address,
-                        chainId, cancellationToken);
-                    beamSession = new BeamSession
-                    {
-                        Id = res.Id,
-                        StartTime = res.StartTime,
-                        EndTime = res.EndTime,
-                        SessionAddress = res.SessionAddress
-                    };
-                }
-                catch (ApiException e)
-                {
-                    Log($"GetActiveSessionInfo returned: {e.Message} {e.ErrorContent}");
-                }
+                    Id = res.Id,
+                    StartTime = res.StartTime,
+                    EndTime = res.EndTime,
+                    SessionAddress = res.SessionAddress
+                };
+            }
+            catch (ApiException e)
+            {
+                Log($"GetActiveSessionInfo returned: {e.Message} {e.ErrorContent}");
             }
 
             // make sure session we just retrieved is valid and owned by current KeyPair
-            if (beamSession.IsValidNow() && beamSession.IsOwnedBy(keyPair))
+            if (beamSession.IsActive() && beamSession.IsOwnedBy(keyPair))
             {
-                m_Storage.Set(Constants.Storage.BeamSession + entityId, JsonConvert.SerializeObject(beamSession));
                 return (beamSession, keyPair);
             }
 
-            // if session is not valid or owned by different KeyPair, remove it from cache
-            m_Storage.Delete(Constants.Storage.BeamSession + entityId);
             return (null, keyPair);
         }
 
