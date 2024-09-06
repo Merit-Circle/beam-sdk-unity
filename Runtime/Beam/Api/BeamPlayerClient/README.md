@@ -167,6 +167,8 @@ Class | Method | HTTP request | Description
 *TransactionsApi* | [**GetUserTransactions**](TransactionsApi.md#getusertransactions) | **GET** /v1/player/transactions/users/{entityId} | Get a paginated list of transactions created on behalf of a user
 *UsersApi* | [**GetAllUsers**](UsersApi.md#getallusers) | **GET** /v1/player/users | Returns a list of users
 *UsersApi* | [**GetUser**](UsersApi.md#getuser) | **GET** /v1/player/users/{entityId} | Returns a particular user
+*UsersApi* | [**UnlinkUser**](UsersApi.md#unlinkuser) | **DELETE** /v1/player/users/{entityId} | Unlinks an entity ID from a user
+*UsersApi* | [**UpdateUser**](UsersApi.md#updateuser) | **PATCH** /v1/player/users/{entityId} | Updates entityId for the user
 
 
 <a id="documentation-for-models"></a>
@@ -265,6 +267,7 @@ Class | Method | HTTP request | Description
  - [Model.TransferNativeTokenRequestInput](TransferNativeTokenRequestInput.md)
  - [Model.TransferTokenRequestInput](TransferTokenRequestInput.md)
  - [Model.UnwrappingTokenInput](UnwrappingTokenInput.md)
+ - [Model.UpdateUserRequest](UpdateUserRequest.md)
  - [Model.WrappingTokenInput](WrappingTokenInput.md)
 
 

@@ -1014,6 +1014,28 @@ paths:
       tags:
       - Users
   /v1/player/users/{entityId}:
+    delete:
+      operationId: unlinkUser
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Unlinks an entity ID from a user
+      tags:
+      - Users
     get:
       operationId: getUser
       parameters:
@@ -1034,6 +1056,34 @@ paths:
       security:
       - beam-api-key: []
       summary: Returns a particular user
+      tags:
+      - Users
+    patch:
+      operationId: updateUser
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Updates entityId for the user
       tags:
       - Users
   /v1/player/operation/{opId}:
@@ -2572,11 +2622,12 @@ components:
           default: BEAM
           enum:
           - BEAM
-          - WBEAM
-          - USDC
-          - USDT
           - IMX
+          - SOPH
+          - WBEAM
           - WIMX
+          - WSOPH
+          - USDC
           type: string
         sponsor:
           default: true
@@ -2702,8 +2753,9 @@ components:
           default: WBEAM
           enum:
           - WBEAM
+          - WIMX
+          - WSOPH
           - USDC
-          - USDT
           type: string
         chainId:
           default: 13337
@@ -3233,6 +3285,15 @@ components:
       - gameId
       - userId
       - wallets
+      type: object
+    UpdateUserRequest:
+      example:
+        newEntityId: newEntityId
+      properties:
+        newEntityId:
+          type: string
+      required:
+      - newEntityId
       type: object
     CreateOperationRequestInput:
       example:
@@ -4349,11 +4410,12 @@ components:
         symbol:
           enum:
           - BEAM
-          - WBEAM
-          - USDC
-          - USDT
           - IMX
+          - SOPH
+          - WBEAM
           - WIMX
+          - WSOPH
+          - USDC
           nullable: true
           type: string
         decimals:
@@ -4507,11 +4569,12 @@ components:
         symbol:
           enum:
           - BEAM
-          - WBEAM
-          - USDC
-          - USDT
           - IMX
+          - SOPH
+          - WBEAM
           - WIMX
+          - WSOPH
+          - USDC
           type: string
         address:
           type: string

@@ -44,16 +44,22 @@ namespace BeamPlayerClient.Model
             WBEAM = 1,
 
             /// <summary>
+            /// Enum WIMX for value: WIMX
+            /// </summary>
+            [EnumMember(Value = "WIMX")]
+            WIMX = 2,
+
+            /// <summary>
+            /// Enum WSOPH for value: WSOPH
+            /// </summary>
+            [EnumMember(Value = "WSOPH")]
+            WSOPH = 3,
+
+            /// <summary>
             /// Enum USDC for value: USDC
             /// </summary>
             [EnumMember(Value = "USDC")]
-            USDC = 2,
-
-            /// <summary>
-            /// Enum USDT for value: USDT
-            /// </summary>
-            [EnumMember(Value = "USDT")]
-            USDT = 3
+            USDC = 4
         }
 
 

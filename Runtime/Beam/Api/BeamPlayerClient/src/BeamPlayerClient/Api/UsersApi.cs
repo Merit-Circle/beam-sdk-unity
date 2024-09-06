@@ -64,6 +64,44 @@ namespace BeamPlayerClient.Api
         /// <param name="entityId"></param>
         /// <returns>ApiResponse of GetUserResponse</returns>
         ApiResponse<GetUserResponse> GetUserWithHttpInfo(string entityId);
+        /// <summary>
+        /// Unlinks an entity ID from a user
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <returns>GetUserResponse</returns>
+        GetUserResponse UnlinkUser(string entityId);
+
+        /// <summary>
+        /// Unlinks an entity ID from a user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <returns>ApiResponse of GetUserResponse</returns>
+        ApiResponse<GetUserResponse> UnlinkUserWithHttpInfo(string entityId);
+        /// <summary>
+        /// Updates entityId for the user
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="updateUserRequest"></param>
+        /// <returns>GetUserResponse</returns>
+        GetUserResponse UpdateUser(string entityId, UpdateUserRequest updateUserRequest);
+
+        /// <summary>
+        /// Updates entityId for the user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="updateUserRequest"></param>
+        /// <returns>ApiResponse of GetUserResponse</returns>
+        ApiResponse<GetUserResponse> UpdateUserWithHttpInfo(string entityId, UpdateUserRequest updateUserRequest);
         #endregion Synchronous Operations
     }
 
@@ -121,6 +159,54 @@ namespace BeamPlayerClient.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetUserResponse)</returns>
         Cysharp.Threading.Tasks.UniTask<ApiResponse<GetUserResponse>> GetUserWithHttpInfoAsync(string entityId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Unlinks an entity ID from a user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetUserResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<GetUserResponse> UnlinkUserAsync(string entityId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Unlinks an entity ID from a user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetUserResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetUserResponse>> UnlinkUserWithHttpInfoAsync(string entityId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Updates entityId for the user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="updateUserRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetUserResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<GetUserResponse> UpdateUserAsync(string entityId, UpdateUserRequest updateUserRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Updates entityId for the user
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="updateUserRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetUserResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetUserResponse>> UpdateUserWithHttpInfoAsync(string entityId, UpdateUserRequest updateUserRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -525,6 +611,278 @@ namespace BeamPlayerClient.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Unlinks an entity ID from a user 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <returns>GetUserResponse</returns>
+        public GetUserResponse UnlinkUser(string entityId)
+        {
+            BeamPlayerClient.Client.ApiResponse<GetUserResponse> localVarResponse = UnlinkUserWithHttpInfo(entityId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Unlinks an entity ID from a user 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <returns>ApiResponse of GetUserResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<GetUserResponse> UnlinkUserWithHttpInfo(string entityId)
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling UsersApi->UnlinkUser");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Delete<GetUserResponse>("/v1/player/users/{entityId}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UnlinkUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Unlinks an entity ID from a user 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetUserResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<GetUserResponse> UnlinkUserAsync(string entityId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = UnlinkUserWithHttpInfoAsync(entityId, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<GetUserResponse> localVarResponse = await task;
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Unlinks an entity ID from a user 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetUserResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetUserResponse>> UnlinkUserWithHttpInfoAsync(string entityId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling UsersApi->UnlinkUser");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.DeleteAsync<GetUserResponse>("/v1/player/users/{entityId}", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UnlinkUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Updates entityId for the user 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="updateUserRequest"></param>
+        /// <returns>GetUserResponse</returns>
+        public GetUserResponse UpdateUser(string entityId, UpdateUserRequest updateUserRequest)
+        {
+            BeamPlayerClient.Client.ApiResponse<GetUserResponse> localVarResponse = UpdateUserWithHttpInfo(entityId, updateUserRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Updates entityId for the user 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="updateUserRequest"></param>
+        /// <returns>ApiResponse of GetUserResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<GetUserResponse> UpdateUserWithHttpInfo(string entityId, UpdateUserRequest updateUserRequest)
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling UsersApi->UpdateUser");
+
+            // verify the required parameter 'updateUserRequest' is set
+            if (updateUserRequest == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'updateUserRequest' when calling UsersApi->UpdateUser");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+            localVarRequestOptions.Data = updateUserRequest;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Patch<GetUserResponse>("/v1/player/users/{entityId}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Updates entityId for the user 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="updateUserRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetUserResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<GetUserResponse> UpdateUserAsync(string entityId, UpdateUserRequest updateUserRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var task = UpdateUserWithHttpInfoAsync(entityId, updateUserRequest, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<GetUserResponse> localVarResponse = await task;
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Updates entityId for the user 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="updateUserRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetUserResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetUserResponse>> UpdateUserWithHttpInfoAsync(string entityId, UpdateUserRequest updateUserRequest, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling UsersApi->UpdateUser");
+
+            // verify the required parameter 'updateUserRequest' is set
+            if (updateUserRequest == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'updateUserRequest' when calling UsersApi->UpdateUser");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+            localVarRequestOptions.Data = updateUserRequest;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.PatchAsync<GetUserResponse>("/v1/player/users/{entityId}", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateUser", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
