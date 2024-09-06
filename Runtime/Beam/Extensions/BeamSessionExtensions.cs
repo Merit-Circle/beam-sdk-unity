@@ -6,10 +6,11 @@ namespace Beam.Extensions
 {
     internal static class BeamSessionExtensions
     {
-        internal static bool IsValidNow(this BeamSession beamSession)
+        internal static bool IsActive(this BeamSession beamSession)
         {
-            var now = DateTimeOffset.Now;
-            return beamSession != null && beamSession.StartTime <= now && beamSession.EndTime > now;
+            // add some time to take into account processing time
+            var nowWithMargin = DateTimeOffset.Now.AddSeconds(30);
+            return beamSession != null && beamSession.StartTime <= nowWithMargin && beamSession.EndTime > nowWithMargin;
         }
 
         internal static bool IsOwnedBy(this BeamSession beamSession, KeyPair keyPair)
