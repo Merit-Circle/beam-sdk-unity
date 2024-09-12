@@ -56,10 +56,16 @@ namespace BeamPlayerClient.Model
             WSOPH = 3,
 
             /// <summary>
+            /// Enum RAT for value: RAT
+            /// </summary>
+            [EnumMember(Value = "RAT")]
+            RAT = 4,
+
+            /// <summary>
             /// Enum USDC for value: USDC
             /// </summary>
             [EnumMember(Value = "USDC")]
-            USDC = 4
+            USDC = 5
         }
 
 

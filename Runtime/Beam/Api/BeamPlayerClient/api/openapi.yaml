@@ -1918,6 +1918,21 @@ components:
           assetAddress: assetAddress
           assetId: assetId
           receiverEntityId: receiverEntityId
+        - receiverWalletAddress: receiverWalletAddress
+          amountToTransfer: 1.0800828190461012
+          assetAddress: assetAddress
+          assetId: assetId
+          receiverEntityId: receiverEntityId
+        - receiverWalletAddress: receiverWalletAddress
+          amountToTransfer: 1.0800828190461012
+          assetAddress: assetAddress
+          assetId: assetId
+          receiverEntityId: receiverEntityId
+        - receiverWalletAddress: receiverWalletAddress
+          amountToTransfer: 1.0800828190461012
+          assetAddress: assetAddress
+          assetId: assetId
+          receiverEntityId: receiverEntityId
         policyId: policyId
         chainId: 6.027456183070403
         operationId: operationId
@@ -1926,6 +1941,7 @@ components:
         assets:
           items:
             $ref: '#/components/schemas/TransferAssetRequestInput_assets_inner'
+          maxItems: 9
           minItems: 1
           type: array
         optimistic:
@@ -2627,6 +2643,7 @@ components:
           - WBEAM
           - WIMX
           - WSOPH
+          - RAT
           - USDC
           type: string
         sponsor:
@@ -2755,6 +2772,7 @@ components:
           - WBEAM
           - WIMX
           - WSOPH
+          - RAT
           - USDC
           type: string
         chainId:
@@ -4415,6 +4433,7 @@ components:
           - WBEAM
           - WIMX
           - WSOPH
+          - RAT
           - USDC
           nullable: true
           type: string
@@ -4574,6 +4593,7 @@ components:
           - WBEAM
           - WIMX
           - WSOPH
+          - RAT
           - USDC
           type: string
         address:
