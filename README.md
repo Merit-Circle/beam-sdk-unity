@@ -8,7 +8,7 @@ To install Beam SDK for Unity you have to add following dependencies to your man
 Open Packages/manifest.json and add these lines:
 
 ```
-"beam.sdk.client": "https://github.com/Merit-Circle/beam-sdk-unity.git",
+"beam.sdk.client": "https://github.com/BuildOnBeam/beam-sdk-unity.git",
 "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
 ```
 
@@ -20,7 +20,7 @@ https://docs.unity3d.com/Manual/upm-ui-giturl.html
 
 And add these urls:  
 ```
-https://github.com/Merit-Circle/beam-sdk-unity.git
+https://github.com/BuildOnBeam/beam-sdk-unity.git
 https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
 ```
 
@@ -102,7 +102,7 @@ var operationId = "clxn9u(...)0c4bz7av";
 ```
 
 ### Examples
-You can find an example implementation using this demo in [beam-sdk-unity-example](https://github.com/Merit-Circle/beam-sdk-unity-example/tree/main)
+You can find an example implementation using this demo in [beam-sdk-unity-example](https://github.com/BuildOnBeam/beam-sdk-unity-example/tree/main)
 
 ### Notes
 
