@@ -3569,6 +3569,7 @@ components:
           type: string
         suggestedExpiry:
           format: date-time
+          nullable: true
           type: string
         chainId:
           default: 13337

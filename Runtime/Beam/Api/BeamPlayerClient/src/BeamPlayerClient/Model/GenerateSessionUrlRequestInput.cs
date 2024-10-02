@@ -44,7 +44,7 @@ namespace BeamPlayerClient.Model
         /// <param name="suggestedExpiry">suggestedExpiry.</param>
         /// <param name="chainId">chainId (default to 13337).</param>
         [UnityEngine.Scripting.Preserve]
-        public GenerateSessionUrlRequestInput(string address = default(string), DateTime suggestedExpiry = default(DateTime), long chainId = 13337)
+        public GenerateSessionUrlRequestInput(string address = default(string), DateTime? suggestedExpiry = default(DateTime?), long chainId = 13337)
         {
             // to ensure "address" is required (not null)
             if (address == null)
@@ -66,9 +66,9 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Gets or Sets SuggestedExpiry
         /// </summary>
-        [DataMember(Name = "suggestedExpiry", EmitDefaultValue = false)]
+        [DataMember(Name = "suggestedExpiry", EmitDefaultValue = true)]
         [UnityEngine.Scripting.Preserve]
-        public DateTime SuggestedExpiry { get; set; }
+        public DateTime? SuggestedExpiry { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId

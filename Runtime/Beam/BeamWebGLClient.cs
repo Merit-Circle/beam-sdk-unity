@@ -75,6 +75,14 @@ namespace Beam
         }
 
         #endregion
+        
+        /// <summary>
+        /// Retrieves Connection Request data. Use with <see cref="StartConnectingUserToGameAsync"/>
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async UniTask<BeamResult<CreateConnectionRequestResponse>> GetUserConnectionRequestAsync(
             string entityId,
             int chainId = Constants.DefaultChainId,
@@ -95,6 +103,14 @@ namespace Beam
             }
         }
 
+        /// <summary>
+        /// Will connect given EntityId for your game to a User.
+        /// This will also happen on first possible action signed by user in the browser.
+        /// </summary>
+        /// <param name="createConnectionRequestResponse">ConnectionRequest from <see cref="GetUserConnectionRequestAsync"/></param>
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async UniTask<BeamResult<GetConnectionRequestResponse.StatusEnum>> StartConnectingUserToGameAsync(
             CreateConnectionRequestResponse createConnectionRequestResponse,
             int secondsTimeout = DefaultTimeoutInSeconds,
@@ -116,6 +132,14 @@ namespace Beam
             return new BeamResult<GetConnectionRequestResponse.StatusEnum>(pollingResult.Status);
         }
         
+        /// <summary>
+        /// Retrieves RevokeSession Operation data. Use with <see cref="StartSessionRevokingAsync"/>
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="sessionAddress">address of a Session to revoke</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async UniTask<BeamResult<CommonOperationResponse>> GetSessionRevokingOperationAsync(
             string entityId,
             string sessionAddress,
@@ -139,7 +163,15 @@ namespace Beam
 
             return new BeamResult<CommonOperationResponse>(operation);
         }
-        
+
+        /// <summary>
+        /// Revokes given Session Address. Always opens Browser as User has to sign it with his key.
+        /// </summary>
+        /// <param name="operation">SessionRevoke Operation from <see cref="GetSessionRevokingOperationAsync"/></param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async Task<BeamResult<CommonOperationResponse.StatusEnum>> StartSessionRevokingAsync(
             CommonOperationResponse operation,
             int chainId = Constants.DefaultChainId,
@@ -150,15 +182,17 @@ namespace Beam
             return result;
         }
         
-                /// <summary>
-        /// Only use this method 
+        /// <summary>
+        /// Retrieves payload to start Session Creation signing. Use with <see cref="StartSessionSigningAsync"/>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="suggestedExpiry">Suggested expiration date for Session. It will be presented in the identity.onbea.com as pre-selected.</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         /// </summary>
-        /// <param name="entityId"></param>
-        /// <param name="chainId"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public async UniTask<BeamResult<GenerateSessionRequestResponse>> GetSessionSigningRequestAsync(
             string entityId,
+            DateTime? suggestedExpiry = null,
             int chainId = Constants.DefaultChainId,
             CancellationToken cancellationToken = default)
         {
@@ -181,7 +215,7 @@ namespace Beam
             try
             {
                 var res = await SessionsApi.CreateSessionRequestAsync(entityId,
-                    new GenerateSessionUrlRequestInput(newKeyPair.Account.Address, chainId: chainId), cancellationToken);
+                    new GenerateSessionUrlRequestInput(newKeyPair.Account.Address, suggestedExpiry: suggestedExpiry, chainId: chainId), cancellationToken);
 
                 Log($"Created session request: {res.Id} to check for session result");
                 return new BeamResult<GenerateSessionRequestResponse>(res);
@@ -193,6 +227,14 @@ namespace Beam
             }
         }
 
+        /// <summary>
+        /// Opens an external browser to sign a Session, returns the result via callback arg.
+        /// </summary>
+        /// <param name="generateSessionRequestResponse">SessionRequest from <see cref="GetSessionSigningRequestAsync"/></param>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async UniTask<BeamResult<BeamSession>> StartSessionSigningAsync(
             GenerateSessionRequestResponse generateSessionRequestResponse,
             string entityId,
@@ -260,6 +302,12 @@ namespace Beam
             return beamResultModel;
         }
 
+        /// <summary>
+        /// Retrieves Operation to sign. Use with <see cref="StartOperationSigningAsync"/>
+        /// </summary>
+        /// <param name="operationId">Id of the Operation to sign. Returned by Beam API.</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async UniTask<BeamResult<CommonOperationResponse>> GetOperationToSignAsync(
             string operationId,
             CancellationToken cancellationToken = default)
@@ -287,6 +335,16 @@ namespace Beam
             }
         }
 
+        /// <summary>
+        /// Opens an external browser to sign a transaction, returns the result via callback arg.
+        /// </summary>
+        /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="commonOperationResponse">Operation from <see cref="GetOperationToSignAsync"/></param>
+        /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
+        /// <param name="signingBy">If set to Auto, will try to use a local Session and open Browser if there is no valid Session.</param>
+        /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
+        /// <param name="cancellationToken">Optional CancellationToken</param>
+        /// <returns>UniTask</returns>
         public async UniTask<BeamResult<CommonOperationResponse.StatusEnum>> StartOperationSigningAsync(
             string entityId,
             CommonOperationResponse commonOperationResponse,

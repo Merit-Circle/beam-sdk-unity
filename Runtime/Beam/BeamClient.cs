@@ -218,12 +218,13 @@ namespace Beam
         /// Opens an external browser to sign a Session, returns the result via callback arg.
         /// </summary>
         /// <param name="entityId">Entity Id of the User performing signing</param>
+        /// <param name="suggestedExpiry">Suggested expiration date for Session. It will be presented in the identity.onbea.com as pre-selected.</param>
         /// <param name="chainId">ChainId to perform operation on. Defaults to 13337.</param>
         /// <param name="secondsTimeout">Optional timeout in seconds, defaults to 240</param>
         /// <param name="cancellationToken">Optional CancellationToken</param>
         /// <returns>UniTask</returns>
-        public async UniTask<BeamResult<BeamSession>> CreateSessionAsync(
-            string entityId,
+        public async UniTask<BeamResult<BeamSession>> CreateSessionAsync(string entityId,
+            DateTime? suggestedExpiry = null,
             int chainId = Constants.DefaultChainId,
             int secondsTimeout = DefaultTimeoutInSeconds,
             CancellationToken cancellationToken = default)
@@ -250,7 +251,7 @@ namespace Beam
             try
             {
                 var res = await SessionsApi.CreateSessionRequestAsync(entityId,
-                    new GenerateSessionUrlRequestInput(newKeyPair.Account.Address, chainId: chainId), cancellationToken);
+                    new GenerateSessionUrlRequestInput(newKeyPair.Account.Address, suggestedExpiry: suggestedExpiry, chainId: chainId), cancellationToken);
 
                 Log($"Created session request: {res.Id} to check for session result");
                 beamSessionRequest = res;
