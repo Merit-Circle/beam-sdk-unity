@@ -75,7 +75,7 @@ namespace BeamPlayerClient.Api
         /// <param name="amountOut"></param>
         /// <param name="chainId"> (optional)</param>
         /// <returns>GetQuoteResponse</returns>
-        GetQuoteResponse GetQuoteForInput(string tokenIn, string tokenOut, string amountOut, decimal? chainId);
+        GetQuoteResponse GetQuoteForInput(string tokenIn, string tokenOut, string amountOut, long? chainId);
 
         /// <summary>
         /// Returns the maximum necessary input amount for a token trade, given a desired output amount
@@ -89,7 +89,7 @@ namespace BeamPlayerClient.Api
         /// <param name="amountOut"></param>
         /// <param name="chainId"> (optional)</param>
         /// <returns>ApiResponse of GetQuoteResponse</returns>
-        ApiResponse<GetQuoteResponse> GetQuoteForInputWithHttpInfo(string tokenIn, string tokenOut, string amountOut, decimal? chainId);
+        ApiResponse<GetQuoteResponse> GetQuoteForInputWithHttpInfo(string tokenIn, string tokenOut, string amountOut, long? chainId);
         /// <summary>
         /// Returns the minimum expected output amount for a token trade, given an input amount
         /// </summary>
@@ -99,7 +99,7 @@ namespace BeamPlayerClient.Api
         /// <param name="amountIn"></param>
         /// <param name="chainId"> (optional)</param>
         /// <returns>GetQuoteResponse</returns>
-        GetQuoteResponse GetQuoteForOutput(string tokenIn, string tokenOut, string amountIn, decimal? chainId);
+        GetQuoteResponse GetQuoteForOutput(string tokenIn, string tokenOut, string amountIn, long? chainId);
 
         /// <summary>
         /// Returns the minimum expected output amount for a token trade, given an input amount
@@ -113,7 +113,7 @@ namespace BeamPlayerClient.Api
         /// <param name="amountIn"></param>
         /// <param name="chainId"> (optional)</param>
         /// <returns>ApiResponse of GetQuoteResponse</returns>
-        ApiResponse<GetQuoteResponse> GetQuoteForOutputWithHttpInfo(string tokenIn, string tokenOut, string amountIn, decimal? chainId);
+        ApiResponse<GetQuoteResponse> GetQuoteForOutputWithHttpInfo(string tokenIn, string tokenOut, string amountIn, long? chainId);
         /// <summary>
         /// Unwrap an amount of wrapped to native token
         /// </summary>
@@ -226,7 +226,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetQuoteResponse</returns>
-        Cysharp.Threading.Tasks.UniTask<GetQuoteResponse> GetQuoteForInputAsync(string tokenIn, string tokenOut, string amountOut, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetQuoteResponse> GetQuoteForInputAsync(string tokenIn, string tokenOut, string amountOut, long? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Returns the maximum necessary input amount for a token trade, given a desired output amount
@@ -241,7 +241,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetQuoteResponse)</returns>
-        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetQuoteResponse>> GetQuoteForInputWithHttpInfoAsync(string tokenIn, string tokenOut, string amountOut, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetQuoteResponse>> GetQuoteForInputWithHttpInfoAsync(string tokenIn, string tokenOut, string amountOut, long? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Returns the minimum expected output amount for a token trade, given an input amount
         /// </summary>
@@ -255,7 +255,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetQuoteResponse</returns>
-        Cysharp.Threading.Tasks.UniTask<GetQuoteResponse> GetQuoteForOutputAsync(string tokenIn, string tokenOut, string amountIn, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<GetQuoteResponse> GetQuoteForOutputAsync(string tokenIn, string tokenOut, string amountIn, long? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Returns the minimum expected output amount for a token trade, given an input amount
@@ -270,7 +270,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetQuoteResponse)</returns>
-        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetQuoteResponse>> GetQuoteForOutputWithHttpInfoAsync(string tokenIn, string tokenOut, string amountIn, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<GetQuoteResponse>> GetQuoteForOutputWithHttpInfoAsync(string tokenIn, string tokenOut, string amountIn, long? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Unwrap an amount of wrapped to native token
         /// </summary>
@@ -762,7 +762,7 @@ namespace BeamPlayerClient.Api
         /// <param name="amountOut"></param>
         /// <param name="chainId"> (optional)</param>
         /// <returns>GetQuoteResponse</returns>
-        public GetQuoteResponse GetQuoteForInput(string tokenIn, string tokenOut, string amountOut, decimal? chainId)
+        public GetQuoteResponse GetQuoteForInput(string tokenIn, string tokenOut, string amountOut, long? chainId)
         {
             BeamPlayerClient.Client.ApiResponse<GetQuoteResponse> localVarResponse = GetQuoteForInputWithHttpInfo(tokenIn, tokenOut, amountOut, chainId);
             return localVarResponse.Data;
@@ -777,7 +777,7 @@ namespace BeamPlayerClient.Api
         /// <param name="amountOut"></param>
         /// <param name="chainId"> (optional)</param>
         /// <returns>ApiResponse of GetQuoteResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<GetQuoteResponse> GetQuoteForInputWithHttpInfo(string tokenIn, string tokenOut, string amountOut, decimal? chainId)
+        public BeamPlayerClient.Client.ApiResponse<GetQuoteResponse> GetQuoteForInputWithHttpInfo(string tokenIn, string tokenOut, string amountOut, long? chainId)
         {
             // verify the required parameter 'tokenIn' is set
             if (tokenIn == null)
@@ -843,7 +843,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetQuoteResponse</returns>
-        public async Cysharp.Threading.Tasks.UniTask<GetQuoteResponse> GetQuoteForInputAsync(string tokenIn, string tokenOut, string amountOut, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetQuoteResponse> GetQuoteForInputAsync(string tokenIn, string tokenOut, string amountOut, long? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetQuoteForInputWithHttpInfoAsync(tokenIn, tokenOut, amountOut, chainId, cancellationToken);
             BeamPlayerClient.Client.ApiResponse<GetQuoteResponse> localVarResponse = await task;
@@ -860,7 +860,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetQuoteResponse)</returns>
-        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetQuoteResponse>> GetQuoteForInputWithHttpInfoAsync(string tokenIn, string tokenOut, string amountOut, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetQuoteResponse>> GetQuoteForInputWithHttpInfoAsync(string tokenIn, string tokenOut, string amountOut, long? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'tokenIn' is set
             if (tokenIn == null)
@@ -930,7 +930,7 @@ namespace BeamPlayerClient.Api
         /// <param name="amountIn"></param>
         /// <param name="chainId"> (optional)</param>
         /// <returns>GetQuoteResponse</returns>
-        public GetQuoteResponse GetQuoteForOutput(string tokenIn, string tokenOut, string amountIn, decimal? chainId)
+        public GetQuoteResponse GetQuoteForOutput(string tokenIn, string tokenOut, string amountIn, long? chainId)
         {
             BeamPlayerClient.Client.ApiResponse<GetQuoteResponse> localVarResponse = GetQuoteForOutputWithHttpInfo(tokenIn, tokenOut, amountIn, chainId);
             return localVarResponse.Data;
@@ -945,7 +945,7 @@ namespace BeamPlayerClient.Api
         /// <param name="amountIn"></param>
         /// <param name="chainId"> (optional)</param>
         /// <returns>ApiResponse of GetQuoteResponse</returns>
-        public BeamPlayerClient.Client.ApiResponse<GetQuoteResponse> GetQuoteForOutputWithHttpInfo(string tokenIn, string tokenOut, string amountIn, decimal? chainId)
+        public BeamPlayerClient.Client.ApiResponse<GetQuoteResponse> GetQuoteForOutputWithHttpInfo(string tokenIn, string tokenOut, string amountIn, long? chainId)
         {
             // verify the required parameter 'tokenIn' is set
             if (tokenIn == null)
@@ -1011,7 +1011,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetQuoteResponse</returns>
-        public async Cysharp.Threading.Tasks.UniTask<GetQuoteResponse> GetQuoteForOutputAsync(string tokenIn, string tokenOut, string amountIn, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<GetQuoteResponse> GetQuoteForOutputAsync(string tokenIn, string tokenOut, string amountIn, long? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var task = GetQuoteForOutputWithHttpInfoAsync(tokenIn, tokenOut, amountIn, chainId, cancellationToken);
             BeamPlayerClient.Client.ApiResponse<GetQuoteResponse> localVarResponse = await task;
@@ -1028,7 +1028,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetQuoteResponse)</returns>
-        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetQuoteResponse>> GetQuoteForOutputWithHttpInfoAsync(string tokenIn, string tokenOut, string amountIn, decimal? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<GetQuoteResponse>> GetQuoteForOutputWithHttpInfoAsync(string tokenIn, string tokenOut, string amountIn, long? chainId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'tokenIn' is set
             if (tokenIn == null)

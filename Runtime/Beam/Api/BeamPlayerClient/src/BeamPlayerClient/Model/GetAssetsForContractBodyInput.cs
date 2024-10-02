@@ -99,7 +99,7 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="GetAssetsForContractBodyInput" /> class.
         /// </summary>
         /// <param name="continuation">continuation.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         /// <param name="minRarityRank">minRarityRank.</param>
         /// <param name="maxRarityRank">maxRarityRank.</param>
         /// <param name="minFloorAskPrice">minFloorAskPrice.</param>
@@ -110,7 +110,7 @@ namespace BeamPlayerClient.Model
         /// <param name="sortBy">sortBy (default to SortByEnum.FloorAskPrice).</param>
         /// <param name="limit">limit (default to 20M).</param>
         [UnityEngine.Scripting.Preserve]
-        public GetAssetsForContractBodyInput(string continuation = default(string), decimal chainId = 13337M, int? minRarityRank = default(int?), int? maxRarityRank = default(int?), decimal? minFloorAskPrice = default(decimal?), decimal? maxFloorAskPrice = default(decimal?), bool? includeAttributes = false, List<GetAssetsForContractBodyInputAttributesInner> attributes = default(List<GetAssetsForContractBodyInputAttributesInner>), SortDirectionEnum? sortDirection = SortDirectionEnum.Asc, SortByEnum? sortBy = SortByEnum.FloorAskPrice, decimal limit = 20M)
+        public GetAssetsForContractBodyInput(string continuation = default(string), long chainId = 13337, int? minRarityRank = default(int?), int? maxRarityRank = default(int?), decimal? minFloorAskPrice = default(decimal?), decimal? maxFloorAskPrice = default(decimal?), bool? includeAttributes = false, List<GetAssetsForContractBodyInputAttributesInner> attributes = default(List<GetAssetsForContractBodyInputAttributesInner>), SortDirectionEnum? sortDirection = SortDirectionEnum.Asc, SortByEnum? sortBy = SortByEnum.FloorAskPrice, decimal limit = 20M)
         {
             this.Continuation = continuation;
             this.ChainId = chainId;
@@ -138,7 +138,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets MinRarityRank

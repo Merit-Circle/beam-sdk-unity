@@ -181,7 +181,7 @@ namespace Beam
             try
             {
                 var res = await SessionsApi.CreateSessionRequestAsync(entityId,
-                    new GenerateSessionUrlRequestInput(newKeyPair.Account.Address, chainId), cancellationToken);
+                    new GenerateSessionUrlRequestInput(newKeyPair.Account.Address, chainId: chainId), cancellationToken);
 
                 Log($"Created session request: {res.Id} to check for session result");
                 return new BeamResult<GenerateSessionRequestResponse>(res);

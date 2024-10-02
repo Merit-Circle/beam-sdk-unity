@@ -98,10 +98,10 @@ namespace BeamPlayerClient.Model
         /// <param name="sortBy">sortBy (default to SortByEnum.CreatedAt).</param>
         /// <param name="sortDirection">If using &#x60;createdAt&#x60; for sorting, only &#x60;desc&#x60; is allowed. (default to SortDirectionEnum.Desc).</param>
         /// <param name="limit">limit (default to 50).</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         /// <param name="continuation">continuation.</param>
         [UnityEngine.Scripting.Preserve]
-        public GetListedAssetsBodyInput(List<string> assetAddresses = default(List<string>), SortByEnum? sortBy = SortByEnum.CreatedAt, SortDirectionEnum? sortDirection = SortDirectionEnum.Desc, int limit = 50, decimal chainId = 13337M, string continuation = default(string))
+        public GetListedAssetsBodyInput(List<string> assetAddresses = default(List<string>), SortByEnum? sortBy = SortByEnum.CreatedAt, SortDirectionEnum? sortDirection = SortDirectionEnum.Desc, int limit = 50, long chainId = 13337, string continuation = default(string))
         {
             this.AssetAddresses = assetAddresses;
             this.SortBy = sortBy;
@@ -130,7 +130,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Continuation

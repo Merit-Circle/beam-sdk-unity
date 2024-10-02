@@ -117,11 +117,11 @@ namespace BeamPlayerClient.Model
         /// <param name="startTime">startTime.</param>
         /// <param name="endTime">endTime.</param>
         /// <param name="currency">currency (default to CurrencyEnum.WBEAM).</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
         [UnityEngine.Scripting.Preserve]
-        public CreateAssetOfferRequestInput(string assetAddress = default(string), string assetId = default(string), decimal quantity = default(decimal), string price = default(string), DateTime startTime = default(DateTime), DateTime endTime = default(DateTime), CurrencyEnum? currency = CurrencyEnum.WBEAM, decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
+        public CreateAssetOfferRequestInput(string assetAddress = default(string), string assetId = default(string), decimal quantity = default(decimal), string price = default(string), DateTime startTime = default(DateTime), DateTime endTime = default(DateTime), CurrencyEnum? currency = CurrencyEnum.WBEAM, long chainId = 13337, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
         {
             // to ensure "assetAddress" is required (not null)
             if (assetAddress == null)
@@ -197,7 +197,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId

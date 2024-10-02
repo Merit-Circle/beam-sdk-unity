@@ -68,11 +68,11 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="entityId">entityId (required).</param>
         /// <param name="transactions">transactions (required).</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
         [UnityEngine.Scripting.Preserve]
-        public CreateOperationRequestInput(string entityId = default(string), List<CreateOperationRequestInputTransactionsInner> transactions = default(List<CreateOperationRequestInputTransactionsInner>), decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
+        public CreateOperationRequestInput(string entityId = default(string), List<CreateOperationRequestInputTransactionsInner> transactions = default(List<CreateOperationRequestInputTransactionsInner>), long chainId = 13337, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
         {
             // to ensure "entityId" is required (not null)
             if (entityId == null)
@@ -110,7 +110,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId

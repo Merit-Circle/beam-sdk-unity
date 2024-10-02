@@ -69,9 +69,9 @@ namespace BeamPlayerClient.Model
         /// <param name="address">address (required).</param>
         /// <param name="operationId">operationId.</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         [UnityEngine.Scripting.Preserve]
-        public RevokeSessionRequestInput(string address = default(string), string operationId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, decimal chainId = 13337M)
+        public RevokeSessionRequestInput(string address = default(string), string operationId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, long chainId = 13337)
         {
             // to ensure "address" is required (not null)
             if (address == null)
@@ -103,7 +103,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -176,11 +176,11 @@ namespace BeamPlayerClient.Model
         /// <param name="currency">currency (default to CurrencyEnum.BEAM).</param>
         /// <param name="sponsor">sponsor (default to true).</param>
         /// <param name="policyId">policyId.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
         [UnityEngine.Scripting.Preserve]
-        public SellAssetRequestInput(string assetAddress = default(string), string assetId = default(string), decimal quantity = default(decimal), string price = default(string), DateTime? startTime = default(DateTime?), DateTime? endTime = default(DateTime?), SellTypeEnum sellType = default(SellTypeEnum), CurrencyEnum? currency = CurrencyEnum.BEAM, bool sponsor = true, string policyId = default(string), decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
+        public SellAssetRequestInput(string assetAddress = default(string), string assetId = default(string), decimal quantity = default(decimal), string price = default(string), DateTime? startTime = default(DateTime?), DateTime? endTime = default(DateTime?), SellTypeEnum sellType = default(SellTypeEnum), CurrencyEnum? currency = CurrencyEnum.BEAM, bool sponsor = true, string policyId = default(string), long chainId = 13337, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
         {
             // to ensure "assetAddress" is required (not null)
             if (assetAddress == null)
@@ -275,7 +275,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId

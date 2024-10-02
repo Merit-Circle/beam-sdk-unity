@@ -91,7 +91,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       responses:
         "200":
@@ -121,7 +122,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       responses:
         "200":
@@ -260,7 +262,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       - explode: false
         in: path
@@ -321,7 +324,8 @@ paths:
         name: chainId
         required: true
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       responses:
         "200":
@@ -351,7 +355,8 @@ paths:
         name: chainId
         required: true
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       - explode: true
         in: query
@@ -505,7 +510,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       - explode: false
         in: path
@@ -583,7 +589,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       - explode: false
         in: path
@@ -669,7 +676,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       - explode: true
         in: query
@@ -785,7 +793,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       - explode: true
         in: query
@@ -815,7 +824,8 @@ paths:
         name: chainId
         required: true
         schema:
-          type: number
+          format: int64
+          type: integer
         style: simple
       responses:
         "200":
@@ -1235,7 +1245,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       responses:
         "200":
@@ -1280,7 +1291,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       responses:
         "200":
@@ -1508,7 +1520,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       responses:
         "200":
@@ -1545,7 +1558,8 @@ paths:
         name: chainId
         required: false
         schema:
-          type: number
+          format: int64
+          type: integer
         style: form
       responses:
         "200":
@@ -1768,7 +1782,7 @@ components:
     GetAssetsForUserBodyInput:
       example:
         sortDirection: asc
-        chainId: 0.8008281904610115
+        chainId: 0
         contract: contract
         limit: 60.67181621239699
         sortBy: acquiredAt
@@ -1799,7 +1813,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         limit:
           default: 20
           maximum: 100
@@ -1810,7 +1825,7 @@ components:
       example:
         data:
         - ownedQuantity: 2.3021358869347655
-          chainId: 5.637376656633329
+          chainId: 5
           assetAddress: assetAddress
           assetId: assetId
           imageUrl: imageUrl
@@ -1831,7 +1846,7 @@ components:
           assetType: assetType
           rarity: Common
         - ownedQuantity: 2.3021358869347655
-          chainId: 5.637376656633329
+          chainId: 5
           assetAddress: assetAddress
           assetId: assetId
           imageUrl: imageUrl
@@ -1869,14 +1884,14 @@ components:
         - symbol: symbol
           address: address
           balance: balance
-          chainId: 6.027456183070403
+          chainId: 6
           decimals: 0.8008281904610115
           name: name
           logoUri: logoUri
         - symbol: symbol
           address: address
           balance: balance
-          chainId: 6.027456183070403
+          chainId: 6
           decimals: 0.8008281904610115
           name: name
           logoUri: logoUri
@@ -1893,7 +1908,7 @@ components:
         nativeTokenBalance:
           symbol: symbol
           balance: balance
-          chainId: 6.027456183070403
+          chainId: 6
           decimals: 0.8008281904610115
           name: name
           logoUri: logoUri
@@ -1934,7 +1949,7 @@ components:
           assetId: assetId
           receiverEntityId: receiverEntityId
         policyId: policyId
-        chainId: 6.027456183070403
+        chainId: 6
         operationId: operationId
         operationProcessing: Execute
       properties:
@@ -1956,7 +1971,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -2028,6 +2044,7 @@ components:
         userId:
           type: string
         chainId:
+          format: int64
           type: integer
         url:
           format: uri
@@ -2055,7 +2072,7 @@ components:
         sponsor: true
         amountToTransfer: amountToTransfer
         policyId: policyId
-        chainId: 0.8008281904610115
+        chainId: 0
         assetAddress: assetAddress
         receiverEntityId: receiverEntityId
         operationId: operationId
@@ -2081,7 +2098,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -2102,7 +2120,7 @@ components:
         sponsor: true
         amountToTransfer: amountToTransfer
         policyId: policyId
-        chainId: 0.8008281904610115
+        chainId: 0
         receiverEntityId: receiverEntityId
         operationId: operationId
         operationProcessing: Execute
@@ -2125,7 +2143,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -2141,7 +2160,7 @@ components:
     GetAssetsForContractBodyInput:
       example:
         sortDirection: asc
-        chainId: 0.8008281904610115
+        chainId: 0
         limit: 23.791145280654177
         minFloorAskPrice: 5.962133916683182
         maxFloorAskPrice: 5.637376656633329
@@ -2161,7 +2180,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         minRarityRank:
           nullable: true
           type: integer
@@ -2206,7 +2226,7 @@ components:
     GetAssetsForContractResponse:
       example:
         data:
-        - chainId: 1.4658129805029452
+        - chainId: 1
           assetAddress: assetAddress
           assetId: assetId
           imageUrl: imageUrl
@@ -2226,7 +2246,7 @@ components:
           supply: 0.8008281904610115
           assetType: assetType
           rarity: Common
-        - chainId: 1.4658129805029452
+        - chainId: 1
           assetAddress: assetAddress
           assetId: assetId
           imageUrl: imageUrl
@@ -2260,7 +2280,7 @@ components:
       type: object
     GetAssetResponse:
       example:
-        chainId: 5.962133916683182
+        chainId: 5
         assetAddress: assetAddress
         assetId: assetId
         imageUrl: imageUrl
@@ -2324,7 +2344,8 @@ components:
           type: array
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
       required:
       - assetAddress
       - assetId
@@ -2384,7 +2405,7 @@ components:
     GetOwnerAssetsBodyInput:
       example:
         sortDirection: asc
-        chainId: 0.8008281904610115
+        chainId: 0
         limit: 60.67181621239699
         sortBy: acquiredAt
         includeAttributes: false
@@ -2411,7 +2432,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         limit:
           default: 20
           maximum: 100
@@ -2422,7 +2444,7 @@ components:
       example:
         data:
         - ownedQuantity: 2.3021358869347655
-          chainId: 5.637376656633329
+          chainId: 5
           assetAddress: assetAddress
           assetId: assetId
           imageUrl: imageUrl
@@ -2443,7 +2465,7 @@ components:
           assetType: assetType
           rarity: Common
         - ownedQuantity: 2.3021358869347655
-          chainId: 5.637376656633329
+          chainId: 5
           assetAddress: assetAddress
           assetId: assetId
           imageUrl: imageUrl
@@ -2481,7 +2503,7 @@ components:
         assetAddresses:
         - assetAddresses
         - assetAddresses
-        chainId: 6.027456183070403
+        chainId: 6
         limit: 81
         sortBy: createdAt
         continuation: continuation
@@ -2512,7 +2534,8 @@ components:
           type: integer
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         continuation:
           nullable: true
           type: string
@@ -2598,7 +2621,7 @@ components:
         sellType: FixedPrice
         operationProcessing: Execute
         policyId: policyId
-        chainId: 6.027456183070403
+        chainId: 6
         assetId: assetId
         price: price
         operationId: operationId
@@ -2655,7 +2678,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -2678,7 +2702,7 @@ components:
         sponsor: true
         quantity: 0.8008281904610115
         policyId: policyId
-        chainId: 6.027456183070403
+        chainId: 6
         operationId: operationId
         operationProcessing: Execute
       properties:
@@ -2696,7 +2720,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -2740,7 +2765,7 @@ components:
     CreateAssetOfferRequestInput:
       example:
         quantity: 1.0800828190461012
-        chainId: 6.027456183070403
+        chainId: 6
         assetAddress: assetAddress
         assetId: assetId
         price: price
@@ -2777,7 +2802,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -2799,7 +2825,7 @@ components:
         sponsor: true
         quantity: 1.0800828190461012
         policyId: policyId
-        chainId: 6.027456183070403
+        chainId: 6
         operationId: operationId
         operationProcessing: Execute
       properties:
@@ -2818,7 +2844,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -2836,7 +2863,7 @@ components:
         optimistic: false
         sponsor: true
         policyId: policyId
-        chainId: 0.8008281904610115
+        chainId: 0
         operationId: operationId
         operationProcessing: Execute
       properties:
@@ -2861,7 +2888,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
       type: object
     GetChainCurrenciesResponse:
       example:
@@ -2883,7 +2911,7 @@ components:
     RefreshTokenRequestBody:
       example:
         tokenId: tokenId
-        chainId: 0.8008281904610115
+        chainId: 0
         assetAddress: assetAddress
       properties:
         assetAddress:
@@ -2893,21 +2921,23 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
       required:
       - assetAddress
       - tokenId
       type: object
     RefreshContractRequestBody:
       example:
-        chainId: 0.8008281904610115
+        chainId: 0
         assetAddress: assetAddress
       properties:
         assetAddress:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
       required:
       - assetAddress
       type: object
@@ -2919,7 +2949,7 @@ components:
           limit: 1.4658129805029452
         data:
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          chainId: 0.8008281904610115
+          chainId: 0
           id: id
           intent:
             message: message
@@ -2972,7 +3002,7 @@ components:
             status: 1.4658129805029452
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          chainId: 0.8008281904610115
+          chainId: 0
           id: id
           intent:
             message: message
@@ -3038,7 +3068,7 @@ components:
     GetTransactionResponse:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
-        chainId: 0.8008281904610115
+        chainId: 0
         id: id
         intent:
           message: message
@@ -3108,7 +3138,8 @@ components:
           format: date-time
           type: string
         chainId:
-          type: number
+          format: int64
+          type: integer
         intent:
           $ref: '#/components/schemas/GetTransactionsResponse_data_inner_intent'
         transaction:
@@ -3131,7 +3162,7 @@ components:
         optimistic: false
         sponsor: true
         policyId: policyId
-        chainId: 0.8008281904610115
+        chainId: 0
         operationId: operationId
         operationProcessing: Execute
         interactions:
@@ -3184,7 +3215,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -3315,7 +3347,7 @@ components:
       type: object
     CreateOperationRequestInput:
       example:
-        chainId: 0.8008281904610115
+        chainId: 0
         operationId: operationId
         entityId: entityId
         transactions:
@@ -3334,7 +3366,8 @@ components:
           type: array
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -3397,10 +3430,11 @@ components:
     ConvertTokenRequestInput:
       example:
         tokenOut: tokenOut
+        receiverWalletAddress: receiverWalletAddress
         optimistic: false
         sponsor: true
         policyId: policyId
-        chainId: 0.8008281904610115
+        chainId: 0
         receiverEntityId: receiverEntityId
         operationId: operationId
         amountIn: amountIn
@@ -3418,6 +3452,8 @@ components:
           type: string
         receiverEntityId:
           type: string
+        receiverWalletAddress:
+          type: string
         optimistic:
           default: false
           type: boolean
@@ -3430,7 +3466,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -3452,7 +3489,7 @@ components:
         sponsor: true
         amount: amount
         policyId: policyId
-        chainId: 0.8008281904610115
+        chainId: 0
         operationId: operationId
         operationProcessing: Execute
       properties:
@@ -3470,7 +3507,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -3489,7 +3527,7 @@ components:
         sponsor: true
         amount: amount
         policyId: policyId
-        chainId: 0.8008281904610115
+        chainId: 0
         operationId: operationId
         operationProcessing: Execute
       properties:
@@ -3507,7 +3545,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         operationProcessing:
           default: Execute
           enum:
@@ -3523,13 +3562,18 @@ components:
     GenerateSessionUrlRequestInput:
       example:
         address: address
-        chainId: 0.8008281904610115
+        chainId: 0
+        suggestedExpiry: 2000-01-23T04:56:07.000+00:00
       properties:
         address:
           type: string
+        suggestedExpiry:
+          format: date-time
+          type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
       required:
       - address
       type: object
@@ -3561,6 +3605,7 @@ components:
           nullable: true
           type: string
         chainId:
+          format: int64
           type: integer
         openfortId:
           nullable: true
@@ -3583,7 +3628,7 @@ components:
     RevokeSessionRequestInput:
       example:
         address: address
-        chainId: 0.8008281904610115
+        chainId: 0
         operationId: operationId
         operationProcessing: Execute
       properties:
@@ -3601,7 +3646,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
       required:
       - address
       type: object
@@ -3632,6 +3678,7 @@ components:
           nullable: true
           type: string
         chainId:
+          format: int64
           type: integer
         openfortId:
           nullable: true
@@ -3697,7 +3744,7 @@ components:
       type: object
     CreateConnectionRequestInput:
       example:
-        chainId: 0.8008281904610115
+        chainId: 0
         entityId: entityId
       properties:
         entityId:
@@ -3706,7 +3753,8 @@ components:
           type: string
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
       required:
       - entityId
       type: object
@@ -3775,7 +3823,7 @@ components:
       type: object
     CommonStatsRequestInput:
       example:
-        chainId: 0.8008281904610115
+        chainId: 0
         attributes:
         - value: value
           key: key
@@ -3789,7 +3837,8 @@ components:
           type: array
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
       type: object
     CommonStatsResponse:
       example:
@@ -3807,7 +3856,7 @@ components:
         types:
         - ask
         - ask
-        chainId: 6.027456183070403
+        chainId: 6
         limit: 2.521573561875922
         continuation: continuation
       properties:
@@ -3831,7 +3880,8 @@ components:
           type: array
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         continuation:
           nullable: true
           type: string
@@ -3882,7 +3932,7 @@ components:
         types:
         - ask
         - ask
-        chainId: 6.027456183070403
+        chainId: 6
         limit: 4.924058133258956
         continuation: continuation
       properties:
@@ -3906,7 +3956,8 @@ components:
           type: array
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         continuation:
           nullable: true
           type: string
@@ -3916,7 +3967,7 @@ components:
         types:
         - ask
         - ask
-        chainId: 6.027456183070403
+        chainId: 6
         limit: 2.521573561875922
         continuation: continuation
       properties:
@@ -3940,7 +3991,8 @@ components:
           type: array
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         continuation:
           nullable: true
           type: string
@@ -4049,7 +4101,7 @@ components:
     GetAssetsForUserResponse_data_inner:
       example:
         ownedQuantity: 2.3021358869347655
-        chainId: 5.637376656633329
+        chainId: 5
         assetAddress: assetAddress
         assetId: assetId
         imageUrl: imageUrl
@@ -4101,7 +4153,8 @@ components:
           type: array
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
         ownedQuantity:
           type: number
       required:
@@ -4118,7 +4171,7 @@ components:
         symbol: symbol
         address: address
         balance: balance
-        chainId: 6.027456183070403
+        chainId: 6
         decimals: 0.8008281904610115
         name: name
         logoUri: logoUri
@@ -4134,7 +4187,8 @@ components:
         logoUri:
           type: string
         chainId:
-          type: number
+          format: int64
+          type: integer
         balance:
           type: string
       required:
@@ -4149,7 +4203,7 @@ components:
       example:
         symbol: symbol
         balance: balance
-        chainId: 6.027456183070403
+        chainId: 6
         decimals: 0.8008281904610115
         name: name
         logoUri: logoUri
@@ -4163,7 +4217,8 @@ components:
         logoUri:
           type: string
         chainId:
-          type: number
+          format: int64
+          type: integer
         balance:
           type: string
       required:
@@ -4269,7 +4324,7 @@ components:
       type: object
     GetAssetsForContractResponse_data_inner:
       example:
-        chainId: 1.4658129805029452
+        chainId: 1
         assetAddress: assetAddress
         assetId: assetId
         imageUrl: imageUrl
@@ -4321,7 +4376,8 @@ components:
           type: array
         chainId:
           default: 13337
-          type: number
+          format: int64
+          type: integer
       required:
       - assetAddress
       - assetId
@@ -4762,7 +4818,7 @@ components:
     GetTransactionsResponse_data_inner:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
-        chainId: 0.8008281904610115
+        chainId: 0
         id: id
         intent:
           message: message
@@ -4824,7 +4880,8 @@ components:
           format: date-time
           type: string
         chainId:
-          type: number
+          format: int64
+          type: integer
         intent:
           $ref: '#/components/schemas/GetTransactionsResponse_data_inner_intent'
         transaction:
@@ -4931,6 +4988,7 @@ components:
         address:
           type: string
         chainId:
+          format: int64
           type: integer
         profileId:
           nullable: true

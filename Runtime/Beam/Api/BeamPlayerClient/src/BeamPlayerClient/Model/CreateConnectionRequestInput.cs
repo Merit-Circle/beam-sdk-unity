@@ -41,9 +41,9 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="CreateConnectionRequestInput" /> class.
         /// </summary>
         /// <param name="entityId">entityId (required).</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         [UnityEngine.Scripting.Preserve]
-        public CreateConnectionRequestInput(string entityId = default(string), decimal chainId = 13337M)
+        public CreateConnectionRequestInput(string entityId = default(string), long chainId = 13337)
         {
             // to ensure "entityId" is required (not null)
             if (entityId == null)
@@ -66,7 +66,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

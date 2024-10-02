@@ -80,7 +80,7 @@ namespace BeamPlayerClient.Model
         /// <param name="openfortId">openfortId (required).</param>
         /// <param name="address">address (required).</param>
         [UnityEngine.Scripting.Preserve]
-        public GetSessionRequestResponse(StatusEnum status = default(StatusEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), int chainId = default(int), string openfortId = default(string), string address = default(string))
+        public GetSessionRequestResponse(StatusEnum status = default(StatusEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), long chainId = default(long), string openfortId = default(string), string address = default(string))
         {
             this.Status = status;
             // to ensure "id" is required (not null)
@@ -137,7 +137,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
         [UnityEngine.Scripting.Preserve]
-        public int ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets OpenfortId

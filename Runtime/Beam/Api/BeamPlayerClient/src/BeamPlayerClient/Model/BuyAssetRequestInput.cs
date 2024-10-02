@@ -70,11 +70,11 @@ namespace BeamPlayerClient.Model
         /// <param name="optimistic">optimistic (default to false).</param>
         /// <param name="sponsor">sponsor (default to true).</param>
         /// <param name="policyId">policyId.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
         [UnityEngine.Scripting.Preserve]
-        public BuyAssetRequestInput(decimal quantity = default(decimal), bool optimistic = false, bool sponsor = true, string policyId = default(string), decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
+        public BuyAssetRequestInput(decimal quantity = default(decimal), bool optimistic = false, bool sponsor = true, string policyId = default(string), long chainId = 13337, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
         {
             this.Quantity = quantity;
             this.Optimistic = optimistic;
@@ -118,7 +118,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId

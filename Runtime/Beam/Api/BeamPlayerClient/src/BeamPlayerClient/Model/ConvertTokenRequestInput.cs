@@ -71,14 +71,15 @@ namespace BeamPlayerClient.Model
         /// <param name="amountIn">amountIn (required).</param>
         /// <param name="amountOut">amountOut (required).</param>
         /// <param name="receiverEntityId">receiverEntityId.</param>
+        /// <param name="receiverWalletAddress">receiverWalletAddress.</param>
         /// <param name="optimistic">optimistic (default to false).</param>
         /// <param name="sponsor">sponsor (default to true).</param>
         /// <param name="policyId">policyId.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
         [UnityEngine.Scripting.Preserve]
-        public ConvertTokenRequestInput(string tokenIn = default(string), string tokenOut = default(string), string amountIn = default(string), string amountOut = default(string), string receiverEntityId = default(string), bool optimistic = false, bool sponsor = true, string policyId = default(string), decimal chainId = 13337M, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
+        public ConvertTokenRequestInput(string tokenIn = default(string), string tokenOut = default(string), string amountIn = default(string), string amountOut = default(string), string receiverEntityId = default(string), string receiverWalletAddress = default(string), bool optimistic = false, bool sponsor = true, string policyId = default(string), long chainId = 13337, OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string))
         {
             // to ensure "tokenIn" is required (not null)
             if (tokenIn == null)
@@ -105,6 +106,7 @@ namespace BeamPlayerClient.Model
             }
             this.AmountOut = amountOut;
             this.ReceiverEntityId = receiverEntityId;
+            this.ReceiverWalletAddress = receiverWalletAddress;
             this.Optimistic = optimistic;
             this.Sponsor = sponsor;
             this.PolicyId = policyId;
@@ -149,6 +151,13 @@ namespace BeamPlayerClient.Model
         public string ReceiverEntityId { get; set; }
 
         /// <summary>
+        /// Gets or Sets ReceiverWalletAddress
+        /// </summary>
+        [DataMember(Name = "receiverWalletAddress", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
+        public string ReceiverWalletAddress { get; set; }
+
+        /// <summary>
         /// Gets or Sets Optimistic
         /// </summary>
         [DataMember(Name = "optimistic", EmitDefaultValue = true)]
@@ -174,7 +183,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId
@@ -197,6 +206,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  AmountIn: ").Append(AmountIn).Append("\n");
             sb.Append("  AmountOut: ").Append(AmountOut).Append("\n");
             sb.Append("  ReceiverEntityId: ").Append(ReceiverEntityId).Append("\n");
+            sb.Append("  ReceiverWalletAddress: ").Append(ReceiverWalletAddress).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");

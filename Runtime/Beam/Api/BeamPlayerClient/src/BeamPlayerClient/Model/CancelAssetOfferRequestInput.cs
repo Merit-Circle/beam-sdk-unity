@@ -65,9 +65,9 @@ namespace BeamPlayerClient.Model
         /// <param name="policyId">policyId.</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute).</param>
         /// <param name="operationId">operationId.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         [UnityEngine.Scripting.Preserve]
-        public CancelAssetOfferRequestInput(bool optimistic = false, bool sponsor = true, string policyId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string), decimal chainId = 13337M)
+        public CancelAssetOfferRequestInput(bool optimistic = false, bool sponsor = true, string policyId = default(string), OperationProcessingEnum? operationProcessing = OperationProcessingEnum.Execute, string operationId = default(string), long chainId = 13337)
         {
             this.Optimistic = optimistic;
             this.Sponsor = sponsor;
@@ -110,7 +110,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

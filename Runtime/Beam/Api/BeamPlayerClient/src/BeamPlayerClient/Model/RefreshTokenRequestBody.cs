@@ -42,9 +42,9 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="assetAddress">assetAddress (required).</param>
         /// <param name="tokenId">tokenId (required).</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         [UnityEngine.Scripting.Preserve]
-        public RefreshTokenRequestBody(string assetAddress = default(string), string tokenId = default(string), decimal chainId = 13337M)
+        public RefreshTokenRequestBody(string assetAddress = default(string), string tokenId = default(string), long chainId = 13337)
         {
             // to ensure "assetAddress" is required (not null)
             if (assetAddress == null)
@@ -80,7 +80,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

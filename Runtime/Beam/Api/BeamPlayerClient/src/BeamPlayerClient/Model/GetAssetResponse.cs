@@ -94,9 +94,9 @@ namespace BeamPlayerClient.Model
         /// <param name="rarity">rarity.</param>
         /// <param name="rarityScore">rarityScore.</param>
         /// <param name="attributes">attributes.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         [UnityEngine.Scripting.Preserve]
-        public GetAssetResponse(string name = default(string), string imageUrl = default(string), string assetType = default(string), string assetAddress = default(string), string assetId = default(string), decimal supply = default(decimal), List<GetAssetResponseOwnersInner> owners = default(List<GetAssetResponseOwnersInner>), RarityEnum? rarity = default(RarityEnum?), decimal? rarityScore = default(decimal?), List<GetAssetsForUserResponseDataInnerAttributesInner> attributes = default(List<GetAssetsForUserResponseDataInnerAttributesInner>), decimal chainId = 13337M)
+        public GetAssetResponse(string name = default(string), string imageUrl = default(string), string assetType = default(string), string assetAddress = default(string), string assetId = default(string), decimal supply = default(decimal), List<GetAssetResponseOwnersInner> owners = default(List<GetAssetResponseOwnersInner>), RarityEnum? rarity = default(RarityEnum?), decimal? rarityScore = default(decimal?), List<GetAssetsForUserResponseDataInnerAttributesInner> attributes = default(List<GetAssetsForUserResponseDataInnerAttributesInner>), long chainId = 13337)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -209,7 +209,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

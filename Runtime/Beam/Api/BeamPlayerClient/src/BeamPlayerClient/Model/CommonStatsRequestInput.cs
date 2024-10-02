@@ -35,9 +35,9 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="CommonStatsRequestInput" /> class.
         /// </summary>
         /// <param name="attributes">attributes.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         [UnityEngine.Scripting.Preserve]
-        public CommonStatsRequestInput(List<GetAssetsForContractBodyInputAttributesInner> attributes = default(List<GetAssetsForContractBodyInputAttributesInner>), decimal chainId = 13337M)
+        public CommonStatsRequestInput(List<GetAssetsForContractBodyInputAttributesInner> attributes = default(List<GetAssetsForContractBodyInputAttributesInner>), long chainId = 13337)
         {
             this.Attributes = attributes;
             this.ChainId = chainId;
@@ -55,7 +55,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -85,10 +85,10 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="limit">limit (default to 20M).</param>
         /// <param name="types">types.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         /// <param name="continuation">continuation.</param>
         [UnityEngine.Scripting.Preserve]
-        public CommonContractActivityRequestInput(decimal limit = 20M, List<TypesEnum> types = default(List<TypesEnum>), decimal chainId = 13337M, string continuation = default(string))
+        public CommonContractActivityRequestInput(decimal limit = 20M, List<TypesEnum> types = default(List<TypesEnum>), long chainId = 13337, string continuation = default(string))
         {
             this.Limit = limit;
             this.Types = types;
@@ -115,7 +115,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Continuation

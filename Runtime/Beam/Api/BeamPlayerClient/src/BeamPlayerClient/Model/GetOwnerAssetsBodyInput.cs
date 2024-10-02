@@ -90,10 +90,10 @@ namespace BeamPlayerClient.Model
         /// <param name="sortBy">sortBy (default to SortByEnum.AcquiredAt).</param>
         /// <param name="includeAttributes">includeAttributes (default to false).</param>
         /// <param name="continuation">continuation.</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         /// <param name="limit">limit (default to 20M).</param>
         [UnityEngine.Scripting.Preserve]
-        public GetOwnerAssetsBodyInput(SortDirectionEnum? sortDirection = SortDirectionEnum.Asc, SortByEnum? sortBy = SortByEnum.AcquiredAt, bool? includeAttributes = false, string continuation = default(string), decimal chainId = 13337M, decimal limit = 20M)
+        public GetOwnerAssetsBodyInput(SortDirectionEnum? sortDirection = SortDirectionEnum.Asc, SortByEnum? sortBy = SortByEnum.AcquiredAt, bool? includeAttributes = false, string continuation = default(string), long chainId = 13337, decimal limit = 20M)
         {
             this.SortDirection = sortDirection;
             this.SortBy = sortBy;
@@ -123,7 +123,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Limit

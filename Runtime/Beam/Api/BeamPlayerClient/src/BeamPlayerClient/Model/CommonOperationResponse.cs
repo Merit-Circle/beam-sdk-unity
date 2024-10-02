@@ -121,7 +121,7 @@ namespace BeamPlayerClient.Model
         /// <param name="url">url (required).</param>
         /// <param name="transactions">transactions (required).</param>
         [UnityEngine.Scripting.Preserve]
-        public CommonOperationResponse(StatusEnum status = default(StatusEnum), ProcessingEnum processing = default(ProcessingEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), string gameId = default(string), string userId = default(string), int chainId = default(int), string url = default(string), List<CommonOperationResponseTransactionsInner> transactions = default(List<CommonOperationResponseTransactionsInner>))
+        public CommonOperationResponse(StatusEnum status = default(StatusEnum), ProcessingEnum processing = default(ProcessingEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), string gameId = default(string), string userId = default(string), long chainId = default(long), string url = default(string), List<CommonOperationResponseTransactionsInner> transactions = default(List<CommonOperationResponseTransactionsInner>))
         {
             this.Status = status;
             this.Processing = processing;
@@ -205,7 +205,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
         [UnityEngine.Scripting.Preserve]
-        public int ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Url

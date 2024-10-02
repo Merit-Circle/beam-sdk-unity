@@ -41,9 +41,10 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="GenerateSessionUrlRequestInput" /> class.
         /// </summary>
         /// <param name="address">address (required).</param>
-        /// <param name="chainId">chainId (default to 13337M).</param>
+        /// <param name="suggestedExpiry">suggestedExpiry.</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         [UnityEngine.Scripting.Preserve]
-        public GenerateSessionUrlRequestInput(string address = default(string), decimal chainId = 13337M)
+        public GenerateSessionUrlRequestInput(string address = default(string), DateTime suggestedExpiry = default(DateTime), long chainId = 13337)
         {
             // to ensure "address" is required (not null)
             if (address == null)
@@ -51,6 +52,7 @@ namespace BeamPlayerClient.Model
                 throw new ArgumentNullException("address is a required property for GenerateSessionUrlRequestInput and cannot be null");
             }
             this.Address = address;
+            this.SuggestedExpiry = suggestedExpiry;
             this.ChainId = chainId;
         }
 
@@ -62,11 +64,18 @@ namespace BeamPlayerClient.Model
         public string Address { get; set; }
 
         /// <summary>
+        /// Gets or Sets SuggestedExpiry
+        /// </summary>
+        [DataMember(Name = "suggestedExpiry", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
+        public DateTime SuggestedExpiry { get; set; }
+
+        /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [DataMember(Name = "chainId", EmitDefaultValue = false)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -78,6 +87,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GenerateSessionUrlRequestInput {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
+            sb.Append("  SuggestedExpiry: ").Append(SuggestedExpiry).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

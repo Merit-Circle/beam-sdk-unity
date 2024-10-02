@@ -49,7 +49,7 @@ namespace BeamPlayerClient.Model
         /// <param name="profileId">profileId (required).</param>
         /// <param name="userId">userId (required).</param>
         [UnityEngine.Scripting.Preserve]
-        public GetAllUsersResponseDataInnerWalletsInner(string id = default(string), DateTime createdAt = default(DateTime), DateTime updatedAt = default(DateTime), string externalId = default(string), string address = default(string), int chainId = default(int), string profileId = default(string), string userId = default(string))
+        public GetAllUsersResponseDataInnerWalletsInner(string id = default(string), DateTime createdAt = default(DateTime), DateTime updatedAt = default(DateTime), string externalId = default(string), string address = default(string), long chainId = default(long), string profileId = default(string), string userId = default(string))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -126,7 +126,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
         [UnityEngine.Scripting.Preserve]
-        public int ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets ProfileId

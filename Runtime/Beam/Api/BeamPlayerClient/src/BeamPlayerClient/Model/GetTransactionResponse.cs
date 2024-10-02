@@ -49,7 +49,7 @@ namespace BeamPlayerClient.Model
         /// <param name="policy">policy (required).</param>
         /// <param name="user">user (required).</param>
         [UnityEngine.Scripting.Preserve]
-        public GetTransactionResponse(string id = default(string), DateTime createdAt = default(DateTime), DateTime updatedAt = default(DateTime), decimal chainId = default(decimal), GetTransactionsResponseDataInnerIntent intent = default(GetTransactionsResponseDataInnerIntent), GetTransactionsResponseDataInnerTransaction transaction = default(GetTransactionsResponseDataInnerTransaction), GetTransactionResponsePolicy policy = default(GetTransactionResponsePolicy), GetTransactionResponseUser user = default(GetTransactionResponseUser))
+        public GetTransactionResponse(string id = default(string), DateTime createdAt = default(DateTime), DateTime updatedAt = default(DateTime), long chainId = default(long), GetTransactionsResponseDataInnerIntent intent = default(GetTransactionsResponseDataInnerIntent), GetTransactionsResponseDataInnerTransaction transaction = default(GetTransactionsResponseDataInnerTransaction), GetTransactionResponsePolicy policy = default(GetTransactionResponsePolicy), GetTransactionResponseUser user = default(GetTransactionResponseUser))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -107,7 +107,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Intent

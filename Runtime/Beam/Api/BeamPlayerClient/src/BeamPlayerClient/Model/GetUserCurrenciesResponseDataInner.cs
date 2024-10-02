@@ -48,7 +48,7 @@ namespace BeamPlayerClient.Model
         /// <param name="chainId">chainId (required).</param>
         /// <param name="balance">balance (required).</param>
         [UnityEngine.Scripting.Preserve]
-        public GetUserCurrenciesResponseDataInner(string address = default(string), string name = default(string), string symbol = default(string), decimal decimals = default(decimal), string logoUri = default(string), decimal chainId = default(decimal), string balance = default(string))
+        public GetUserCurrenciesResponseDataInner(string address = default(string), string name = default(string), string symbol = default(string), decimal decimals = default(decimal), string logoUri = default(string), long chainId = default(long), string balance = default(string))
         {
             // to ensure "address" is required (not null)
             if (address == null)
@@ -119,7 +119,7 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [DataMember(Name = "chainId", IsRequired = true, EmitDefaultValue = true)]
         [UnityEngine.Scripting.Preserve]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Balance
