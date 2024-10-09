@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.7.0"
+    "@openapitools/openapi-generator-cli": "^2.13.5"
   },
   "engines": {
     "node": ">=20",
