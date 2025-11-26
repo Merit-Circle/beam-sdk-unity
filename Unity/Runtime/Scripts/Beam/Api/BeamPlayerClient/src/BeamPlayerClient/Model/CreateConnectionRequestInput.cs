@@ -76,11 +76,13 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="entityId">entityId.</param>
         /// <param name="authProvider">Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI. (default to AuthProviderEnum.Any).</param>
+        /// <param name="chainId">chainId (default to 13337).</param>
         [UnityEngine.Scripting.Preserve]
-        public CreateConnectionRequestInput(string entityId = default(string), AuthProviderEnum? authProvider = AuthProviderEnum.Any)
+        public CreateConnectionRequestInput(string entityId = default(string), AuthProviderEnum? authProvider = AuthProviderEnum.Any, long chainId = 13337)
         {
             this.EntityId = entityId;
             this.AuthProvider = authProvider;
+            this.ChainId = chainId;
         }
 
         /// <summary>
@@ -89,6 +91,13 @@ namespace BeamPlayerClient.Model
         [DataMember(Name = "entityId", EmitDefaultValue = true)]
         [UnityEngine.Scripting.Preserve]
         public string EntityId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ChainId
+        /// </summary>
+        [DataMember(Name = "chainId", EmitDefaultValue = false)]
+        [UnityEngine.Scripting.Preserve]
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -101,6 +110,7 @@ namespace BeamPlayerClient.Model
             sb.Append("class CreateConnectionRequestInput {\n");
             sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

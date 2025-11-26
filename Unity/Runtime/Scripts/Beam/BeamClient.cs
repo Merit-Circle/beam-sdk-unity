@@ -147,7 +147,7 @@ namespace Beam
         public BeamClient SetChromeTabsConfig(BeamChromeTabsConfig config)
         {
             ChromeTabConfig = config;
-            
+
             return this;
         }
 #endif
@@ -771,7 +771,7 @@ namespace Beam
                 }
                 else
                 {
-                    // use lower delay when in background so that first check after we come back happens earlier 
+                    // use lower delay when in background so that first check after we come back happens earlier
                     await UniTask.Delay(200, cancellationToken: cancellationToken);
                 }
             }

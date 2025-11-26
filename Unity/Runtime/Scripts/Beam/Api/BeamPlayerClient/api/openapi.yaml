@@ -310,6 +310,47 @@ paths:
       summary: Transfer the native token
       tags:
       - Assets
+  /v1/player/assets/users/{entityId}/transfer-multiple-native:
+    post:
+      operationId: TransferMultipleNativeTokens
+      parameters:
+      - explode: false
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferMultipleNativeTokensRequestInput'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerOperationResponse'
+          description: ""
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BeamErrorResponse'
+          description: ""
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BeamErrorResponse'
+          description: ""
+      security:
+      - beam-api-key: []
+      summary: Transfer the native token to multiple recipients
+      tags:
+      - Assets
   /v1/player/assets/{assetAddress}/assets:
     post:
       operationId: getAssetsForContract
@@ -2912,6 +2953,9 @@ components:
         chainId: 0
         processing: SignOnly
         id: id
+        transactions:
+        - ""
+        - ""
         userId: userId
         actions:
         - signature:
@@ -3000,6 +3044,12 @@ components:
         url:
           format: uri
           type: string
+        transactions:
+          deprecated: true
+          description: "Legacy transactions property. Please deprecate the usage and\
+            \ move to the OperationResponse.Actions[] array instead."
+          items: {}
+          type: array
       required:
       - actions
       - authProvider
@@ -3009,6 +3059,7 @@ components:
       - id
       - processing
       - status
+      - transactions
       - updatedAt
       - url
       - userId
@@ -3128,6 +3179,64 @@ components:
           type: string
       required:
       - amountToTransfer
+      type: object
+    TransferMultipleNativeTokensRequestInput:
+      example:
+        optimistic: false
+        sponsor: true
+        authProvider: Any
+        policyId: policyId
+        chainId: 0
+        transfers:
+        - receiverWalletAddress: receiverWalletAddress
+          amountToTransfer: amountToTransfer
+          receiverEntityId: receiverEntityId
+        - receiverWalletAddress: receiverWalletAddress
+          amountToTransfer: amountToTransfer
+          receiverEntityId: receiverEntityId
+        operationProcessing: Execute
+      properties:
+        transfers:
+          items:
+            $ref: '#/components/schemas/TransferMultipleNativeTokensRequestInput_transfers_inner'
+          type: array
+        optimistic:
+          default: false
+          type: boolean
+        sponsor:
+          default: true
+          type: boolean
+        policyId:
+          format: cuid
+          nullable: true
+          type: string
+        chainId:
+          default: 13337
+          format: int64
+          type: integer
+        operationProcessing:
+          default: Execute
+          description: "Operation processing type. If Execute is used, Operation will\
+            \ be executed automatically right after User signs it. If you prefer to\
+            \ have more control, use SignOnly then Process it using ProcessOperation."
+          enum:
+          - SignOnly
+          - Execute
+          type: string
+        authProvider:
+          default: Any
+          description: "Auth Provider for the user to use. If it's Any, user will\
+            \ be able to choose his preferred login method. Useful when you want to\
+            \ present social login choice in your UI."
+          enum:
+          - Any
+          - Google
+          - Discord
+          - Apple
+          nullable: true
+          type: string
+      required:
+      - transfers
       type: object
     GetAssetsForContractBodyInput:
       example:
@@ -4920,6 +5029,7 @@ components:
     CreateConnectionRequestInput:
       example:
         authProvider: Any
+        chainId: 0
         entityId: entityId
       properties:
         entityId:
@@ -4939,6 +5049,10 @@ components:
           - Apple
           nullable: true
           type: string
+        chainId:
+          default: 13337
+          format: int64
+          type: integer
       type: object
     CreateConnectionRequestResponse:
       example:
@@ -5111,6 +5225,7 @@ components:
           contract:
             address: address
           asset:
+            quantity: 6.027456183070403
             id: id
           type: ask
           transaction:
@@ -5124,6 +5239,7 @@ components:
           contract:
             address: address
           asset:
+            quantity: 6.027456183070403
             id: id
           type: ask
           transaction:
@@ -5269,7 +5385,7 @@ components:
       example:
         quote:
           output:
-            tokenAdress: tokenAdress
+            tokenSymbol: tokenSymbol
             tokenAmount: tokenAmount
           input:
             fiatAmount: fiatAmount
@@ -5726,6 +5842,21 @@ components:
       - operationId
       - type
       title: PlayerOperationAction
+      type: object
+    TransferMultipleNativeTokensRequestInput_transfers_inner:
+      example:
+        receiverWalletAddress: receiverWalletAddress
+        amountToTransfer: amountToTransfer
+        receiverEntityId: receiverEntityId
+      properties:
+        receiverEntityId:
+          type: string
+        receiverWalletAddress:
+          type: string
+        amountToTransfer:
+          type: string
+      required:
+      - amountToTransfer
       type: object
     GetAssetsForContractBodyInput_attributes_inner:
       example:
@@ -6580,11 +6711,15 @@ components:
       type: object
     CommonActivityResponse_data_inner_asset:
       example:
+        quantity: 6.027456183070403
         id: id
       properties:
         id:
           nullable: true
           type: string
+        quantity:
+          nullable: true
+          type: number
       type: object
     CommonActivityResponse_data_inner_order:
       example:
@@ -6601,6 +6736,7 @@ components:
         contract:
           address: address
         asset:
+          quantity: 6.027456183070403
           id: id
         type: ask
         transaction:
@@ -6653,21 +6789,21 @@ components:
       type: object
     GetOnRampQuoteResponse_quote_output:
       example:
-        tokenAdress: tokenAdress
+        tokenSymbol: tokenSymbol
         tokenAmount: tokenAmount
       properties:
-        tokenAdress:
+        tokenSymbol:
           type: string
         tokenAmount:
           type: string
       required:
-      - tokenAdress
       - tokenAmount
+      - tokenSymbol
       type: object
     GetOnRampQuoteResponse_quote:
       example:
         output:
-          tokenAdress: tokenAdress
+          tokenSymbol: tokenSymbol
           tokenAmount: tokenAmount
         input:
           fiatAmount: fiatAmount

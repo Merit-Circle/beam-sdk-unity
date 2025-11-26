@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *AssetsApi* | [**GetUserCurrencies**](AssetsApi.md#getusercurrencies) | **GET** /v1/player/assets/users/{entityId}/currencies | Get all the currencies owned by an account (ERC20)
 *AssetsApi* | [**GetUserNativeCurrency**](AssetsApi.md#getusernativecurrency) | **GET** /v1/player/assets/users/{entityId}/native | Get the native token balance
 *AssetsApi* | [**TransferAsset**](AssetsApi.md#transferasset) | **POST** /v1/player/assets/users/{entityId}/transfer-asset | Transfer an asset (NFT assets, ERC721 / ERC1155)
+*AssetsApi* | [**TransferMultipleNativeTokens**](AssetsApi.md#transfermultiplenativetokens) | **POST** /v1/player/assets/users/{entityId}/transfer-multiple-native | Transfer the native token to multiple recipients
 *AssetsApi* | [**TransferNativeToken**](AssetsApi.md#transfernativetoken) | **POST** /v1/player/assets/users/{entityId}/transfer-native | Transfer the native token
 *AssetsApi* | [**TransferToken**](AssetsApi.md#transfertoken) | **POST** /v1/player/assets/users/{entityId}/transfer-token | Transfer a token (token assets, ERC20)
 *ConnectorApi* | [**CreateConnectionRequest**](ConnectorApi.md#createconnectionrequest) | **POST** /v1/connection/request | 
@@ -263,6 +264,8 @@ Class | Method | HTTP request | Description
  - [Model.SellAssetRequestInput](SellAssetRequestInput.md)
  - [Model.TransferAssetRequestInput](TransferAssetRequestInput.md)
  - [Model.TransferAssetRequestInputAssetsInner](TransferAssetRequestInputAssetsInner.md)
+ - [Model.TransferMultipleNativeTokensRequestInput](TransferMultipleNativeTokensRequestInput.md)
+ - [Model.TransferMultipleNativeTokensRequestInputTransfersInner](TransferMultipleNativeTokensRequestInputTransfersInner.md)
  - [Model.TransferNativeTokenRequestInput](TransferNativeTokenRequestInput.md)
  - [Model.TransferTokenRequestInput](TransferTokenRequestInput.md)
  - [Model.UnwrappingTokenInput](UnwrappingTokenInput.md)

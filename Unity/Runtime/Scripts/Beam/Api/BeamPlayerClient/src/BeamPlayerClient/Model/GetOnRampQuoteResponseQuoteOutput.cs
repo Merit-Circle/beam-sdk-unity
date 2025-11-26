@@ -39,17 +39,17 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOnRampQuoteResponseQuoteOutput" /> class.
         /// </summary>
-        /// <param name="tokenAdress">tokenAdress (required).</param>
+        /// <param name="tokenSymbol">tokenSymbol (required).</param>
         /// <param name="tokenAmount">tokenAmount (required).</param>
         [UnityEngine.Scripting.Preserve]
-        public GetOnRampQuoteResponseQuoteOutput(string tokenAdress = default(string), string tokenAmount = default(string))
+        public GetOnRampQuoteResponseQuoteOutput(string tokenSymbol = default(string), string tokenAmount = default(string))
         {
-            // to ensure "tokenAdress" is required (not null)
-            if (tokenAdress == null)
+            // to ensure "tokenSymbol" is required (not null)
+            if (tokenSymbol == null)
             {
-                throw new ArgumentNullException("tokenAdress is a required property for GetOnRampQuoteResponseQuoteOutput and cannot be null");
+                throw new ArgumentNullException("tokenSymbol is a required property for GetOnRampQuoteResponseQuoteOutput and cannot be null");
             }
-            this.TokenAdress = tokenAdress;
+            this.TokenSymbol = tokenSymbol;
             // to ensure "tokenAmount" is required (not null)
             if (tokenAmount == null)
             {
@@ -59,11 +59,11 @@ namespace BeamPlayerClient.Model
         }
 
         /// <summary>
-        /// Gets or Sets TokenAdress
+        /// Gets or Sets TokenSymbol
         /// </summary>
-        [DataMember(Name = "tokenAdress", IsRequired = true, EmitDefaultValue = true)]
+        [DataMember(Name = "tokenSymbol", IsRequired = true, EmitDefaultValue = true)]
         [UnityEngine.Scripting.Preserve]
-        public string TokenAdress { get; set; }
+        public string TokenSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenAmount
@@ -81,7 +81,7 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetOnRampQuoteResponseQuoteOutput {\n");
-            sb.Append("  TokenAdress: ").Append(TokenAdress).Append("\n");
+            sb.Append("  TokenSymbol: ").Append(TokenSymbol).Append("\n");
             sb.Append("  TokenAmount: ").Append(TokenAmount).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

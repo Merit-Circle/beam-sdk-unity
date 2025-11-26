@@ -132,6 +132,8 @@ src/BeamPlayerClient/Model/RevokeSessionRequestInput.cs
 src/BeamPlayerClient/Model/SellAssetRequestInput.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInput.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInputAssetsInner.cs
+src/BeamPlayerClient/Model/TransferMultipleNativeTokensRequestInput.cs
+src/BeamPlayerClient/Model/TransferMultipleNativeTokensRequestInputTransfersInner.cs
 src/BeamPlayerClient/Model/TransferNativeTokenRequestInput.cs
 src/BeamPlayerClient/Model/TransferTokenRequestInput.cs
 src/BeamPlayerClient/Model/UnwrappingTokenInput.cs

@@ -35,10 +35,12 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="CommonActivityResponseDataInnerAsset" /> class.
         /// </summary>
         /// <param name="id">id.</param>
+        /// <param name="quantity">quantity.</param>
         [UnityEngine.Scripting.Preserve]
-        public CommonActivityResponseDataInnerAsset(string id = default(string))
+        public CommonActivityResponseDataInnerAsset(string id = default(string), decimal? quantity = default(decimal?))
         {
             this.Id = id;
+            this.Quantity = quantity;
         }
 
         /// <summary>
@@ -47,6 +49,13 @@ namespace BeamPlayerClient.Model
         [DataMember(Name = "id", EmitDefaultValue = true)]
         [UnityEngine.Scripting.Preserve]
         public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Quantity
+        /// </summary>
+        [DataMember(Name = "quantity", EmitDefaultValue = true)]
+        [UnityEngine.Scripting.Preserve]
+        public decimal? Quantity { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -58,6 +67,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class CommonActivityResponseDataInnerAsset {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

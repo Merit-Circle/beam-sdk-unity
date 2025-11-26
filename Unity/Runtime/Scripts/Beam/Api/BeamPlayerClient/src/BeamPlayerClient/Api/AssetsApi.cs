@@ -219,6 +219,26 @@ namespace BeamPlayerClient.Api
         /// <returns>ApiResponse of PlayerOperationResponse</returns>
         ApiResponse<PlayerOperationResponse> TransferAssetWithHttpInfo(string entityId, TransferAssetRequestInput transferAssetRequestInput);
         /// <summary>
+        /// Transfer the native token to multiple recipients
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="transferMultipleNativeTokensRequestInput"></param>
+        /// <returns>PlayerOperationResponse</returns>
+        PlayerOperationResponse TransferMultipleNativeTokens(string entityId, TransferMultipleNativeTokensRequestInput transferMultipleNativeTokensRequestInput);
+
+        /// <summary>
+        /// Transfer the native token to multiple recipients
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="transferMultipleNativeTokensRequestInput"></param>
+        /// <returns>ApiResponse of PlayerOperationResponse</returns>
+        ApiResponse<PlayerOperationResponse> TransferMultipleNativeTokensWithHttpInfo(string entityId, TransferMultipleNativeTokensRequestInput transferMultipleNativeTokensRequestInput);
+        /// <summary>
         /// Transfer the native token
         /// </summary>
         /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
@@ -504,6 +524,31 @@ namespace BeamPlayerClient.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PlayerOperationResponse)</returns>
         Cysharp.Threading.Tasks.UniTask<ApiResponse<PlayerOperationResponse>> TransferAssetWithHttpInfoAsync(string entityId, TransferAssetRequestInput transferAssetRequestInput, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// Transfer the native token to multiple recipients
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="transferMultipleNativeTokensRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of PlayerOperationResponse</returns>
+        Cysharp.Threading.Tasks.UniTask<PlayerOperationResponse> TransferMultipleNativeTokensAsync(string entityId, TransferMultipleNativeTokensRequestInput transferMultipleNativeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Transfer the native token to multiple recipients
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="transferMultipleNativeTokensRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (PlayerOperationResponse)</returns>
+        Cysharp.Threading.Tasks.UniTask<ApiResponse<PlayerOperationResponse>> TransferMultipleNativeTokensWithHttpInfoAsync(string entityId, TransferMultipleNativeTokensRequestInput transferMultipleNativeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Transfer the native token
         /// </summary>
@@ -2032,6 +2077,150 @@ namespace BeamPlayerClient.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("TransferAsset", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Transfer the native token to multiple recipients 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="transferMultipleNativeTokensRequestInput"></param>
+        /// <returns>PlayerOperationResponse</returns>
+        public PlayerOperationResponse TransferMultipleNativeTokens(string entityId, TransferMultipleNativeTokensRequestInput transferMultipleNativeTokensRequestInput)
+        {
+            BeamPlayerClient.Client.ApiResponse<PlayerOperationResponse> localVarResponse = TransferMultipleNativeTokensWithHttpInfo(entityId, transferMultipleNativeTokensRequestInput);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Transfer the native token to multiple recipients 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="transferMultipleNativeTokensRequestInput"></param>
+        /// <returns>ApiResponse of PlayerOperationResponse</returns>
+        public BeamPlayerClient.Client.ApiResponse<PlayerOperationResponse> TransferMultipleNativeTokensWithHttpInfo(string entityId, TransferMultipleNativeTokensRequestInput transferMultipleNativeTokensRequestInput)
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling AssetsApi->TransferMultipleNativeTokens");
+
+            // verify the required parameter 'transferMultipleNativeTokensRequestInput' is set
+            if (transferMultipleNativeTokensRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'transferMultipleNativeTokensRequestInput' when calling AssetsApi->TransferMultipleNativeTokens");
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+            localVarRequestOptions.Data = transferMultipleNativeTokensRequestInput;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<PlayerOperationResponse>("/v1/player/assets/users/{entityId}/transfer-multiple-native", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("TransferMultipleNativeTokens", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Transfer the native token to multiple recipients 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="transferMultipleNativeTokensRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of PlayerOperationResponse</returns>
+        public async Cysharp.Threading.Tasks.UniTask<PlayerOperationResponse> TransferMultipleNativeTokensAsync(string entityId, TransferMultipleNativeTokensRequestInput transferMultipleNativeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            var task = TransferMultipleNativeTokensWithHttpInfoAsync(entityId, transferMultipleNativeTokensRequestInput, cancellationToken);
+            BeamPlayerClient.Client.ApiResponse<PlayerOperationResponse> localVarResponse = await task;
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Transfer the native token to multiple recipients 
+        /// </summary>
+        /// <exception cref="BeamPlayerClient.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="transferMultipleNativeTokensRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (PlayerOperationResponse)</returns>
+        public async Cysharp.Threading.Tasks.UniTask<BeamPlayerClient.Client.ApiResponse<PlayerOperationResponse>> TransferMultipleNativeTokensWithHttpInfoAsync(string entityId, TransferMultipleNativeTokensRequestInput transferMultipleNativeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'entityId' is set
+            if (entityId == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'entityId' when calling AssetsApi->TransferMultipleNativeTokens");
+
+            // verify the required parameter 'transferMultipleNativeTokensRequestInput' is set
+            if (transferMultipleNativeTokensRequestInput == null)
+                throw new BeamPlayerClient.Client.ApiException(400, "Missing required parameter 'transferMultipleNativeTokensRequestInput' when calling AssetsApi->TransferMultipleNativeTokens");
+
+
+            BeamPlayerClient.Client.RequestOptions localVarRequestOptions = new BeamPlayerClient.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = BeamPlayerClient.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = BeamPlayerClient.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("entityId", BeamPlayerClient.Client.ClientUtils.ParameterToString(entityId)); // path parameter
+            localVarRequestOptions.Data = transferMultipleNativeTokensRequestInput;
+
+            // authentication (beam-api-key) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.PostAsync<PlayerOperationResponse>("/v1/player/assets/users/{entityId}/transfer-multiple-native", localVarRequestOptions, this.Configuration, cancellationToken);
+
+            var localVarResponse = await task;
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("TransferMultipleNativeTokens", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

@@ -158,8 +158,9 @@ namespace BeamPlayerClient.Model
         /// <param name="chainId">chainId (required).</param>
         /// <param name="actions">actions (required).</param>
         /// <param name="url">url (required).</param>
+        /// <param name="transactions">Legacy transactions property. Please deprecate the usage and move to the OperationResponse.Actions[] array instead. (required).</param>
         [UnityEngine.Scripting.Preserve]
-        public PlayerOperationResponse(StatusEnum status = default(StatusEnum), ProcessingEnum processing = default(ProcessingEnum), AuthProviderEnum authProvider = default(AuthProviderEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), string gameId = default(string), string userId = default(string), long chainId = default(long), List<PlayerOperationAction> actions = default(List<PlayerOperationAction>), string url = default(string))
+        public PlayerOperationResponse(StatusEnum status = default(StatusEnum), ProcessingEnum processing = default(ProcessingEnum), AuthProviderEnum authProvider = default(AuthProviderEnum), string id = default(string), DateTime createdAt = default(DateTime), DateTime? updatedAt = default(DateTime?), string gameId = default(string), string userId = default(string), long chainId = default(long), List<PlayerOperationAction> actions = default(List<PlayerOperationAction>), string url = default(string), List<Object> transactions = default(List<Object>))
         {
             this.Status = status;
             this.Processing = processing;
@@ -202,6 +203,12 @@ namespace BeamPlayerClient.Model
                 throw new ArgumentNullException("url is a required property for PlayerOperationResponse and cannot be null");
             }
             this.Url = url;
+            // to ensure "transactions" is required (not null)
+            if (transactions == null)
+            {
+                throw new ArgumentNullException("transactions is a required property for PlayerOperationResponse and cannot be null");
+            }
+            this.Transactions = transactions;
         }
 
         /// <summary>
@@ -261,6 +268,15 @@ namespace BeamPlayerClient.Model
         public string Url { get; set; }
 
         /// <summary>
+        /// Legacy transactions property. Please deprecate the usage and move to the OperationResponse.Actions[] array instead.
+        /// </summary>
+        /// <value>Legacy transactions property. Please deprecate the usage and move to the OperationResponse.Actions[] array instead.</value>
+        [DataMember(Name = "transactions", IsRequired = true, EmitDefaultValue = true)]
+        [Obsolete]
+        [UnityEngine.Scripting.Preserve]
+        public List<Object> Transactions { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -280,6 +296,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Actions: ").Append(Actions).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("  Transactions: ").Append(Transactions).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
